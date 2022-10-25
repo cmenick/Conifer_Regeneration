@@ -2,7 +2,9 @@
 title: "01_fireselection"
 author: "Casey Menick"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 # Set Up
@@ -35,13 +37,13 @@ forest_codes <- read_csv('data/forestgroupcodes.csv')
 # set crs
 crs = crs(conus_forestgroup)
 
-mapview(conus_forestgroup,maxpixels =  317219032)
+# mapview(conus_forestgroup,maxpixels =  317219032)
 ```
 
 ##EPA level-3 Ecoregions
 Canadian Rockies, Idaho Batholith, Middle Rockies, Columbian Mountains - Northern Rockies
 
-```{r ecoregions, message=FALSE}
+```{r ecoregions, message=FALSE, warning=FALSE}
 # level 3 ecoregions
 l3eco <- st_read('data/us_eco_l3.shp') %>% 
   st_transform(., crs=crs)
@@ -65,7 +67,7 @@ mapview(eco_select)
 
   ->25% of selected forest types
   
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 # mtbs fire perimeters
 mtbs_full <- st_read('data/mtbs_perims_DD.shp') %>% 
   st_transform(., crs=crs)
@@ -167,11 +169,6 @@ fires_severity <- left_join(fires,severity_df,by="Event_ID")%>%
   filter(highsev_acres > 500) %>% 
   .[!duplicated(.[1]),]
 
-# fix that one fire
-# fires_severity[42,1] <- "FALLS 2"
-# fires_severity[61,1]<- "HELEN CREEK 2"
-# fires_severity[146,1]<- "TRAIL CREEK 2"
-
 
 fires_select <- fires_severity %>%
   left_join(.,exact_extract(conus_forestgroup,fires_severity, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
@@ -204,26 +201,16 @@ mapview(fires_select, zcol = "fire_foresttype")
 # Export Data 
 
 ```{r}
-dir <- "G:/Other computers/My Laptop/Documents/Grad School/Research/WesternConiferRegeneration/output"
+# dir <- "G:/Other computers/My Laptop/Documents/Grad School/Research/WesternConiferRegeneration/output"
+# 
+# fires_export <- fires_select %>% 
+#   mutate(fire_name = str_replace_all(fire_name, fixed(" "), ""),
+#          Fire_ID = str_c(fire_name,"_", Event_ID),
+#          year = as.integer(year))
+# 
+# str(fires_export)
 
-fires_export <- fires_select %>% 
-  mutate(fire_name = str_replace_all(fire_name, fixed(" "), ""),
-         Fire_ID = str_c(fire_name,"_", Event_ID),
-         year = as.integer(year))
-
-str(fires_export)
-
-st_write(fires_export, dir, "fires_select.shp",driver = 'ESRI Shapefile')
-
+# st_write(fires_export, dir, "fires_select.shp",driver = 'ESRI Shapefile')
 ```
 
-```{r}
-rasttest <- raster('data/UT3749411226820080822_dnbr.tif')
-
-mtbs_full
-
-test <- mtbs_full %>%  filter(Event_ID == "UT3749411226820080822")
-
-mapview(rasttest)
-```
 
