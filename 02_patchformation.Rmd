@@ -1,0 +1,82 @@
+---
+title: "02_patchformation"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{r packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(terra)
+library(patchwoRk)
+library(sf)
+library(mapview)
+```
+
+```{r}
+rast_list <- list.files(path = "data/highsev", pattern='.tif', all.files=TRUE, full.names=TRUE)
+rast_all <- lapply(rast_list, rast)
+names(rast_all) <- str_c(rast_list)
+rast_collection <- sprc(rast_all)
+
+crs<- crs(rast_collection[1])
+
+fires_select <- st_read("output/fires_select.shp")%>% 
+  st_transform(., crs=crs) %>% 
+  filter(year %in% c(1988,1989,1990,1991))
+```
+
+```{r message=FALSE, warning=FALSE}
+# # #merge method
+# rast_merge <- merge(rast_collection)
+# rast_merge[rast_merge > 0] <- 1
+# 
+# mapview(raster(rast_merge))
+# # patch_raster <- patchMorph(raster(rast_merge), spurThresh = 3, gapThresh = 3)
+# # patch_poly <- as.polygons(rast(patch)) %>%
+# #   st_as_sf()
+
+# for loop method
+patch_df <- list()
+rast_df <- list()
+for (i in 1:length(rast_all)){
+  rast_fire <- raster(rast_collection[i])
+  rast_fire[rast_fire > 0] <- 1
+# gap and spur are based on number of pixels (mtbs = 30m; 90m = 3 pixels)
+  patch <- patchMorph(rast_fire, spurThresh = 3, gapThresh = 3)
+  rast_df[[i]] <- patch
+  patch_poly <- as.polygons(rast(patch)) %>%
+    st_as_sf()
+  df_union_cast <- patch_poly %>%
+    st_cast(., "POLYGON") %>%
+    filter(layer == 1)
+  patch_df[[i]] <- df_union_cast}
+
+patch_rast_all <- lapply(patch_df, rast)
+
+patch_poly_all <- do.call(rbind,patch_df)
+
+non_overlaps <- st_intersection(patch_poly_all) %>%
+  filter(n.overlaps == 1)
+
+
+
+
+st_write(patch_poly_all, "output/", "highsev.shp",driver = 'ESRI Shapefile')
+
+
+%>% 
+  st_transform(., crs=crs) %>% 
+  st_join(.,fires_select,join = st_intersects,left= FALSE,largest = TRUE)%>% 
+  mutate(patch_area_ha = as.numeric(st_area(.)/10000)) %>%
+  mutate(patch_name = str_c(fire_nm,"-",1:n()))
+
+```
+
+```{r}
+
+
+
+```
+

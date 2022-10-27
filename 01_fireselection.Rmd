@@ -90,10 +90,10 @@ mtbs_select <- mtbs_full %>%
           max_High_T = max(High_T)) %>% 
      filter(min_High_T != -9999,
             max_High_T != 9999,
-            acres >= 5000) 
+            acres >= 5000)
   
 # assign proportions of forest type to each fire polygon
-fires_join <- st_join(mtbs_select,eco_select,join=st_intersects,left=FALSE) %>% 
+fires_join <- st_join(mtbs_select,eco_select,join=st_intersects,left=FALSE,largest=TRUE) %>% 
   left_join(., exact_extract(conus_forestgroup,mtbs_select, append_cols = TRUE, max_cells_in_memory = 3e+08, 
                              fun = function(value, coverage_fraction) {
                                data.frame(value = value,
@@ -122,7 +122,6 @@ fires <- fires_join %>%
          freq_forested = 1- freq_0,
          freq_ideal = freq_df+freq_pp+freq_fs+freq_lpp)%>% 
   mutate(across(starts_with('freq'), round,2)) %>% 
-  .[!duplicated(.[1]),]%>% 
   filter(freq_ideal >= 0.25)
 
 ```
@@ -165,10 +164,8 @@ severity_df <- do.call(rbind, severity_list)
 fires_severity <- left_join(fires,severity_df,by="Event_ID")%>% 
   rename(noburn= "1",lowsev = "2", medsev = "3", highsev = "4",regrowth = "5", error = "6") %>% 
   dplyr::select(- "NaN",-"regrowth",-"error") %>% 
-  mutate(highsev_acres = fire_acres*highsev) %>% 
-  filter(highsev_acres > 500) %>% 
-  .[!duplicated(.[1]),]
-
+  mutate(highsev_acres = fire_acres*highsev)%>% 
+  filter(highsev_acres > 500) 
 
 fires_select <- fires_severity %>%
   left_join(.,exact_extract(conus_forestgroup,fires_severity, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
@@ -181,8 +178,6 @@ fires_select <- fires_select %>%
                                 mode==260 ~ "Fir-Spruce",
                                 mode==280 ~ "Lodegepole Pine",
                                 TRUE ~ "Other")) 
-
-fires88 = fires_select %>%  filter(year ==1988)
 ```
 
 # Fire Dataset
@@ -198,6 +193,7 @@ mapview(fires_select, zcol = "year")
 # plot
 mapview(fires_select, zcol = "fire_foresttype")
 ```
+
 # Export Data 
 
 ```{r}
@@ -213,4 +209,35 @@ mapview(fires_select, zcol = "fire_foresttype")
 # st_write(fires_export, dir, "fires_select.shp",driver = 'ESRI Shapefile')
 ```
 
+```{r}
+mgmt <- st_read("data/S_USA.Activity_SilvReforestation.shp")
+
+mgt_filter <- mgmt %>% 
+  filter(FY_COMPLET > 1988,
+         STATE_ABBR %in% c('WY','MT','ID','WA',"SD")) %>% 
+  st_transform(., crs=crs)
+  
+
+mgmt_select <- st_join(mgt_filter, fires_select, left = FALSE, largest = TRUE)
+
+mgmt_selected <- mgmt_select %>% 
+  filter(Certification of Natural Regeneration without Site Prep)
+
+mapview(list(mgmt_select,fires_select),col.regions = c("red","blue"))
+mapview(mgmt_select)
+
+?mapview
+```
+
+```{r}
+geom = st_union(fires_select) %>% 
+  st_as_sf()
+
+geom = fires_select %>% 
+  st_buffer(.001)%>%
+  st_union() %>% 
+  st_as_sf()
+
+mapview(geom)
+```
 
