@@ -12,38 +12,39 @@ library(terra)
 library(patchwoRk)
 library(sf)
 library(mapview)
+library(exactextractr)
 ```
 
 ```{r}
 rast_list <- list.files(path = "data/highsev", pattern='.tif', all.files=TRUE, full.names=TRUE)
 rast_all <- lapply(rast_list, rast)
-names(rast_all) <- str_c(rast_list)
+# names(rast_all) <- str_c(rast_list)
 rast_collection <- sprc(rast_all)
 
-crs<- crs(rast_collection[1])
+crs <- crs(rast_collection[1])
+```
 
+
+```{r}
 fires_select <- st_read("output/fires_select.shp")%>% 
   st_transform(., crs=crs) %>% 
   filter(year %in% c(1988,1989,1990,1991))
+
+fires_export <- st_read("output/fires_export.shp")%>% 
+  st_transform(., crs=crs)
+
+conus_forestgroup <- raster('data/conus_forestgroup.tif')
 ```
 
-```{r message=FALSE, warning=FALSE}
-# # #merge method
-# rast_merge <- merge(rast_collection)
-# rast_merge[rast_merge > 0] <- 1
-# 
-# mapview(raster(rast_merge))
-# # patch_raster <- patchMorph(raster(rast_merge), spurThresh = 3, gapThresh = 3)
-# # patch_poly <- as.polygons(rast(patch)) %>%
-# #   st_as_sf()
-
+```{r patchmorph, message=FALSE, warning=FALSE}
 # for loop method
 patch_df <- list()
 rast_df <- list()
 for (i in 1:length(rast_all)){
   rast_fire <- raster(rast_collection[i])
-  rast_fire[rast_fire > 0] <- 1
-# gap and spur are based on number of pixels (mtbs = 30m; 90m = 3 pixels)
+  rast_fire[rast_fire < 640] <- 0
+  rast_fire[rast_fire > 640] <- 1
+  # gap and spur are based on number of pixels (mtbs = 30m; 90m = 3 pixels)
   patch <- patchMorph(rast_fire, spurThresh = 3, gapThresh = 3)
   rast_df[[i]] <- patch
   patch_poly <- as.polygons(rast(patch)) %>%
@@ -54,29 +55,31 @@ for (i in 1:length(rast_all)){
   patch_df[[i]] <- df_union_cast}
 
 patch_rast_all <- lapply(patch_df, rast)
-
 patch_poly_all <- do.call(rbind,patch_df)
+```
 
-non_overlaps <- st_intersection(patch_poly_all) %>%
-  filter(n.overlaps == 1)
+```{r message=FALSE, warning=FALSE}
+st_write(patch_poly_all, "output/", "highsev_patches_morph.shp",driver = 'ESRI Shapefile')
+```
+
+```{r message=FALSE, warning=FALSE}
+highsev_patches <- patch_poly_all %>% 
+  st_transform(., crs=crs) %>% 
+  left_join(.,exact_extract(conus_forestgroup,patch_poly_all, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
+
+head(highsev_patches)
+
+info_patches <- patch_poly_all %>%
+  left_join(.,exact_extract(conus_forestgroup,patch_poly_all, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
 
 
-
-
-st_write(patch_poly_all, "output/", "highsev.shp",driver = 'ESRI Shapefile')
-
+  st_join(.,fires_select,join = st_intersects,left= FALSE,largest = TRUE) %>% 
 
 %>% 
-  st_transform(., crs=crs) %>% 
-  st_join(.,fires_select,join = st_intersects,left= FALSE,largest = TRUE)%>% 
+  select() %>% 
   mutate(patch_area_ha = as.numeric(st_area(.)/10000)) %>%
-  mutate(patch_name = str_c(fire_nm,"-",1:n()))
-
+  mutate(patch_name = str_c(fire_nm,"-",1:n())) %>% 
+  filter(patch_area_ha > 9.0)
 ```
 
-```{r}
-
-
-
-```
 

@@ -1,0 +1,102 @@
+---
+title: "03_samplingpoints"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{r}
+library(elevatr)
+library(tidyverse)
+library(sf)
+library(terra)
+library(mapview)
+```
+
+```{r}
+# data
+fires_select <- st_read("output/fires_select.shp")%>% 
+  filter(year %in% c(1988,1989,1990,1991))
+fires_export <- st_read("output/fires_export.shp")
+patches <- st_read("output/highsev_patches_morph.shp") %>% 
+  st_transform(crs=crs(fires_export))
+```
+
+
+```{r}
+# create interior/exterior patches
+patches_interior <- st_buffer(patches,-200)
+mapview(patches_interior)
+mapview(list(patches_interior,subset),col.regions=c("red","blue"))
+
+patches_exterior <- do.call(rbind,purrr::map(1:nrow(subset), ~st_difference(subset[.x,], patches_interior[.x,])))
+mapview(patches_exterior)
+mapview(list(patches_interior,patches_exterior),col.regions=c("red","blue"))
+
+# get elevation/ ccaspect
+dem <- get_elev_raster(subset,z=10)
+aspect <- terrain(dem, opt = "aspect",unit = "radians")
+ccaspect <- cos(aspect)
+mapview(ccaspect)
+
+ccaspect[ccaspect>0] <- 1
+ccaspect[ccaspect<0] <- -1
+
+ccaspect_poly <- as.polygons(rast(ccaspect)) %>% 
+  st_as_sf()
+mapview(ccaspect_poly)
+
+pos_aspect <- ccaspect_poly %>% 
+  filter(layer==1)
+neg_aspect <- ccaspect_poly %>% 
+  filter(layer==-1)
+
+# get quadrants
+pos_ext <- st_intersection(pos_aspect,patches_exterior)
+pos_int <-  st_intersection(pos_aspect,patches_interior)
+neg_ext <- st_intersection(neg_aspect,patches_exterior)
+neg_int <-  st_intersection(neg_aspect,patches_interior)
+
+mapview(list(neg_ext,pos_ext),col.regions=c("red","blue"))
+mapview(list(neg_int,pos_int),col.regions=c("red","blue"))
+mapview(list(neg_int,pos_int,neg_ext,pos_ext),col.regions=c("red","orange","blue","green"))
+
+# sample regions
+
+sampled_points_neg_ext <- st_sample(
+  x = neg_ext,
+  type = "SSI",
+  r = 30, # threshold distance (in metres)
+  n = 5 # number of points
+) 
+sampled_points_pos_ext <- st_sample(
+  x = pos_ext,
+  type = "SSI",
+  r = 30, # threshold distance (in metres)
+  n = 5 # number of points
+) 
+sampled_points_pos_int <- st_sample(
+  x = pos_int,
+  type = "SSI",
+  r = 30, # threshold distance (in metres)
+  n = 5 # number of points
+) 
+sampled_points_neg_int <- st_sample(
+  x = neg_int,
+  type = "SSI",
+  r = 30, # threshold distance (in metres)
+  n = 5 # number of points
+) 
+
+sampled_points %>% st_crs
+
+st_crs(sampled_points) <- st_crs(neg_ext)
+
+plot(sampled_points)
+mapview(list(neg_ext,sampled_points))
+
+mapview(sampled_points)
+
+```
+

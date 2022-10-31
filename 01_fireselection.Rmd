@@ -16,7 +16,6 @@ library(sf)
 library(mapview)
 library(raster)
 library(rgeos)
-library(stars)
 library(lubridate)
 library(ggplot2)
 library(exactextractr)
@@ -37,10 +36,10 @@ forest_codes <- read_csv('data/forestgroupcodes.csv')
 # set crs
 crs = crs(conus_forestgroup)
 
-# mapview(conus_forestgroup,maxpixels =  317219032)
+plot(conus_forestgroup)
 ```
 
-##EPA level-3 Ecoregions
+## EPA level-3 Ecoregions
 Canadian Rockies, Idaho Batholith, Middle Rockies, Columbian Mountains - Northern Rockies
 
 ```{r ecoregions, message=FALSE, warning=FALSE}
@@ -55,7 +54,9 @@ eco_select <- l3eco %>%
 mapview(eco_select)
 ```
 
-##MTBS Fires
+## MTBS Fires Boundaries
+
+Criteria: 
 
   -1988-1996
 
@@ -73,8 +74,7 @@ mtbs_full <- st_read('data/mtbs_perims_DD.shp') %>%
   st_transform(., crs=crs)
 ```
 
-  
-```{r initial fire selection, message=FALSE, warning=FALSE}
+```{r initial fire selection, message=FALSE, warning=FALSE, results='hide'}
 # select fires qualities of interest
 # region of interest, 1988-1996, over 5k acres, some high severity
 mtbs_select <- mtbs_full %>% 
@@ -91,7 +91,9 @@ mtbs_select <- mtbs_full %>%
      filter(min_High_T != -9999,
             max_High_T != 9999,
             acres >= 5000)
-  
+```
+
+```{r forest typing, message=FALSE, warning=FALSE, results='hide'}  
 # assign proportions of forest type to each fire polygon
 fires_join <- st_join(mtbs_select,eco_select,join=st_intersects,left=FALSE,largest=TRUE) %>% 
   left_join(., exact_extract(conus_forestgroup,mtbs_select, append_cols = TRUE, max_cells_in_memory = 3e+08, 
@@ -123,10 +125,9 @@ fires <- fires_join %>%
          freq_ideal = freq_df+freq_pp+freq_fs+freq_lpp)%>% 
   mutate(across(starts_with('freq'), round,2)) %>% 
   filter(freq_ideal >= 0.25)
-
 ```
 
-```{r extract burn severity, message=FALSE, warning=FALSE}
+```{r extract burn severity, message=FALSE, warning=FALSE, results='hide'}
 # import all mtbs rasters via a list
 rastlist <- list.files(path = "data/MTBSmosaic", pattern='.tif', all.files=TRUE, full.names=TRUE)
 allrasters <- lapply(rastlist, raster)
@@ -174,70 +175,74 @@ fires_select$mode <- as.factor(fires_select$mode)
 
 fires_select <- fires_select %>% 
     mutate(fire_foresttype = case_when(mode==200 ~ "Douglas-Fir",
-                                mode==220 ~ "Ponderosa",
-                                mode==260 ~ "Fir-Spruce",
-                                mode==280 ~ "Lodegepole Pine",
-                                TRUE ~ "Other")) 
+                                       mode==220 ~ "Ponderosa",
+                                       mode==260 ~ "Fir-Spruce",
+                                       mode==280 ~ "Lodegepole Pine",
+                                       TRUE ~ "Other")) 
 ```
 
 # Fire Dataset
 
-##Selected fires by year
+## Selected fires by year
 ```{r plot year}
 # plot
 mapview(fires_select, zcol = "year")
 ```
 
-##Selected fires by majority forest type
+## Selected fires by majority forest type
 ```{r plot forest type}
 # plot
 mapview(fires_select, zcol = "fire_foresttype")
 ```
 
+
+
+
 # Export Data 
+## Merge Fire Polys for Analysis
+```{r message=FALSE, warning=FALSE}
+fires_8891 <- fires_select %>%
+  filter(year %in% c(1988,1989,1990,1991))
 
-```{r}
-# dir <- "G:/Other computers/My Laptop/Documents/Grad School/Research/WesternConiferRegeneration/output"
-# 
-# fires_export <- fires_select %>% 
-#   mutate(fire_name = str_replace_all(fire_name, fixed(" "), ""),
-#          Fire_ID = str_c(fire_name,"_", Event_ID),
-#          year = as.integer(year))
-# 
-# str(fires_export)
+combined<- st_join(fires_8891, fires_8891, join=st_is_within_distance, dist = 10, left = TRUE,remove_self = TRUE) %>% 
+  drop_na(fire_name.y) %>% 
+  select(fire_name.x,fire_name.y)
 
-# st_write(fires_export, dir, "fires_select.shp",driver = 'ESRI Shapefile')
+overlap <- fires_8891 %>% 
+  filter(fire_name %in% combined$fire_name.x)
+no_overlap <- fires_8891 %>% 
+  filter(!(fire_name %in% combined$fire_name.x))
+
+overlap_union <- st_union(overlap) %>% 
+  st_buffer(180)
+
+groups <- st_as_sf(st_cast(overlap_union ,to='POLYGON',group_or_split=TRUE))
+groups$Fire_ID <- str_c("Fire_",c(1:nrow(groups)))
+
+grouped_overlap <- st_join(overlap,groups,left=TRUE)
+
+joined_overlap_groups <- grouped_overlap %>% 
+  group_by(Fire_ID) %>% 
+  tally() %>% 
+  st_buffer(1) %>% 
+  select(Fire_ID) %>% 
+  mutate(year = 1988)
+
+no_overlap_groups <- no_overlap %>% 
+  mutate(Fire_ID = str_c("Fire_",nrow(groups)+c(1:nrow(no_overlap)))) %>% 
+  select(Fire_ID,year)
+
+fires_export <- rbind(joined_overlap_groups,no_overlap_groups) %>% 
+  mutate(year=as.integer(year))
+
+mapview(fires_export)
 ```
 
+
+## Export
 ```{r}
-mgmt <- st_read("data/S_USA.Activity_SilvReforestation.shp")
-
-mgt_filter <- mgmt %>% 
-  filter(FY_COMPLET > 1988,
-         STATE_ABBR %in% c('WY','MT','ID','WA',"SD")) %>% 
-  st_transform(., crs=crs)
-  
-
-mgmt_select <- st_join(mgt_filter, fires_select, left = FALSE, largest = TRUE)
-
-mgmt_selected <- mgmt_select %>% 
-  filter(Certification of Natural Regeneration without Site Prep)
-
-mapview(list(mgmt_select,fires_select),col.regions = c("red","blue"))
-mapview(mgmt_select)
-
-?mapview
+#st_write(fires_export, "output/", "fires_export.shp",driver = 'ESRI Shapefile')
+#st_write(fires_8891, "output/", "fires_8891.shp",driver = 'ESRI Shapefile')
 ```
 
-```{r}
-geom = st_union(fires_select) %>% 
-  st_as_sf()
-
-geom = fires_select %>% 
-  st_buffer(.001)%>%
-  st_union() %>% 
-  st_as_sf()
-
-mapview(geom)
-```
 
