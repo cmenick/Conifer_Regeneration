@@ -6,7 +6,7 @@ output: html_document
 ---
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(elevatr)
 library(tidyverse)
 library(sf)
@@ -14,89 +14,123 @@ library(terra)
 library(mapview)
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # data
 fires_select <- st_read("output/fires_select.shp")%>% 
   filter(year %in% c(1988,1989,1990,1991))
 fires_export <- st_read("output/fires_export.shp")
-patches <- st_read("output/highsev_patches_morph.shp") %>% 
+patches <- st_read("output/highsev_patches_final.shp") %>% 
   st_transform(crs=crs(fires_export))
+
+
+
+```
+
+```{r message=FALSE, warning=FALSE}
+fire_list <- unique(patches$Evnt_ID)
+
+quadrants_df = list()
+
+for(i in fire_list){
+  
+  patch_fire <- patches %>% 
+    filter(Evnt_ID == i)
+  
+  Evnt_ID <- i
+  
+  # get exterior/interior
+  patches_interior <- st_buffer(patch_fire,-90)
+  patches_exterior <- do.call(rbind,
+                              purrr::map(1:nrow(patch_fire), ~st_difference(patch_fire[.x,], patches_interior[.x,]))) %>% 
+    select(colnames(patches_interior))
+
+  # get elevation/ ccaspect
+  dem <- get_elev_raster(patch_fire,z=10)
+  aspect <- terrain(dem, opt = "aspect",unit = "radians")
+  ccaspect <- cos(aspect)
+
+  ccaspect[ccaspect>0] <- 1
+  ccaspect[ccaspect<0] <- -1
+  ccaspect_poly <- as.polygons(rast(ccaspect)) %>%
+    st_as_sf()
+  
+  pos_aspect <- ccaspect_poly %>%
+    filter(layer==1)
+  neg_aspect <- ccaspect_poly %>%
+    filter(layer==-1)
+
+  # get quadrants
+  pos_ext <- st_intersection(pos_aspect,patches_exterior)%>% 
+    st_transform(crs=crs(fires_export)) %>% 
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "pos_ext",
+           Evnt_ID = i,
+           quad_id = paste0(Evnt_ID,"-",quadrant))
+  
+  pos_int <- st_intersection(pos_aspect,patches_interior)%>% 
+    st_transform(crs=crs(fires_export)) %>% 
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "pos_int",
+           Evnt_ID = i,
+           quad_id = paste0(Evnt_ID,"-",quadrant))
+  
+  neg_ext <- st_intersection(neg_aspect,patches_exterior)%>% 
+  st_transform(crs=crs(fires_export)) %>% 
+  st_union() %>% 
+  st_as_sf()%>% 
+  mutate(quadrant = "neg_ext",
+         Evnt_ID = i,
+         quad_id = paste0(Evnt_ID,"-",quadrant))
+  
+  neg_int <- st_intersection(neg_aspect,patches_interior)%>% 
+  st_transform(crs=crs(fires_export)) %>% 
+  st_union() %>% 
+  st_as_sf()%>% 
+  mutate(quadrant = "neg_int",
+         Evnt_ID = i,
+         quad_id = paste0(Evnt_ID,"-",quadrant))
+  
+  #combine, export quadrants
+  all_quadrants <- rbind(neg_int,pos_int,neg_ext,pos_ext)
+  
+  quadrants_df[[i]] <- all_quadrants
+  
+  print(i)
+}
+
+quadrants_fullset <- do.call(rbind,quadrants_df) %>% 
+  st_as_sf() 
+
+mapview(quadrants_fullset,zcol = "quadrant")
 ```
 
 
 ```{r}
-# create interior/exterior patches
-patches_interior <- st_buffer(patches,-200)
-mapview(patches_interior)
-mapview(list(patches_interior,subset),col.regions=c("red","blue"))
+quadrats_fullset <- head(quadrats_fullset,10)
 
-patches_exterior <- do.call(rbind,purrr::map(1:nrow(subset), ~st_difference(subset[.x,], patches_interior[.x,])))
-mapview(patches_exterior)
-mapview(list(patches_interior,patches_exterior),col.regions=c("red","blue"))
-
-# get elevation/ ccaspect
-dem <- get_elev_raster(subset,z=10)
-aspect <- terrain(dem, opt = "aspect",unit = "radians")
-ccaspect <- cos(aspect)
-mapview(ccaspect)
-
-ccaspect[ccaspect>0] <- 1
-ccaspect[ccaspect<0] <- -1
-
-ccaspect_poly <- as.polygons(rast(ccaspect)) %>% 
-  st_as_sf()
-mapview(ccaspect_poly)
-
-pos_aspect <- ccaspect_poly %>% 
-  filter(layer==1)
-neg_aspect <- ccaspect_poly %>% 
-  filter(layer==-1)
-
-# get quadrants
-pos_ext <- st_intersection(pos_aspect,patches_exterior)
-pos_int <-  st_intersection(pos_aspect,patches_interior)
-neg_ext <- st_intersection(neg_aspect,patches_exterior)
-neg_int <-  st_intersection(neg_aspect,patches_interior)
-
-mapview(list(neg_ext,pos_ext),col.regions=c("red","blue"))
-mapview(list(neg_int,pos_int),col.regions=c("red","blue"))
-mapview(list(neg_int,pos_int,neg_ext,pos_ext),col.regions=c("red","orange","blue","green"))
-
-# sample regions
-
-sampled_points_neg_ext <- st_sample(
-  x = neg_ext,
+points_df <- list()
+for (j in quadrats_fullset){
+  
+  patch_fire <- quadrats_fullset %>%
+    filter(quad_id == j)
+  
+  sampled_points <- st_sample(
+  x = patch_fire,
   type = "SSI",
   r = 30, # threshold distance (in metres)
   n = 5 # number of points
-) 
-sampled_points_pos_ext <- st_sample(
-  x = pos_ext,
-  type = "SSI",
-  r = 30, # threshold distance (in metres)
-  n = 5 # number of points
-) 
-sampled_points_pos_int <- st_sample(
-  x = pos_int,
-  type = "SSI",
-  r = 30, # threshold distance (in metres)
-  n = 5 # number of points
-) 
-sampled_points_neg_int <- st_sample(
-  x = neg_int,
-  type = "SSI",
-  r = 30, # threshold distance (in metres)
-  n = 5 # number of points
-) 
+  ) 
+  
+  points_df[[j]] <- sampled_points
+}
 
-sampled_points %>% st_crs
+points_fullset <- do.call(rbind,points_df)
 
-st_crs(sampled_points) <- st_crs(neg_ext)
+```
 
-plot(sampled_points)
-mapview(list(neg_ext,sampled_points))
-
-mapview(sampled_points)
-
+```{r}
+st_sample(x,5,type="random")[1:5]
 ```
 

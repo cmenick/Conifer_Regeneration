@@ -25,7 +25,7 @@ crs <- crs(rast_collection[1])
 ```
 
 
-```{r}
+```{r data import, show_col_types = FALSE}
 fires_select <- st_read("output/fires_select.shp")%>% 
   st_transform(., crs=crs) %>% 
   filter(year %in% c(1988,1989,1990,1991))
@@ -34,19 +34,19 @@ fires_export <- st_read("output/fires_export.shp")%>%
   st_transform(., crs=crs)
 
 conus_forestgroup <- raster('data/conus_forestgroup.tif')
+forest_codes <- read_csv('data/forestgroupcodes.csv')
 ```
 
 ```{r patchmorph, message=FALSE, warning=FALSE}
-# for loop method
+# loop through RdNBR rasters, assign >640 to high severity category
+# utilize patchmorph to act as 3x3 cell majority filter
 patch_df <- list()
-rast_df <- list()
 for (i in 1:length(rast_all)){
   rast_fire <- raster(rast_collection[i])
   rast_fire[rast_fire < 640] <- 0
   rast_fire[rast_fire > 640] <- 1
-  # gap and spur are based on number of pixels (mtbs = 30m; 90m = 3 pixels)
+
   patch <- patchMorph(rast_fire, spurThresh = 3, gapThresh = 3)
-  rast_df[[i]] <- patch
   patch_poly <- as.polygons(rast(patch)) %>%
     st_as_sf()
   df_union_cast <- patch_poly %>%
@@ -54,32 +54,32 @@ for (i in 1:length(rast_all)){
     filter(layer == 1)
   patch_df[[i]] <- df_union_cast}
 
-patch_rast_all <- lapply(patch_df, rast)
 patch_poly_all <- do.call(rbind,patch_df)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-st_write(patch_poly_all, "output/", "highsev_patches_morph.shp",driver = 'ESRI Shapefile')
+patches_full <- patch_poly_all %>% 
+  st_transform(., crs=crs) %>% 
+  mutate(patch_area_ha = as.numeric(st_area(.)/10000)) %>%
+  filter(patch_area_ha > 2.25)
+  
+highsev_info <- patches_full%>% 
+  st_join(.,fires_select,join = st_intersects,left= FALSE,largest = TRUE)%>% 
+  dplyr::select("fire_nm","Evnt_ID","year","patch_area_ha")
+  
+highsev_patches <- left_join(highsev_info,exact_extract(conus_forestgroup,highsev_info, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) %>% 
+  mutate(fire_foresttype = case_when(mode==200 ~ "Douglas-Fir",
+                                     mode==220 ~ "Ponderosa",
+                                     mode==260 ~ "Fir-Spruce",
+                                     mode==280 ~ "Lodegepole Pine",
+                                     mode==0 ~ "Unforested",
+                                     TRUE ~ "Other"))
 ```
 
-```{r message=FALSE, warning=FALSE}
-highsev_patches <- patch_poly_all %>% 
-  st_transform(., crs=crs) %>% 
-  left_join(.,exact_extract(conus_forestgroup,patch_poly_all, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
 
-head(highsev_patches)
-
-info_patches <- patch_poly_all %>%
-  left_join(.,exact_extract(conus_forestgroup,patch_poly_all, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
-
-
-  st_join(.,fires_select,join = st_intersects,left= FALSE,largest = TRUE) %>% 
-
-%>% 
-  select() %>% 
-  mutate(patch_area_ha = as.numeric(st_area(.)/10000)) %>%
-  mutate(patch_name = str_c(fire_nm,"-",1:n())) %>% 
-  filter(patch_area_ha > 9.0)
+```{r export, message=FALSE, warning=FALSE}
+# st_write(highsev_patches, "output/", "highsev_patches_final.shp",driver = 'ESRI Shapefile')
+# st_write(patch_poly_all, "output/", "highsev_patches_morph_unfiltered.shp",driver = 'ESRI Shapefile')
 ```
 
 
