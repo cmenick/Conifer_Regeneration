@@ -83,3 +83,16 @@ highsev_patches <- left_join(highsev_info,exact_extract(conus_forestgroup,highse
 ```
 
 
+```{r}
+training_datapoints <- st_read("output/training_datapoints.shp")%>% 
+  st_transform(., crs=crs(highsev_patches)) 
+quadrants_fullset <- st_read("output/quadrants_fullset.shp")%>% 
+  st_transform(., crs=crs(highsev_patches)) 
+training_squarebuffer <- st_read("output/training_data_squarebuffer.shp")%>% 
+  st_transform(., crs=crs(highsev_patches)) 
+
+st_write(training_datapoints, "output/", "training_datapoints_proj",driver = 'ESRI Shapefile')
+st_write(quadrants_fullset, "output/", "quadrants_fullset_proj",driver = 'ESRI Shapefile')
+st_write(training_squarebuffer, "output/", "training_squarebuffer",driver = 'ESRI Shapefile')
+```
+

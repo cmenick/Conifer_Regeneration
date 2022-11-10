@@ -21,9 +21,6 @@ fires_select <- st_read("output/fires_select.shp")%>%
 fires_export <- st_read("output/fires_export.shp")
 patches <- st_read("output/highsev_patches_final.shp") %>% 
   st_transform(crs=crs(fires_export))
-
-
-
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -96,41 +93,24 @@ for(i in fire_list){
   all_quadrants <- rbind(neg_int,pos_int,neg_ext,pos_ext)
   
   quadrants_df[[i]] <- all_quadrants
-  
-  print(i)
 }
 
 quadrants_fullset <- do.call(rbind,quadrants_df) %>% 
   st_as_sf() 
-
-mapview(quadrants_fullset,zcol = "quadrant")
-```
-
-
-```{r}
-quadrats_fullset <- head(quadrats_fullset,10)
-
-points_df <- list()
-for (j in quadrats_fullset){
-  
-  patch_fire <- quadrats_fullset %>%
-    filter(quad_id == j)
-  
-  sampled_points <- st_sample(
-  x = patch_fire,
-  type = "SSI",
-  r = 30, # threshold distance (in metres)
-  n = 5 # number of points
-  ) 
-  
-  points_df[[j]] <- sampled_points
-}
-
-points_fullset <- do.call(rbind,points_df)
-
 ```
 
 ```{r}
-st_sample(x,5,type="random")[1:5]
+#st_write(fires_export, "output/", "fires_export.shp",driver = 'ESRI Shapefile')
+quad_export <- quadrants_fullset %>% 
+  st_transform(crs=crs(fires_export))
+
+st_write(quadrants_fullset,"output/","quadrants_fullset.shp",driver = "ESRI Shapefile")
+crs(quadrants_fullset)
+```
+```{r}
+points <- st_read("data/points_dataset_uptofire1.shp")
+
+mapview(list(points,patches))
+
 ```
 
