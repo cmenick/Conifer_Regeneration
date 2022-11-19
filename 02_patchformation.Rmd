@@ -1,11 +1,13 @@
 ---
-title: "02_patchformation"
+title: "Patch Formation"
 author: "Casey Menick"
 date: "`r Sys.Date()`"
 output: html_document
 ---
 
+# Set Up
 
+## Libraries
 ```{r packages, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(terra)
@@ -13,38 +15,45 @@ library(patchwoRk)
 library(sf)
 library(mapview)
 library(exactextractr)
+library(lubridate)
 ```
 
-```{r}
-rast_list <- list.files(path = "data/highsev", pattern='.tif', all.files=TRUE, full.names=TRUE)
+## Import Data
+
+```{r raster import}
+# import calculated RdNBR rasters for each fire boundary polygon
+rast_list <- list.files(path = "data/rdnbr_rasters", pattern='.tif', all.files=TRUE, full.names=TRUE)
 rast_all <- lapply(rast_list, rast)
-# names(rast_all) <- str_c(rast_list)
 rast_collection <- sprc(rast_all)
 
 crs <- crs(rast_collection[1])
 ```
 
+```{r fire import, message=FALSE, warning=FALSE, results='hide'}
+# import fire boundaries
+mtbs_export <- st_read('data/fire_boundaries/mtbs_export.shp') %>% 
+  st_transform(., crs=crs) 
 
-```{r data import, show_col_types = FALSE}
-fires_select <- st_read("output/fires_select.shp")%>% 
-  st_transform(., crs=crs) %>% 
-  filter(year %in% c(1988,1989,1990,1991))
-
-fires_export <- st_read("output/fires_export.shp")%>% 
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
   st_transform(., crs=crs)
 
-conus_forestgroup <- raster('data/conus_forestgroup.tif')
-forest_codes <- read_csv('data/forestgroupcodes.csv')
+# import forest type group raster
+conus_forestgroup <- raster('data/forest_type/conus_forestgroup.tif')
+forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
 ```
 
-```{r patchmorph, message=FALSE, warning=FALSE}
+# Create High-Severity Patches
+
+## PatchMorph
+```{r patchmorph, message=FALSE, warning=FALSE, results='hide'}
 # loop through RdNBR rasters, assign >640 to high severity category
 # utilize patchmorph to act as 3x3 cell majority filter
 patch_df <- list()
 for (i in 1:length(rast_all)){
+  # print(i)
   rast_fire <- raster(rast_collection[i])
   rast_fire[rast_fire < 640] <- 0
-  rast_fire[rast_fire > 640] <- 1
+  rast_fire[rast_fire >= 640] <- 1
 
   patch <- patchMorph(rast_fire, spurThresh = 3, gapThresh = 3)
   patch_poly <- as.polygons(rast(patch)) %>%
@@ -57,18 +66,21 @@ for (i in 1:length(rast_all)){
 patch_poly_all <- do.call(rbind,patch_df)
 ```
 
-```{r message=FALSE, warning=FALSE}
+## Refine Patches
+
+```{r patch filter, message=FALSE, warning=FALSE}
+# filter small patches
 patches_full <- patch_poly_all %>% 
-  st_transform(., crs=crs) %>% 
-  mutate(patch_area_ha = as.numeric(st_area(.)/10000)) %>%
+  mutate(patch_area_ha = as.numeric(st_area(.))/10000) %>%
   filter(patch_area_ha > 2.25)
-  
-highsev_info <- patches_full%>% 
-  st_join(.,fires_select,join = st_intersects,left= FALSE,largest = TRUE)%>% 
-  dplyr::select("fire_nm","Evnt_ID","year","patch_area_ha")
-  
-highsev_patches <- left_join(highsev_info,exact_extract(conus_forestgroup,highsev_info, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) %>% 
-  mutate(fire_foresttype = case_when(mode==200 ~ "Douglas-Fir",
+```
+
+```{r inform patches, message=FALSE, warning=FALSE, results='hide'}
+# join patches back to grouped fires
+patches_joined <- st_join(patches_full,mtbs_export,join = st_intersects,left= FALSE,largest = TRUE) %>%
+  dplyr::select(-layer,-BurnBndAc) %>% 
+  left_join(.,exact_extract(conus_forestgroup,., 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08))%>%
+  mutate(patch_foresttype = case_when(mode==200 ~ "Douglas-Fir",
                                      mode==220 ~ "Ponderosa",
                                      mode==260 ~ "Fir-Spruce",
                                      mode==280 ~ "Lodegepole Pine",
@@ -76,23 +88,19 @@ highsev_patches <- left_join(highsev_info,exact_extract(conus_forestgroup,highse
                                      TRUE ~ "Other"))
 ```
 
+## Mapping
 
-```{r export, message=FALSE, warning=FALSE}
-# st_write(highsev_patches, "output/", "highsev_patches_final.shp",driver = 'ESRI Shapefile')
-# st_write(patch_poly_all, "output/", "highsev_patches_morph_unfiltered.shp",driver = 'ESRI Shapefile')
+```{r map}
+mapview(patches_joined,col.regions = "red") + mapview(fires_export, alpha.regions = 0, lwd = 2)
 ```
 
 
-```{r}
-training_datapoints <- st_read("output/training_datapoints.shp")%>% 
-  st_transform(., crs=crs(highsev_patches)) 
-quadrants_fullset <- st_read("output/quadrants_fullset.shp")%>% 
-  st_transform(., crs=crs(highsev_patches)) 
-training_squarebuffer <- st_read("output/training_data_squarebuffer.shp")%>% 
-  st_transform(., crs=crs(highsev_patches)) 
+# Export Data 
 
-st_write(training_datapoints, "output/", "training_datapoints_proj",driver = 'ESRI Shapefile')
-st_write(quadrants_fullset, "output/", "quadrants_fullset_proj",driver = 'ESRI Shapefile')
-st_write(training_squarebuffer, "output/", "training_squarebuffer",driver = 'ESRI Shapefile')
+```{r export patches, message=FALSE, warning=FALSE}
+# export patches
+patches <- patches_joined %>%
+  st_transform(crs = crs)
+
+# st_write(patches, "data/patches/", "highsev_patches.shp",driver = 'ESRI Shapefile')
 ```
-

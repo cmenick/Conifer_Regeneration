@@ -1,0 +1,158 @@
+---
+title: "03_samplingpoints"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(elevatr)
+library(tidyverse)
+library(sf)
+library(terra)
+library(mapview)
+```
+
+```{r data import, message=FALSE, warning=FALSE}
+# data import
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG:4326")
+crs <- crs(patches)
+
+patch_interiors<- st_read("data/patches/highsev_patches_interior.shp") %>%
+  st_transform(crs=crs)
+patch_exteriors<- st_read("data/patches/highsev_patches_exterior.shp") %>%
+  st_transform(crs=crs)
+
+mtbs_export <- st_read('data/fire_boundaries/mtbs_export.shp') %>% 
+  st_transform(crs=crs) 
+
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(crs=crs)
+```
+
+```{r quadrant creation, message=FALSE, warning=FALSE}
+# create list of fire IDs
+fire_list <- unique(patches$Evnt_ID)
+
+quadrants_df = list()
+
+for(i in fire_list){
+  
+  # filter patch interiors/exteriors to the selected fire
+  patch_fire <- patches %>% 
+    filter(Evnt_ID == i)
+  
+  mapview(patch_fire)
+  
+  patches_interior <- patch_interiors %>% 
+    filter(Evnt_ID == i)%>% 
+    st_make_valid() %>% 
+    st_union()
+  
+  patches_exterior <- patch_exteriors %>% 
+    filter(Evnt_ID_1 == i)%>% 
+    st_make_valid()%>% 
+    st_union()
+  
+  # set event and fire id to the selected fire
+  Evnt_ID <- i
+  Fire_ID <-names(which.max(table(patch_fire$Fire_ID)))
+  
+  print(paste0("starting event ",Evnt_ID," in fire group ", Fire_ID))
+  
+  # get and calculate cosine corrected aspect
+  dem <- get_elev_raster(patch_fire,z=11)
+  aspect <- terrain(dem, opt = "aspect",unit = "radians")
+  ccaspect <- cos(aspect)
+
+  # positive aspects are north-facing, negative are south-facing
+  ccaspect[ccaspect>0] <- 1
+  ccaspect[ccaspect<0] <- -1
+  ccaspect_poly <- as.polygons(rast(ccaspect)) %>%
+    st_as_sf()
+  
+  pos_aspect <- ccaspect_poly %>%
+    filter(layer==1)%>% 
+    st_make_valid()
+  neg_aspect <- ccaspect_poly %>%
+    filter(layer==-1) %>% 
+    st_make_valid()
+
+  # get quadrants as the intersection of interior/exterior and pos/neg aspect
+  pos_ext <- st_intersection(patches_exterior,pos_aspect)%>% 
+    st_make_valid() %>% 
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "pos_ext",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+
+  pos_int <- st_intersection(patches_interior,pos_aspect)%>% 
+    st_make_valid() %>% 
+    st_union()%>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "pos_int",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+  
+  neg_ext <- st_intersection(patches_exterior,neg_aspect)%>% 
+    st_make_valid() %>%
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "neg_ext",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+  
+  neg_int <- st_intersection(patches_interior, neg_aspect)%>% 
+    st_make_valid() %>%
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "neg_int",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+  
+  #c ombine, export quadrants
+  all_quadrants <- rbind(neg_int,pos_int,neg_ext,pos_ext) %>% 
+    st_transform(crs=crs)
+
+  quadrants_df[[i]] <- all_quadrants
+  
+  print(paste0("completed"))
+}
+
+# bind list together
+quadrants_fullset <- do.call(rbind,quadrants_df) %>% 
+  st_as_sf() 
+```
+
+```{r clean up quadrants, message=FALSE, warning=FALSE}
+# removes erroneous polygons created from irregular fire boundary shapes
+# removes small border mismatched fire
+quadrants_clean <- quadrants_fullset %>% 
+  mutate(area=as.numeric(st_area(x))) %>% 
+  filter(area > 1) %>% 
+  group_by(Evnt_ID) %>% 
+  mutate(n=n()) %>% 
+  filter(n == 4)
+
+# clean up for export
+quadrants_export <- quadrants_clean %>% 
+  st_make_valid() %>% 
+  st_as_sf() %>% 
+  select(-"area")%>% 
+  st_transform(crs=crs)
+```
+
+```{r message=FALSE, warning=FALSE}
+# export
+# st_write(quadrants_export,"data/patches/","quadrants_export.shp",driver = "ESRI Shapefile")
+```

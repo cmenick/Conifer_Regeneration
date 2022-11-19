@@ -1,5 +1,5 @@
 ---
-title: "01_fireselection"
+title: "Fire Selection"
 author: "Casey Menick"
 date: "`r Sys.Date()`"
 output:
@@ -23,15 +23,15 @@ library(patchwoRk)
 library(gridExtra)
 ```
 
-# Define Fire Parameters
+# Import Data
 
 ## USDA National Forest Type Group Dataset (2004)
-Conifer Forest Type Groups: Douglas-Fir, Ponderosa Pine, Fir-Spruce-Mountain Hemlock, Lodgepole Pine
+Conifer Forest Type Groups: Douglas-Fir, Fir-Spruce-Mountain Hemlock, Lodgepole Pine
 
-```{r import forest type groups, message=FALSE, warning=FALSE}
+```{r import forest type groups, message=FALSE, warning=FALSE, results='hide'}
 # forest type groups and key
-conus_forestgroup <- raster('data/conus_forestgroup.tif')
-forest_codes <- read_csv('data/forestgroupcodes.csv')
+conus_forestgroup <- raster('data/forest_type/conus_forestgroup.tif')
+forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
 
 # set crs
 crs = crs(conus_forestgroup)
@@ -39,26 +39,38 @@ crs = crs(conus_forestgroup)
 
 ## EPA level-3 Ecoregions
 Canadian Rockies, Idaho Batholith, Middle Rockies, Columbian Mountains - Northern Rockies
-
-```{r import ecoregions, message=FALSE, warning=FALSE}
+```{r ecoregions, message=FALSE, warning=FALSE, results='hide'}
 # level 3 ecoregions
-l3eco <- st_read('data/us_eco_l3.shp') %>% 
+l3eco <- st_read('data/ecoregion/us_eco_l3.shp') %>% 
   st_transform(., crs=crs)
 
 # select northern rocky mountains from level3 ecoregions
 eco_select <- l3eco %>% 
   filter(NA_L3NAME %in% c('Canadian Rockies','Columbia Mountains/Northern Rockies','Middle Rockies','Idaho Batholith'))
+```
 
+## Mapping
+
+### Ecoregions
+
+```{r mapping ecoregion, message=FALSE, warning=FALSE}
 mapview(eco_select)
 ```
 
-## MTBS Fires Boundaries
+### Forest Type Groups
+
+```{r mapping ftype, message=FALSE, warning=FALSE}
+forestgroup_crop <- crop(conus_forestgroup,l3eco)
+mapview(forestgroup_crop)
+```
+
+# Define Fire Parameters
+
+## MTBS 
 
 Criteria: 
 
   -1988-1991
-
-  -5000+ acres of burning
 
   -500+ acres of high-severity
 
@@ -66,24 +78,21 @@ Criteria:
 
   ->25% of selected forest types
   
-```{r import mtbs, message=FALSE, warning=FALSE}
+```{r import mtbs, message=FALSE, warning=FALSE, results='hide'}
 # mtbs fire perimeters
-mtbs_full <- st_read('data/mtbs_perims_DD.shp') %>% 
+mtbs_full <- st_read('data/mtbs/mtbs_perims_DD.shp') %>% 
   st_transform(., crs=crs)
-```
-```{r initial fire selection, message=FALSE, warning=FALSE, results='hide'}
-# filter fires by general region of interest and date range
+
 mtbs_select <- mtbs_full %>% 
   mutate(state = str_sub(Event_ID,0,2),
          year = year(as.Date(Ig_Date))) %>% 
   filter(state %in% c("WA","ID","MT","WY","SD"),
          between(Ig_Date, as.Date('1988-01-1'), as.Date('1991-12-31'))) 
-
-mapview(mtbs_select,zcol="year")
 ```
+## Group Adjacent Fires
 
 ```{r create polygon grouping function}
-# function to group adjoining fire polygons to ensure patches are contiguous
+# function to group adjoining fire polygons to ensure contiguous high-severity patches
 group_fires <- function(mtbs_year) {
 
   # join the polygons with themselves, and remove those that do not join with any besides themselves
@@ -91,7 +100,7 @@ group_fires <- function(mtbs_year) {
     drop_na(Event_ID.y)%>% 
     dplyr::select(Event_ID.x,Event_ID.y)
   
-  if(nrow(combined)>=1){
+  if(nrow(combined)>=1){ # if there are overlaps for this years fires...
     
     # partition data into that that has overlap, and that that does not
     overlap <- mtbs_year %>%
@@ -101,9 +110,9 @@ group_fires <- function(mtbs_year) {
     
     print(paste0("there are ",nrow(overlap)," overlapping polygons"))
     
-    # join all overlapping features, and buffer with radius to ensure proper grouping
+    # join all overlapping features, and buffer to ensure proper grouping
     overlap_union <- st_union(overlap) %>%
-    st_buffer(190)
+      st_buffer(190)
     
     # break apart the joined polygons into their individual groups
     groups <- st_as_sf(st_cast(overlap_union ,to='POLYGON',group_or_split=TRUE)) %>%
@@ -133,7 +142,7 @@ group_fires <- function(mtbs_year) {
     fires_export <- rbind(joined_overlap_groups,no_overlap_groups)
     return(fires_export)
     
-    } else { 
+    } else { # if there are no overlaps for this year...
       
       print("no overlapping polygons")
       
@@ -146,7 +155,7 @@ group_fires <- function(mtbs_year) {
 }
 ```
 
-```{r group adjacent or overlapping polygons}
+```{r group adjacent or overlapping polygons, message=FALSE, warning=FALSE}
 # group adjacent polygons within each fire year
 fires_88 <- group_fires(mtbs_select %>%  filter(year == 1988))
 fires_89 <- group_fires(mtbs_select %>%  filter(year == 1989))
@@ -155,14 +164,12 @@ fires_91 <- group_fires(mtbs_select %>%  filter(year == 1991))
 
 # join each fire year, filter by area
 mtbs_grouped <- rbind(fires_88,fires_89,fires_90,fires_91)%>%
-  mutate(aream2 = as.numeric(st_area(geometry)),
-         areaha = aream2/10000,
-         areaac = areaha*2.471)%>% 
-  filter(areaac >5000)
+  mutate(area_ha = as.numeric(st_area(geometry))/10000,
+         area_acres = area_ha*2.471)
 ```
-
-```{r forest typing, message=FALSE, warning=FALSE, results='hide'}  
-# assign proportions of forest type to each fire polygon
+## Select Fires by Ecoregion and Forest Type 
+```{r forest typing, message=FALSE, warning=FALSE, results='hide'}
+# assign ecoregion and proportions of forest type to each fire polygon
 fires_join <- st_join(mtbs_grouped,eco_select,join=st_intersects,left=FALSE,largest=TRUE) %>% 
   left_join(., exact_extract(conus_forestgroup,mtbs_grouped, append_cols = TRUE, max_cells_in_memory = 3e+08, 
                              fun = function(value, coverage_fraction) {
@@ -176,12 +183,10 @@ fires_join <- st_join(mtbs_grouped,eco_select,join=st_intersects,left=FALSE,larg
               mutate(across(starts_with('freq'), replace_na, 0)))
  
 # remove unnecessary columns, cleanup names
-# filter to remove majority other forest types, majority not-forested cover
+# filter to ensure fire polygons are at least 25% type of interest
 fires <- fires_join %>% 
-  dplyr::select("Fire_ID","year","areaha","areaac","US_L3NAME","freq_0","freq_200","freq_220","freq_260","freq_280") %>% 
-  rename("fire_name"="Fire_ID",
-         "fire_acres"="areaac",
-         "ecoregion" = "US_L3NAME",
+  dplyr::select("Fire_ID","year","area_ha","area_acres","US_L3NAME","freq_0","freq_200","freq_220","freq_260","freq_280") %>% 
+  rename("ecoregion" = "US_L3NAME",
          "freq_df"="freq_200",
          "freq_pp"="freq_220",
          "freq_fs"="freq_260",
@@ -192,31 +197,32 @@ fires <- fires_join %>%
   mutate(across(starts_with('freq'), round,2))%>% 
   filter(freq_ideal > 0.25)
 ```
+## Select Fires by Burn Severity
 
 ```{r extract burn severity, message=FALSE, warning=FALSE, results='hide'}
 # import all mtbs rasters via a list
-rastlist <- list.files(path = "data/MTBSmosaic", pattern='.tif', all.files=TRUE, full.names=TRUE)
+rastlist <- list.files(path = "data/mtbs", pattern='.tif', all.files=TRUE, full.names=TRUE)
 allrasters <- lapply(rastlist, raster)
-names(allrasters) <- str_c("y", str_sub(rastlist,28,31))
+names(allrasters) <- str_c("y", str_sub(rastlist,22,25))
 
 # create empty dataframe
 severity_list <- list()
 
-# loop through mtbs mosasics for 1986-1991
-# extract burn severity raster for all selected fires
+# loop through mtbs mosasics for 1988-1991
+# extract mtbs burn severity raster for all selected fires
 # calculate burn severity percentages for each fire
 for (i in names(allrasters)){
   mtbs_year <- allrasters[[i]]
   fire_year <- filter(fires, year==str_sub(i,2,5)) 
   raster_extract <- exact_extract(mtbs_year,fire_year, max_cells_in_memory = 3e+09,coverage_area=TRUE)
-  names(raster_extract) <- fire_year$fire_name 
+  names(raster_extract) <- fire_year$Fire_ID 
   
-  output_select <- bind_rows(raster_extract, .id = "fire_name")%>%
-    group_by(fire_name , value) %>%
+  output_select <- bind_rows(raster_extract, .id = "Fire_ID")%>%
+    group_by(Fire_ID , value) %>%
     summarize(total_area = sum(coverage_area)) %>%
-    group_by(fire_name) %>%
+    group_by(Fire_ID) %>%
     mutate(proportion = total_area/sum(total_area))%>% 
-    dplyr::select("fire_name","value","proportion") %>% 
+    dplyr::select("Fire_ID","value","proportion") %>% 
     spread(.,key="value",value = "proportion")
   
   severity_list[[i]] <- output_select
@@ -228,12 +234,15 @@ severity_df <- do.call(rbind, severity_list)
 # join burn severity % to fires polygons
 # fix naming
 # filter dataset for 500 acres high severity
-fires_severity <- left_join(fires,severity_df,by="fire_name")%>% 
+fires_severity <- left_join(fires,severity_df,by="Fire_ID")%>% 
   rename(noburn= "1",lowsev = "2", medsev = "3", highsev = "4",regrowth = "5", error = "6") %>% 
   dplyr::select(- "NaN",-"regrowth",-"error") %>% 
-  mutate(highsev_acres = fire_acres*highsev)%>% 
-  filter(highsev_acres > 500) 
-
+  mutate(highsev_acres = area_acres*highsev)%>% 
+  filter(highsev_acres > 500)
+```
+## Clean Up Dataset
+```{r extract majority forest type, message=FALSE, warning=FALSE, results='hide'}
+# get the most common forest type within each polygon
 fires_select <- fires_severity %>%
   left_join(.,exact_extract(conus_forestgroup,fires_severity, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
 
@@ -244,10 +253,19 @@ fires_select <- fires_select %>%
                                        mode==220 ~ "Ponderosa",
                                        mode==260 ~ "Fir-Spruce",
                                        mode==280 ~ "Lodegepole Pine",
-                                       TRUE ~ "Other")) 
+                                       TRUE ~ "Other"),
+           Fire_ID = str_c("Fire_",c(1:nrow(.)),"_",year))
 ```
 
-# Fire Dataset
+```{r get mtbs fires, message=FALSE, warning=FALSE}
+# join the grouped fires back to original mtbs boundaries
+fires_mtbs <- st_join(mtbs_select,fires_select,left=FALSE,largest=TRUE) %>% 
+  filter(year.x==year.y)%>% 
+  dplyr::select("Event_ID","Incid_Name","Fire_ID","Ig_Date","year.y","state","BurnBndAc","ecoregion") %>% 
+  rename(year= year.y)
+```
+
+# Final Fire Dataset
 
 ## Selected fires by year
 ```{r plot year}
@@ -262,20 +280,22 @@ mapview(fires_select, zcol = "fire_foresttype")
 ```
 
 # Export Data 
-## Merge Fire Polys for Analysis
+
+## Final Cleanup for Export
 ```{r cleanup, message=FALSE, warning=FALSE}
 fires_export <- fires_select %>% 
-  dplyr::select('fire_name','year','fire_acres','ecoregion','fire_foresttype','geometry') %>% 
-  rename(Fire_ID = fire_name) %>% 
   mutate(year = as.integer(year)) %>% 
   st_transform(., crs="EPSG:4326")
 
-str(fires_export)
+mtbs_export <- fires_mtbs %>% 
+  mutate(year = as.integer(year)) %>% 
+  st_transform(., crs="EPSG:4326")
 ```
 
 ## Export
 ```{r export}
-# st_write(fires_export, "output/", "fires_export.shp", driver = 'ESRI Shapefile')
+# st_write(fires_export, "data/fire_boundaries/", "fires_export.shp", driver = 'ESRI Shapefile')
+# st_write(mtbs_export, "data/fire_boundaries/", "mbts_export.shp", driver = 'ESRI Shapefile')
 ```
 
 

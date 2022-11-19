@@ -1,0 +1,53 @@
+---
+title: "04_trainingdata"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+library(terra)
+```
+
+```{r data import}
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG: 4326")
+
+crs <- crs(patches)
+
+quadrants <- st_read("data/patches/quadrants_export.shp") %>% 
+  st_transform(crs=crs)
+```
+
+```{r combine training points, message=FALSE, warning=FALSE}
+points_list <- list.files(path = "data/points/individual_fire_points/", pattern='.shp', all.files=TRUE, full.names=TRUE)
+points_all <- lapply(points_list, st_read)
+
+points <- do.call(rbind,points_all) %>% 
+  st_transform(crs=crs)
+```
+
+```{r join points}
+# join points dataset back to fires to fill out dataset
+points_joined <- st_join(points,patches,left=TRUE,largest=TRUE) %>% 
+  st_join(.,quadrants,left=TRUE,largest=TRUE)
+
+
+points_cleaned <- points_joined %>% 
+  dplyr::select("class","ptch_r_","Evnt_ID.x","Incd_Nm","Fire_ID.x","year","ecoregn","ptch_fr","quadrnt","qd_d_vn","qd_d_fr") %>% 
+  rename(patch_area_ha = ptch_r_,
+         Event_ID = Evnt_ID.x,
+         Incid_Name = Incd_Nm,
+         Fire_ID = Fire_ID.x,
+         patch_frtype = ptch_fr,
+         quad = quadrnt,
+         quad_event_id= qd_d_vn,
+         quad_fire_id=qd_d_fr) %>% 
+  st_transform(crs=crs)
+```
+
+```{r export, message=FALSE, warning=FALSE}
+st_write(points_cleaned, "data/points/", "points_export.shp",driver = 'ESRI Shapefile')
+```
