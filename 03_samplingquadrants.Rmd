@@ -5,7 +5,13 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-```{r libraries, message=FALSE, warning=FALSE}
+# Sampling Quadrants
+
+## Set Up
+
+### Libraries
+
+```{r libraries3, message=FALSE, warning=FALSE}
 library(elevatr)
 library(tidyverse)
 library(sf)
@@ -13,7 +19,9 @@ library(terra)
 library(mapview)
 ```
 
-```{r data import, message=FALSE, warning=FALSE}
+### Import High-Severity Patches and Fire Boundaries
+
+```{r boundary import, message=FALSE, warning=FALSE, results='hide'}
 # data import
 patches <- st_read("data/patches/highsev_patches.shp") %>% 
   st_transform(crs="EPSG:4326")
@@ -31,7 +39,11 @@ fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>%
   st_transform(crs=crs)
 ```
 
-```{r quadrant creation, message=FALSE, warning=FALSE}
+## Create Sampling Quadrants
+
+### Split Patches by North/South Aspects and Interior/Exterior
+
+```{r quadrant creation, message=FALSE, warning=FALSE, results='hide'}
 # create list of fire IDs
 fire_list <- unique(patches$Evnt_ID)
 
@@ -120,7 +132,7 @@ for(i in fire_list){
            Fire_ID = Fire_ID,
            quad_id_fire = paste0(Fire_ID,"-",quadrant))
   
-  #c ombine, export quadrants
+  # combine, export quadrants
   all_quadrants <- rbind(neg_int,pos_int,neg_ext,pos_ext) %>% 
     st_transform(crs=crs)
 
@@ -134,7 +146,9 @@ quadrants_fullset <- do.call(rbind,quadrants_df) %>%
   st_as_sf() 
 ```
 
-```{r clean up quadrants, message=FALSE, warning=FALSE}
+### Clean Quadrants
+
+```{r clean up quadrants, message=FALSE, warning=FALSE, results='hide'}
 # removes erroneous polygons created from irregular fire boundary shapes
 # removes small border mismatched fire
 quadrants_clean <- quadrants_fullset %>% 
@@ -148,11 +162,12 @@ quadrants_clean <- quadrants_fullset %>%
 quadrants_export <- quadrants_clean %>% 
   st_make_valid() %>% 
   st_as_sf() %>% 
-  select(-"area")%>% 
+  dplyr::select(-"area")%>% 
   st_transform(crs=crs)
 ```
 
-```{r message=FALSE, warning=FALSE}
-# export
+## Export Data
+
+```{r export quadrants, message=FALSE, warning=FALSE}
 # st_write(quadrants_export,"data/patches/","quadrants_export.shp",driver = "ESRI Shapefile")
 ```

@@ -7,9 +7,13 @@ output:
   pdf_document: default
 ---
 
-# Set Up
+# Fire Selection
 
-```{r packages, message=FALSE, warning=FALSE}
+## Set Up
+
+### Libraries
+
+```{r libraries1, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(terra)
 library(sf)
@@ -23,9 +27,7 @@ library(patchwoRk)
 library(gridExtra)
 ```
 
-# Import Data
-
-## USDA National Forest Type Group Dataset (2004)
+### USDA National Forest Type Group Dataset
 Conifer Forest Type Groups: Douglas-Fir, Fir-Spruce-Mountain Hemlock, Lodgepole Pine
 
 ```{r import forest type groups, message=FALSE, warning=FALSE, results='hide'}
@@ -37,7 +39,7 @@ forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
 crs = crs(conus_forestgroup)
 ```
 
-## EPA level-3 Ecoregions
+### EPA level-3 Ecoregions
 Canadian Rockies, Idaho Batholith, Middle Rockies, Columbian Mountains - Northern Rockies
 ```{r ecoregions, message=FALSE, warning=FALSE, results='hide'}
 # level 3 ecoregions
@@ -49,24 +51,24 @@ eco_select <- l3eco %>%
   filter(NA_L3NAME %in% c('Canadian Rockies','Columbia Mountains/Northern Rockies','Middle Rockies','Idaho Batholith'))
 ```
 
-## Mapping
+### Mapping
 
-### Ecoregions
+#### Ecoregions
 
 ```{r mapping ecoregion, message=FALSE, warning=FALSE}
 mapview(eco_select)
 ```
 
-### Forest Type Groups
+#### Forest Type Groups
 
 ```{r mapping ftype, message=FALSE, warning=FALSE}
 forestgroup_crop <- crop(conus_forestgroup,l3eco)
 mapview(forestgroup_crop)
 ```
 
-# Define Fire Parameters
+## Define Fire Parameters
 
-## MTBS 
+### Monitoring Trends in Burn Severity (MTBS) Dataset
 
 Criteria: 
 
@@ -89,7 +91,7 @@ mtbs_select <- mtbs_full %>%
   filter(state %in% c("WA","ID","MT","WY","SD"),
          between(Ig_Date, as.Date('1988-01-1'), as.Date('1991-12-31'))) 
 ```
-## Group Adjacent Fires
+### Group Adjacent Fires
 
 ```{r create polygon grouping function}
 # function to group adjoining fire polygons to ensure contiguous high-severity patches
@@ -167,7 +169,8 @@ mtbs_grouped <- rbind(fires_88,fires_89,fires_90,fires_91)%>%
   mutate(area_ha = as.numeric(st_area(geometry))/10000,
          area_acres = area_ha*2.471)
 ```
-## Select Fires by Ecoregion and Forest Type 
+### Select Fires by Ecoregion and Forest Type 
+
 ```{r forest typing, message=FALSE, warning=FALSE, results='hide'}
 # assign ecoregion and proportions of forest type to each fire polygon
 fires_join <- st_join(mtbs_grouped,eco_select,join=st_intersects,left=FALSE,largest=TRUE) %>% 
@@ -197,7 +200,7 @@ fires <- fires_join %>%
   mutate(across(starts_with('freq'), round,2))%>% 
   filter(freq_ideal > 0.25)
 ```
-## Select Fires by Burn Severity
+### Select Fires by Burn Severity
 
 ```{r extract burn severity, message=FALSE, warning=FALSE, results='hide'}
 # import all mtbs rasters via a list
@@ -240,7 +243,7 @@ fires_severity <- left_join(fires,severity_df,by="Fire_ID")%>%
   mutate(highsev_acres = area_acres*highsev)%>% 
   filter(highsev_acres > 500)
 ```
-## Clean Up Dataset
+### Clean Up Dataset
 ```{r extract majority forest type, message=FALSE, warning=FALSE, results='hide'}
 # get the most common forest type within each polygon
 fires_select <- fires_severity %>%
@@ -265,24 +268,25 @@ fires_mtbs <- st_join(mtbs_select,fires_select,left=FALSE,largest=TRUE) %>%
   rename(year= year.y)
 ```
 
-# Final Fire Dataset
+## Final Fire Dataset
 
-## Selected fires by year
+### Selected fires by year
 ```{r plot year}
 # plot
 mapview(fires_select, zcol = "year")
 ```
 
-## Selected fires by majority forest type
+### Selected fires by majority forest type
 ```{r plot forest type}
 # plot
 mapview(fires_select, zcol = "fire_foresttype")
 ```
 
-# Export Data 
+## Export Data 
 
-## Final Cleanup for Export
+### Final Cleanup for Export
 ```{r cleanup, message=FALSE, warning=FALSE}
+# reformat and project
 fires_export <- fires_select %>% 
   mutate(year = as.integer(year)) %>% 
   st_transform(., crs="EPSG:4326")
@@ -292,8 +296,8 @@ mtbs_export <- fires_mtbs %>%
   st_transform(., crs="EPSG:4326")
 ```
 
-## Export
-```{r export}
+### Export
+```{r export fire boundaries}
 # st_write(fires_export, "data/fire_boundaries/", "fires_export.shp", driver = 'ESRI Shapefile')
 # st_write(mtbs_export, "data/fire_boundaries/", "mbts_export.shp", driver = 'ESRI Shapefile')
 ```

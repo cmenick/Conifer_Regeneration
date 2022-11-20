@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Define Fire Parameters | 04_trainingdata</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Define Fire Parameters | 04_trainingdata" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Define Fire Parameters | 04_trainingdata" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Casey Menick" />
+
+
+<meta name="date" content="2022-11-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="import-data.html"/>
+<link rel="next" href="final-fire-dataset.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/forestgroup_crop_7c3a86-1/data_stars_forestgroup_cropfac8b7.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i><b>2</b> Set Up</a></li>
+<li class="chapter" data-level="3" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>3</b> Import Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="import-data.html"><a href="import-data.html#usda-national-forest-type-group-dataset-2004"><i class="fa fa-check"></i><b>3.1</b> USDA National Forest Type Group Dataset (2004)</a></li>
+<li class="chapter" data-level="3.2" data-path="import-data.html"><a href="import-data.html#epa-level-3-ecoregions"><i class="fa fa-check"></i><b>3.2</b> EPA level-3 Ecoregions</a></li>
+<li class="chapter" data-level="3.3" data-path="import-data.html"><a href="import-data.html#mapping"><i class="fa fa-check"></i><b>3.3</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="import-data.html"><a href="import-data.html#ecoregions"><i class="fa fa-check"></i><b>3.3.1</b> Ecoregions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="import-data.html"><a href="import-data.html#forest-type-groups"><i class="fa fa-check"></i><b>3.3.2</b> Forest Type Groups</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="define-fire-parameters.html"><a href="define-fire-parameters.html"><i class="fa fa-check"></i><b>4</b> Define Fire Parameters</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="define-fire-parameters.html"><a href="define-fire-parameters.html#mtbs"><i class="fa fa-check"></i><b>4.1</b> MTBS</a></li>
+<li class="chapter" data-level="4.2" data-path="define-fire-parameters.html"><a href="define-fire-parameters.html#group-adjacent-fires"><i class="fa fa-check"></i><b>4.2</b> Group Adjacent Fires</a></li>
+<li class="chapter" data-level="4.3" data-path="define-fire-parameters.html"><a href="define-fire-parameters.html#select-fires-by-ecoregion-and-forest-type"><i class="fa fa-check"></i><b>4.3</b> Select Fires by Ecoregion and Forest Type</a></li>
+<li class="chapter" data-level="4.4" data-path="define-fire-parameters.html"><a href="define-fire-parameters.html#select-fires-by-burn-severity"><i class="fa fa-check"></i><b>4.4</b> Select Fires by Burn Severity</a></li>
+<li class="chapter" data-level="4.5" data-path="define-fire-parameters.html"><a href="define-fire-parameters.html#clean-up-dataset"><i class="fa fa-check"></i><b>4.5</b> Clean Up Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-fire-dataset.html"><a href="final-fire-dataset.html"><i class="fa fa-check"></i><b>5</b> Final Fire Dataset</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="final-fire-dataset.html"><a href="final-fire-dataset.html#selected-fires-by-year"><i class="fa fa-check"></i><b>5.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="5.2" data-path="final-fire-dataset.html"><a href="final-fire-dataset.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>5.2</b> Selected fires by majority forest type</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="export-data.html"><a href="export-data.html"><i class="fa fa-check"></i><b>6</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="export-data.html"><a href="export-data.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>6.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="6.2" data-path="export-data.html"><a href="export-data.html#export"><i class="fa fa-check"></i><b>6.2</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="set-up-1.html"><a href="set-up-1.html"><i class="fa fa-check"></i><b>7</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="set-up-1.html"><a href="set-up-1.html#libraries"><i class="fa fa-check"></i><b>7.1</b> Libraries</a></li>
+<li class="chapter" data-level="7.2" data-path="set-up-1.html"><a href="set-up-1.html#import-data-1"><i class="fa fa-check"></i><b>7.2</b> Import Data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="create-high-severity-patches.html"><a href="create-high-severity-patches.html"><i class="fa fa-check"></i><b>8</b> Create High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="create-high-severity-patches.html"><a href="create-high-severity-patches.html#patchmorph"><i class="fa fa-check"></i><b>8.1</b> PatchMorph</a></li>
+<li class="chapter" data-level="8.2" data-path="create-high-severity-patches.html"><a href="create-high-severity-patches.html#refine-patches"><i class="fa fa-check"></i><b>8.2</b> Refine Patches</a></li>
+<li class="chapter" data-level="8.3" data-path="create-high-severity-patches.html"><a href="create-high-severity-patches.html#mapping-1"><i class="fa fa-check"></i><b>8.3</b> Mapping</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="export-data-1.html"><a href="export-data-1.html"><i class="fa fa-check"></i><b>9</b> Export Data</a></li>
+<li class="chapter" data-level="10" data-path="set-up-2.html"><a href="set-up-2.html"><i class="fa fa-check"></i><b>10</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="set-up-2.html"><a href="set-up-2.html#libraries-1"><i class="fa fa-check"></i><b>10.1</b> Libraries</a></li>
+<li class="chapter" data-level="10.2" data-path="set-up-2.html"><a href="set-up-2.html#import-data-2"><i class="fa fa-check"></i><b>10.2</b> Import Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="create-sampling-quadrants.html"><a href="create-sampling-quadrants.html"><i class="fa fa-check"></i><b>11</b> Create Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="create-sampling-quadrants.html"><a href="create-sampling-quadrants.html#create-quadrants-of-northsouth-aspects-and-patch-interiorexterior"><i class="fa fa-check"></i><b>11.1</b> Create Quadrants of North/South Aspects and Patch Interior/Exterior</a></li>
+<li class="chapter" data-level="11.2" data-path="create-sampling-quadrants.html"><a href="create-sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>11.2</b> Clean Quadrants</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="export-data-2.html"><a href="export-data-2.html"><i class="fa fa-check"></i><b>12</b> Export Data</a></li>
+<li class="chapter" data-level="13" data-path="set-up-3.html"><a href="set-up-3.html"><i class="fa fa-check"></i><b>13</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="set-up-3.html"><a href="set-up-3.html#libraries-2"><i class="fa fa-check"></i><b>13.1</b> Libraries</a></li>
+<li class="chapter" data-level="13.2" data-path="set-up-3.html"><a href="set-up-3.html#import-data-3"><i class="fa fa-check"></i><b>13.2</b> Import Data</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sampling-points.html"><a href="sampling-points.html"><i class="fa fa-check"></i><b>14</b> Sampling Points</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="sampling-points.html"><a href="sampling-points.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>14.1</b> Import and Combine Training Points</a></li>
+<li class="chapter" data-level="14.2" data-path="sampling-points.html"><a href="sampling-points.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>14.2</b> Assign Points and Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="export-1.html"><a href="export-1.html"><i class="fa fa-check"></i><b>15</b> Export</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">04_trainingdata</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="define-fire-parameters" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Define Fire Parameters<a href="define-fire-parameters.html#define-fire-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="mtbs" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> MTBS<a href="define-fire-parameters.html#mtbs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Criteria:</p>
+<p>-1988-1991</p>
+<p>-500+ acres of high-severity</p>
+<p>-Within selected ecoregions</p>
+<p>-&gt;25% of selected forest types</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="define-fire-parameters.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mtbs fire perimeters</span></span>
+<span id="cb8-2"><a href="define-fire-parameters.html#cb8-2" aria-hidden="true" tabindex="-1"></a>mtbs_full <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&#39;data/mtbs/mtbs_perims_DD.shp&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="define-fire-parameters.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span>
+<span id="cb8-4"><a href="define-fire-parameters.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="define-fire-parameters.html#cb8-5" aria-hidden="true" tabindex="-1"></a>mtbs_select <span class="ot">&lt;-</span> mtbs_full <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="define-fire-parameters.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">str_sub</span>(Event_ID,<span class="dv">0</span>,<span class="dv">2</span>),</span>
+<span id="cb8-7"><a href="define-fire-parameters.html#cb8-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">year</span>(<span class="fu">as.Date</span>(Ig_Date))) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="define-fire-parameters.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;WA&quot;</span>,<span class="st">&quot;ID&quot;</span>,<span class="st">&quot;MT&quot;</span>,<span class="st">&quot;WY&quot;</span>,<span class="st">&quot;SD&quot;</span>),</span>
+<span id="cb8-9"><a href="define-fire-parameters.html#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="fu">between</span>(Ig_Date, <span class="fu">as.Date</span>(<span class="st">&#39;1988-01-1&#39;</span>), <span class="fu">as.Date</span>(<span class="st">&#39;1991-12-31&#39;</span>))) </span></code></pre></div>
+</div>
+<div id="group-adjacent-fires" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Group Adjacent Fires<a href="define-fire-parameters.html#group-adjacent-fires" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="define-fire-parameters.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to group adjoining fire polygons to ensure contiguous high-severity patches</span></span>
+<span id="cb9-2"><a href="define-fire-parameters.html#cb9-2" aria-hidden="true" tabindex="-1"></a>group_fires <span class="ot">&lt;-</span> <span class="cf">function</span>(mtbs_year) {</span>
+<span id="cb9-3"><a href="define-fire-parameters.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="define-fire-parameters.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># join the polygons with themselves, and remove those that do not join with any besides themselves</span></span>
+<span id="cb9-5"><a href="define-fire-parameters.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  combined<span class="ot">&lt;-</span> <span class="fu">st_join</span>(mtbs_year, mtbs_year, <span class="at">join=</span>st_is_within_distance, <span class="at">dist =</span> <span class="dv">180</span>, <span class="at">left =</span> <span class="cn">TRUE</span>,<span class="at">remove_self =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="define-fire-parameters.html#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(Event_ID.y)<span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="define-fire-parameters.html#cb9-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Event_ID.x,Event_ID.y)</span>
+<span id="cb9-8"><a href="define-fire-parameters.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-9"><a href="define-fire-parameters.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(combined)<span class="sc">&gt;=</span><span class="dv">1</span>){ <span class="co"># if there are overlaps for this years fires...</span></span>
+<span id="cb9-10"><a href="define-fire-parameters.html#cb9-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-11"><a href="define-fire-parameters.html#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># partition data into that that has overlap, and that that does not</span></span>
+<span id="cb9-12"><a href="define-fire-parameters.html#cb9-12" aria-hidden="true" tabindex="-1"></a>    overlap <span class="ot">&lt;-</span> mtbs_year <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="define-fire-parameters.html#cb9-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(Event_ID <span class="sc">%in%</span> combined<span class="sc">$</span>Event_ID.x)</span>
+<span id="cb9-14"><a href="define-fire-parameters.html#cb9-14" aria-hidden="true" tabindex="-1"></a>    no_overlap <span class="ot">&lt;-</span> mtbs_year <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="define-fire-parameters.html#cb9-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="sc">!</span>(Event_ID <span class="sc">%in%</span> combined<span class="sc">$</span>Event_ID.x))</span>
+<span id="cb9-16"><a href="define-fire-parameters.html#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="define-fire-parameters.html#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;there are &quot;</span>,<span class="fu">nrow</span>(overlap),<span class="st">&quot; overlapping polygons&quot;</span>))</span>
+<span id="cb9-18"><a href="define-fire-parameters.html#cb9-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-19"><a href="define-fire-parameters.html#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># join all overlapping features, and buffer to ensure proper grouping</span></span>
+<span id="cb9-20"><a href="define-fire-parameters.html#cb9-20" aria-hidden="true" tabindex="-1"></a>    overlap_union <span class="ot">&lt;-</span> <span class="fu">st_union</span>(overlap) <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="define-fire-parameters.html#cb9-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_buffer</span>(<span class="dv">190</span>)</span>
+<span id="cb9-22"><a href="define-fire-parameters.html#cb9-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-23"><a href="define-fire-parameters.html#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># break apart the joined polygons into their individual groups</span></span>
+<span id="cb9-24"><a href="define-fire-parameters.html#cb9-24" aria-hidden="true" tabindex="-1"></a>    groups <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">st_cast</span>(overlap_union ,<span class="at">to=</span><span class="st">&#39;POLYGON&#39;</span>,<span class="at">group_or_split=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-25"><a href="define-fire-parameters.html#cb9-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">mean</span>(mtbs_year<span class="sc">$</span>year),</span>
+<span id="cb9-26"><a href="define-fire-parameters.html#cb9-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">Fire_ID =</span> <span class="fu">str_c</span>(<span class="st">&quot;Fire_&quot;</span>,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)),<span class="st">&quot;_&quot;</span>,year)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-27"><a href="define-fire-parameters.html#cb9-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rename</span>(<span class="at">geometry =</span> x)</span>
+<span id="cb9-28"><a href="define-fire-parameters.html#cb9-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-29"><a href="define-fire-parameters.html#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;polygons formed into &quot;</span>,<span class="fu">nrow</span>(groups),<span class="st">&quot; groups&quot;</span>))</span>
+<span id="cb9-30"><a href="define-fire-parameters.html#cb9-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-31"><a href="define-fire-parameters.html#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># join back with original dataset to return to unbuffered geometry</span></span>
+<span id="cb9-32"><a href="define-fire-parameters.html#cb9-32" aria-hidden="true" tabindex="-1"></a>    grouped_overlap <span class="ot">&lt;-</span> <span class="fu">st_join</span>(overlap,groups,<span class="at">left=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-33"><a href="define-fire-parameters.html#cb9-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-34"><a href="define-fire-parameters.html#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># arrange by the new grouping</span></span>
+<span id="cb9-35"><a href="define-fire-parameters.html#cb9-35" aria-hidden="true" tabindex="-1"></a>    joined_overlap_groups <span class="ot">&lt;-</span> grouped_overlap <span class="sc">%&gt;%</span></span>
+<span id="cb9-36"><a href="define-fire-parameters.html#cb9-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(Fire_ID) <span class="sc">%&gt;%</span></span>
+<span id="cb9-37"><a href="define-fire-parameters.html#cb9-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tally</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb9-38"><a href="define-fire-parameters.html#cb9-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_buffer</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-39"><a href="define-fire-parameters.html#cb9-39" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">select</span>(Fire_ID) <span class="sc">%&gt;%</span></span>
+<span id="cb9-40"><a href="define-fire-parameters.html#cb9-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">mean</span>(mtbs_year<span class="sc">$</span>year))</span>
+<span id="cb9-41"><a href="define-fire-parameters.html#cb9-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-42"><a href="define-fire-parameters.html#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add new ID to the freestanding polygons</span></span>
+<span id="cb9-43"><a href="define-fire-parameters.html#cb9-43" aria-hidden="true" tabindex="-1"></a>    no_overlap_groups <span class="ot">&lt;-</span> no_overlap <span class="sc">%&gt;%</span></span>
+<span id="cb9-44"><a href="define-fire-parameters.html#cb9-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">str_c</span>(<span class="st">&quot;Fire_&quot;</span>,<span class="fu">nrow</span>(groups)<span class="sc">+</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(no_overlap)),<span class="st">&quot;_&quot;</span>,year)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-45"><a href="define-fire-parameters.html#cb9-45" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">select</span>(Fire_ID,year)</span>
+<span id="cb9-46"><a href="define-fire-parameters.html#cb9-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-47"><a href="define-fire-parameters.html#cb9-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># join the new grouped overlap and the polygons without overlap</span></span>
+<span id="cb9-48"><a href="define-fire-parameters.html#cb9-48" aria-hidden="true" tabindex="-1"></a>    fires_export <span class="ot">&lt;-</span> <span class="fu">rbind</span>(joined_overlap_groups,no_overlap_groups)</span>
+<span id="cb9-49"><a href="define-fire-parameters.html#cb9-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fires_export)</span>
+<span id="cb9-50"><a href="define-fire-parameters.html#cb9-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-51"><a href="define-fire-parameters.html#cb9-51" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { <span class="co"># if there are no overlaps for this year...</span></span>
+<span id="cb9-52"><a href="define-fire-parameters.html#cb9-52" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-53"><a href="define-fire-parameters.html#cb9-53" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">&quot;no overlapping polygons&quot;</span>)</span>
+<span id="cb9-54"><a href="define-fire-parameters.html#cb9-54" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-55"><a href="define-fire-parameters.html#cb9-55" aria-hidden="true" tabindex="-1"></a>      fires_export <span class="ot">&lt;-</span> mtbs_year <span class="sc">%&gt;%</span></span>
+<span id="cb9-56"><a href="define-fire-parameters.html#cb9-56" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">str_c</span>(<span class="st">&quot;Fire_&quot;</span>,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)),<span class="st">&quot;_&quot;</span>,year)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-57"><a href="define-fire-parameters.html#cb9-57" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(Fire_ID,year)</span>
+<span id="cb9-58"><a href="define-fire-parameters.html#cb9-58" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb9-59"><a href="define-fire-parameters.html#cb9-59" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(fires_export)</span>
+<span id="cb9-60"><a href="define-fire-parameters.html#cb9-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-61"><a href="define-fire-parameters.html#cb9-61" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="define-fire-parameters.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group adjacent polygons within each fire year</span></span>
+<span id="cb10-2"><a href="define-fire-parameters.html#cb10-2" aria-hidden="true" tabindex="-1"></a>fires_88 <span class="ot">&lt;-</span> <span class="fu">group_fires</span>(mtbs_select <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1988</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;there are 22 overlapping polygons&quot;
+## [1] &quot;polygons formed into 7 groups&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="define-fire-parameters.html#cb12-1" aria-hidden="true" tabindex="-1"></a>fires_89 <span class="ot">&lt;-</span> <span class="fu">group_fires</span>(mtbs_select <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1989</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;there are 2 overlapping polygons&quot;
+## [1] &quot;polygons formed into 1 groups&quot;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="define-fire-parameters.html#cb14-1" aria-hidden="true" tabindex="-1"></a>fires_90 <span class="ot">&lt;-</span> <span class="fu">group_fires</span>(mtbs_select <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1990</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;there are 2 overlapping polygons&quot;
+## [1] &quot;polygons formed into 1 groups&quot;</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="define-fire-parameters.html#cb16-1" aria-hidden="true" tabindex="-1"></a>fires_91 <span class="ot">&lt;-</span> <span class="fu">group_fires</span>(mtbs_select <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1991</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;no overlapping polygons&quot;</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="define-fire-parameters.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join each fire year, filter by area</span></span>
+<span id="cb18-2"><a href="define-fire-parameters.html#cb18-2" aria-hidden="true" tabindex="-1"></a>mtbs_grouped <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fires_88,fires_89,fires_90,fires_91)<span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="define-fire-parameters.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area_ha =</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(geometry))<span class="sc">/</span><span class="dv">10000</span>,</span>
+<span id="cb18-4"><a href="define-fire-parameters.html#cb18-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_acres =</span> area_ha<span class="sc">*</span><span class="fl">2.471</span>)</span></code></pre></div>
+</div>
+<div id="select-fires-by-ecoregion-and-forest-type" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Select Fires by Ecoregion and Forest Type<a href="define-fire-parameters.html#select-fires-by-ecoregion-and-forest-type" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="define-fire-parameters.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign ecoregion and proportions of forest type to each fire polygon</span></span>
+<span id="cb19-2"><a href="define-fire-parameters.html#cb19-2" aria-hidden="true" tabindex="-1"></a>fires_join <span class="ot">&lt;-</span> <span class="fu">st_join</span>(mtbs_grouped,eco_select,<span class="at">join=</span>st_intersects,<span class="at">left=</span><span class="cn">FALSE</span>,<span class="at">largest=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="define-fire-parameters.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., <span class="fu">exact_extract</span>(conus_forestgroup,mtbs_grouped, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, </span>
+<span id="cb19-4"><a href="define-fire-parameters.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fun =</span> <span class="cf">function</span>(value, coverage_fraction) {</span>
+<span id="cb19-5"><a href="define-fire-parameters.html#cb19-5" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">data.frame</span>(<span class="at">value =</span> value,</span>
+<span id="cb19-6"><a href="define-fire-parameters.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">frac =</span> coverage_fraction <span class="sc">/</span> <span class="fu">sum</span>(coverage_fraction)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="define-fire-parameters.html#cb19-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">group_by</span>(value) <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="define-fire-parameters.html#cb19-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">sum</span>(frac), <span class="at">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-9"><a href="define-fire-parameters.html#cb19-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&#39;value&#39;</span>,</span>
+<span id="cb19-10"><a href="define-fire-parameters.html#cb19-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">names_prefix =</span> <span class="st">&#39;freq_&#39;</span>,</span>
+<span id="cb19-11"><a href="define-fire-parameters.html#cb19-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">values_from =</span> <span class="st">&#39;freq&#39;</span>)}) <span class="sc">%&gt;%</span></span>
+<span id="cb19-12"><a href="define-fire-parameters.html#cb19-12" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&#39;freq&#39;</span>), replace_na, <span class="dv">0</span>)))</span>
+<span id="cb19-13"><a href="define-fire-parameters.html#cb19-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb19-14"><a href="define-fire-parameters.html#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># remove unnecessary columns, cleanup names</span></span>
+<span id="cb19-15"><a href="define-fire-parameters.html#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to ensure fire polygons are at least 25% type of interest</span></span>
+<span id="cb19-16"><a href="define-fire-parameters.html#cb19-16" aria-hidden="true" tabindex="-1"></a>fires <span class="ot">&lt;-</span> fires_join <span class="sc">%&gt;%</span> </span>
+<span id="cb19-17"><a href="define-fire-parameters.html#cb19-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;Fire_ID&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;area_ha&quot;</span>,<span class="st">&quot;area_acres&quot;</span>,<span class="st">&quot;US_L3NAME&quot;</span>,<span class="st">&quot;freq_0&quot;</span>,<span class="st">&quot;freq_200&quot;</span>,<span class="st">&quot;freq_220&quot;</span>,<span class="st">&quot;freq_260&quot;</span>,<span class="st">&quot;freq_280&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-18"><a href="define-fire-parameters.html#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;ecoregion&quot;</span> <span class="ot">=</span> <span class="st">&quot;US_L3NAME&quot;</span>,</span>
+<span id="cb19-19"><a href="define-fire-parameters.html#cb19-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;freq_df&quot;</span><span class="ot">=</span><span class="st">&quot;freq_200&quot;</span>,</span>
+<span id="cb19-20"><a href="define-fire-parameters.html#cb19-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;freq_pp&quot;</span><span class="ot">=</span><span class="st">&quot;freq_220&quot;</span>,</span>
+<span id="cb19-21"><a href="define-fire-parameters.html#cb19-21" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;freq_fs&quot;</span><span class="ot">=</span><span class="st">&quot;freq_260&quot;</span>,</span>
+<span id="cb19-22"><a href="define-fire-parameters.html#cb19-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;freq_lpp&quot;</span><span class="ot">=</span><span class="st">&quot;freq_280&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-23"><a href="define-fire-parameters.html#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq_allother =</span> <span class="dv">1</span><span class="sc">-</span>(freq_0 <span class="sc">+</span> freq_df<span class="sc">+</span>freq_pp<span class="sc">+</span>freq_fs<span class="sc">+</span>freq_lpp),</span>
+<span id="cb19-24"><a href="define-fire-parameters.html#cb19-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_forested =</span> <span class="dv">1</span><span class="sc">-</span> freq_0,</span>
+<span id="cb19-25"><a href="define-fire-parameters.html#cb19-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">freq_ideal =</span> freq_df<span class="sc">+</span>freq_fs<span class="sc">+</span>freq_lpp)<span class="sc">%&gt;%</span> </span>
+<span id="cb19-26"><a href="define-fire-parameters.html#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&#39;freq&#39;</span>), round,<span class="dv">2</span>))<span class="sc">%&gt;%</span> </span>
+<span id="cb19-27"><a href="define-fire-parameters.html#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(freq_ideal <span class="sc">&gt;</span> <span class="fl">0.25</span>)</span></code></pre></div>
+</div>
+<div id="select-fires-by-burn-severity" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Select Fires by Burn Severity<a href="define-fire-parameters.html#select-fires-by-burn-severity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="define-fire-parameters.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import all mtbs rasters via a list</span></span>
+<span id="cb20-2"><a href="define-fire-parameters.html#cb20-2" aria-hidden="true" tabindex="-1"></a>rastlist <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/mtbs&quot;</span>, <span class="at">pattern=</span><span class="st">&#39;.tif&#39;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb20-3"><a href="define-fire-parameters.html#cb20-3" aria-hidden="true" tabindex="-1"></a>allrasters <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rastlist, raster)</span>
+<span id="cb20-4"><a href="define-fire-parameters.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(allrasters) <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&quot;y&quot;</span>, <span class="fu">str_sub</span>(rastlist,<span class="dv">22</span>,<span class="dv">25</span>))</span>
+<span id="cb20-5"><a href="define-fire-parameters.html#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="define-fire-parameters.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create empty dataframe</span></span>
+<span id="cb20-7"><a href="define-fire-parameters.html#cb20-7" aria-hidden="true" tabindex="-1"></a>severity_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb20-8"><a href="define-fire-parameters.html#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="define-fire-parameters.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through mtbs mosasics for 1988-1991</span></span>
+<span id="cb20-10"><a href="define-fire-parameters.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># extract mtbs burn severity raster for all selected fires</span></span>
+<span id="cb20-11"><a href="define-fire-parameters.html#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate burn severity percentages for each fire</span></span>
+<span id="cb20-12"><a href="define-fire-parameters.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">names</span>(allrasters)){</span>
+<span id="cb20-13"><a href="define-fire-parameters.html#cb20-13" aria-hidden="true" tabindex="-1"></a>  mtbs_year <span class="ot">&lt;-</span> allrasters[[i]]</span>
+<span id="cb20-14"><a href="define-fire-parameters.html#cb20-14" aria-hidden="true" tabindex="-1"></a>  fire_year <span class="ot">&lt;-</span> <span class="fu">filter</span>(fires, year<span class="sc">==</span><span class="fu">str_sub</span>(i,<span class="dv">2</span>,<span class="dv">5</span>)) </span>
+<span id="cb20-15"><a href="define-fire-parameters.html#cb20-15" aria-hidden="true" tabindex="-1"></a>  raster_extract <span class="ot">&lt;-</span> <span class="fu">exact_extract</span>(mtbs_year,fire_year, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+09</span>,<span class="at">coverage_area=</span><span class="cn">TRUE</span>)</span>
+<span id="cb20-16"><a href="define-fire-parameters.html#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(raster_extract) <span class="ot">&lt;-</span> fire_year<span class="sc">$</span>Fire_ID </span>
+<span id="cb20-17"><a href="define-fire-parameters.html#cb20-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-18"><a href="define-fire-parameters.html#cb20-18" aria-hidden="true" tabindex="-1"></a>  output_select <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(raster_extract, <span class="at">.id =</span> <span class="st">&quot;Fire_ID&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb20-19"><a href="define-fire-parameters.html#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Fire_ID , value) <span class="sc">%&gt;%</span></span>
+<span id="cb20-20"><a href="define-fire-parameters.html#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total_area =</span> <span class="fu">sum</span>(coverage_area)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-21"><a href="define-fire-parameters.html#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Fire_ID) <span class="sc">%&gt;%</span></span>
+<span id="cb20-22"><a href="define-fire-parameters.html#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> total_area<span class="sc">/</span><span class="fu">sum</span>(total_area))<span class="sc">%&gt;%</span> </span>
+<span id="cb20-23"><a href="define-fire-parameters.html#cb20-23" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;Fire_ID&quot;</span>,<span class="st">&quot;value&quot;</span>,<span class="st">&quot;proportion&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-24"><a href="define-fire-parameters.html#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">spread</span>(.,<span class="at">key=</span><span class="st">&quot;value&quot;</span>,<span class="at">value =</span> <span class="st">&quot;proportion&quot;</span>)</span>
+<span id="cb20-25"><a href="define-fire-parameters.html#cb20-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-26"><a href="define-fire-parameters.html#cb20-26" aria-hidden="true" tabindex="-1"></a>  severity_list[[i]] <span class="ot">&lt;-</span> output_select</span>
+<span id="cb20-27"><a href="define-fire-parameters.html#cb20-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-28"><a href="define-fire-parameters.html#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="define-fire-parameters.html#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co"># combine extracted raster datasets</span></span>
+<span id="cb20-30"><a href="define-fire-parameters.html#cb20-30" aria-hidden="true" tabindex="-1"></a>severity_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, severity_list) </span>
+<span id="cb20-31"><a href="define-fire-parameters.html#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="define-fire-parameters.html#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co"># join burn severity % to fires polygons</span></span>
+<span id="cb20-33"><a href="define-fire-parameters.html#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co"># fix naming</span></span>
+<span id="cb20-34"><a href="define-fire-parameters.html#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co"># filter dataset for 500 acres high severity</span></span>
+<span id="cb20-35"><a href="define-fire-parameters.html#cb20-35" aria-hidden="true" tabindex="-1"></a>fires_severity <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fires,severity_df,<span class="at">by=</span><span class="st">&quot;Fire_ID&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb20-36"><a href="define-fire-parameters.html#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">noburn=</span> <span class="st">&quot;1&quot;</span>,<span class="at">lowsev =</span> <span class="st">&quot;2&quot;</span>, <span class="at">medsev =</span> <span class="st">&quot;3&quot;</span>, <span class="at">highsev =</span> <span class="st">&quot;4&quot;</span>,<span class="at">regrowth =</span> <span class="st">&quot;5&quot;</span>, <span class="at">error =</span> <span class="st">&quot;6&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-37"><a href="define-fire-parameters.html#cb20-37" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span> <span class="st">&quot;NaN&quot;</span>,<span class="sc">-</span><span class="st">&quot;regrowth&quot;</span>,<span class="sc">-</span><span class="st">&quot;error&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-38"><a href="define-fire-parameters.html#cb20-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">highsev_acres =</span> area_acres<span class="sc">*</span>highsev)<span class="sc">%&gt;%</span> </span>
+<span id="cb20-39"><a href="define-fire-parameters.html#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(highsev_acres <span class="sc">&gt;</span> <span class="dv">500</span>)</span></code></pre></div>
+</div>
+<div id="clean-up-dataset" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Clean Up Dataset<a href="define-fire-parameters.html#clean-up-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="define-fire-parameters.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the most common forest type within each polygon</span></span>
+<span id="cb21-2"><a href="define-fire-parameters.html#cb21-2" aria-hidden="true" tabindex="-1"></a>fires_select <span class="ot">&lt;-</span> fires_severity <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="define-fire-parameters.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(.,<span class="fu">exact_extract</span>(conus_forestgroup,fires_severity, <span class="st">&#39;mode&#39;</span>, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>)) </span>
+<span id="cb21-4"><a href="define-fire-parameters.html#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="define-fire-parameters.html#cb21-5" aria-hidden="true" tabindex="-1"></a>fires_select<span class="sc">$</span>mode <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(fires_select<span class="sc">$</span>mode)</span>
+<span id="cb21-6"><a href="define-fire-parameters.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="define-fire-parameters.html#cb21-7" aria-hidden="true" tabindex="-1"></a>fires_select <span class="ot">&lt;-</span> fires_select <span class="sc">%&gt;%</span> </span>
+<span id="cb21-8"><a href="define-fire-parameters.html#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fire_foresttype =</span> <span class="fu">case_when</span>(mode<span class="sc">==</span><span class="dv">200</span> <span class="sc">~</span> <span class="st">&quot;Douglas-Fir&quot;</span>,</span>
+<span id="cb21-9"><a href="define-fire-parameters.html#cb21-9" aria-hidden="true" tabindex="-1"></a>                                       mode<span class="sc">==</span><span class="dv">220</span> <span class="sc">~</span> <span class="st">&quot;Ponderosa&quot;</span>,</span>
+<span id="cb21-10"><a href="define-fire-parameters.html#cb21-10" aria-hidden="true" tabindex="-1"></a>                                       mode<span class="sc">==</span><span class="dv">260</span> <span class="sc">~</span> <span class="st">&quot;Fir-Spruce&quot;</span>,</span>
+<span id="cb21-11"><a href="define-fire-parameters.html#cb21-11" aria-hidden="true" tabindex="-1"></a>                                       mode<span class="sc">==</span><span class="dv">280</span> <span class="sc">~</span> <span class="st">&quot;Lodegepole Pine&quot;</span>,</span>
+<span id="cb21-12"><a href="define-fire-parameters.html#cb21-12" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Other&quot;</span>),</span>
+<span id="cb21-13"><a href="define-fire-parameters.html#cb21-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> <span class="fu">str_c</span>(<span class="st">&quot;Fire_&quot;</span>,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)),<span class="st">&quot;_&quot;</span>,year))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="define-fire-parameters.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join the grouped fires back to original mtbs boundaries</span></span>
+<span id="cb22-2"><a href="define-fire-parameters.html#cb22-2" aria-hidden="true" tabindex="-1"></a>fires_mtbs <span class="ot">&lt;-</span> <span class="fu">st_join</span>(mtbs_select,fires_select,<span class="at">left=</span><span class="cn">FALSE</span>,<span class="at">largest=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="define-fire-parameters.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year.x<span class="sc">==</span>year.y)<span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="define-fire-parameters.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;Event_ID&quot;</span>,<span class="st">&quot;Incid_Name&quot;</span>,<span class="st">&quot;Fire_ID&quot;</span>,<span class="st">&quot;Ig_Date&quot;</span>,<span class="st">&quot;year.y&quot;</span>,<span class="st">&quot;state&quot;</span>,<span class="st">&quot;BurnBndAc&quot;</span>,<span class="st">&quot;ecoregion&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-5"><a href="define-fire-parameters.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">year=</span> year.y)</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-fire-dataset.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01_fireselection.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

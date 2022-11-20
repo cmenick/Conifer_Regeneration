@@ -1,0 +1,731 @@
+--- 
+title: "Post-Fire Conifer Regeneration"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+always_allow_html: true
+---
+
+# About
+
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+
+## Usage 
+
+Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+
+Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+
+The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+
+## Render book
+
+You can render the HTML version of this example book without changing anything:
+
+1. Find the **Build** pane in the RStudio IDE, and
+
+1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+
+Or build the book from the R console:
+
+```{r, eval=FALSE}
+bookdown::render_book()
+```
+
+To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+
+## Preview book
+
+As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+
+```{r eval=FALSE}
+bookdown::serve_book()
+```
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+---
+title: "Fire Selection"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Fire Selection
+
+## Set Up
+
+### Libraries
+
+```{r libraries1, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(terra)
+library(sf)
+library(mapview)
+library(raster)
+library(rgeos)
+library(lubridate)
+library(ggplot2)
+library(exactextractr)
+library(patchwoRk)
+library(gridExtra)
+```
+
+### USDA National Forest Type Group Dataset
+Conifer Forest Type Groups: Douglas-Fir, Fir-Spruce-Mountain Hemlock, Lodgepole Pine
+
+```{r import forest type groups, message=FALSE, warning=FALSE, results='hide'}
+# forest type groups and key
+conus_forestgroup <- raster('data/forest_type/conus_forestgroup.tif')
+forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
+
+# set crs
+crs = crs(conus_forestgroup)
+```
+
+### EPA level-3 Ecoregions
+Canadian Rockies, Idaho Batholith, Middle Rockies, Columbian Mountains - Northern Rockies
+```{r ecoregions, message=FALSE, warning=FALSE, results='hide'}
+# level 3 ecoregions
+l3eco <- st_read('data/ecoregion/us_eco_l3.shp') %>% 
+  st_transform(., crs=crs)
+
+# select northern rocky mountains from level3 ecoregions
+eco_select <- l3eco %>% 
+  filter(NA_L3NAME %in% c('Canadian Rockies','Columbia Mountains/Northern Rockies','Middle Rockies','Idaho Batholith'))
+```
+
+### Mapping
+
+#### Ecoregions
+
+```{r mapping ecoregion, message=FALSE, warning=FALSE}
+mapview(eco_select)
+```
+
+#### Forest Type Groups
+
+```{r mapping ftype, message=FALSE, warning=FALSE}
+forestgroup_crop <- crop(conus_forestgroup,l3eco)
+mapview(forestgroup_crop)
+```
+
+## Define Fire Parameters
+
+### Monitoring Trends in Burn Severity (MTBS) Dataset
+
+Criteria: 
+
+  -1988-1991
+
+  -500+ acres of high-severity
+
+  -Within selected ecoregions
+
+  ->25% of selected forest types
+  
+```{r import mtbs, message=FALSE, warning=FALSE, results='hide'}
+# mtbs fire perimeters
+mtbs_full <- st_read('data/mtbs/mtbs_perims_DD.shp') %>% 
+  st_transform(., crs=crs)
+
+mtbs_select <- mtbs_full %>% 
+  mutate(state = str_sub(Event_ID,0,2),
+         year = year(as.Date(Ig_Date))) %>% 
+  filter(state %in% c("WA","ID","MT","WY","SD"),
+         between(Ig_Date, as.Date('1988-01-1'), as.Date('1991-12-31'))) 
+```
+### Group Adjacent Fires
+
+```{r create polygon grouping function}
+# function to group adjoining fire polygons to ensure contiguous high-severity patches
+group_fires <- function(mtbs_year) {
+
+  # join the polygons with themselves, and remove those that do not join with any besides themselves
+  combined<- st_join(mtbs_year, mtbs_year, join=st_is_within_distance, dist = 180, left = TRUE,remove_self = TRUE) %>% 
+    drop_na(Event_ID.y)%>% 
+    dplyr::select(Event_ID.x,Event_ID.y)
+  
+  if(nrow(combined)>=1){ # if there are overlaps for this years fires...
+    
+    # partition data into that that has overlap, and that that does not
+    overlap <- mtbs_year %>%
+      filter(Event_ID %in% combined$Event_ID.x)
+    no_overlap <- mtbs_year %>%
+      filter(!(Event_ID %in% combined$Event_ID.x))
+    
+    print(paste0("there are ",nrow(overlap)," overlapping polygons"))
+    
+    # join all overlapping features, and buffer to ensure proper grouping
+    overlap_union <- st_union(overlap) %>%
+      st_buffer(190)
+    
+    # break apart the joined polygons into their individual groups
+    groups <- st_as_sf(st_cast(overlap_union ,to='POLYGON',group_or_split=TRUE)) %>%
+      mutate(year = mean(mtbs_year$year),
+             Fire_ID = str_c("Fire_",c(1:nrow(.)),"_",year)) %>%
+      rename(geometry = x)
+    
+    print(paste0("polygons formed into ",nrow(groups)," groups"))
+    
+    # join back with original dataset to return to unbuffered geometry
+    grouped_overlap <- st_join(overlap,groups,left=TRUE)
+    
+    # arrange by the new grouping
+    joined_overlap_groups <- grouped_overlap %>%
+      group_by(Fire_ID) %>%
+      tally()%>%
+      st_buffer(1) %>%
+      dplyr::select(Fire_ID) %>%
+      mutate(year = mean(mtbs_year$year))
+    
+    # add new ID to the freestanding polygons
+    no_overlap_groups <- no_overlap %>%
+      mutate(Fire_ID = str_c("Fire_",nrow(groups)+c(1:nrow(no_overlap)),"_",year)) %>%
+      dplyr::select(Fire_ID,year)
+    
+    # join the new grouped overlap and the polygons without overlap
+    fires_export <- rbind(joined_overlap_groups,no_overlap_groups)
+    return(fires_export)
+    
+    } else { # if there are no overlaps for this year...
+      
+      print("no overlapping polygons")
+      
+      fires_export <- mtbs_year %>%
+        mutate(Fire_ID = str_c("Fire_",c(1:nrow(.)),"_",year)) %>%
+        dplyr::select(Fire_ID,year)
+      
+      return(fires_export)
+  }
+}
+```
+
+```{r group adjacent or overlapping polygons, message=FALSE, warning=FALSE}
+# group adjacent polygons within each fire year
+fires_88 <- group_fires(mtbs_select %>%  filter(year == 1988))
+fires_89 <- group_fires(mtbs_select %>%  filter(year == 1989))
+fires_90 <- group_fires(mtbs_select %>%  filter(year == 1990))
+fires_91 <- group_fires(mtbs_select %>%  filter(year == 1991))
+
+# join each fire year, filter by area
+mtbs_grouped <- rbind(fires_88,fires_89,fires_90,fires_91)%>%
+  mutate(area_ha = as.numeric(st_area(geometry))/10000,
+         area_acres = area_ha*2.471)
+```
+### Select Fires by Ecoregion and Forest Type 
+
+```{r forest typing, message=FALSE, warning=FALSE, results='hide'}
+# assign ecoregion and proportions of forest type to each fire polygon
+fires_join <- st_join(mtbs_grouped,eco_select,join=st_intersects,left=FALSE,largest=TRUE) %>% 
+  left_join(., exact_extract(conus_forestgroup,mtbs_grouped, append_cols = TRUE, max_cells_in_memory = 3e+08, 
+                             fun = function(value, coverage_fraction) {
+                               data.frame(value = value,
+                                          frac = coverage_fraction / sum(coverage_fraction)) %>%
+                                 group_by(value) %>%
+                                 summarize(freq = sum(frac), .groups = 'drop') %>%
+                                 pivot_wider(names_from = 'value',
+                                             names_prefix = 'freq_',
+                                             values_from = 'freq')}) %>%
+              mutate(across(starts_with('freq'), replace_na, 0)))
+ 
+# remove unnecessary columns, cleanup names
+# filter to ensure fire polygons are at least 25% type of interest
+fires <- fires_join %>% 
+  dplyr::select("Fire_ID","year","area_ha","area_acres","US_L3NAME","freq_0","freq_200","freq_220","freq_260","freq_280") %>% 
+  rename("ecoregion" = "US_L3NAME",
+         "freq_df"="freq_200",
+         "freq_pp"="freq_220",
+         "freq_fs"="freq_260",
+         "freq_lpp"="freq_280") %>% 
+  mutate(freq_allother = 1-(freq_0 + freq_df+freq_pp+freq_fs+freq_lpp),
+         freq_forested = 1- freq_0,
+         freq_ideal = freq_df+freq_fs+freq_lpp)%>% 
+  mutate(across(starts_with('freq'), round,2))%>% 
+  filter(freq_ideal > 0.25)
+```
+### Select Fires by Burn Severity
+
+```{r extract burn severity, message=FALSE, warning=FALSE, results='hide'}
+# import all mtbs rasters via a list
+rastlist <- list.files(path = "data/mtbs", pattern='.tif', all.files=TRUE, full.names=TRUE)
+allrasters <- lapply(rastlist, raster)
+names(allrasters) <- str_c("y", str_sub(rastlist,22,25))
+
+# create empty dataframe
+severity_list <- list()
+
+# loop through mtbs mosasics for 1988-1991
+# extract mtbs burn severity raster for all selected fires
+# calculate burn severity percentages for each fire
+for (i in names(allrasters)){
+  mtbs_year <- allrasters[[i]]
+  fire_year <- filter(fires, year==str_sub(i,2,5)) 
+  raster_extract <- exact_extract(mtbs_year,fire_year, max_cells_in_memory = 3e+09,coverage_area=TRUE)
+  names(raster_extract) <- fire_year$Fire_ID 
+  
+  output_select <- bind_rows(raster_extract, .id = "Fire_ID")%>%
+    group_by(Fire_ID , value) %>%
+    summarize(total_area = sum(coverage_area)) %>%
+    group_by(Fire_ID) %>%
+    mutate(proportion = total_area/sum(total_area))%>% 
+    dplyr::select("Fire_ID","value","proportion") %>% 
+    spread(.,key="value",value = "proportion")
+  
+  severity_list[[i]] <- output_select
+}
+
+# combine extracted raster datasets
+severity_df <- do.call(rbind, severity_list) 
+
+# join burn severity % to fires polygons
+# fix naming
+# filter dataset for 500 acres high severity
+fires_severity <- left_join(fires,severity_df,by="Fire_ID")%>% 
+  rename(noburn= "1",lowsev = "2", medsev = "3", highsev = "4",regrowth = "5", error = "6") %>% 
+  dplyr::select(- "NaN",-"regrowth",-"error") %>% 
+  mutate(highsev_acres = area_acres*highsev)%>% 
+  filter(highsev_acres > 500)
+```
+### Clean Up Dataset
+```{r extract majority forest type, message=FALSE, warning=FALSE, results='hide'}
+# get the most common forest type within each polygon
+fires_select <- fires_severity %>%
+  left_join(.,exact_extract(conus_forestgroup,fires_severity, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
+
+fires_select$mode <- as.factor(fires_select$mode)
+
+fires_select <- fires_select %>% 
+    mutate(fire_foresttype = case_when(mode==200 ~ "Douglas-Fir",
+                                       mode==220 ~ "Ponderosa",
+                                       mode==260 ~ "Fir-Spruce",
+                                       mode==280 ~ "Lodegepole Pine",
+                                       TRUE ~ "Other"),
+           Fire_ID = str_c("Fire_",c(1:nrow(.)),"_",year))
+```
+
+```{r get mtbs fires, message=FALSE, warning=FALSE}
+# join the grouped fires back to original mtbs boundaries
+fires_mtbs <- st_join(mtbs_select,fires_select,left=FALSE,largest=TRUE) %>% 
+  filter(year.x==year.y)%>% 
+  dplyr::select("Event_ID","Incid_Name","Fire_ID","Ig_Date","year.y","state","BurnBndAc","ecoregion") %>% 
+  rename(year= year.y)
+```
+
+## Final Fire Dataset
+
+### Selected fires by year
+```{r plot year}
+# plot
+mapview(fires_select, zcol = "year")
+```
+
+### Selected fires by majority forest type
+```{r plot forest type}
+# plot
+mapview(fires_select, zcol = "fire_foresttype")
+```
+
+## Export Data 
+
+### Final Cleanup for Export
+```{r cleanup, message=FALSE, warning=FALSE}
+# reformat and project
+fires_export <- fires_select %>% 
+  mutate(year = as.integer(year)) %>% 
+  st_transform(., crs="EPSG:4326")
+
+mtbs_export <- fires_mtbs %>% 
+  mutate(year = as.integer(year)) %>% 
+  st_transform(., crs="EPSG:4326")
+```
+
+### Export
+```{r export fire boundaries}
+# st_write(fires_export, "data/fire_boundaries/", "fires_export.shp", driver = 'ESRI Shapefile')
+# st_write(mtbs_export, "data/fire_boundaries/", "mbts_export.shp", driver = 'ESRI Shapefile')
+```
+
+
+
+<!--chapter:end:01_fireselection.Rmd-->
+
+---
+title: "Patch Formation"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Patch Formation
+
+## Set Up
+
+### Libraries
+```{r libraries2, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(terra)
+library(patchwoRk)
+library(sf)
+library(mapview)
+library(exactextractr)
+library(lubridate)
+```
+
+### Import RdNBR Rasters
+
+```{r raster import}
+# import calculated RdNBR rasters for each fire boundary polygon
+rast_list <- list.files(path = "data/rdnbr_rasters", pattern='.tif', all.files=TRUE, full.names=TRUE)
+rast_all <- lapply(rast_list, rast)
+rast_collection <- sprc(rast_all)
+
+crs <- crs(rast_collection[1])
+```
+
+### Import Fire Boundaries
+
+```{r fire import, message=FALSE, warning=FALSE, results='hide'}
+# import fire boundaries
+mtbs_export <- st_read('data/fire_boundaries/mtbs_export.shp') %>% 
+  st_transform(., crs=crs) 
+
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(., crs=crs)
+
+# import forest type group raster
+conus_forestgroup <- raster('data/forest_type/conus_forestgroup.tif')
+forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
+```
+
+## Create High-Severity Patches
+
+### PatchMorph
+```{r patchmorph, message=FALSE, warning=FALSE, results='hide'}
+# loop through RdNBR rasters, assign >640 to high severity category
+# utilize patchmorph to act as 3x3 cell majority filter
+patch_df <- list()
+for (i in 1:length(rast_all)){
+  # print(i)
+  rast_fire <- raster(rast_collection[i])
+  rast_fire[rast_fire < 640] <- 0
+  rast_fire[rast_fire >= 640] <- 1
+
+  patch <- patchMorph(rast_fire, spurThresh = 3, gapThresh = 3)
+  patch_poly <- as.polygons(rast(patch)) %>%
+    st_as_sf()
+  df_union_cast <- patch_poly %>%
+    st_cast(., "POLYGON") %>%
+    filter(layer == 1)
+  patch_df[[i]] <- df_union_cast}
+
+patch_poly_all <- do.call(rbind,patch_df)
+```
+
+## Refine Patches
+
+```{r patch filter, message=FALSE, warning=FALSE}
+# filter small patches
+patches_full <- patch_poly_all %>% 
+  mutate(patch_area_ha = as.numeric(st_area(.))/10000) %>%
+  filter(patch_area_ha > 2.25)
+```
+
+```{r inform patches, message=FALSE, warning=FALSE, results='hide'}
+# join patches back to grouped fires
+patches_joined <- st_join(patches_full,mtbs_export,join = st_intersects,left= FALSE,largest = TRUE) %>%
+  dplyr::select(-layer,-BurnBndAc) %>% 
+  left_join(.,exact_extract(conus_forestgroup,., 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08))%>%
+  mutate(patch_foresttype = case_when(mode==200 ~ "Douglas-Fir",
+                                     mode==220 ~ "Ponderosa",
+                                     mode==260 ~ "Fir-Spruce",
+                                     mode==280 ~ "Lodegepole Pine",
+                                     mode==0 ~ "Unforested",
+                                     TRUE ~ "Other"))
+```
+
+## Mapping
+
+```{r map}
+mapview(patches_joined,col.regions = "red") + mapview(fires_export, alpha.regions = 0, lwd = 2)
+```
+
+
+## Export Data 
+
+```{r export patches, message=FALSE, warning=FALSE}
+patches <- patches_joined %>%
+  st_transform(crs = crs)
+
+# st_write(patches, "data/patches/", "highsev_patches.shp",driver = 'ESRI Shapefile')
+```
+
+<!--chapter:end:02_patchformation.Rmd-->
+
+---
+title: "03_samplingpoints"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Sampling Quadrants
+
+## Set Up
+
+### Libraries
+
+```{r libraries3, message=FALSE, warning=FALSE}
+library(elevatr)
+library(tidyverse)
+library(sf)
+library(terra)
+library(mapview)
+```
+
+### Import High-Severity Patches and Fire Boundaries
+
+```{r boundary import, message=FALSE, warning=FALSE, results='hide'}
+# data import
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG:4326")
+crs <- crs(patches)
+
+patch_interiors<- st_read("data/patches/highsev_patches_interior.shp") %>%
+  st_transform(crs=crs)
+patch_exteriors<- st_read("data/patches/highsev_patches_exterior.shp") %>%
+  st_transform(crs=crs)
+
+mtbs_export <- st_read('data/fire_boundaries/mtbs_export.shp') %>% 
+  st_transform(crs=crs) 
+
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(crs=crs)
+```
+
+## Create Sampling Quadrants
+
+### Split Patches by North/South Aspects and Interior/Exterior
+
+```{r quadrant creation, message=FALSE, warning=FALSE, results='hide'}
+# create list of fire IDs
+fire_list <- unique(patches$Evnt_ID)
+
+quadrants_df = list()
+
+for(i in fire_list){
+  
+  # filter patch interiors/exteriors to the selected fire
+  patch_fire <- patches %>% 
+    filter(Evnt_ID == i)
+  
+  mapview(patch_fire)
+  
+  patches_interior <- patch_interiors %>% 
+    filter(Evnt_ID == i)%>% 
+    st_make_valid() %>% 
+    st_union()
+  
+  patches_exterior <- patch_exteriors %>% 
+    filter(Evnt_ID_1 == i)%>% 
+    st_make_valid()%>% 
+    st_union()
+  
+  # set event and fire id to the selected fire
+  Evnt_ID <- i
+  Fire_ID <-names(which.max(table(patch_fire$Fire_ID)))
+  
+  print(paste0("starting event ",Evnt_ID," in fire group ", Fire_ID))
+  
+  # get and calculate cosine corrected aspect
+  dem <- get_elev_raster(patch_fire,z=11)
+  aspect <- terrain(dem, opt = "aspect",unit = "radians")
+  ccaspect <- cos(aspect)
+
+  # positive aspects are north-facing, negative are south-facing
+  ccaspect[ccaspect>0] <- 1
+  ccaspect[ccaspect<0] <- -1
+  ccaspect_poly <- as.polygons(rast(ccaspect)) %>%
+    st_as_sf()
+  
+  pos_aspect <- ccaspect_poly %>%
+    filter(layer==1)%>% 
+    st_make_valid()
+  neg_aspect <- ccaspect_poly %>%
+    filter(layer==-1) %>% 
+    st_make_valid()
+
+  # get quadrants as the intersection of interior/exterior and pos/neg aspect
+  pos_ext <- st_intersection(patches_exterior,pos_aspect)%>% 
+    st_make_valid() %>% 
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "pos_ext",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+
+  pos_int <- st_intersection(patches_interior,pos_aspect)%>% 
+    st_make_valid() %>% 
+    st_union()%>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "pos_int",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+  
+  neg_ext <- st_intersection(patches_exterior,neg_aspect)%>% 
+    st_make_valid() %>%
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "neg_ext",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+  
+  neg_int <- st_intersection(patches_interior, neg_aspect)%>% 
+    st_make_valid() %>%
+    st_union() %>% 
+    st_as_sf()%>% 
+    mutate(quadrant = "neg_int",
+           Evnt_ID = i,
+           quad_id_event = paste0(Evnt_ID,"-",quadrant),
+           Fire_ID = Fire_ID,
+           quad_id_fire = paste0(Fire_ID,"-",quadrant))
+  
+  # combine, export quadrants
+  all_quadrants <- rbind(neg_int,pos_int,neg_ext,pos_ext) %>% 
+    st_transform(crs=crs)
+
+  quadrants_df[[i]] <- all_quadrants
+  
+  print(paste0("completed"))
+}
+
+# bind list together
+quadrants_fullset <- do.call(rbind,quadrants_df) %>% 
+  st_as_sf() 
+```
+
+### Clean Quadrants
+
+```{r clean up quadrants, message=FALSE, warning=FALSE, results='hide'}
+# removes erroneous polygons created from irregular fire boundary shapes
+# removes small border mismatched fire
+quadrants_clean <- quadrants_fullset %>% 
+  mutate(area=as.numeric(st_area(x))) %>% 
+  filter(area > 1) %>% 
+  group_by(Evnt_ID) %>% 
+  mutate(n=n()) %>% 
+  filter(n == 4)
+
+# clean up for export
+quadrants_export <- quadrants_clean %>% 
+  st_make_valid() %>% 
+  st_as_sf() %>% 
+  dplyr::select(-"area")%>% 
+  st_transform(crs=crs)
+```
+
+## Export Data
+
+```{r export quadrants, message=FALSE, warning=FALSE}
+# st_write(quadrants_export,"data/patches/","quadrants_export.shp",driver = "ESRI Shapefile")
+```
+
+<!--chapter:end:03_samplingquadrants.Rmd-->
+
+---
+title: "04_trainingdata"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Training Data
+
+## Set Up
+
+#### Libraries
+
+```{r libraries4, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(sf)
+library(terra)
+```
+
+## Import Data
+
+```{r patch import, message=FALSE, warning=FALSE, results='hide'}
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG: 4326")
+
+crs <- crs(patches)
+
+quadrants <- st_read("data/patches/quadrants_export.shp") %>% 
+  st_transform(crs=crs)
+```
+
+## Sampling Points
+
+### Import and Combine Training Points
+
+```{r combine training points, message=FALSE, warning=FALSE, results='hide'}
+points_list <- list.files(path = "data/points/individual_fire_points/", pattern='.shp', all.files=TRUE, full.names=TRUE)
+points_all <- lapply(points_list, st_read)
+
+points <- do.call(rbind,points_all) %>% 
+  st_transform(crs=crs)
+```
+
+### Assign Points and Clean Data
+
+```{r join points}
+# join points dataset back to fires to fill out dataset
+points_joined <- st_join(points,patches,left=TRUE,largest=TRUE) %>% 
+  st_join(.,quadrants,left=TRUE,largest=TRUE)
+
+points_cleaned <- points_joined %>% 
+  dplyr::select("class","ptch_r_","Evnt_ID.x","Incd_Nm","Fire_ID.x","year","ecoregn","ptch_fr","quadrnt","qd_d_vn","qd_d_fr") %>% 
+  rename(patch_area_ha = ptch_r_,
+         Event_ID = Evnt_ID.x,
+         Incid_Name = Incd_Nm,
+         Fire_ID = Fire_ID.x,
+         patch_frtype = ptch_fr,
+         quad = quadrnt,
+         quad_event_id= qd_d_vn,
+         quad_fire_id=qd_d_fr) %>% 
+  st_transform(crs=crs)
+```
+
+## Export
+
+```{r export points, message=FALSE, warning=FALSE}
+# st_write(points_cleaned, "data/points/", "points_export.shp",driver = 'ESRI Shapefile')
+```
+
+<!--chapter:end:04_trainingdata.Rmd-->
+
