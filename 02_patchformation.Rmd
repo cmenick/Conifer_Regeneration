@@ -1,9 +1,3 @@
----
-title: "Patch Formation"
-author: "Casey Menick"
-date: "`r Sys.Date()`"
-output: html_document
----
 
 # Patch Formation
 

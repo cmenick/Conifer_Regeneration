@@ -1,9 +1,3 @@
----
-title: "03_samplingpoints"
-author: "Casey Menick"
-date: "`r Sys.Date()`"
-output: html_document
----
 
 # Sampling Quadrants
 
