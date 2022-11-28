@@ -1,0 +1,123 @@
+# Snow Cover Imagery
+
+## Set Up
+
+### Import Fire Boundaries
+```{js import boundaries}
+// Import fire polygons
+var fires_export = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export");
+```
+
+### Import Landsat Imagery
+
+```{js import landsat}
+// Import Landsat 4,5,7, rename bands
+var ls7 = ee.ImageCollection('LANDSAT/LE07/C01/T1_SR'),
+    ls5 = ee.ImageCollection('LANDSAT/LT05/C01/T1_SR'),
+    ls4 = ee.ImageCollection('LANDSAT/LT04/C01/T1_SR');
+var ls4_7 = ee.ImageCollection(ls7.merge(ls5).merge(ls4)).map(function(image) {
+    var bands = ['B1','B2', 'B3', 'B4', 'B5', 'B7', 'pixel_qa']; 
+    var new_bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'pixel_qa'];
+    return image.select(bands).rename(new_bands);
+    });
+
+// Import Landsat 8, rename bands
+var ls8 = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').map(function(image) {
+    var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'pixel_qa']; 
+    var new_bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'pixel_qa'];
+    return image.select(bands).rename(new_bands);
+    });
+
+// Merge Landsat 4-7 and 8 with renamed bands
+var ls4_8 = ee.ImageCollection(ls8.merge(ls4_7));
+```
+
+## Functions
+
+### Get Spectral Indices
+```{js indices}
+// Function: get spectral indices
+var calc_indices = function(image) {
+  return image
+    .addBands(image.normalizedDifference(['nir', 'red']).double().rename('ndvi'))
+    .addBands(image.normalizedDifference(['green', 'nir']).double().rename('ndwi'))
+    .addBands(image.normalizedDifference(['nir', 'swir2']).double().rename('nbr'))
+    .addBands(image.normalizedDifference(['swir1','swir2']).double().rename('nbr2'))
+    .addBands(image.normalizedDifference(['green', 'swir1']).double().rename('ndsi'))
+    .addBands(image.normalizedDifference(['nir','swir1']).double().rename('ndfsi'))
+    .addBands(image.expression('((NIR - R) / (NIR + R + 0.5)) * (1.5)'
+       ,{'NIR':image.select('nir'),'R':image.select('red')}).rename('savi'))
+    .addBands(image.expression('2.5 * ((NIR - R) / (NIR + 6 * R - 7.5 * B + 1))'
+       ,{'NIR':image.select('nir'),'R':image.select('red'),'B':image.select('blue')}).rename('evi'))};
+```
+
+### Get Clear Images
+
+```{js qa}
+// Function: QA
+var qa_mask = function(lsImg){
+  var quality =lsImg.select(['pixel_qa']);
+  var clear = quality.bitwiseAnd(8).eq(0) // cloud shadow
+                .and(quality.bitwiseAnd(32).eq(0) // cloud
+                .and(quality.bitwiseAnd(4).eq(0))); // water
+  return lsImg.updateMask(clear)                                    
+            .copyProperties(lsImg, ['system:time_start']);
+};
+```
+
+### Get snow-Covered Pixels
+
+```{js snow mask}
+// Function: snow masking
+var ndfsi_mask = function(image){
+  var ndfsi_snow = image.select('ndfsi').gt(0.4);
+  return image.updateMask(ndfsi_snow);
+};
+var ndsi_mask = function(image){
+  var ndsi_snow = image.select('ndsi').gt(0.4);
+  return image.updateMask(ndsi_snow);
+};
+```
+
+## Select Images
+
+```{js map and filter}
+// Map functions to create final Landsat collection
+var ls_indices = ls4_8.map(calc_indices)
+                      .map(ndfsi_mask)
+                      .map(ndsi_mask)
+                      .map(qa_mask);
+
+// Filter collection by dates, fire boundaries
+var ls_area = ls_indices
+  .filterBounds(fires_export)
+  .filterDate('2020-11-01', '2021-05-01')
+  .filter(ee.Filter.calendarRange(12,4,"month"))	
+  .median()
+  .clip(fires_export);
+```
+
+## Export Data
+
+### Project Image
+
+```{js project}
+// Project image to match training grid
+var proj4326 = ee.Projection('EPSG:4326').atScale(30);
+var ls_area_4326= ls_area.reproject(proj4326).clip(fires_export);
+```
+
+### Export to Drive
+
+```{js export}
+Export.image.toDrive({
+      image: ls_area_4326,
+      folder: "landsat_2021",
+      description: "landsat_2021",
+      crs: "EPSG:4326",
+      maxPixels: 1e13,
+      scale: 30,
+      region: fires_export
+  }); 
+```
+

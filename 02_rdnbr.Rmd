@@ -1,0 +1,157 @@
+# Calculation of High-Severity
+
+## Set Up
+
+### Import Fire Boundaries
+```{js import boundaries}
+var mtbs_all = ee.FeatureCollection("USFS/GTAC/MTBS/burned_area_boundaries/v1");
+    
+var fires = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export");
+```
+
+### Clean Fire Boundaries
+
+```{js clean boundaries}
+// filter mtbs fire perimeters to relevant date range
+var mtbs = mtbs_all
+  .filter(ee.Filter.gt("Ig_Date",ee.Date('1984-01-01').millis()))
+  .filter(ee.Filter.lt("Ig_Date",ee.Date('1992-12-31').millis()));
+	
+// list fire IDs and get total number of fires
+var fireID = ee.List(fires.aggregate_array('Fire_ID')).getInfo();
+var nFires = fireID.length;
+```
+
+## Imagery 
+
+### Import Landsat 5
+
+```{js get landsat}
+// Landsat 5 Surface Reflectance Tier 1 collection
+var ls5_SR = ee.ImageCollection('LANDSAT/LT05/C01/T1_SR');
+```
+
+### Prepare Landsat Data
+
+```{js clean landsat}
+// function to get NBR, qa pixel bands
+var ls5_getbands = function(lsImage){
+  var nbr = lsImage.normalizedDifference(['B4', 'B7']).toFloat();
+  var qa = lsImage.select(['pixel_qa']);
+  return nbr.addBands([qa])
+          .select([0,1], ['nbr', 'pixel_qa'])
+          .copyProperties(lsImage, ['system:time_start']);
+  };
+
+// function to get clear pixels
+var ls5_qa = function(lsImg){
+  var quality =lsImg.select(['pixel_qa']);
+  var clear = quality.bitwiseAnd(8).eq(0) // cloud shadow
+                .and(quality.bitwiseAnd(32).eq(0) // cloud
+                .and(quality.bitwiseAnd(4).eq(0) // water
+                .and(quality.bitwiseAnd(16).eq(0)))); // snow
+  return lsImg.updateMask(clear).select([0])                                    
+            .copyProperties(lsImg, ['system:time_start']);
+};
+
+// function to project to EPSG 4326
+var ls5_project = function(lsImage){
+  var proj4326 = ee.Projection('EPSG:4326').atScale(30);
+  var lsImage_proj = lsImage.reproject(proj4326);
+  return lsImage_proj;
+};
+
+// Map functions across Landsat Collection
+var ls5 = ls5_SR.map(ls5_getbands)
+               .map(ls5_qa)
+               .map(ls5_project);
+```
+
+## Burn Indices
+
+### Calculate RdNBR
+
+```{js calculate RdNBR}
+// Calculate burn severity metrics for each fire
+var indices = ee.ImageCollection(fires.map(function(fire){
+
+  // get fire bounds
+  var fireBounds = fire.geometry().bounds();
+  
+  // get pre- and post-fire years
+  var fireYear = ee.Date.parse('YYYY', fire.get('year'));
+  var preFireYear = fireYear.advance(-1, 'year'); 
+  var postFireYear = fireYear.advance(1, 'year');
+  
+  // filter ls5 to fire bounds and dates to get pre and post-fire imagery
+  var preNBR = ls5.filterBounds(fireBounds)
+                          .filterDate(preFireYear, fireYear)
+                          .filter(ee.Filter.dayOfYear(152, 273))
+                          .mean()
+                          .rename('preNBR');
+ 
+  var postNBR = ls5.filterBounds(fireBounds)
+                          .filterDate(postFireYear, fireYear.advance(2, 'year'))
+                          .filter(ee.Filter.dayOfYear(152, 273))
+                          .mean()
+                          .rename('postNBR');
+  
+  // calculate sqrt of pre-fire NBR to relativize
+  var preNBRsq = preNBR
+            .expression("abs(b('preNBR')) < 0.001 ? 0.001" + ": b('preNBR')")
+            .abs().sqrt().rename('preNBRsq').toFloat();
+  
+  // combine pre and post-fire imagery                       
+  var fireIndices = preNBR.addBands(postNBR).addBands(preNBRsq);
+  
+  // calculate dNBR  
+  var dnbr = fireIndices.expression("(b('preNBR') - b('postNBR')) * 1000").rename('dnbr').toFloat();
+
+  // calculate offset value from 180-m buffer of unburned area outside the fire perimeter
+  var ring   = fire.buffer(180).difference(mtbs.geometry());
+  
+  var offset = ee.Image.constant(ee.Number(dnbr.select('dnbr').reduceRegion({
+      reducer: ee.Reducer.mean(),
+      geometry: ring.geometry(),
+      scale: 30,
+      maxPixels: 1e9
+    }).get('dnbr'))).rename('offset').toFloat().addBands(dnbr);
+
+  // calculate dNBR with offset
+  var dnbr_w_offset = fireIndices
+          .addBands(offset.expression("b('dnbr') - b('offset')").rename('dnbr_w_offset').toFloat());
+
+  // calculate RdNBR with offset
+  var rdnbr_w_offset = dnbr_w_offset.expression("b('dnbr_w_offset') / b('preNBRsq')").rename('rdnbr_w_offset').toFloat();
+
+  return rdnbr_w_offset.select('rdnbr_w_offset').set({'fireID': fire.get('Fire_ID'),'fireYear': fire.get('year')
+  }); 
+}));
+```
+
+## Export
+
+### Export Each Fire RdNBR to Drive
+```{js export rdnbr}
+// export to drive
+for (var j = 0; j < nFires; j++){
+  var id   = fireID[j];
+  var Name = id;
+  var fireExport = ee.Image(indices.filterMetadata('fireID', 'equals', id).first());
+  var fireBounds = ee.Feature(fires.filterMetadata('Fire_ID', 'equals', id).first()).geometry().bounds();
+  var firePolygon = ee.Feature(fires.filterMetadata('Fire_ID', 'equals', id).first()).geometry();
+
+  var exportImg = fireExport.select('rdnbr_w_offset').toInt().clip(firePolygon);
+  
+  Export.image.toDrive({
+    image: exportImg,
+    folder: "fire_rdnbr_rasters",
+    description: Name,
+    crs: "EPSG:4326",
+    maxPixels: 1e13,
+    scale: 30,
+    region: fireBounds
+}); 
+}
+```
+
