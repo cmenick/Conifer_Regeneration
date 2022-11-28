@@ -19,16 +19,16 @@ library(raster)
 
 ```{r}
 # bring in snow-on landsat imagery tiles, merge into collection
-rast_list <- list.files(path = "data/landsat/landsat_DJFMA", pattern='.tif', all.files=TRUE, full.names=TRUE)
+rast_list <- list.files(path = "data/landsat/landsat_2021", pattern='.tif', all.files=TRUE, full.names=TRUE)
 rast_all <- lapply(rast_list, rast)
 rast_collection <- sprc(rast_all)
 
-crs <-"EPSG: 4326"
+crs <-crs(rast_collection[1])
 ```
 
 ### Import Points
 
-```{r}
+```{r message=FALSE}
 # bring in training points
 points <- st_read("data/points/points_export.shp") %>% 
   st_transform(crs=crs)
@@ -36,7 +36,7 @@ points <- st_read("data/points/points_export.shp") %>%
 
 ### Import Fire Polygons
 
-```{r}
+```{r message=FALSE}
 fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
   st_transform( crs=crs)
 ```
@@ -55,11 +55,9 @@ for(i in 1:length(rast_all)){
 }
 
 training_dataset <- do.call(rbind,extracted_df) %>% 
-  mutate(absence = case_when(class == "absence" ~ "absence",
-                             TRUE ~ "presence"),
-         class = as.factor(class),
-         absence = as.factor(absence),
-         class = fct_relevel(class,c("absence","presencetrace","presence1to10"))) %>% 
+  mutate(absence = as.factor(case_when(class == "absence" ~ "absence",
+                                       TRUE ~ "presence")),
+         class = fct_relevel(as.factor(class),c("absence","presencetrace","presence1to10"))) %>% 
   rename(f_type = ptch_fr,
          area_ha = ptch_r_) %>% 
   st_drop_geometry() %>% 
@@ -91,7 +89,7 @@ pres_abs_quad <- training_dataset %>%
 pres_abs_quad
 ```
 
-## Export Data 
+## Examine Data 
 
 ### Plot NDVI by Density Class
 
@@ -111,16 +109,15 @@ ggplot(training_dataset,aes(absence,ndvi)) +
 ### Examine Variable Correlation
 
 ```{r}
-pairs(training_dataset %>% select("class","ndvi","savi","ndsi","ndfsi","nbr2"))
+pairs(training_dataset %>% dplyr::select("class","ndvi","savi","ndsi","ndfsi","nbr2"))
 
-
-pairs(training_dataset %>% select("ndvi","ndfsi"),
+pairs(training_dataset %>% dplyr::select("ndvi","ndfsi"),
       pch = c(16),
       col = c("red","dark green")[training_dataset$absence])
 ```
 
 ```{r}
-cor(training_dataset %>% dplyr::select(-red,-green,-blue,-absence,-class,-f_type,-Evnt_ID,-evi,-quadrant)) 
+cor(training_dataset %>% drop_na() %>% dplyr::select(ndvi, evi, savi, ndsi,ndfsi, ndwi, nbr, nbr2)) 
 ```
 
 ## Model
@@ -131,22 +128,43 @@ training_dataset1 <- training_dataset %>%
                          TRUE ~1),
          binom=as.factor(binom)) %>% 
   drop_na()
+```
 
-# add forest type, fire
-lm_conifer <- glm(absence ~  ndvi +ndsi+nbr2, data = training_dataset1, family = binomial(logit))
 
-summary(lm_conifer)
+```{r}
+# full model 
+lm_conifer <- glm(absence ~  ndvi + savi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
 
 vif(lm_conifer)
+
+# remove savi
+lm_conifer <- glm(absence ~  ndvi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+
+vif(lm_conifer)
+
+# remove ndfsi
+lm_conifer <- glm(absence ~  ndvi + evi + ndsi+ nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+
+vif(lm_conifer)
+
+# remove ndsi
+lm_conifer <- glm(absence ~  ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+
+vif(lm_conifer)
+
+# final model
+summary(lm_conifer)
+
+
+# # add forest type, fire
+# lm_conifer <- glm(absence ~  ndvi + ndsi + nbr2, data = training_dataset1, family = binomial(logit))
+
 ```
 ## Predict
 
 ```{r}
-rast_collection[1]
-image_subset <- mask(rast_collection,vect(fires_export))
+image_subset <- mask(rast_collection[1],fires_export)
 rast_predicted <- terra::predict(image_subset,lm_conifer, type="response", se.fit=TRUE)
-?mask
-library(raster)
+
 mapview(raster(rast_predicted))
-test<- as.data.frame(rast_predicted)
 ```

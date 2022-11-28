@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Model | Post-Fire Conifer Regeneration</title>
+  <meta name="description" content="Chapter 8 Model | Post-Fire Conifer Regeneration" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Model | Post-Fire Conifer Regeneration" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Model | Post-Fire Conifer Regeneration" />
+  
+  
+  
+
+<meta name="author" content="Casey Menick" />
+
+
+<meta name="date" content="2022-11-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="snow-cover-imagery.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/raster(rast_predicted)_b5fa2d-1/data_stars_rasterrast_predictedf98a1c.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Northern Rockies Conifer Regeneration</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="fire-selection.html"><a href="fire-selection.html"><i class="fa fa-check"></i><b>2</b> Fire Selection</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="fire-selection.html"><a href="fire-selection.html#set-up"><i class="fa fa-check"></i><b>2.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="fire-selection.html"><a href="fire-selection.html#libraries"><i class="fa fa-check"></i><b>2.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="2.1.2" data-path="fire-selection.html"><a href="fire-selection.html#usda-national-forest-type-group-dataset"><i class="fa fa-check"></i><b>2.1.2</b> USDA National Forest Type Group Dataset</a></li>
+<li class="chapter" data-level="2.1.3" data-path="fire-selection.html"><a href="fire-selection.html#epa-level-3-ecoregions"><i class="fa fa-check"></i><b>2.1.3</b> EPA level-3 Ecoregions</a></li>
+<li class="chapter" data-level="2.1.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping"><i class="fa fa-check"></i><b>2.1.4</b> Mapping</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="fire-selection.html"><a href="fire-selection.html#define-fire-parameters"><i class="fa fa-check"></i><b>2.2</b> Define Fire Parameters</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="fire-selection.html"><a href="fire-selection.html#monitoring-trends-in-burn-severity-mtbs-dataset"><i class="fa fa-check"></i><b>2.2.1</b> Monitoring Trends in Burn Severity (MTBS) Dataset</a></li>
+<li class="chapter" data-level="2.2.2" data-path="fire-selection.html"><a href="fire-selection.html#group-adjacent-fires"><i class="fa fa-check"></i><b>2.2.2</b> Group Adjacent Fires</a></li>
+<li class="chapter" data-level="2.2.3" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-ecoregion-and-forest-type"><i class="fa fa-check"></i><b>2.2.3</b> Select Fires by Ecoregion and Forest Type</a></li>
+<li class="chapter" data-level="2.2.4" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-burn-severity"><i class="fa fa-check"></i><b>2.2.4</b> Select Fires by Burn Severity</a></li>
+<li class="chapter" data-level="2.2.5" data-path="fire-selection.html"><a href="fire-selection.html#clean-up-dataset"><i class="fa fa-check"></i><b>2.2.5</b> Clean Up Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Final Fire Dataset</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.3.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.3.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.3.2</b> Selected fires by majority forest type</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.4</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.4.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.4.2</b> Export</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#set-up-1"><i class="fa fa-check"></i><b>3.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-fire-boundaries"><i class="fa fa-check"></i><b>3.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="3.1.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#clean-fire-boundaries"><i class="fa fa-check"></i><b>3.1.2</b> Clean Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#imagery"><i class="fa fa-check"></i><b>3.2</b> Imagery</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-landsat-5"><i class="fa fa-check"></i><b>3.2.1</b> Import Landsat 5</a></li>
+<li class="chapter" data-level="3.2.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#prepare-landsat-data"><i class="fa fa-check"></i><b>3.2.2</b> Prepare Landsat Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#burn-indices"><i class="fa fa-check"></i><b>3.3</b> Burn Indices</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-rdnbr"><i class="fa fa-check"></i><b>3.3.1</b> Calculate RdNBR</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-1"><i class="fa fa-check"></i><b>3.4</b> Export</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-each-fire-rdnbr-to-drive"><i class="fa fa-check"></i><b>3.4.1</b> Export Each Fire RdNBR to Drive</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="patch-formation.html"><a href="patch-formation.html"><i class="fa fa-check"></i><b>4</b> Patch Formation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="patch-formation.html"><a href="patch-formation.html#set-up-2"><i class="fa fa-check"></i><b>4.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="patch-formation.html"><a href="patch-formation.html#libraries-1"><i class="fa fa-check"></i><b>4.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="4.1.2" data-path="patch-formation.html"><a href="patch-formation.html#import-rdnbr-rasters"><i class="fa fa-check"></i><b>4.1.2</b> Import RdNBR Rasters</a></li>
+<li class="chapter" data-level="4.1.3" data-path="patch-formation.html"><a href="patch-formation.html#import-fire-boundaries-1"><i class="fa fa-check"></i><b>4.1.3</b> Import Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="patch-formation.html"><a href="patch-formation.html#create-high-severity-patches"><i class="fa fa-check"></i><b>4.2</b> Create High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>5.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>5.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>5.2</b> Create Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a></li>
+<li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
+<li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
+<li class="chapter" data-level="6.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-2"><i class="fa fa-check"></i><b>6.4</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow Cover Imagery</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#set-up-5"><i class="fa fa-check"></i><b>7.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions"><i class="fa fa-check"></i><b>7.2</b> Functions</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-spectral-indices"><i class="fa fa-check"></i><b>7.2.1</b> Get Spectral Indices</a></li>
+<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-clear-images"><i class="fa fa-check"></i><b>7.2.2</b> Get Clear Images</a></li>
+<li class="chapter" data-level="7.2.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-snow-covered-pixels"><i class="fa fa-check"></i><b>7.2.3</b> Get snow-Covered Pixels</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#select-images"><i class="fa fa-check"></i><b>7.3</b> Select Images</a></li>
+<li class="chapter" data-level="7.4" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-data-3"><i class="fa fa-check"></i><b>7.4</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#project-image"><i class="fa fa-check"></i><b>7.4.1</b> Project Image</a></li>
+<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-to-drive"><i class="fa fa-check"></i><b>7.4.2</b> Export to Drive</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="model.html"><a href="model.html"><i class="fa fa-check"></i><b>8</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="model.html"><a href="model.html#setup"><i class="fa fa-check"></i><b>8.1</b> Setup</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="model.html"><a href="model.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model.html"><a href="model.html#import-snow-on-landsant"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-On Landsant</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model.html"><a href="model.html#import-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Points</a></li>
+<li class="chapter" data-level="8.1.4" data-path="model.html"><a href="model.html#import-fire-polygons"><i class="fa fa-check"></i><b>8.1.4</b> Import Fire Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="model.html"><a href="model.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="model.html"><a href="model.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model.html"><a href="model.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+<li class="chapter" data-level="8.2.3" data-path="model.html"><a href="model.html#training-data-by-sampling-quadrant"><i class="fa fa-check"></i><b>8.2.3</b> Training Data by Sampling Quadrant</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="model.html"><a href="model.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="model.html"><a href="model.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.3.2" data-path="model.html"><a href="model.html#examine-variable-correlation"><i class="fa fa-check"></i><b>8.3.2</b> Examine Variable Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="model.html"><a href="model.html#model-1"><i class="fa fa-check"></i><b>8.4</b> Model</a></li>
+<li class="chapter" data-level="8.5" data-path="model.html"><a href="model.html#predict"><i class="fa fa-check"></i><b>8.5</b> Predict</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Post-Fire Conifer Regeneration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Model<a href="model.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="setup" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Setup<a href="model.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-4" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Libraries<a href="model.html#libraries-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="model.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb2-2"><a href="model.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-3"><a href="model.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb2-4"><a href="model.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-5"><a href="model.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-6"><a href="model.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb2-7"><a href="model.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb2-8"><a href="model.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code></pre></div>
+</div>
+<div id="import-snow-on-landsant" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Import Snow-On Landsant<a href="model.html#import-snow-on-landsant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="model.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in snow-on landsat imagery tiles, merge into collection</span></span>
+<span id="cb3-2"><a href="model.html#cb3-2" aria-hidden="true" tabindex="-1"></a>rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_2021&quot;</span>, <span class="at">pattern=</span><span class="st">&#39;.tif&#39;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="model.html#cb3-3" aria-hidden="true" tabindex="-1"></a>rast_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rast_list, rast)</span>
+<span id="cb3-4"><a href="model.html#cb3-4" aria-hidden="true" tabindex="-1"></a>rast_collection <span class="ot">&lt;-</span> <span class="fu">sprc</span>(rast_all)</span>
+<span id="cb3-5"><a href="model.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="model.html#cb3-6" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span><span class="fu">crs</span>(rast_collection[<span class="dv">1</span>])</span></code></pre></div>
+</div>
+<div id="import-points" class="section level3 hasAnchor" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Import Points<a href="model.html#import-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="model.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in training points</span></span>
+<span id="cb4-2"><a href="model.html#cb4-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/points/points_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="model.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<pre><code>## Reading layer `points_export&#39; from data source 
+##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\points\points_export.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 3300 features and 11 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -118.6075 ymin: 42.57725 xmax: -106.9652 ymax: 48.83974
+## Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div id="import-fire-polygons" class="section level3 hasAnchor" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> Import Fire Polygons<a href="model.html#import-fire-polygons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="model.html#cb6-1" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="model.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>( <span class="at">crs=</span>crs)</span></code></pre></div>
+<pre><code>## Reading layer `fires_export&#39; from data source 
+##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\fire_boundaries\fires_export.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 54 features and 20 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -118.6259 ymin: 42.57259 xmax: -106.9485 ymax: 48.9346
+## Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+<div id="prepare-training-data" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Prepare Training Data<a href="model.html#prepare-training-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="extract-landsat-values" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Extract Landsat Values<a href="model.html#extract-landsat-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="model.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract landsat values to each training point</span></span>
+<span id="cb8-2"><a href="model.html#cb8-2" aria-hidden="true" tabindex="-1"></a>extracted_df <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb8-3"><a href="model.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rast_all)){</span>
+<span id="cb8-4"><a href="model.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb8-5"><a href="model.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  extracted_points <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(terra<span class="sc">::</span><span class="fu">extract</span>(rast_collection[i], points,<span class="at">bind =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb8-6"><a href="model.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  extracted_df[[i]] <span class="ot">&lt;-</span> extracted_points </span>
+<span id="cb8-7"><a href="model.html#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10
+## [1] 11
+## [1] 12
+## [1] 13
+## [1] 14
+## [1] 15
+## [1] 16
+## [1] 17
+## [1] 18
+## [1] 19
+## [1] 20
+## [1] 21
+## [1] 22
+## [1] 23
+## [1] 24
+## [1] 25
+## [1] 26
+## [1] 27
+## [1] 28
+## [1] 29
+## [1] 30
+## [1] 31
+## [1] 32</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="model.html#cb10-1" aria-hidden="true" tabindex="-1"></a>training_dataset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,extracted_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="model.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">absence =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(class <span class="sc">==</span> <span class="st">&quot;absence&quot;</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>,</span>
+<span id="cb10-3"><a href="model.html#cb10-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;presence&quot;</span>)),</span>
+<span id="cb10-4"><a href="model.html#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">class =</span> <span class="fu">fct_relevel</span>(<span class="fu">as.factor</span>(class),<span class="fu">c</span>(<span class="st">&quot;absence&quot;</span>,<span class="st">&quot;presencetrace&quot;</span>,<span class="st">&quot;presence1to10&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="model.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">f_type =</span> ptch_fr,</span>
+<span id="cb10-6"><a href="model.html#cb10-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_ha =</span> ptch_r_) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="model.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="model.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pixel_qa,<span class="sc">-</span>qd_vnt_,<span class="sc">-</span>qd_fr_d) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-9"><a href="model.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ndvi)</span></code></pre></div>
+</div>
+<div id="training-data-by-forest-type" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Training Data by Forest Type<a href="model.html#training-data-by-forest-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="model.html#cb11-1" aria-hidden="true" tabindex="-1"></a>pres_abs_type <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="model.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(f_type,absence) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="model.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="model.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent=</span> <span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="model.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(absence<span class="sc">==</span><span class="st">&quot;presence&quot;</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;f_type&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="model.html#cb13-1" aria-hidden="true" tabindex="-1"></a>pres_abs_type</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 4
+## # Groups:   f_type [7]
+##   f_type          absence      n percent
+##   &lt;chr&gt;           &lt;fct&gt;    &lt;int&gt;   &lt;dbl&gt;
+## 1 Douglas-Fir     presence   418    74.0
+## 2 Fir-Spruce      presence   513    68.2
+## 3 Lodegepole Pine presence  1024    85.3
+## 4 Other           presence    16    66.7
+## 5 Ponderosa       presence    13   100  
+## 6 Unforested      presence   396    70.2
+## 7 &lt;NA&gt;            presence     1    50</code></pre>
+</div>
+<div id="training-data-by-sampling-quadrant" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Training Data by Sampling Quadrant<a href="model.html#training-data-by-sampling-quadrant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="model.html#cb15-1" aria-hidden="true" tabindex="-1"></a>pres_abs_quad <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="model.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(quad,absence) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="model.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="model.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent=</span> <span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="model.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(absence<span class="sc">==</span><span class="st">&quot;presence&quot;</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;quad&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="model.html#cb17-1" aria-hidden="true" tabindex="-1"></a>pres_abs_quad</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+## # Groups:   quad [5]
+##   quad    absence      n percent
+##   &lt;chr&gt;   &lt;fct&gt;    &lt;int&gt;   &lt;dbl&gt;
+## 1 neg_ext presence   560    71.6
+## 2 neg_int presence   595    76.4
+## 3 pos_ext presence   624    79.4
+## 4 pos_int presence   601    78.0
+## 5 &lt;NA&gt;    presence     1    50</code></pre>
+</div>
+</div>
+<div id="examine-data" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Examine Data<a href="model.html#examine-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="plot-ndvi-by-density-class" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Plot NDVI by Density Class<a href="model.html#plot-ndvi-by-density-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="model.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset,<span class="fu">aes</span>(class,ndvi)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="model.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="model.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;absence&quot;</span>,<span class="st">&quot;presencetrace&quot;</span>)),<span class="fu">aes</span>(class,ndvi)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="model.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb20-3"><a href="model.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span>.<span class="dv">1</span>,.<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 42 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="model.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset,<span class="fu">aes</span>(absence,ndvi)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="model.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+</div>
+<div id="examine-variable-correlation" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Examine Variable Correlation<a href="model.html#examine-variable-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="model.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(training_dataset <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;class&quot;</span>,<span class="st">&quot;ndvi&quot;</span>,<span class="st">&quot;savi&quot;</span>,<span class="st">&quot;ndsi&quot;</span>,<span class="st">&quot;ndfsi&quot;</span>,<span class="st">&quot;nbr2&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="model.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(training_dataset <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;ndvi&quot;</span>,<span class="st">&quot;ndfsi&quot;</span>),</span>
+<span id="cb24-2"><a href="model.html#cb24-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">16</span>),</span>
+<span id="cb24-3"><a href="model.html#cb24-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;dark green&quot;</span>)[training_dataset<span class="sc">$</span>absence])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="model.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(training_dataset <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ndvi, evi, savi, ndsi,ndfsi, ndwi, nbr, nbr2)) </span></code></pre></div>
+<pre><code>##              ndvi          evi        savi        ndsi        ndfsi        ndwi
+## ndvi   1.00000000  0.102783173  0.99915284 -0.71016680 -0.026190808 -0.97232945
+## evi    0.10278317  1.000000000  0.10224763 -0.08259929  0.008040045 -0.11552854
+## savi   0.99915284  0.102247629  1.00000000 -0.71019743 -0.025030057 -0.97279584
+## ndsi  -0.71016680 -0.082599287 -0.71019743  1.00000000  0.647032872  0.73420554
+## ndfsi -0.02619081  0.008040045 -0.02503006  0.64703287  1.000000000  0.03705757
+## ndwi  -0.97232945 -0.115528539 -0.97279584  0.73420554  0.037057569  1.00000000
+## nbr    0.18967592  0.072259750  0.18890690  0.25978846  0.728978688 -0.20780216
+## nbr2   0.20854704  0.080392171  0.20610632 -0.46866327 -0.310137173 -0.25552856
+##               nbr        nbr2
+## ndvi   0.18967592  0.20854704
+## evi    0.07225975  0.08039217
+## savi   0.18890690  0.20610632
+## ndsi   0.25978846 -0.46866327
+## ndfsi  0.72897869 -0.31013717
+## ndwi  -0.20780216 -0.25552856
+## nbr    1.00000000  0.30757811
+## nbr2   0.30757811  1.00000000</code></pre>
+</div>
+</div>
+<div id="model-1" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Model<a href="model.html#model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="model.html#cb27-1" aria-hidden="true" tabindex="-1"></a>training_dataset1 <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="model.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">binom=</span><span class="fu">case_when</span>(absence<span class="sc">==</span><span class="st">&quot;absence&quot;</span><span class="sc">~</span><span class="dv">0</span>,</span>
+<span id="cb27-3"><a href="model.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                         <span class="cn">TRUE</span> <span class="sc">~</span><span class="dv">1</span>),</span>
+<span id="cb27-4"><a href="model.html#cb27-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">binom=</span><span class="fu">as.factor</span>(binom)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="model.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="model.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full model </span></span>
+<span id="cb28-2"><a href="model.html#cb28-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span>  ndvi <span class="sc">+</span> savi <span class="sc">+</span> evi <span class="sc">+</span> ndsi<span class="sc">+</span>ndfsi<span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset1, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb28-3"><a href="model.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="model.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##       ndvi       savi        evi       ndsi      ndfsi        nbr       nbr2 
+## 256.598976 258.147585   1.020675  12.164577  12.687429   7.523407   1.698811 
+##       ndwi 
+##   5.376619</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="model.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove savi</span></span>
+<span id="cb30-2"><a href="model.html#cb30-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span>  ndvi <span class="sc">+</span> evi <span class="sc">+</span> ndsi<span class="sc">+</span>ndfsi<span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset1, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb30-3"><a href="model.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="model.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##      ndvi       evi      ndsi     ndfsi       nbr      nbr2      ndwi 
+##  4.133703  1.020591 12.149548 12.683439  7.529870  1.694613  5.337866</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="model.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove ndfsi</span></span>
+<span id="cb32-2"><a href="model.html#cb32-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span>  ndvi <span class="sc">+</span> evi <span class="sc">+</span> ndsi<span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset1, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb32-3"><a href="model.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="model.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##     ndvi      evi     ndsi      nbr     nbr2     ndwi 
+## 4.112058 1.020825 7.508204 4.594545 1.390095 5.097598</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="model.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove ndsi</span></span>
+<span id="cb34-2"><a href="model.html#cb34-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span>  ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset1, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb34-3"><a href="model.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="model.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##     ndvi      evi      nbr     nbr2     ndwi 
+## 4.014984 1.019293 1.286972 1.101599 4.204469</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="model.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># final model</span></span>
+<span id="cb36-2"><a href="model.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_conifer)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = absence ~ ndvi + evi + nbr + nbr2 + ndwi, family = binomial(logit), 
+##     data = training_dataset1)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.1152   0.0016   0.0496   0.4745   4.0263  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -13.93769    0.97680 -14.269  &lt; 2e-16 ***
+## ndvi         18.84103    2.22341   8.474  &lt; 2e-16 ***
+## evi          -0.04889    0.01923  -2.542    0.011 *  
+## nbr          17.44675    1.21070  14.410  &lt; 2e-16 ***
+## nbr2          4.15277    0.97695   4.251 2.13e-05 ***
+## ndwi         -3.55385    2.23710  -1.589    0.112    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 3410.9  on 3114  degrees of freedom
+## Residual deviance: 1927.2  on 3109  degrees of freedom
+## AIC: 1939.2
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="model.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # add forest type, fire</span></span>
+<span id="cb38-2"><a href="model.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lm_conifer &lt;- glm(absence ~  ndvi + ndsi + nbr2, data = training_dataset1, family = binomial(logit))</span></span></code></pre></div>
+</div>
+<div id="predict" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Predict<a href="model.html#predict" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="model.html#cb39-1" aria-hidden="true" tabindex="-1"></a>image_subset <span class="ot">&lt;-</span> <span class="fu">mask</span>(rast_collection[<span class="dv">1</span>],fires_export)</span>
+<span id="cb39-2"><a href="model.html#cb39-2" aria-hidden="true" tabindex="-1"></a>rast_predicted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">predict</span>(image_subset,lm_conifer, <span class="at">type=</span><span class="st">&quot;response&quot;</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-3"><a href="model.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="model.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(<span class="fu">raster</span>(rast_predicted))</span></code></pre></div>
+<pre><code>## Warning in rasterCheckSize(x, maxpixels = maxpixels): maximum number of pixels for Raster* viewing is 5e+05 ; 
+## the supplied Raster* has 37748736 
+##  ... decreasing Raster* resolution to 5e+05 pixels
+##  to view full resolution set &#39;maxpixels =  37748736 &#39;</code></pre>
+<pre><code>## Warning in showSRID(uprojargs, format = &quot;PROJ&quot;, multiline = &quot;NO&quot;, prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137
+## +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null
+## +wktext +no_defs +type=crs</code></pre>
+<pre><code>## Warning in showSRID(uprojargs, format = &quot;PROJ&quot;, multiline = &quot;NO&quot;, prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition</code></pre>
+<div id="htmlwidget-8f79fa3ce465430160c3" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8f79fa3ce465430160c3">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[48.9325224493523,-118.626126529119],[48.3950389024631,-117.658891784865]],0.8,null,"raster(rast_predicted)","raster(rast_predicted)"]},{"method":"removeLayersControl","args":[]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"raster(rast_predicted)",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addControl","args":["","topright","imageValues-raster(rast_predicted)","info legend "]},{"method":"addImageQuery","args":["raster(rast_predicted)",[-118.626126529119,48.3950389024631,-117.658891784865,48.9325224493523],"mousemove",7,"Layer"]},{"method":"addLegend","args":[{"colors":["#040404 , #451354 18.4390995671835%, #9B1774 38.8293246753876%, #E2505B 59.2195497835918%, #F7A82C 79.6097748917959%, #FFFE9E 100%, #FFFE9E "],"labels":["0.2","0.4","0.6","0.8","1.0"],"na_color":"#BEBEBE","na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"raster(rast_predicted)","extra":{"p_1":0.184390995671835,"p_n":1},"layerId":null,"className":"info legend","group":"raster(rast_predicted)"}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-118.626126529119,47.2790520554377,-116.97035179743,48.9348267871268,true,"raster(rast_predicted)","Zoom to raster(rast_predicted)","<strong> raster(rast_predicted) <\/strong>","bottomright"]}],"limits":{"lat":[48.3950389024631,48.9325224493523],"lng":[-118.626126529119,-117.658891784865]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="snow-cover-imagery.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07_model.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

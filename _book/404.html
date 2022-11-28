@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-11-27" />
+<meta name="date" content="2022-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,25 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/raster(rast_predicted)_b5fa2d-1/data_stars_rasterrast_predictedf98a1c.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -247,7 +266,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-to-drive"><i class="fa fa-check"></i><b>7.4.2</b> Export to Drive</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="model.html"><a href="model.html"><i class="fa fa-check"></i><b>8</b> Model</a></li>
+<li class="chapter" data-level="8" data-path="model.html"><a href="model.html"><i class="fa fa-check"></i><b>8</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="model.html"><a href="model.html#setup"><i class="fa fa-check"></i><b>8.1</b> Setup</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="model.html"><a href="model.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model.html"><a href="model.html#import-snow-on-landsant"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-On Landsant</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model.html"><a href="model.html#import-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Points</a></li>
+<li class="chapter" data-level="8.1.4" data-path="model.html"><a href="model.html#import-fire-polygons"><i class="fa fa-check"></i><b>8.1.4</b> Import Fire Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="model.html"><a href="model.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="model.html"><a href="model.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model.html"><a href="model.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+<li class="chapter" data-level="8.2.3" data-path="model.html"><a href="model.html#training-data-by-sampling-quadrant"><i class="fa fa-check"></i><b>8.2.3</b> Training Data by Sampling Quadrant</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="model.html"><a href="model.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="model.html"><a href="model.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.3.2" data-path="model.html"><a href="model.html#examine-variable-correlation"><i class="fa fa-check"></i><b>8.3.2</b> Examine Variable Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="model.html"><a href="model.html#model-1"><i class="fa fa-check"></i><b>8.4</b> Model</a></li>
+<li class="chapter" data-level="8.5" data-path="model.html"><a href="model.html#predict"><i class="fa fa-check"></i><b>8.5</b> Predict</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
