@@ -79,7 +79,9 @@ var ndsi_mask = function(image){
 };
 ```
 
-## Select Images
+## Create Image Composites
+
+### Map Functions Across Image Collection
 
 ```{js map and filter}
 // Map functions to create final Landsat collection
@@ -87,37 +89,53 @@ var ls_indices = ls4_8.map(calc_indices)
                       .map(ndfsi_mask)
                       .map(ndsi_mask)
                       .map(qa_mask);
-
-// Filter collection by dates, fire boundaries
-var ls_area = ls_indices
-  .filterBounds(fires_export)
-  .filterDate('2020-11-01', '2021-05-01')
-  .filter(ee.Filter.calendarRange(12,4,"month"))	
-  .median()
-  .clip(fires_export);
 ```
 
-## Export Data
+### Create 3-year Landsat Composites
 
-### Project Image
+```{js composites}
+// create 3-year snow-cover image composites over fire areas            
 
-```{js project}
-// Project image to match training grid
-var proj4326 = ee.Projection('EPSG:4326').atScale(30);
-var ls_area_4326= ls_area.reproject(proj4326).clip(fires_export);
-```
+for (var j = 1986; j < 1990; j++){ 
+  
+  // list years within imagery window
+  var years = [j-1,j,j+1,j+2];
+  
+  print("landsat_" + years[0] + "_"+ years[3]);
 
-### Export to Drive
+  var start = ee.Date(years[0] + '-11-01');
+  var end = ee.Date(years[3] + '-05-01');
+  
+  print(start);
+  print(end);
 
-```{js export}
-Export.image.toDrive({
-      image: ls_area_4326,
-      folder: "landsat_2021",
-      description: "landsat_2021",
-      crs: "EPSG:4326",
-      maxPixels: 1e13,
-      scale: 30,
-      region: fires_export
-  }); 
+  // filter images to fire bounds and dates of interest
+  var ls_area = ls_indices
+    .filterBounds(fires_export)
+    .filterDate(start,end)
+    .filter(ee.Filter.calendarRange(12,4,"month"))	
+    .median()
+    .clip(fires_export);
+    
+  // project image to match training grid
+  var proj4326 = ee.Projection('EPSG:4326').atScale(30);
+  var ls_area_4326= ls_area.reproject(proj4326).clip(fires_export);
+  
+  // view and map
+  print(ls_area_4326);
+  Map.addLayer(ls_area_4326, {min:0,max:1,bands:["ndvi"],palette:["white","green"]}, "ndvi" + years[0] + "_" + years[3],false);
+  Map.addLayer(ls_area_4326, {min:0,max:3000,bands:["red","green","blue"]}, "Landsat EPSG:4326",false);
+
+  // export to drive
+  Export.image.toDrive({
+        image: ls_area_4326,
+        folder: "landsat_prefire_" + years[0] + "_" + years[3],
+        description: "landsat_prefire_" + years[0] + "_" + years[3],
+        crs: "EPSG:4326",
+        maxPixels: 1e13,
+        scale: 30,
+        region: fires_export
+    }); 
+}
 ```
 

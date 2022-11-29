@@ -84,3 +84,10 @@ examine-variable-correlation
 model-1
 logistic
 random-forest
+set-up-6
+import-snow-cover-landsat
+import-fire-boundaries-3
+import-training-points
+create-image-composites
+map-functions-across-image-collection
+create-3-year-landsat-composites

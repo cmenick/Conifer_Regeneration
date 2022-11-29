@@ -1,9 +1,9 @@
 # Model
 
-
-## Setup
+## Set Up
 
 ### Libraries
+
 ```{r libraries, message=FALSE, warning=FALSE}
 library(mapview)
 library(sf)
@@ -12,11 +12,11 @@ library(tidyverse)
 library(ggplot2)
 library(car)
 library(forcats)
-library(raster)
 library(randomForest)
+library(raster)
 ```
 
-### Import Snow-On Landsant
+### Import Snow-Cover Landsat
 
 ```{r}
 # bring in snow-on landsat imagery tiles, merge into collection
@@ -24,22 +24,22 @@ rast_list <- list.files(path = "data/landsat/landsat_2019_2022", pattern='.tif',
 rast_all <- lapply(rast_list, rast)
 rast_collection <- sprc(rast_all)
 
-crs <-crs(rast_collection[1])
+crs <- crs(rast_collection[1])
 ```
 
-### Import Points
+### Import Fire Boundaries
 
-```{r message=FALSE}
+```{r}
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(., crs=crs)
+```
+
+### Import Training Points
+
+```{r}
 # bring in training points
 points <- st_read("data/points/points_export.shp") %>% 
   st_transform(crs=crs)
-```
-
-### Import Fire Polygons
-
-```{r message=FALSE}
-fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
-  st_transform( crs=crs)
 ```
 
 ## Prepare Training Data
@@ -54,7 +54,6 @@ for(i in 1:length(rast_all)){
   extracted_points <- st_as_sf(terra::extract(rast_collection[i], points,bind = TRUE))
   extracted_df[[i]] <- extracted_points 
 }
-
 training_dataset <- do.call(rbind,extracted_df) %>% 
   mutate(absence = as.factor(case_when(class == "absence" ~ "absence",
                                        TRUE ~ "presence")),
@@ -74,7 +73,6 @@ pres_abs_type <- training_dataset %>%
   summarize(n=n()) %>% 
   mutate(percent= 100*n/sum(n)) %>% 
   filter(absence=="presence")
-
 pres_abs_type
 ```
 
@@ -86,7 +84,6 @@ pres_abs_quad <- training_dataset %>%
   summarize(n=n()) %>% 
   mutate(percent= 100*n/sum(n)) %>% 
   filter(absence=="presence")
-
 pres_abs_quad
 ```
 
@@ -97,21 +94,17 @@ pres_abs_quad
 ```{r}
 ggplot(training_dataset,aes(class,ndvi)) +
   geom_boxplot()
-
 ggplot(training_dataset %>% filter(class %in% c("absence","presencetrace")),aes(class,ndvi)) +
   geom_boxplot()+
   ylim(-.1,.1)
-
 ggplot(training_dataset,aes(absence,ndvi)) +
   geom_boxplot()
-
 ```
 
 ### Examine Variable Correlation
 
 ```{r}
 pairs(training_dataset %>% dplyr::select("class","ndvi","savi","ndsi","ndfsi","nbr2"))
-
 pairs(training_dataset %>% dplyr::select("ndvi","ndfsi"),
       pch = c(16),
       col = c("red","dark green")[training_dataset$absence])
@@ -137,57 +130,38 @@ training_dataset <- training_dataset %>%
 ```{r}
 # full model 
 lm_conifer <- glm(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + savi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove savi 
 lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove red 
 lm_conifer <- glm(absence ~ green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove swir1
 lm_conifer <- glm(absence ~ green + blue + nir + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove green
 lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove ndfsi
 lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove nir
 lm_conifer <- glm(absence ~ blue + swir2 + ndsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # remove ndsi
 lm_conifer <- glm(absence ~ blue + swir2 + ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-
 vif(lm_conifer)
-
 # final model
 summary(lm_conifer)
 anova(lm_conifer)
-
 ```
 
 ```{r}
 image_subset <- mask(rast_collection[1],fires_export)
 rast_predicted <- terra::predict(image_subset,lm_conifer, type="response", se.fit=TRUE)
-
 rast_predicted[rast_predicted < .5] <- 0
 rast_predicted[rast_predicted >= .5] <- 1
-
 mapview(raster(rast_predicted))
 ```
 
@@ -196,31 +170,10 @@ mapview(raster(rast_predicted))
 
 ```{r}
 rf_conifer <- randomForest(absence ~ red + green + blue + nir + swir1 + swir2 + ndvi + savi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data= training_dataset)
-
 randomForest::importance(rf_conifer)
-
 summary(rf_conifer)
-
 rast_predicted <- terra::predict(image_subset,rf_conifer, type="response", se.fit=TRUE)
-
 mapview(raster(rast_predicted))
-
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
