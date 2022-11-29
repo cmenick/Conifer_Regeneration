@@ -13,13 +13,14 @@ library(ggplot2)
 library(car)
 library(forcats)
 library(raster)
+library(randomForest)
 ```
 
 ### Import Snow-On Landsant
 
 ```{r}
 # bring in snow-on landsat imagery tiles, merge into collection
-rast_list <- list.files(path = "data/landsat/landsat_2021", pattern='.tif', all.files=TRUE, full.names=TRUE)
+rast_list <- list.files(path = "data/landsat/landsat_2019_2022", pattern='.tif', all.files=TRUE, full.names=TRUE)
 rast_all <- lapply(rast_list, rast)
 rast_collection <- sprc(rast_all)
 
@@ -122,8 +123,10 @@ cor(training_dataset %>% drop_na() %>% dplyr::select(ndvi, evi, savi, ndsi,ndfsi
 
 ## Model
 
+### Logistic
+
 ```{r}
-training_dataset1 <- training_dataset %>% 
+training_dataset <- training_dataset %>% 
   mutate(binom=case_when(absence=="absence"~0,
                          TRUE ~1),
          binom=as.factor(binom)) %>% 
@@ -133,38 +136,91 @@ training_dataset1 <- training_dataset %>%
 
 ```{r}
 # full model 
-lm_conifer <- glm(absence ~  ndvi + savi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+lm_conifer <- glm(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + savi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
 
 vif(lm_conifer)
 
-# remove savi
-lm_conifer <- glm(absence ~  ndvi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+# remove savi 
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
+
+vif(lm_conifer)
+
+# remove red 
+lm_conifer <- glm(absence ~ green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
+
+vif(lm_conifer)
+
+# remove swir1
+lm_conifer <- glm(absence ~ green + blue + nir + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
+
+vif(lm_conifer)
+
+# remove green
+lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
 
 vif(lm_conifer)
 
 # remove ndfsi
-lm_conifer <- glm(absence ~  ndvi + evi + ndsi+ nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
+
+vif(lm_conifer)
+
+# remove nir
+lm_conifer <- glm(absence ~ blue + swir2 + ndsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
 
 vif(lm_conifer)
 
 # remove ndsi
-lm_conifer <- glm(absence ~  ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset1, family = binomial(logit))
+lm_conifer <- glm(absence ~ blue + swir2 + ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
 
 vif(lm_conifer)
 
 # final model
 summary(lm_conifer)
-
-
-# # add forest type, fire
-# lm_conifer <- glm(absence ~  ndvi + ndsi + nbr2, data = training_dataset1, family = binomial(logit))
+anova(lm_conifer)
 
 ```
-## Predict
 
 ```{r}
 image_subset <- mask(rast_collection[1],fires_export)
 rast_predicted <- terra::predict(image_subset,lm_conifer, type="response", se.fit=TRUE)
 
+rast_predicted[rast_predicted < .5] <- 0
+rast_predicted[rast_predicted >= .5] <- 1
+
 mapview(raster(rast_predicted))
 ```
+
+
+## Random Forest
+
+```{r}
+rf_conifer <- randomForest(absence ~ red + green + blue + nir + swir1 + swir2 + ndvi + savi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data= training_dataset)
+
+randomForest::importance(rf_conifer)
+
+summary(rf_conifer)
+
+rast_predicted <- terra::predict(image_subset,rf_conifer, type="response", se.fit=TRUE)
+
+mapview(raster(rast_predicted))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

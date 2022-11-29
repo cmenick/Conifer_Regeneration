@@ -3,7 +3,7 @@
 ## Set Up
 
 ### Import Fire Boundaries
-```{js import boundaries}
+```{js import fire boundaries}
 // Import fire polygons
 var fires_export = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export");
 ```
