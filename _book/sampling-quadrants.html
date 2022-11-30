@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Sampling Quadrants | 04_trainingdata</title>
-  <meta name="description" content="Chapter 4 Sampling Quadrants | 04_trainingdata" />
+  <title>Chapter 5 Sampling Quadrants | Post-Fire Conifer Regeneration</title>
+  <meta name="description" content="Chapter 5 Sampling Quadrants | Post-Fire Conifer Regeneration" />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Sampling Quadrants | 04_trainingdata" />
+  <meta property="og:title" content="Chapter 5 Sampling Quadrants | Post-Fire Conifer Regeneration" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Sampling Quadrants | 04_trainingdata" />
+  <meta name="twitter:title" content="Chapter 5 Sampling Quadrants | Post-Fire Conifer Regeneration" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-11-19" />
+<meta name="date" content="2022-11-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -68,9 +68,11 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_crop_7cdb1f-1/data_stars_forestgroup_croped8c79.txt"></script>
+<script src="libs/forestgroup_crop_042965-1/data_stars_forestgroup_crop5dfc40.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/raster(rast_predicted)_da1e52-1/data_stars_rasterrast_predicteddeaf3c.txt"></script>
+<script src="libs/raster(rast_predicted)_6df9b1-1/data_stars_rasterrast_predicted25819f.txt"></script>
 
 
 <style type="text/css">
@@ -152,7 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Northern Rockies Conifer Regeneration</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
@@ -184,46 +186,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.4.2</b> Export</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="patch-formation.html"><a href="patch-formation.html"><i class="fa fa-check"></i><b>3</b> Patch Formation</a>
+<li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="patch-formation.html"><a href="patch-formation.html#set-up-1"><i class="fa fa-check"></i><b>3.1</b> Set Up</a>
+<li class="chapter" data-level="3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#set-up-1"><i class="fa fa-check"></i><b>3.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="patch-formation.html"><a href="patch-formation.html#libraries-1"><i class="fa fa-check"></i><b>3.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="3.1.2" data-path="patch-formation.html"><a href="patch-formation.html#import-rdnbr-rasters"><i class="fa fa-check"></i><b>3.1.2</b> Import RdNBR Rasters</a></li>
-<li class="chapter" data-level="3.1.3" data-path="patch-formation.html"><a href="patch-formation.html#import-fire-boundaries"><i class="fa fa-check"></i><b>3.1.3</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="3.1.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-fire-boundaries"><i class="fa fa-check"></i><b>3.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="3.1.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#clean-fire-boundaries"><i class="fa fa-check"></i><b>3.1.2</b> Clean Fire Boundaries</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="patch-formation.html"><a href="patch-formation.html#create-high-severity-patches"><i class="fa fa-check"></i><b>3.2</b> Create High-Severity Patches</a>
+<li class="chapter" data-level="3.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#imagery"><i class="fa fa-check"></i><b>3.2</b> Imagery</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>3.2.1</b> PatchMorph</a></li>
+<li class="chapter" data-level="3.2.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-landsat-5"><i class="fa fa-check"></i><b>3.2.1</b> Import Landsat 5</a></li>
+<li class="chapter" data-level="3.2.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#prepare-landsat-data"><i class="fa fa-check"></i><b>3.2.2</b> Prepare Landsat Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>3.3</b> Refine Patches</a></li>
-<li class="chapter" data-level="3.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>3.4</b> Mapping</a></li>
-<li class="chapter" data-level="3.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>3.5</b> Export Data</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>4</b> Sampling Quadrants</a>
+<li class="chapter" data-level="3.3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#burn-indices"><i class="fa fa-check"></i><b>3.3</b> Burn Indices</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#set-up-2"><i class="fa fa-check"></i><b>4.1</b> Set Up</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>4.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="4.1.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>4.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
+<li class="chapter" data-level="3.3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-rdnbr"><i class="fa fa-check"></i><b>3.3.1</b> Calculate RdNBR</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>4.2</b> Create Sampling Quadrants</a>
+<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-1"><i class="fa fa-check"></i><b>3.4</b> Export</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>4.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
-<li class="chapter" data-level="4.2.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>4.2.2</b> Clean Quadrants</a></li>
+<li class="chapter" data-level="3.4.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-each-fire-rdnbr-to-drive"><i class="fa fa-check"></i><b>3.4.1</b> Export Each Fire RdNBR to Drive</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>4.3</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>5</b> Training Data</a>
+<li class="chapter" data-level="4" data-path="patch-formation.html"><a href="patch-formation.html"><i class="fa fa-check"></i><b>4</b> Patch Formation</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="training-data.html"><a href="training-data.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a></li>
-<li class="chapter" data-level="5.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>5.2</b> Import Data</a></li>
-<li class="chapter" data-level="5.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>5.3</b> Sampling Points</a>
+<li class="chapter" data-level="4.1" data-path="patch-formation.html"><a href="patch-formation.html#set-up-2"><i class="fa fa-check"></i><b>4.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>5.3.1</b> Import and Combine Training Points</a></li>
-<li class="chapter" data-level="5.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>5.3.2</b> Assign Points and Clean Data</a></li>
+<li class="chapter" data-level="4.1.1" data-path="patch-formation.html"><a href="patch-formation.html#libraries-1"><i class="fa fa-check"></i><b>4.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="4.1.2" data-path="patch-formation.html"><a href="patch-formation.html#import-rdnbr-rasters"><i class="fa fa-check"></i><b>4.1.2</b> Import RdNBR Rasters</a></li>
+<li class="chapter" data-level="4.1.3" data-path="patch-formation.html"><a href="patch-formation.html#import-fire-boundaries-1"><i class="fa fa-check"></i><b>4.1.3</b> Import Fire Boundaries</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="training-data.html"><a href="training-data.html#export-1"><i class="fa fa-check"></i><b>5.4</b> Export</a></li>
+<li class="chapter" data-level="4.2" data-path="patch-formation.html"><a href="patch-formation.html#create-high-severity-patches"><i class="fa fa-check"></i><b>4.2</b> Create High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>5.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>5.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>5.2</b> Create Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a></li>
+<li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
+<li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
+<li class="chapter" data-level="6.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-2"><i class="fa fa-check"></i><b>6.4</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow Cover Imagery</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#set-up-5"><i class="fa fa-check"></i><b>7.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions"><i class="fa fa-check"></i><b>7.2</b> Functions</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-spectral-indices"><i class="fa fa-check"></i><b>7.2.1</b> Get Spectral Indices</a></li>
+<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-clear-images"><i class="fa fa-check"></i><b>7.2.2</b> Get Clear Images</a></li>
+<li class="chapter" data-level="7.2.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-snow-covered-pixels"><i class="fa fa-check"></i><b>7.2.3</b> Get snow-Covered Pixels</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Image Composites</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.3.1</b> Map Functions Across Image Collection</a></li>
+<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-3-year-landsat-composites"><i class="fa fa-check"></i><b>7.3.2</b> Create 3-year Landsat Composites</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="model.html"><a href="model.html"><i class="fa fa-check"></i><b>8</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="model.html"><a href="model.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="model.html"><a href="model.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model.html"><a href="model.html#import-snow-cover-landsat"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model.html"><a href="model.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.4" data-path="model.html"><a href="model.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="model.html"><a href="model.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="model.html"><a href="model.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model.html"><a href="model.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+<li class="chapter" data-level="8.2.3" data-path="model.html"><a href="model.html#training-data-by-sampling-quadrant"><i class="fa fa-check"></i><b>8.2.3</b> Training Data by Sampling Quadrant</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="model.html"><a href="model.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="model.html"><a href="model.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.3.2" data-path="model.html"><a href="model.html#examine-variable-correlation"><i class="fa fa-check"></i><b>8.3.2</b> Examine Variable Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="model.html"><a href="model.html#model-1"><i class="fa fa-check"></i><b>8.4</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="model.html"><a href="model.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model.html"><a href="model.html#random-forest"><i class="fa fa-check"></i><b>8.5</b> Random Forest</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -237,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">04_trainingdata</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Post-Fire Conifer Regeneration</a>
           </h1>
         </div>
 
@@ -245,164 +313,164 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sampling-quadrants" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Sampling Quadrants<a href="sampling-quadrants.html#sampling-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="set-up-2" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Set Up<a href="sampling-quadrants.html#set-up-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="libraries-2" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Libraries<a href="sampling-quadrants.html#libraries-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="sampling-quadrants.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
-<span id="cb34-2"><a href="sampling-quadrants.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb34-3"><a href="sampling-quadrants.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb34-4"><a href="sampling-quadrants.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb34-5"><a href="sampling-quadrants.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
+<div id="sampling-quadrants" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Sampling Quadrants<a href="sampling-quadrants.html#sampling-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="set-up-3" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Set Up<a href="sampling-quadrants.html#set-up-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-2" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Libraries<a href="sampling-quadrants.html#libraries-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sampling-quadrants.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
+<span id="cb40-2"><a href="sampling-quadrants.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb40-3"><a href="sampling-quadrants.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb40-4"><a href="sampling-quadrants.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb40-5"><a href="sampling-quadrants.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
 </div>
-<div id="import-high-severity-patches-and-fire-boundaries" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Import High-Severity Patches and Fire Boundaries<a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sampling-quadrants.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data import</span></span>
-<span id="cb35-2"><a href="sampling-quadrants.html#cb35-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-3"><a href="sampling-quadrants.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span>
-<span id="cb35-4"><a href="sampling-quadrants.html#cb35-4" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
-<span id="cb35-5"><a href="sampling-quadrants.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="sampling-quadrants.html#cb35-6" aria-hidden="true" tabindex="-1"></a>patch_interiors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_interior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb35-7"><a href="sampling-quadrants.html#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
-<span id="cb35-8"><a href="sampling-quadrants.html#cb35-8" aria-hidden="true" tabindex="-1"></a>patch_exteriors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_exterior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb35-9"><a href="sampling-quadrants.html#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
-<span id="cb35-10"><a href="sampling-quadrants.html#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="sampling-quadrants.html#cb35-11" aria-hidden="true" tabindex="-1"></a>mtbs_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&#39;data/fire_boundaries/mtbs_export.shp&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-12"><a href="sampling-quadrants.html#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs) </span>
-<span id="cb35-13"><a href="sampling-quadrants.html#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-14"><a href="sampling-quadrants.html#cb35-14" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb35-15"><a href="sampling-quadrants.html#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
-</div>
-</div>
-<div id="create-sampling-quadrants" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Create Sampling Quadrants<a href="sampling-quadrants.html#create-sampling-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="split-patches-by-northsouth-aspects-and-interiorexterior" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Split Patches by North/South Aspects and Interior/Exterior<a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sampling-quadrants.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of fire IDs</span></span>
-<span id="cb36-2"><a href="sampling-quadrants.html#cb36-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">unique</span>(patches<span class="sc">$</span>Evnt_ID)</span>
-<span id="cb36-3"><a href="sampling-quadrants.html#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="sampling-quadrants.html#cb36-4" aria-hidden="true" tabindex="-1"></a>quadrants_df <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb36-5"><a href="sampling-quadrants.html#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="sampling-quadrants.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> fire_list){</span>
-<span id="cb36-7"><a href="sampling-quadrants.html#cb36-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-8"><a href="sampling-quadrants.html#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter patch interiors/exteriors to the selected fire</span></span>
-<span id="cb36-9"><a href="sampling-quadrants.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  patch_fire <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb36-10"><a href="sampling-quadrants.html#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)</span>
-<span id="cb36-11"><a href="sampling-quadrants.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-12"><a href="sampling-quadrants.html#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapview</span>(patch_fire)</span>
-<span id="cb36-13"><a href="sampling-quadrants.html#cb36-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-14"><a href="sampling-quadrants.html#cb36-14" aria-hidden="true" tabindex="-1"></a>  patches_interior <span class="ot">&lt;-</span> patch_interiors <span class="sc">%&gt;%</span> </span>
-<span id="cb36-15"><a href="sampling-quadrants.html#cb36-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-16"><a href="sampling-quadrants.html#cb36-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-17"><a href="sampling-quadrants.html#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
-<span id="cb36-18"><a href="sampling-quadrants.html#cb36-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-19"><a href="sampling-quadrants.html#cb36-19" aria-hidden="true" tabindex="-1"></a>  patches_exterior <span class="ot">&lt;-</span> patch_exteriors <span class="sc">%&gt;%</span> </span>
-<span id="cb36-20"><a href="sampling-quadrants.html#cb36-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID_1 <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-21"><a href="sampling-quadrants.html#cb36-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb36-22"><a href="sampling-quadrants.html#cb36-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
-<span id="cb36-23"><a href="sampling-quadrants.html#cb36-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-24"><a href="sampling-quadrants.html#cb36-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set event and fire id to the selected fire</span></span>
-<span id="cb36-25"><a href="sampling-quadrants.html#cb36-25" aria-hidden="true" tabindex="-1"></a>  Evnt_ID <span class="ot">&lt;-</span> i</span>
-<span id="cb36-26"><a href="sampling-quadrants.html#cb36-26" aria-hidden="true" tabindex="-1"></a>  Fire_ID <span class="ot">&lt;-</span><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(patch_fire<span class="sc">$</span>Fire_ID)))</span>
-<span id="cb36-27"><a href="sampling-quadrants.html#cb36-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-28"><a href="sampling-quadrants.html#cb36-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;starting event &quot;</span>,Evnt_ID,<span class="st">&quot; in fire group &quot;</span>, Fire_ID))</span>
-<span id="cb36-29"><a href="sampling-quadrants.html#cb36-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-30"><a href="sampling-quadrants.html#cb36-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get and calculate cosine corrected aspect</span></span>
-<span id="cb36-31"><a href="sampling-quadrants.html#cb36-31" aria-hidden="true" tabindex="-1"></a>  dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(patch_fire,<span class="at">z=</span><span class="dv">11</span>)</span>
-<span id="cb36-32"><a href="sampling-quadrants.html#cb36-32" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem, <span class="at">opt =</span> <span class="st">&quot;aspect&quot;</span>,<span class="at">unit =</span> <span class="st">&quot;radians&quot;</span>)</span>
-<span id="cb36-33"><a href="sampling-quadrants.html#cb36-33" aria-hidden="true" tabindex="-1"></a>  ccaspect <span class="ot">&lt;-</span> <span class="fu">cos</span>(aspect)</span>
-<span id="cb36-34"><a href="sampling-quadrants.html#cb36-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-35"><a href="sampling-quadrants.html#cb36-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># positive aspects are north-facing, negative are south-facing</span></span>
-<span id="cb36-36"><a href="sampling-quadrants.html#cb36-36" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&gt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb36-37"><a href="sampling-quadrants.html#cb36-37" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb36-38"><a href="sampling-quadrants.html#cb36-38" aria-hidden="true" tabindex="-1"></a>  ccaspect_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(<span class="fu">rast</span>(ccaspect)) <span class="sc">%&gt;%</span></span>
-<span id="cb36-39"><a href="sampling-quadrants.html#cb36-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()</span>
-<span id="cb36-40"><a href="sampling-quadrants.html#cb36-40" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-41"><a href="sampling-quadrants.html#cb36-41" aria-hidden="true" tabindex="-1"></a>  pos_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
-<span id="cb36-42"><a href="sampling-quadrants.html#cb36-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==</span><span class="dv">1</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-43"><a href="sampling-quadrants.html#cb36-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
-<span id="cb36-44"><a href="sampling-quadrants.html#cb36-44" aria-hidden="true" tabindex="-1"></a>  neg_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
-<span id="cb36-45"><a href="sampling-quadrants.html#cb36-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-46"><a href="sampling-quadrants.html#cb36-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
-<span id="cb36-47"><a href="sampling-quadrants.html#cb36-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-48"><a href="sampling-quadrants.html#cb36-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get quadrants as the intersection of interior/exterior and pos/neg aspect</span></span>
-<span id="cb36-49"><a href="sampling-quadrants.html#cb36-49" aria-hidden="true" tabindex="-1"></a>  pos_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,pos_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-50"><a href="sampling-quadrants.html#cb36-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-51"><a href="sampling-quadrants.html#cb36-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-52"><a href="sampling-quadrants.html#cb36-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb36-53"><a href="sampling-quadrants.html#cb36-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_ext&quot;</span>,</span>
-<span id="cb36-54"><a href="sampling-quadrants.html#cb36-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb36-55"><a href="sampling-quadrants.html#cb36-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb36-56"><a href="sampling-quadrants.html#cb36-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb36-57"><a href="sampling-quadrants.html#cb36-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb36-58"><a href="sampling-quadrants.html#cb36-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-59"><a href="sampling-quadrants.html#cb36-59" aria-hidden="true" tabindex="-1"></a>  pos_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior,pos_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-60"><a href="sampling-quadrants.html#cb36-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-61"><a href="sampling-quadrants.html#cb36-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb36-62"><a href="sampling-quadrants.html#cb36-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb36-63"><a href="sampling-quadrants.html#cb36-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_int&quot;</span>,</span>
-<span id="cb36-64"><a href="sampling-quadrants.html#cb36-64" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb36-65"><a href="sampling-quadrants.html#cb36-65" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb36-66"><a href="sampling-quadrants.html#cb36-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb36-67"><a href="sampling-quadrants.html#cb36-67" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb36-68"><a href="sampling-quadrants.html#cb36-68" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-69"><a href="sampling-quadrants.html#cb36-69" aria-hidden="true" tabindex="-1"></a>  neg_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,neg_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-70"><a href="sampling-quadrants.html#cb36-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb36-71"><a href="sampling-quadrants.html#cb36-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-72"><a href="sampling-quadrants.html#cb36-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb36-73"><a href="sampling-quadrants.html#cb36-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_ext&quot;</span>,</span>
-<span id="cb36-74"><a href="sampling-quadrants.html#cb36-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb36-75"><a href="sampling-quadrants.html#cb36-75" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb36-76"><a href="sampling-quadrants.html#cb36-76" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb36-77"><a href="sampling-quadrants.html#cb36-77" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb36-78"><a href="sampling-quadrants.html#cb36-78" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-79"><a href="sampling-quadrants.html#cb36-79" aria-hidden="true" tabindex="-1"></a>  neg_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior, neg_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb36-80"><a href="sampling-quadrants.html#cb36-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb36-81"><a href="sampling-quadrants.html#cb36-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-82"><a href="sampling-quadrants.html#cb36-82" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb36-83"><a href="sampling-quadrants.html#cb36-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_int&quot;</span>,</span>
-<span id="cb36-84"><a href="sampling-quadrants.html#cb36-84" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb36-85"><a href="sampling-quadrants.html#cb36-85" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb36-86"><a href="sampling-quadrants.html#cb36-86" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb36-87"><a href="sampling-quadrants.html#cb36-87" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb36-88"><a href="sampling-quadrants.html#cb36-88" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-89"><a href="sampling-quadrants.html#cb36-89" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine, export quadrants</span></span>
-<span id="cb36-90"><a href="sampling-quadrants.html#cb36-90" aria-hidden="true" tabindex="-1"></a>  all_quadrants <span class="ot">&lt;-</span> <span class="fu">rbind</span>(neg_int,pos_int,neg_ext,pos_ext) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-91"><a href="sampling-quadrants.html#cb36-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
-<span id="cb36-92"><a href="sampling-quadrants.html#cb36-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-93"><a href="sampling-quadrants.html#cb36-93" aria-hidden="true" tabindex="-1"></a>  quadrants_df[[i]] <span class="ot">&lt;-</span> all_quadrants</span>
-<span id="cb36-94"><a href="sampling-quadrants.html#cb36-94" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-95"><a href="sampling-quadrants.html#cb36-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;completed&quot;</span>))</span>
-<span id="cb36-96"><a href="sampling-quadrants.html#cb36-96" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-97"><a href="sampling-quadrants.html#cb36-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-98"><a href="sampling-quadrants.html#cb36-98" aria-hidden="true" tabindex="-1"></a><span class="co"># bind list together</span></span>
-<span id="cb36-99"><a href="sampling-quadrants.html#cb36-99" aria-hidden="true" tabindex="-1"></a>quadrants_fullset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,quadrants_df) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-100"><a href="sampling-quadrants.html#cb36-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() </span></code></pre></div>
-</div>
-<div id="clean-quadrants" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Clean Quadrants<a href="sampling-quadrants.html#clean-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sampling-quadrants.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes erroneous polygons created from irregular fire boundary shapes</span></span>
-<span id="cb37-2"><a href="sampling-quadrants.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># removes small border mismatched fire</span></span>
-<span id="cb37-3"><a href="sampling-quadrants.html#cb37-3" aria-hidden="true" tabindex="-1"></a>quadrants_clean <span class="ot">&lt;-</span> quadrants_fullset <span class="sc">%&gt;%</span> </span>
-<span id="cb37-4"><a href="sampling-quadrants.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area=</span><span class="fu">as.numeric</span>(<span class="fu">st_area</span>(x))) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-5"><a href="sampling-quadrants.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(area <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-6"><a href="sampling-quadrants.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Evnt_ID) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-7"><a href="sampling-quadrants.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-8"><a href="sampling-quadrants.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">4</span>)</span>
-<span id="cb37-9"><a href="sampling-quadrants.html#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="sampling-quadrants.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up for export</span></span>
-<span id="cb37-11"><a href="sampling-quadrants.html#cb37-11" aria-hidden="true" tabindex="-1"></a>quadrants_export <span class="ot">&lt;-</span> quadrants_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb37-12"><a href="sampling-quadrants.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb37-13"><a href="sampling-quadrants.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb37-14"><a href="sampling-quadrants.html#cb37-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;area&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb37-15"><a href="sampling-quadrants.html#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div id="import-high-severity-patches-and-fire-boundaries" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Import High-Severity Patches and Fire Boundaries<a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sampling-quadrants.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data import</span></span>
+<span id="cb41-2"><a href="sampling-quadrants.html#cb41-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="sampling-quadrants.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span>
+<span id="cb41-4"><a href="sampling-quadrants.html#cb41-4" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
+<span id="cb41-5"><a href="sampling-quadrants.html#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="sampling-quadrants.html#cb41-6" aria-hidden="true" tabindex="-1"></a>patch_interiors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_interior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-7"><a href="sampling-quadrants.html#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
+<span id="cb41-8"><a href="sampling-quadrants.html#cb41-8" aria-hidden="true" tabindex="-1"></a>patch_exteriors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_exterior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-9"><a href="sampling-quadrants.html#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
+<span id="cb41-10"><a href="sampling-quadrants.html#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="sampling-quadrants.html#cb41-11" aria-hidden="true" tabindex="-1"></a>mtbs_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&#39;data/fire_boundaries/mtbs_export.shp&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-12"><a href="sampling-quadrants.html#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs) </span>
+<span id="cb41-13"><a href="sampling-quadrants.html#cb41-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-14"><a href="sampling-quadrants.html#cb41-14" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb41-15"><a href="sampling-quadrants.html#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
 </div>
-<div id="export-data-2" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Export Data<a href="sampling-quadrants.html#export-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sampling-quadrants.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(quadrants_export,&quot;data/patches/&quot;,&quot;quadrants_export.shp&quot;,driver = &quot;ESRI Shapefile&quot;)</span></span></code></pre></div>
+<div id="create-sampling-quadrants" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Create Sampling Quadrants<a href="sampling-quadrants.html#create-sampling-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="split-patches-by-northsouth-aspects-and-interiorexterior" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Split Patches by North/South Aspects and Interior/Exterior<a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sampling-quadrants.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of fire IDs</span></span>
+<span id="cb42-2"><a href="sampling-quadrants.html#cb42-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">unique</span>(patches<span class="sc">$</span>Evnt_ID)</span>
+<span id="cb42-3"><a href="sampling-quadrants.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="sampling-quadrants.html#cb42-4" aria-hidden="true" tabindex="-1"></a>quadrants_df <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb42-5"><a href="sampling-quadrants.html#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="sampling-quadrants.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> fire_list){</span>
+<span id="cb42-7"><a href="sampling-quadrants.html#cb42-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-8"><a href="sampling-quadrants.html#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter patch interiors/exteriors to the selected fire</span></span>
+<span id="cb42-9"><a href="sampling-quadrants.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  patch_fire <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb42-10"><a href="sampling-quadrants.html#cb42-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)</span>
+<span id="cb42-11"><a href="sampling-quadrants.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-12"><a href="sampling-quadrants.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapview</span>(patch_fire)</span>
+<span id="cb42-13"><a href="sampling-quadrants.html#cb42-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-14"><a href="sampling-quadrants.html#cb42-14" aria-hidden="true" tabindex="-1"></a>  patches_interior <span class="ot">&lt;-</span> patch_interiors <span class="sc">%&gt;%</span> </span>
+<span id="cb42-15"><a href="sampling-quadrants.html#cb42-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-16"><a href="sampling-quadrants.html#cb42-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-17"><a href="sampling-quadrants.html#cb42-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
+<span id="cb42-18"><a href="sampling-quadrants.html#cb42-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-19"><a href="sampling-quadrants.html#cb42-19" aria-hidden="true" tabindex="-1"></a>  patches_exterior <span class="ot">&lt;-</span> patch_exteriors <span class="sc">%&gt;%</span> </span>
+<span id="cb42-20"><a href="sampling-quadrants.html#cb42-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID_1 <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-21"><a href="sampling-quadrants.html#cb42-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb42-22"><a href="sampling-quadrants.html#cb42-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
+<span id="cb42-23"><a href="sampling-quadrants.html#cb42-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-24"><a href="sampling-quadrants.html#cb42-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set event and fire id to the selected fire</span></span>
+<span id="cb42-25"><a href="sampling-quadrants.html#cb42-25" aria-hidden="true" tabindex="-1"></a>  Evnt_ID <span class="ot">&lt;-</span> i</span>
+<span id="cb42-26"><a href="sampling-quadrants.html#cb42-26" aria-hidden="true" tabindex="-1"></a>  Fire_ID <span class="ot">&lt;-</span><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(patch_fire<span class="sc">$</span>Fire_ID)))</span>
+<span id="cb42-27"><a href="sampling-quadrants.html#cb42-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-28"><a href="sampling-quadrants.html#cb42-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;starting event &quot;</span>,Evnt_ID,<span class="st">&quot; in fire group &quot;</span>, Fire_ID))</span>
+<span id="cb42-29"><a href="sampling-quadrants.html#cb42-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-30"><a href="sampling-quadrants.html#cb42-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get and calculate cosine corrected aspect</span></span>
+<span id="cb42-31"><a href="sampling-quadrants.html#cb42-31" aria-hidden="true" tabindex="-1"></a>  dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(patch_fire,<span class="at">z=</span><span class="dv">11</span>)</span>
+<span id="cb42-32"><a href="sampling-quadrants.html#cb42-32" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem, <span class="at">opt =</span> <span class="st">&quot;aspect&quot;</span>,<span class="at">unit =</span> <span class="st">&quot;radians&quot;</span>)</span>
+<span id="cb42-33"><a href="sampling-quadrants.html#cb42-33" aria-hidden="true" tabindex="-1"></a>  ccaspect <span class="ot">&lt;-</span> <span class="fu">cos</span>(aspect)</span>
+<span id="cb42-34"><a href="sampling-quadrants.html#cb42-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-35"><a href="sampling-quadrants.html#cb42-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># positive aspects are north-facing, negative are south-facing</span></span>
+<span id="cb42-36"><a href="sampling-quadrants.html#cb42-36" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&gt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb42-37"><a href="sampling-quadrants.html#cb42-37" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb42-38"><a href="sampling-quadrants.html#cb42-38" aria-hidden="true" tabindex="-1"></a>  ccaspect_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(<span class="fu">rast</span>(ccaspect)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-39"><a href="sampling-quadrants.html#cb42-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()</span>
+<span id="cb42-40"><a href="sampling-quadrants.html#cb42-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-41"><a href="sampling-quadrants.html#cb42-41" aria-hidden="true" tabindex="-1"></a>  pos_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
+<span id="cb42-42"><a href="sampling-quadrants.html#cb42-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==</span><span class="dv">1</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-43"><a href="sampling-quadrants.html#cb42-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
+<span id="cb42-44"><a href="sampling-quadrants.html#cb42-44" aria-hidden="true" tabindex="-1"></a>  neg_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
+<span id="cb42-45"><a href="sampling-quadrants.html#cb42-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-46"><a href="sampling-quadrants.html#cb42-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
+<span id="cb42-47"><a href="sampling-quadrants.html#cb42-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-48"><a href="sampling-quadrants.html#cb42-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get quadrants as the intersection of interior/exterior and pos/neg aspect</span></span>
+<span id="cb42-49"><a href="sampling-quadrants.html#cb42-49" aria-hidden="true" tabindex="-1"></a>  pos_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,pos_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-50"><a href="sampling-quadrants.html#cb42-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-51"><a href="sampling-quadrants.html#cb42-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-52"><a href="sampling-quadrants.html#cb42-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb42-53"><a href="sampling-quadrants.html#cb42-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_ext&quot;</span>,</span>
+<span id="cb42-54"><a href="sampling-quadrants.html#cb42-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb42-55"><a href="sampling-quadrants.html#cb42-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb42-56"><a href="sampling-quadrants.html#cb42-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb42-57"><a href="sampling-quadrants.html#cb42-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb42-58"><a href="sampling-quadrants.html#cb42-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-59"><a href="sampling-quadrants.html#cb42-59" aria-hidden="true" tabindex="-1"></a>  pos_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior,pos_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-60"><a href="sampling-quadrants.html#cb42-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-61"><a href="sampling-quadrants.html#cb42-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb42-62"><a href="sampling-quadrants.html#cb42-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb42-63"><a href="sampling-quadrants.html#cb42-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_int&quot;</span>,</span>
+<span id="cb42-64"><a href="sampling-quadrants.html#cb42-64" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb42-65"><a href="sampling-quadrants.html#cb42-65" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb42-66"><a href="sampling-quadrants.html#cb42-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb42-67"><a href="sampling-quadrants.html#cb42-67" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb42-68"><a href="sampling-quadrants.html#cb42-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-69"><a href="sampling-quadrants.html#cb42-69" aria-hidden="true" tabindex="-1"></a>  neg_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,neg_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-70"><a href="sampling-quadrants.html#cb42-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-71"><a href="sampling-quadrants.html#cb42-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-72"><a href="sampling-quadrants.html#cb42-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb42-73"><a href="sampling-quadrants.html#cb42-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_ext&quot;</span>,</span>
+<span id="cb42-74"><a href="sampling-quadrants.html#cb42-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb42-75"><a href="sampling-quadrants.html#cb42-75" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb42-76"><a href="sampling-quadrants.html#cb42-76" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb42-77"><a href="sampling-quadrants.html#cb42-77" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb42-78"><a href="sampling-quadrants.html#cb42-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-79"><a href="sampling-quadrants.html#cb42-79" aria-hidden="true" tabindex="-1"></a>  neg_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior, neg_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb42-80"><a href="sampling-quadrants.html#cb42-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-81"><a href="sampling-quadrants.html#cb42-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-82"><a href="sampling-quadrants.html#cb42-82" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb42-83"><a href="sampling-quadrants.html#cb42-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_int&quot;</span>,</span>
+<span id="cb42-84"><a href="sampling-quadrants.html#cb42-84" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb42-85"><a href="sampling-quadrants.html#cb42-85" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb42-86"><a href="sampling-quadrants.html#cb42-86" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb42-87"><a href="sampling-quadrants.html#cb42-87" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb42-88"><a href="sampling-quadrants.html#cb42-88" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-89"><a href="sampling-quadrants.html#cb42-89" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine, export quadrants</span></span>
+<span id="cb42-90"><a href="sampling-quadrants.html#cb42-90" aria-hidden="true" tabindex="-1"></a>  all_quadrants <span class="ot">&lt;-</span> <span class="fu">rbind</span>(neg_int,pos_int,neg_ext,pos_ext) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-91"><a href="sampling-quadrants.html#cb42-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
+<span id="cb42-92"><a href="sampling-quadrants.html#cb42-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-93"><a href="sampling-quadrants.html#cb42-93" aria-hidden="true" tabindex="-1"></a>  quadrants_df[[i]] <span class="ot">&lt;-</span> all_quadrants</span>
+<span id="cb42-94"><a href="sampling-quadrants.html#cb42-94" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-95"><a href="sampling-quadrants.html#cb42-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;completed&quot;</span>))</span>
+<span id="cb42-96"><a href="sampling-quadrants.html#cb42-96" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-97"><a href="sampling-quadrants.html#cb42-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-98"><a href="sampling-quadrants.html#cb42-98" aria-hidden="true" tabindex="-1"></a><span class="co"># bind list together</span></span>
+<span id="cb42-99"><a href="sampling-quadrants.html#cb42-99" aria-hidden="true" tabindex="-1"></a>quadrants_fullset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,quadrants_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-100"><a href="sampling-quadrants.html#cb42-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() </span></code></pre></div>
+</div>
+<div id="clean-quadrants" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Clean Quadrants<a href="sampling-quadrants.html#clean-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sampling-quadrants.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes erroneous polygons created from irregular fire boundary shapes</span></span>
+<span id="cb43-2"><a href="sampling-quadrants.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># removes small border mismatched fire</span></span>
+<span id="cb43-3"><a href="sampling-quadrants.html#cb43-3" aria-hidden="true" tabindex="-1"></a>quadrants_clean <span class="ot">&lt;-</span> quadrants_fullset <span class="sc">%&gt;%</span> </span>
+<span id="cb43-4"><a href="sampling-quadrants.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area=</span><span class="fu">as.numeric</span>(<span class="fu">st_area</span>(x))) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-5"><a href="sampling-quadrants.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(area <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-6"><a href="sampling-quadrants.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Evnt_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-7"><a href="sampling-quadrants.html#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-8"><a href="sampling-quadrants.html#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">4</span>)</span>
+<span id="cb43-9"><a href="sampling-quadrants.html#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="sampling-quadrants.html#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up for export</span></span>
+<span id="cb43-11"><a href="sampling-quadrants.html#cb43-11" aria-hidden="true" tabindex="-1"></a>quadrants_export <span class="ot">&lt;-</span> quadrants_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb43-12"><a href="sampling-quadrants.html#cb43-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb43-13"><a href="sampling-quadrants.html#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb43-14"><a href="sampling-quadrants.html#cb43-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;area&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb43-15"><a href="sampling-quadrants.html#cb43-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+</div>
+</div>
+<div id="export-data-2" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Export Data<a href="sampling-quadrants.html#export-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sampling-quadrants.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(quadrants_export,&quot;data/patches/&quot;,&quot;quadrants_export.shp&quot;,driver = &quot;ESRI Shapefile&quot;)</span></span></code></pre></div>
 
 </div>
 </div>
@@ -443,7 +511,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03_samplingquadrants.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04_samplingquadrants.Rmd",
 "text": "Edit"
 },
 "history": {
