@@ -14,10 +14,6 @@ always_allow_html: true
 
 # About
 
-```{r eval=FALSE}
-bookdown::serve_book()
-```
-
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
