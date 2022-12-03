@@ -282,8 +282,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.1</b> Import Fires</a></li>
-<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-landsast"><i class="fa fa-check"></i><b>9.1.2</b> Import Landsast</a></li>
+<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#function-to-extract-landsat"><i class="fa fa-check"></i><b>9.2.1</b> Function to Extract Landsat</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.2</b> Extract Landsat Data for Each Patch</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#regroup-data"><i class="fa fa-check"></i><b>9.3.2</b> Regroup Data</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#plot"><i class="fa fa-check"></i><b>9.4</b> Plot</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ndvi-change-by-forest-type"><i class="fa fa-check"></i><b>9.4.1</b> NDVI Change by Forest Type</a></li>
+<li class="chapter" data-level="9.4.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ndvi-recovery-by-forest-type"><i class="fa fa-check"></i><b>9.4.2</b> NDVI Recovery by Forest Type</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -310,15 +326,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Part 9</span> NDVI Trajectory<a href="ndvi-trajectory.html#ndvi-trajectory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="set-up-7" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Set Up<a href="ndvi-trajectory.html#set-up-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-5" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Libraries<a href="ndvi-trajectory.html#libraries-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ndvi-trajectory.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="ndvi-trajectory.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="ndvi-trajectory.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-4"><a href="ndvi-trajectory.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-5"><a href="ndvi-trajectory.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb1-6"><a href="ndvi-trajectory.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
-<span id="cb1-7"><a href="ndvi-trajectory.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exactextractr)</span></code></pre></div>
-<div id="import-fires" class="section level3 hasAnchor" number="9.1.1">
-<h3><span class="header-section-number">9.1.1</span> Import Fires<a href="ndvi-trajectory.html#import-fires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<span id="cb1-2"><a href="ndvi-trajectory.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb1-3"><a href="ndvi-trajectory.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="ndvi-trajectory.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-5"><a href="ndvi-trajectory.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-6"><a href="ndvi-trajectory.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-7"><a href="ndvi-trajectory.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb1-8"><a href="ndvi-trajectory.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exactextractr)</span></code></pre></div>
+</div>
+<div id="import-fires" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Import Fires<a href="ndvi-trajectory.html#import-fires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ndvi-trajectory.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
 <span id="cb2-2"><a href="ndvi-trajectory.html#cb2-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-3"><a href="ndvi-trajectory.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG: 4326&quot;</span>)</span>
@@ -330,8 +350,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-9"><a href="ndvi-trajectory.html#cb2-9" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
 <span id="cb2-10"><a href="ndvi-trajectory.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
-<div id="import-landsast" class="section level3 hasAnchor" number="9.1.2">
-<h3><span class="header-section-number">9.1.2</span> Import Landsast<a href="ndvi-trajectory.html#import-landsast" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prepare-data-for-bands-and-fire-names" class="section level3 hasAnchor" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Prepare Data for Bands and Fire Names<a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="bands" class="section level4 hasAnchor" number="9.1.3.1">
+<h4><span class="header-section-number">9.1.3.1</span> Bands<a href="ndvi-trajectory.html#bands" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ndvi-trajectory.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list band names and years</span></span>
 <span id="cb3-2"><a href="ndvi-trajectory.html#cb3-2" aria-hidden="true" tabindex="-1"></a>bands <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;pixel_qa&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;savi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
 <span id="cb3-3"><a href="ndvi-trajectory.html#cb3-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1988</span><span class="sc">:</span><span class="dv">2021</span>)</span>
@@ -342,125 +364,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-8"><a href="ndvi-trajectory.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">lift</span>(paste0))</span>
 <span id="cb3-9"><a href="ndvi-trajectory.html#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="ndvi-trajectory.html#cb3-10" aria-hidden="true" tabindex="-1"></a>bandlist <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,bandnames)</span></code></pre></div>
+</div>
+<div id="fire-names" class="section level4 hasAnchor" number="9.1.3.2">
+<h4><span class="header-section-number">9.1.3.2</span> Fire Names<a href="ndvi-trajectory.html#fire-names" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ndvi-trajectory.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of fire names</span></span>
 <span id="cb4-2"><a href="ndvi-trajectory.html#cb4-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(fires_export<span class="sc">$</span>Fire_ID)</span>
 <span id="cb4-3"><a href="ndvi-trajectory.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="ndvi-trajectory.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## subset for testing</span></span>
-<span id="cb4-5"><a href="ndvi-trajectory.html#cb4-5" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_44_1990&quot;</span>,<span class="st">&quot;Fire_45_1990&quot;</span>,<span class="st">&quot;Fire_46_1990&quot;</span>,<span class="st">&quot;Fire_47_1990&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_52_1991&quot;</span>,<span class="st">&quot;Fire_53_1991&quot;</span>)</span>
-<span id="cb4-6"><a href="ndvi-trajectory.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="ndvi-trajectory.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create function </span></span>
-<span id="cb4-8"><a href="ndvi-trajectory.html#cb4-8" aria-hidden="true" tabindex="-1"></a>extract_landsat <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
-<span id="cb4-9"><a href="ndvi-trajectory.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(paste0(&quot;Starting Fire &quot;,fire_name))</span></span>
-<span id="cb4-10"><a href="ndvi-trajectory.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-11"><a href="ndvi-trajectory.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get list of this fire&#39;s tif files</span></span>
-<span id="cb4-12"><a href="ndvi-trajectory.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_clipped&quot;</span>, <span class="at">pattern=</span>fire_name, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-13"><a href="ndvi-trajectory.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-14"><a href="ndvi-trajectory.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># larger rasters were exported as multiple files, need to be combined before importing</span></span>
-<span id="cb4-15"><a href="ndvi-trajectory.html#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(rast_list)<span class="sc">&gt;</span><span class="dv">1</span>) { </span>
-<span id="cb4-16"><a href="ndvi-trajectory.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(paste0(length(rast_list),&quot; rasters, merging...&quot;))</span></span>
-<span id="cb4-17"><a href="ndvi-trajectory.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    rast_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rast_list, rast)</span>
-<span id="cb4-18"><a href="ndvi-trajectory.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    rast_collection <span class="ot">&lt;-</span> <span class="fu">do.call</span>(merge,rast_all)</span>
-<span id="cb4-19"><a href="ndvi-trajectory.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { </span>
-<span id="cb4-20"><a href="ndvi-trajectory.html#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(&quot;Only one raster, adding directly to raster list&quot;)</span></span>
-<span id="cb4-21"><a href="ndvi-trajectory.html#cb4-21" aria-hidden="true" tabindex="-1"></a>    rast_collection <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list)  </span>
-<span id="cb4-22"><a href="ndvi-trajectory.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb4-23"><a href="ndvi-trajectory.html#cb4-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-24"><a href="ndvi-trajectory.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># name the bands</span></span>
-<span id="cb4-25"><a href="ndvi-trajectory.html#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(rast_collection) <span class="ot">&lt;-</span> bandlist</span>
-<span id="cb4-26"><a href="ndvi-trajectory.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-27"><a href="ndvi-trajectory.html#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># verify crs</span></span>
-<span id="cb4-28"><a href="ndvi-trajectory.html#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crs</span>(rast_collection) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG: 4326&quot;</span></span>
-<span id="cb4-29"><a href="ndvi-trajectory.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-30"><a href="ndvi-trajectory.html#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
-<span id="cb4-31"><a href="ndvi-trajectory.html#cb4-31" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb4-32"><a href="ndvi-trajectory.html#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-33"><a href="ndvi-trajectory.html#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="fu">crs</span>(rast_collection))</span>
-<span id="cb4-34"><a href="ndvi-trajectory.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-35"><a href="ndvi-trajectory.html#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the mean landsat values for each patch in this fire</span></span>
-<span id="cb4-36"><a href="ndvi-trajectory.html#cb4-36" aria-hidden="true" tabindex="-1"></a>  extracted_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(rast_collection,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-37"><a href="ndvi-trajectory.html#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>()</span>
-<span id="cb4-38"><a href="ndvi-trajectory.html#cb4-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-39"><a href="ndvi-trajectory.html#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
-<span id="cb4-40"><a href="ndvi-trajectory.html#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_data)</span>
-<span id="cb4-41"><a href="ndvi-trajectory.html#cb4-41" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ndvi-trajectory.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map extraction function across all fires</span></span>
-<span id="cb5-2"><a href="ndvi-trajectory.html#cb5-2" aria-hidden="true" tabindex="-1"></a>extracted_fires <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_names,extract_landsat)</span>
-<span id="cb5-3"><a href="ndvi-trajectory.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="ndvi-trajectory.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># combine dataset</span></span>
-<span id="cb5-5"><a href="ndvi-trajectory.html#cb5-5" aria-hidden="true" tabindex="-1"></a>landsat_dataset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, extracted_fires)</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ndvi-trajectory.html#cb6-1" aria-hidden="true" tabindex="-1"></a>ndvi_dataset <span class="ot">&lt;-</span> landsat_dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="ndvi-trajectory.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()),</span>
-<span id="cb6-3"><a href="ndvi-trajectory.html#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">prefire_yr =</span> year<span class="dv">-1</span>,</span>
-<span id="cb6-4"><a href="ndvi-trajectory.html#cb6-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_area_class =</span> <span class="fu">case_when</span>(ptch_r_ <span class="sc">&gt;=</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;giant&quot;</span>,</span>
-<span id="cb6-5"><a href="ndvi-trajectory.html#cb6-5" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">1000</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">500</span> <span class="sc">~</span> <span class="st">&quot;large&quot;</span>,</span>
-<span id="cb6-6"><a href="ndvi-trajectory.html#cb6-6" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">100</span> <span class="sc">~</span> <span class="st">&quot;big&quot;</span>,</span>
-<span id="cb6-7"><a href="ndvi-trajectory.html#cb6-7" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">100</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">&quot;medium&quot;</span>,</span>
-<span id="cb6-8"><a href="ndvi-trajectory.html#cb6-8" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;small&quot;</span>,</span>
-<span id="cb6-9"><a href="ndvi-trajectory.html#cb6-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;tiny&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-10"><a href="ndvi-trajectory.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fire_yr =</span> year,</span>
-<span id="cb6-11"><a href="ndvi-trajectory.html#cb6-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_area =</span> ptch_r_,</span>
-<span id="cb6-12"><a href="ndvi-trajectory.html#cb6-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_foresttype =</span> ptch_fr,</span>
-<span id="cb6-13"><a href="ndvi-trajectory.html#cb6-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">Event_ID =</span> Evnt_ID,</span>
-<span id="cb6-14"><a href="ndvi-trajectory.html#cb6-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Incid_Name =</span> Incd_Nm,</span>
-<span id="cb6-15"><a href="ndvi-trajectory.html#cb6-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecoregion =</span> ecoregn) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-16"><a href="ndvi-trajectory.html#cb6-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Event_ID, Incid_Name, Fire_ID, Patch_ID, prefire_yr, fire_yr, </span>
-<span id="cb6-17"><a href="ndvi-trajectory.html#cb6-17" aria-hidden="true" tabindex="-1"></a>                ecoregion, patch_foresttype, patch_area, patch_area_class, <span class="fu">contains</span>(<span class="st">&quot;ndvi&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-18"><a href="ndvi-trajectory.html#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(.,<span class="fu">contains</span>(<span class="st">&quot;ndvi&quot;</span>),<span class="at">names_to =</span> <span class="st">&quot;landsat_yr&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;ndvi&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-19"><a href="ndvi-trajectory.html#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">landsat_yr =</span> landsat_yr <span class="sc">%&gt;%</span>  stringr<span class="sc">::</span><span class="fu">str_remove</span>(<span class="st">&quot;mean.ndvi&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-20"><a href="ndvi-trajectory.html#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefire_ndvi =</span> <span class="fu">case_when</span>(prefire_yr <span class="sc">==</span> landsat_yr <span class="sc">~</span> ndvi)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-21"><a href="ndvi-trajectory.html#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Patch_ID) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-22"><a href="ndvi-trajectory.html#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefire_ndvi =</span> <span class="fu">mean</span>(prefire_ndvi, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-23"><a href="ndvi-trajectory.html#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb6-24"><a href="ndvi-trajectory.html#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_ndvi =</span> ndvi <span class="sc">-</span> prefire_ndvi)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ndvi-trajectory.html#cb7-1" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_type <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="ndvi-trajectory.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_foresttype,landsat_yr) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href="ndvi-trajectory.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi),</span>
-<span id="cb7-4"><a href="ndvi-trajectory.html#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a href="ndvi-trajectory.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+<span id="cb4-5"><a href="ndvi-trajectory.html#cb4-5" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_44_1990&quot;</span>,<span class="st">&quot;Fire_45_1990&quot;</span>,<span class="st">&quot;Fire_46_1990&quot;</span>,<span class="st">&quot;Fire_47_1990&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_52_1991&quot;</span>,<span class="st">&quot;Fire_53_1991&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="connect-landsat-and-high-severity-patches" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Connect Landsat and High-Severity Patches<a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="function-to-extract-landsat" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Function to Extract Landsat<a href="ndvi-trajectory.html#function-to-extract-landsat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ndvi-trajectory.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create function </span></span>
+<span id="cb5-2"><a href="ndvi-trajectory.html#cb5-2" aria-hidden="true" tabindex="-1"></a>extract_landsat <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
+<span id="cb5-3"><a href="ndvi-trajectory.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(paste0(&quot;Starting Fire &quot;,fire_name))</span></span>
+<span id="cb5-4"><a href="ndvi-trajectory.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-5"><a href="ndvi-trajectory.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get list of this fire&#39;s tif files</span></span>
+<span id="cb5-6"><a href="ndvi-trajectory.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_clipped&quot;</span>, <span class="at">pattern=</span>fire_name, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-7"><a href="ndvi-trajectory.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="ndvi-trajectory.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># larger rasters were exported from GEE as multiple files, need to be combined before importing</span></span>
+<span id="cb5-9"><a href="ndvi-trajectory.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(rast_list)<span class="sc">&gt;</span><span class="dv">1</span>) { </span>
+<span id="cb5-10"><a href="ndvi-trajectory.html#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(paste0(length(rast_list),&quot; rasters, merging...&quot;))</span></span>
+<span id="cb5-11"><a href="ndvi-trajectory.html#cb5-11" aria-hidden="true" tabindex="-1"></a>    rast_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rast_list, rast)</span>
+<span id="cb5-12"><a href="ndvi-trajectory.html#cb5-12" aria-hidden="true" tabindex="-1"></a>    rast_collection <span class="ot">&lt;-</span> <span class="fu">do.call</span>(merge,rast_all)</span>
+<span id="cb5-13"><a href="ndvi-trajectory.html#cb5-13" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { </span>
+<span id="cb5-14"><a href="ndvi-trajectory.html#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(&quot;Only one raster, adding directly to raster list&quot;)</span></span>
+<span id="cb5-15"><a href="ndvi-trajectory.html#cb5-15" aria-hidden="true" tabindex="-1"></a>    rast_collection <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list)  </span>
+<span id="cb5-16"><a href="ndvi-trajectory.html#cb5-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-17"><a href="ndvi-trajectory.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-18"><a href="ndvi-trajectory.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># name the bands</span></span>
+<span id="cb5-19"><a href="ndvi-trajectory.html#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(rast_collection) <span class="ot">&lt;-</span> bandlist</span>
+<span id="cb5-20"><a href="ndvi-trajectory.html#cb5-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-21"><a href="ndvi-trajectory.html#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># verify crs</span></span>
+<span id="cb5-22"><a href="ndvi-trajectory.html#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crs</span>(rast_collection) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG: 4326&quot;</span></span>
+<span id="cb5-23"><a href="ndvi-trajectory.html#cb5-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-24"><a href="ndvi-trajectory.html#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
+<span id="cb5-25"><a href="ndvi-trajectory.html#cb5-25" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb5-26"><a href="ndvi-trajectory.html#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-27"><a href="ndvi-trajectory.html#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="fu">crs</span>(rast_collection))</span>
+<span id="cb5-28"><a href="ndvi-trajectory.html#cb5-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-29"><a href="ndvi-trajectory.html#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the mean landsat values for each patch in this fire</span></span>
+<span id="cb5-30"><a href="ndvi-trajectory.html#cb5-30" aria-hidden="true" tabindex="-1"></a>  extracted_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(rast_collection,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-31"><a href="ndvi-trajectory.html#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>()</span>
+<span id="cb5-32"><a href="ndvi-trajectory.html#cb5-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-33"><a href="ndvi-trajectory.html#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
+<span id="cb5-34"><a href="ndvi-trajectory.html#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_data)</span>
+<span id="cb5-35"><a href="ndvi-trajectory.html#cb5-35" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="extract-landsat-data-for-each-patch" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Extract Landsat Data for Each Patch<a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ndvi-trajectory.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map extraction function across all fires</span></span>
+<span id="cb6-2"><a href="ndvi-trajectory.html#cb6-2" aria-hidden="true" tabindex="-1"></a>extracted_fires <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_names,extract_landsat)</span>
+<span id="cb6-3"><a href="ndvi-trajectory.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="ndvi-trajectory.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># combine dataset</span></span>
+<span id="cb6-5"><a href="ndvi-trajectory.html#cb6-5" aria-hidden="true" tabindex="-1"></a>landsat_dataset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, extracted_fires)</span></code></pre></div>
+</div>
+</div>
+<div id="prepare-dataset" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Prepare Dataset<a href="ndvi-trajectory.html#prepare-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="clean-data" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Clean Data<a href="ndvi-trajectory.html#clean-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ndvi-trajectory.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clean dataset, label, select only ndvi, calculate pre-fire ndvi &amp; differenced ndvi</span></span>
+<span id="cb7-2"><a href="ndvi-trajectory.html#cb7-2" aria-hidden="true" tabindex="-1"></a>ndvi_dataset <span class="ot">&lt;-</span> landsat_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="ndvi-trajectory.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()),</span>
+<span id="cb7-4"><a href="ndvi-trajectory.html#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">prefire_yr =</span> year<span class="dv">-1</span>,</span>
+<span id="cb7-5"><a href="ndvi-trajectory.html#cb7-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_area_class =</span> <span class="fu">case_when</span>(ptch_r_ <span class="sc">&gt;=</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;giant&quot;</span>,</span>
+<span id="cb7-6"><a href="ndvi-trajectory.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">1000</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">500</span> <span class="sc">~</span> <span class="st">&quot;large&quot;</span>,</span>
+<span id="cb7-7"><a href="ndvi-trajectory.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">100</span> <span class="sc">~</span> <span class="st">&quot;big&quot;</span>,</span>
+<span id="cb7-8"><a href="ndvi-trajectory.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">100</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">&quot;medium&quot;</span>,</span>
+<span id="cb7-9"><a href="ndvi-trajectory.html#cb7-9" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;small&quot;</span>,</span>
+<span id="cb7-10"><a href="ndvi-trajectory.html#cb7-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;tiny&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="ndvi-trajectory.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fire_yr =</span> year,</span>
+<span id="cb7-12"><a href="ndvi-trajectory.html#cb7-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_area =</span> ptch_r_,</span>
+<span id="cb7-13"><a href="ndvi-trajectory.html#cb7-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_foresttype =</span> ptch_fr,</span>
+<span id="cb7-14"><a href="ndvi-trajectory.html#cb7-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Event_ID =</span> Evnt_ID,</span>
+<span id="cb7-15"><a href="ndvi-trajectory.html#cb7-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">Incid_Name =</span> Incd_Nm,</span>
+<span id="cb7-16"><a href="ndvi-trajectory.html#cb7-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecoregion =</span> ecoregn) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-17"><a href="ndvi-trajectory.html#cb7-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Event_ID, Incid_Name, Fire_ID, Patch_ID, prefire_yr, fire_yr, </span>
+<span id="cb7-18"><a href="ndvi-trajectory.html#cb7-18" aria-hidden="true" tabindex="-1"></a>                ecoregion, patch_foresttype, patch_area, patch_area_class, <span class="fu">contains</span>(<span class="st">&quot;ndvi&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-19"><a href="ndvi-trajectory.html#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(.,<span class="fu">contains</span>(<span class="st">&quot;ndvi&quot;</span>),<span class="at">names_to =</span> <span class="st">&quot;landsat_yr&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;ndvi&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-20"><a href="ndvi-trajectory.html#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">landsat_yr =</span> landsat_yr <span class="sc">%&gt;%</span>  stringr<span class="sc">::</span><span class="fu">str_remove</span>(<span class="st">&quot;mean.ndvi&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-21"><a href="ndvi-trajectory.html#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefire_ndvi =</span> <span class="fu">case_when</span>(prefire_yr <span class="sc">==</span> landsat_yr <span class="sc">~</span> ndvi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-22"><a href="ndvi-trajectory.html#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Patch_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-23"><a href="ndvi-trajectory.html#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefire_ndvi =</span> <span class="fu">mean</span>(prefire_ndvi, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-24"><a href="ndvi-trajectory.html#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-25"><a href="ndvi-trajectory.html#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_ndvi =</span> ndvi <span class="sc">-</span> prefire_ndvi)</span></code></pre></div>
+</div>
+<div id="regroup-data" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Regroup Data<a href="ndvi-trajectory.html#regroup-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ndvi-trajectory.html#cb8-1" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_type <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="ndvi-trajectory.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_foresttype,landsat_yr) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="ndvi-trajectory.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi),</span>
+<span id="cb8-4"><a href="ndvi-trajectory.html#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="ndvi-trajectory.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;patch_foresttype&#39;. You can override using
 ## the `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ndvi-trajectory.html#cb9-1" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_size <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="ndvi-trajectory.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_area_class,landsat_yr) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="ndvi-trajectory.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi),</span>
-<span id="cb9-4"><a href="ndvi-trajectory.html#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-5"><a href="ndvi-trajectory.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ndvi-trajectory.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_size <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="ndvi-trajectory.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_area_class,landsat_yr) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="ndvi-trajectory.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi),</span>
+<span id="cb10-4"><a href="ndvi-trajectory.html#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="ndvi-trajectory.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;patch_area_class&#39;. You can override using
 ## the `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ndvi-trajectory.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
-<span id="cb11-2"><a href="ndvi-trajectory.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb11-3"><a href="ndvi-trajectory.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;auto&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb11-4"><a href="ndvi-trajectory.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+</div>
+</div>
+<div id="plot" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Plot<a href="ndvi-trajectory.html#plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ndvi-change-by-forest-type" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> NDVI Change by Forest Type<a href="ndvi-trajectory.html#ndvi-change-by-forest-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ndvi-trajectory.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
+<span id="cb12-2"><a href="ndvi-trajectory.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="ndvi-trajectory.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="ndvi-trajectory.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,<span class="at">y=</span><span class="st">&quot;NDVI&quot;</span>,<span class="at">title=</span> <span class="st">&quot;NDVI Change Overtime 30 Years Post-Fire&quot;</span>,<span class="at">color =</span> <span class="st">&quot;Patch Forest Type&quot;</span>) </span></code></pre></div>
 <p><img src="_main_files/figure-html/graphs!!%20type-1.png" width="672" /></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ndvi-trajectory.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
-<span id="cb13-2"><a href="ndvi-trajectory.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb13-3"><a href="ndvi-trajectory.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/graphs!!%20type-2.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ndvi-trajectory.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type<span class="sc">%&gt;%</span>  dplyr<span class="sc">::</span><span class="fu">filter</span> (patch_foresttype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>)),<span class="fu">aes</span>(landsat_yr ,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="ndvi-trajectory.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb14-3"><a href="ndvi-trajectory.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/graphs!!%20type-3.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ndvi-trajectory.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># by ndvi diff</span></span>
-<span id="cb15-2"><a href="ndvi-trajectory.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,delta_ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
-<span id="cb15-3"><a href="ndvi-trajectory.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb15-4"><a href="ndvi-trajectory.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;auto&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb15-5"><a href="ndvi-trajectory.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/graphs!!%20typediff-1.png" width="672" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ndvi-trajectory.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,delta_ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
-<span id="cb17-2"><a href="ndvi-trajectory.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb17-3"><a href="ndvi-trajectory.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/graphs!!%20typediff-2.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ndvi-trajectory.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_size,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_area_class,<span class="at">group=</span>patch_area_class))<span class="sc">+</span></span>
-<span id="cb18-2"><a href="ndvi-trajectory.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb18-3"><a href="ndvi-trajectory.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;auto&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb18-4"><a href="ndvi-trajectory.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ndvi-trajectory.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(ndvi_grouped_type,aes(landsat_yr,ndvi,color=patch_foresttype,group=patch_foresttype))+</span></span>
+<span id="cb13-2"><a href="ndvi-trajectory.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point() + </span></span>
+<span id="cb13-3"><a href="ndvi-trajectory.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_smooth(method=&quot;auto&quot;,se=FALSE) + </span></span>
+<span id="cb13-4"><a href="ndvi-trajectory.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))</span></span>
+<span id="cb13-5"><a href="ndvi-trajectory.html#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="ndvi-trajectory.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(ndvi_grouped_type%&gt;%  dplyr::filter (patch_foresttype %in% c(&quot;Douglas-Fir&quot;,&quot;Fir-Spruce&quot;,&quot;Lodegepole Pine&quot;)),aes(landsat_yr ,ndvi,color=patch_foresttype,group=patch_foresttype)) +</span></span>
+<span id="cb13-7"><a href="ndvi-trajectory.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_line(size=1) + </span></span>
+<span id="cb13-8"><a href="ndvi-trajectory.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))</span></span></code></pre></div>
+</div>
+<div id="ndvi-recovery-by-forest-type" class="section level3 hasAnchor" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> NDVI Recovery by Forest Type<a href="ndvi-trajectory.html#ndvi-recovery-by-forest-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ndvi-trajectory.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># by ndvi diff</span></span>
+<span id="cb14-2"><a href="ndvi-trajectory.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(ndvi_grouped_type,aes(landsat_yr,delta_ndvi,color=patch_foresttype,group=patch_foresttype))+</span></span>
+<span id="cb14-3"><a href="ndvi-trajectory.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point() + </span></span>
+<span id="cb14-4"><a href="ndvi-trajectory.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_smooth(method=&quot;auto&quot;,se=FALSE) + </span></span>
+<span id="cb14-5"><a href="ndvi-trajectory.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))</span></span>
+<span id="cb14-6"><a href="ndvi-trajectory.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="ndvi-trajectory.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,delta_ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
+<span id="cb14-8"><a href="ndvi-trajectory.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="ndvi-trajectory.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb14-10"><a href="ndvi-trajectory.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,<span class="at">y=</span><span class="st">&quot;Change in NDVI from Pre-Fire&quot;</span>,<span class="at">title=</span> <span class="st">&quot;NDVI Difference from Pre-Fire 30 Years Post-Fire&quot;</span>,<span class="at">color =</span> <span class="st">&quot;Patch Forest Type&quot;</span>) </span></code></pre></div>
+<p><img src="_main_files/figure-html/graphs!!%20typediff-1.png" width="672" />
+### NDVI Chaneg by Patch Area</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ndvi-trajectory.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(ndvi_grouped_size,aes(landsat_yr,ndvi,color=patch_area_class,group=patch_area_class))+</span></span>
+<span id="cb15-2"><a href="ndvi-trajectory.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point() + </span></span>
+<span id="cb15-3"><a href="ndvi-trajectory.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_smooth(method=&quot;auto&quot;,se=FALSE) + </span></span>
+<span id="cb15-4"><a href="ndvi-trajectory.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))</span></span>
+<span id="cb15-5"><a href="ndvi-trajectory.html#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="ndvi-trajectory.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_size,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_area_class,<span class="at">group=</span>patch_area_class))<span class="sc">+</span></span>
+<span id="cb15-7"><a href="ndvi-trajectory.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="ndvi-trajectory.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb15-9"><a href="ndvi-trajectory.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,<span class="at">y=</span><span class="st">&quot;NDVI&quot;</span>,<span class="at">title=</span> <span class="st">&quot;NDVI Change Overtime 30 Years Post-Fire&quot;</span>,<span class="at">color =</span> <span class="st">&quot;Patch Size&quot;</span>) </span></code></pre></div>
 <p><img src="_main_files/figure-html/graphs!!%20size-1.png" width="672" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ndvi-trajectory.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_size,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_area_class,<span class="at">group=</span>patch_area_class))<span class="sc">+</span></span>
-<span id="cb20-2"><a href="ndvi-trajectory.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb20-3"><a href="ndvi-trajectory.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/graphs!!%20size-2.png" width="672" /></p>
 
 </div>
 </div>

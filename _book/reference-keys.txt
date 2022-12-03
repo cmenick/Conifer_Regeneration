@@ -104,3 +104,16 @@ get-cleaned-band-name-strings
 export-3
 import-snow-cover-landsat-for-2020-2021-winter
 export-data-3
+connect-landsat-and-high-severity-patches
+fire-names
+function-to-extract-landsat
+extract-landsat-data-for-each-patch
+clean-data
+regroup-data
+plot
+libraries-5
+prepare-data-for-bands-and-fire-names
+bands
+prepare-dataset
+ndvi-change-by-forest-type
+ndvi-recovery-by-forest-type
