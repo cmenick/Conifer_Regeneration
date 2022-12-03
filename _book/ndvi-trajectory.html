@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 9 NDVI Trajectory | Post-Fire Conifer Regeneration</title>
+  <meta name="description" content="Part 9 NDVI Trajectory | Post-Fire Conifer Regeneration" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 9 NDVI Trajectory | Post-Fire Conifer Regeneration" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 9 NDVI Trajectory | Post-Fire Conifer Regeneration" />
+  
+  
+  
+
+<meta name="author" content="Casey Menick" />
+
+
+<meta name="date" content="2022-12-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="model-development.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Northern Rockies Conifer Regeneration</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="fire-selection.html"><a href="fire-selection.html"><i class="fa fa-check"></i><b>2</b> Fire Selection</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="fire-selection.html"><a href="fire-selection.html#set-up"><i class="fa fa-check"></i><b>2.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="fire-selection.html"><a href="fire-selection.html#libraries"><i class="fa fa-check"></i><b>2.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="2.1.2" data-path="fire-selection.html"><a href="fire-selection.html#usda-national-forest-type-group-dataset"><i class="fa fa-check"></i><b>2.1.2</b> USDA National Forest Type Group Dataset</a></li>
+<li class="chapter" data-level="2.1.3" data-path="fire-selection.html"><a href="fire-selection.html#epa-level-3-ecoregions"><i class="fa fa-check"></i><b>2.1.3</b> EPA level-3 Ecoregions</a></li>
+<li class="chapter" data-level="2.1.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping"><i class="fa fa-check"></i><b>2.1.4</b> Mapping</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="fire-selection.html"><a href="fire-selection.html#define-fire-parameters"><i class="fa fa-check"></i><b>2.2</b> Define Fire Parameters</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="fire-selection.html"><a href="fire-selection.html#monitoring-trends-in-burn-severity-mtbs-dataset"><i class="fa fa-check"></i><b>2.2.1</b> Monitoring Trends in Burn Severity (MTBS) Dataset</a></li>
+<li class="chapter" data-level="2.2.2" data-path="fire-selection.html"><a href="fire-selection.html#group-adjacent-fires"><i class="fa fa-check"></i><b>2.2.2</b> Group Adjacent Fires</a></li>
+<li class="chapter" data-level="2.2.3" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-ecoregion-and-forest-type"><i class="fa fa-check"></i><b>2.2.3</b> Select Fires by Ecoregion and Forest Type</a></li>
+<li class="chapter" data-level="2.2.4" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-burn-severity"><i class="fa fa-check"></i><b>2.2.4</b> Select Fires by Burn Severity</a></li>
+<li class="chapter" data-level="2.2.5" data-path="fire-selection.html"><a href="fire-selection.html#clean-up-dataset"><i class="fa fa-check"></i><b>2.2.5</b> Clean Up Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Final Fire Dataset</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#dataset-overview"><i class="fa fa-check"></i><b>2.3.1</b> Dataset Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping-1"><i class="fa fa-check"></i><b>2.4</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.5.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.5.2</b> Export</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#set-up-1"><i class="fa fa-check"></i><b>3.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-fire-boundaries"><i class="fa fa-check"></i><b>3.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="3.1.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#clean-fire-boundaries"><i class="fa fa-check"></i><b>3.1.2</b> Clean Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#imagery"><i class="fa fa-check"></i><b>3.2</b> Imagery</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-landsat-5"><i class="fa fa-check"></i><b>3.2.1</b> Import Landsat 5</a></li>
+<li class="chapter" data-level="3.2.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#prepare-landsat-data"><i class="fa fa-check"></i><b>3.2.2</b> Prepare Landsat Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#burn-indices"><i class="fa fa-check"></i><b>3.3</b> Burn Indices</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-rdnbr"><i class="fa fa-check"></i><b>3.3.1</b> Calculate RdNBR</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-1"><i class="fa fa-check"></i><b>3.4</b> Export</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-each-fire-rdnbr-to-drive"><i class="fa fa-check"></i><b>3.4.1</b> Export Each Fire RdNBR to Drive</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="patch-formation.html"><a href="patch-formation.html"><i class="fa fa-check"></i><b>4</b> Patch Formation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="patch-formation.html"><a href="patch-formation.html#set-up-2"><i class="fa fa-check"></i><b>4.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="patch-formation.html"><a href="patch-formation.html#libraries-1"><i class="fa fa-check"></i><b>4.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="4.1.2" data-path="patch-formation.html"><a href="patch-formation.html#import-rdnbr-rasters"><i class="fa fa-check"></i><b>4.1.2</b> Import RdNBR Rasters</a></li>
+<li class="chapter" data-level="4.1.3" data-path="patch-formation.html"><a href="patch-formation.html#import-fire-boundaries-1"><i class="fa fa-check"></i><b>4.1.3</b> Import Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="patch-formation.html"><a href="patch-formation.html#create-high-severity-patches"><i class="fa fa-check"></i><b>4.2</b> Create High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-2"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>5.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>5.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>5.2</b> Create Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a></li>
+<li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
+<li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
+<li class="chapter" data-level="6.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-data-3"><i class="fa fa-check"></i><b>6.4</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow Cover Imagery</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#set-up-5"><i class="fa fa-check"></i><b>7.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-snow-cover-landsat-collection"><i class="fa fa-check"></i><b>7.2</b> Create Snow-Cover Landsat Collection</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images"><i class="fa fa-check"></i><b>7.2.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.2.2</b> Map Functions Across Image Collection</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-annual-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Annual Image Composites</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-create-annual-image-composites"><i class="fa fa-check"></i><b>7.3.1</b> Functions to Create Annual Image Composites</a></li>
+<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#apply-functions-to-each-image"><i class="fa fa-check"></i><b>7.3.2</b> Apply Functions to Each Image</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#prepare-and-export-images"><i class="fa fa-check"></i><b>7.4</b> Prepare and Export Images</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images-1"><i class="fa fa-check"></i><b>7.4.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-2"><i class="fa fa-check"></i><b>7.4.2</b> Export</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="model-development.html"><a href="model-development.html"><i class="fa fa-check"></i><b>8</b> Model Development</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat for 2020-2021 Winter</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.4" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.4</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#random-forest"><i class="fa fa-check"></i><b>8.5</b> Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.1</b> Import Fires</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-landsast"><i class="fa fa-check"></i><b>9.1.2</b> Import Landsast</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Post-Fire Conifer Regeneration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ndvi-trajectory" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Part 9</span> NDVI Trajectory<a href="ndvi-trajectory.html#ndvi-trajectory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="set-up-7" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Set Up<a href="ndvi-trajectory.html#set-up-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ndvi-trajectory.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="ndvi-trajectory.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="ndvi-trajectory.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a href="ndvi-trajectory.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-5"><a href="ndvi-trajectory.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-6"><a href="ndvi-trajectory.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb1-7"><a href="ndvi-trajectory.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exactextractr)</span></code></pre></div>
+<div id="import-fires" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Import Fires<a href="ndvi-trajectory.html#import-fires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ndvi-trajectory.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
+<span id="cb2-2"><a href="ndvi-trajectory.html#cb2-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="ndvi-trajectory.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG: 4326&quot;</span>)</span>
+<span id="cb2-4"><a href="ndvi-trajectory.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="ndvi-trajectory.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set crs</span></span>
+<span id="cb2-6"><a href="ndvi-trajectory.html#cb2-6" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
+<span id="cb2-7"><a href="ndvi-trajectory.html#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="ndvi-trajectory.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># import fire boundaries</span></span>
+<span id="cb2-9"><a href="ndvi-trajectory.html#cb2-9" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb2-10"><a href="ndvi-trajectory.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span></code></pre></div>
+</div>
+<div id="import-landsast" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Import Landsast<a href="ndvi-trajectory.html#import-landsast" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ndvi-trajectory.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list band names and years</span></span>
+<span id="cb3-2"><a href="ndvi-trajectory.html#cb3-2" aria-hidden="true" tabindex="-1"></a>bands <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;pixel_qa&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;savi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
+<span id="cb3-3"><a href="ndvi-trajectory.html#cb3-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1988</span><span class="sc">:</span><span class="dv">2021</span>)</span>
+<span id="cb3-4"><a href="ndvi-trajectory.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="ndvi-trajectory.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of all combinations of bands, in the appropriate order</span></span>
+<span id="cb3-6"><a href="ndvi-trajectory.html#cb3-6" aria-hidden="true" tabindex="-1"></a>bandnames <span class="ot">&lt;-</span> <span class="fu">list</span>(bands,years) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="ndvi-trajectory.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cross</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="ndvi-trajectory.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">lift</span>(paste0))</span>
+<span id="cb3-9"><a href="ndvi-trajectory.html#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="ndvi-trajectory.html#cb3-10" aria-hidden="true" tabindex="-1"></a>bandlist <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,bandnames)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ndvi-trajectory.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of fire names</span></span>
+<span id="cb4-2"><a href="ndvi-trajectory.html#cb4-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(fires_export<span class="sc">$</span>Fire_ID)</span>
+<span id="cb4-3"><a href="ndvi-trajectory.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="ndvi-trajectory.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## subset for testing</span></span>
+<span id="cb4-5"><a href="ndvi-trajectory.html#cb4-5" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_44_1990&quot;</span>,<span class="st">&quot;Fire_45_1990&quot;</span>,<span class="st">&quot;Fire_46_1990&quot;</span>,<span class="st">&quot;Fire_47_1990&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_52_1991&quot;</span>,<span class="st">&quot;Fire_53_1991&quot;</span>)</span>
+<span id="cb4-6"><a href="ndvi-trajectory.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="ndvi-trajectory.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create function </span></span>
+<span id="cb4-8"><a href="ndvi-trajectory.html#cb4-8" aria-hidden="true" tabindex="-1"></a>extract_landsat <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
+<span id="cb4-9"><a href="ndvi-trajectory.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(paste0(&quot;Starting Fire &quot;,fire_name))</span></span>
+<span id="cb4-10"><a href="ndvi-trajectory.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-11"><a href="ndvi-trajectory.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get list of this fire&#39;s tif files</span></span>
+<span id="cb4-12"><a href="ndvi-trajectory.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_clipped&quot;</span>, <span class="at">pattern=</span>fire_name, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-13"><a href="ndvi-trajectory.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-14"><a href="ndvi-trajectory.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># larger rasters were exported as multiple files, need to be combined before importing</span></span>
+<span id="cb4-15"><a href="ndvi-trajectory.html#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(rast_list)<span class="sc">&gt;</span><span class="dv">1</span>) { </span>
+<span id="cb4-16"><a href="ndvi-trajectory.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(paste0(length(rast_list),&quot; rasters, merging...&quot;))</span></span>
+<span id="cb4-17"><a href="ndvi-trajectory.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    rast_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rast_list, rast)</span>
+<span id="cb4-18"><a href="ndvi-trajectory.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    rast_collection <span class="ot">&lt;-</span> <span class="fu">do.call</span>(merge,rast_all)</span>
+<span id="cb4-19"><a href="ndvi-trajectory.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { </span>
+<span id="cb4-20"><a href="ndvi-trajectory.html#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(&quot;Only one raster, adding directly to raster list&quot;)</span></span>
+<span id="cb4-21"><a href="ndvi-trajectory.html#cb4-21" aria-hidden="true" tabindex="-1"></a>    rast_collection <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list)  </span>
+<span id="cb4-22"><a href="ndvi-trajectory.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-23"><a href="ndvi-trajectory.html#cb4-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-24"><a href="ndvi-trajectory.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># name the bands</span></span>
+<span id="cb4-25"><a href="ndvi-trajectory.html#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(rast_collection) <span class="ot">&lt;-</span> bandlist</span>
+<span id="cb4-26"><a href="ndvi-trajectory.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-27"><a href="ndvi-trajectory.html#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># verify crs</span></span>
+<span id="cb4-28"><a href="ndvi-trajectory.html#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crs</span>(rast_collection) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG: 4326&quot;</span></span>
+<span id="cb4-29"><a href="ndvi-trajectory.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-30"><a href="ndvi-trajectory.html#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
+<span id="cb4-31"><a href="ndvi-trajectory.html#cb4-31" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb4-32"><a href="ndvi-trajectory.html#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-33"><a href="ndvi-trajectory.html#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="fu">crs</span>(rast_collection))</span>
+<span id="cb4-34"><a href="ndvi-trajectory.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-35"><a href="ndvi-trajectory.html#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the mean landsat values for each patch in this fire</span></span>
+<span id="cb4-36"><a href="ndvi-trajectory.html#cb4-36" aria-hidden="true" tabindex="-1"></a>  extracted_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(rast_collection,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-37"><a href="ndvi-trajectory.html#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>()</span>
+<span id="cb4-38"><a href="ndvi-trajectory.html#cb4-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-39"><a href="ndvi-trajectory.html#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
+<span id="cb4-40"><a href="ndvi-trajectory.html#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_data)</span>
+<span id="cb4-41"><a href="ndvi-trajectory.html#cb4-41" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ndvi-trajectory.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map extraction function across all fires</span></span>
+<span id="cb5-2"><a href="ndvi-trajectory.html#cb5-2" aria-hidden="true" tabindex="-1"></a>extracted_fires <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_names,extract_landsat)</span>
+<span id="cb5-3"><a href="ndvi-trajectory.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="ndvi-trajectory.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># combine dataset</span></span>
+<span id="cb5-5"><a href="ndvi-trajectory.html#cb5-5" aria-hidden="true" tabindex="-1"></a>landsat_dataset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, extracted_fires)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ndvi-trajectory.html#cb6-1" aria-hidden="true" tabindex="-1"></a>ndvi_dataset <span class="ot">&lt;-</span> landsat_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="ndvi-trajectory.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()),</span>
+<span id="cb6-3"><a href="ndvi-trajectory.html#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">prefire_yr =</span> year<span class="dv">-1</span>,</span>
+<span id="cb6-4"><a href="ndvi-trajectory.html#cb6-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_area_class =</span> <span class="fu">case_when</span>(ptch_r_ <span class="sc">&gt;=</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;giant&quot;</span>,</span>
+<span id="cb6-5"><a href="ndvi-trajectory.html#cb6-5" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">1000</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">500</span> <span class="sc">~</span> <span class="st">&quot;large&quot;</span>,</span>
+<span id="cb6-6"><a href="ndvi-trajectory.html#cb6-6" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">100</span> <span class="sc">~</span> <span class="st">&quot;big&quot;</span>,</span>
+<span id="cb6-7"><a href="ndvi-trajectory.html#cb6-7" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">100</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">&quot;medium&quot;</span>,</span>
+<span id="cb6-8"><a href="ndvi-trajectory.html#cb6-8" aria-hidden="true" tabindex="-1"></a>                                 ptch_r_ <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> ptch_r_ <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;small&quot;</span>,</span>
+<span id="cb6-9"><a href="ndvi-trajectory.html#cb6-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;tiny&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-10"><a href="ndvi-trajectory.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fire_yr =</span> year,</span>
+<span id="cb6-11"><a href="ndvi-trajectory.html#cb6-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_area =</span> ptch_r_,</span>
+<span id="cb6-12"><a href="ndvi-trajectory.html#cb6-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_foresttype =</span> ptch_fr,</span>
+<span id="cb6-13"><a href="ndvi-trajectory.html#cb6-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">Event_ID =</span> Evnt_ID,</span>
+<span id="cb6-14"><a href="ndvi-trajectory.html#cb6-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Incid_Name =</span> Incd_Nm,</span>
+<span id="cb6-15"><a href="ndvi-trajectory.html#cb6-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecoregion =</span> ecoregn) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-16"><a href="ndvi-trajectory.html#cb6-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Event_ID, Incid_Name, Fire_ID, Patch_ID, prefire_yr, fire_yr, </span>
+<span id="cb6-17"><a href="ndvi-trajectory.html#cb6-17" aria-hidden="true" tabindex="-1"></a>                ecoregion, patch_foresttype, patch_area, patch_area_class, <span class="fu">contains</span>(<span class="st">&quot;ndvi&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-18"><a href="ndvi-trajectory.html#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(.,<span class="fu">contains</span>(<span class="st">&quot;ndvi&quot;</span>),<span class="at">names_to =</span> <span class="st">&quot;landsat_yr&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;ndvi&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-19"><a href="ndvi-trajectory.html#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">landsat_yr =</span> landsat_yr <span class="sc">%&gt;%</span>  stringr<span class="sc">::</span><span class="fu">str_remove</span>(<span class="st">&quot;mean.ndvi&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-20"><a href="ndvi-trajectory.html#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefire_ndvi =</span> <span class="fu">case_when</span>(prefire_yr <span class="sc">==</span> landsat_yr <span class="sc">~</span> ndvi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-21"><a href="ndvi-trajectory.html#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Patch_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-22"><a href="ndvi-trajectory.html#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefire_ndvi =</span> <span class="fu">mean</span>(prefire_ndvi, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-23"><a href="ndvi-trajectory.html#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-24"><a href="ndvi-trajectory.html#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_ndvi =</span> ndvi <span class="sc">-</span> prefire_ndvi)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ndvi-trajectory.html#cb7-1" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_type <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="ndvi-trajectory.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_foresttype,landsat_yr) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="ndvi-trajectory.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi),</span>
+<span id="cb7-4"><a href="ndvi-trajectory.html#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="ndvi-trajectory.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;patch_foresttype&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ndvi-trajectory.html#cb9-1" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_size <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="ndvi-trajectory.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_area_class,landsat_yr) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="ndvi-trajectory.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi),</span>
+<span id="cb9-4"><a href="ndvi-trajectory.html#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="ndvi-trajectory.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;patch_area_class&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ndvi-trajectory.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
+<span id="cb11-2"><a href="ndvi-trajectory.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="ndvi-trajectory.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;auto&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="ndvi-trajectory.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/graphs!!%20type-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ndvi-trajectory.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="ndvi-trajectory.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="ndvi-trajectory.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/graphs!!%20type-2.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ndvi-trajectory.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type<span class="sc">%&gt;%</span>  dplyr<span class="sc">::</span><span class="fu">filter</span> (patch_foresttype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>)),<span class="fu">aes</span>(landsat_yr ,ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="ndvi-trajectory.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="ndvi-trajectory.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/graphs!!%20type-3.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ndvi-trajectory.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># by ndvi diff</span></span>
+<span id="cb15-2"><a href="ndvi-trajectory.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,delta_ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
+<span id="cb15-3"><a href="ndvi-trajectory.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="ndvi-trajectory.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;auto&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="ndvi-trajectory.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/graphs!!%20typediff-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ndvi-trajectory.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_type,<span class="fu">aes</span>(landsat_yr,delta_ndvi,<span class="at">color=</span>patch_foresttype,<span class="at">group=</span>patch_foresttype))<span class="sc">+</span></span>
+<span id="cb17-2"><a href="ndvi-trajectory.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="ndvi-trajectory.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/graphs!!%20typediff-2.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ndvi-trajectory.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_size,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_area_class,<span class="at">group=</span>patch_area_class))<span class="sc">+</span></span>
+<span id="cb18-2"><a href="ndvi-trajectory.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="ndvi-trajectory.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;auto&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="ndvi-trajectory.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/graphs!!%20size-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ndvi-trajectory.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ndvi_grouped_size,<span class="fu">aes</span>(landsat_yr,ndvi,<span class="at">color=</span>patch_area_class,<span class="at">group=</span>patch_area_class))<span class="sc">+</span></span>
+<span id="cb20-2"><a href="ndvi-trajectory.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="ndvi-trajectory.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/graphs!!%20size-2.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="model-development.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08_NDVItrajectory.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

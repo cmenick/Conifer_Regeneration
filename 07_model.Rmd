@@ -16,11 +16,11 @@ library(randomForest)
 library(raster)
 ```
 
-### Import Snow-Cover Landsat
+### Import Snow-Cover Landsat for 2020-2021 Winter
 
 ```{r landsat import}
 # bring in snow-on landsat imagery tiles, merge into collection
-rast_list <- list.files(path = "data/landsat/landsat_2019_2022", pattern='.tif', all.files=TRUE, full.names=TRUE)
+rast_list <- list.files(path = "data/landsat/landsat_2021", pattern='.tif', all.files=TRUE, full.names=TRUE)
 rast_all <- lapply(rast_list, rast)
 rast_collection <- sprc(rast_all)
 
@@ -50,14 +50,20 @@ points <- st_read("data/points/points_export.shp") %>%
 # extract landsat values to each training point
 extracted_df <- list()
 for(i in 1:length(rast_all)){
-  print(i)
   extracted_points <- st_as_sf(terra::extract(rast_collection[i], points,bind = TRUE))
   extracted_df[[i]] <- extracted_points 
 }
 training_dataset <- do.call(rbind,extracted_df) %>% 
   mutate(absence = as.factor(case_when(class == "absence" ~ "absence",
                                        TRUE ~ "presence")),
-         class = fct_relevel(as.factor(class),c("absence","presencetrace","presence1to10"))) %>% 
+         class = case_when(class == "presence20to40" ~ "20-60%",
+                           class == "presence40to60" ~ "20-60%",
+                           class == "presence10to20" ~ "10-20%",
+                           class == "presence1to10" ~ "1-10%",
+                           class == "presencetrace" ~ "<1%",
+                           class == "presence60plus" ~ ">60%",
+                           TRUE ~ "absence"),
+         class = fct_relevel(as.factor(class),c("absence","<1%","1-10%","10-20%","20-60%",">60%"))) %>% 
   rename(f_type = ptch_fr,
          area_ha = ptch_r_) %>% 
   st_drop_geometry() %>% 
@@ -76,104 +82,79 @@ pres_abs_type <- training_dataset %>%
 pres_abs_type
 ```
 
-### Training Data by Sampling Quadrant
-
-```{r data by quad}
-pres_abs_quad <- training_dataset %>% 
-  group_by(quad,absence) %>% 
-  summarize(n=n()) %>% 
-  mutate(percent= 100*n/sum(n)) %>% 
-  filter(absence=="presence")
-pres_abs_quad
-```
-
 ## Examine Data 
 
 ### Plot NDVI by Density Class
 
-```{r ggplotting}
+```{r ggplotting, message=FALSE, warning=FALSE}
 ggplot(training_dataset,aes(class,ndvi)) +
-  geom_boxplot()
-ggplot(training_dataset %>% filter(class %in% c("absence","presencetrace")),aes(class,ndvi)) +
+  geom_boxplot() + 
+  labs(title = "NDVI by Percent Conifer Cover Class: All Classes",x = "Visually Estimated Conifer Percent Cover",y = "NDVI")
+
+ggplot(training_dataset %>% filter(class %in% c("absence","<1%")),aes(class,ndvi)) +
   geom_boxplot()+
-  ylim(-.1,.1)
+  ylim(-.1,.1) + 
+  labs(title = "NDVI by Percent Conifer Cover Class: Trace Conifer Class vs. Absence",x = "Visually Estimated Conifer Percent Cover",y = "NDVI")
+
 ggplot(training_dataset,aes(absence,ndvi)) +
-  geom_boxplot()
-```
-
-### Examine Variable Correlation
-
-```{r pairs plots}
-pairs(training_dataset %>% dplyr::select("class","ndvi","savi","ndsi","ndfsi","nbr2"))
-pairs(training_dataset %>% dplyr::select("ndvi","ndfsi"),
-      pch = c(16),
-      col = c("red","dark green")[training_dataset$absence])
-```
-
-```{r cor chart}
-cor(training_dataset %>% drop_na() %>% dplyr::select(ndvi, evi, savi, ndsi,ndfsi, ndwi, nbr, nbr2)) 
+  geom_boxplot() + 
+  labs(title = "NDVI by Percent Conifer Cover Class: Presence vs. Absence ",x = "Visually Estimated Conifer Percent Cover",y = "NDVI")
 ```
 
 ## Model
 
 ### Logistic
 
-```{r model prep}
-training_dataset <- training_dataset %>% 
-  mutate(binom=case_when(absence=="absence"~0,
-                         TRUE ~1),
-         binom=as.factor(binom)) %>% 
-  drop_na()
+```{r log model vif}
+# full model 
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+
+# remove
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+
+# remove
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+
+# remove
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+
+# remove
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+
+# remove
+lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
 ```
 
 
-```{r log model vif}
-# full model 
-lm_conifer <- glm(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + savi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove savi 
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove red 
-lm_conifer <- glm(absence ~ green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove swir1
-lm_conifer <- glm(absence ~ green + blue + nir + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove green
-lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndfsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove ndfsi
-lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove nir
-lm_conifer <- glm(absence ~ blue + swir2 + ndsi + ndvi + evi +nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
-# remove ndsi
-lm_conifer <- glm(absence ~ blue + swir2 + ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
+```{r log model}
 # final model
 summary(lm_conifer)
 anova(lm_conifer)
 ```
 
-```{r log model pred}
-image_subset <- mask(rast_collection[1],fires_export)
-rast_predicted <- terra::predict(image_subset,lm_conifer, type="response", se.fit=TRUE)
-rast_predicted[rast_predicted < .5] <- 0
-rast_predicted[rast_predicted >= .5] <- 1
-mapview(raster(rast_predicted))
-```
-
-
 ## Random Forest
 
-```{r rf model pred}
-rf_conifer <- randomForest(absence ~ red + green + blue + nir + swir1 + swir2 + ndvi + savi + evi + ndsi+ndfsi+ nbr + nbr2 + ndwi, data= training_dataset)
-randomForest::importance(rf_conifer)
-summary(rf_conifer)
-rast_predicted <- terra::predict(image_subset,rf_conifer, type="response", se.fit=TRUE)
-mapview(raster(rast_predicted))
+```{r rf model}
+rf_conifer <- randomForest(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi,
+                           data= training_dataset %>% drop_na())
 ```
 
+```{r rf model importance}
+randomForest::importance(rf_conifer)
+```
 
+```{r rf model summary}
+summary(rf_conifer)
+```

@@ -54,7 +54,7 @@ points_cleaned <- points_joined %>%
   st_transform(crs=crs)
 ```
 
-## Export
+## Export Data
 
 ```{r export points, message=FALSE, warning=FALSE}
 # st_write(points_cleaned, "data/points/", "points_export.shp",driver = 'ESRI Shapefile')

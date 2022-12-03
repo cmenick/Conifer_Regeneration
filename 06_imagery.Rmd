@@ -4,14 +4,16 @@
 
 ### Import Fire Boundaries
 ```{js import fire boundaries}
-// Import fire polygons
+// import fire polygons
 var fires_export = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export");
+
+var fires_export_buffer1500 = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export_buffer1500");
 ```
 
 ### Import Landsat Imagery
 
 ```{js import landsat}
-// Import Landsat 4,5,7, rename bands
+// import Landsat 4,5,7, rename bands
 var ls7 = ee.ImageCollection('LANDSAT/LE07/C01/T1_SR'),
     ls5 = ee.ImageCollection('LANDSAT/LT05/C01/T1_SR'),
     ls4 = ee.ImageCollection('LANDSAT/LT04/C01/T1_SR');
@@ -21,22 +23,24 @@ var ls4_7 = ee.ImageCollection(ls7.merge(ls5).merge(ls4)).map(function(image) {
     return image.select(bands).rename(new_bands);
     });
 
-// Import Landsat 8, rename bands
+// import Landsat 8, rename bands
 var ls8 = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').map(function(image) {
     var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'pixel_qa']; 
     var new_bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'pixel_qa'];
     return image.select(bands).rename(new_bands);
     });
 
-// Merge Landsat 4-7 and 8 with renamed bands
+// merge Landsat 4-7 and 8 with renamed bands
 var ls4_8 = ee.ImageCollection(ls8.merge(ls4_7));
 ```
 
-## Functions
+## Create Snow-Cover Landsat Collection
 
-### Get Spectral Indices
+### Functions to Prepare Images
+
+#### Get Spectral Indices
 ```{js indices}
-// Function: get spectral indices
+// function: get spectral indices
 var calc_indices = function(image) {
   return image
     .addBands(image.normalizedDifference(['nir', 'red']).double().rename('ndvi'))
@@ -45,16 +49,14 @@ var calc_indices = function(image) {
     .addBands(image.normalizedDifference(['swir1','swir2']).double().rename('nbr2'))
     .addBands(image.normalizedDifference(['green', 'swir1']).double().rename('ndsi'))
     .addBands(image.normalizedDifference(['nir','swir1']).double().rename('ndfsi'))
-    .addBands(image.expression('((NIR - R) / (NIR + R + 0.5)) * (1.5)'
-       ,{'NIR':image.select('nir'),'R':image.select('red')}).rename('savi'))
     .addBands(image.expression('2.5 * ((NIR - R) / (NIR + 6 * R - 7.5 * B + 1))'
        ,{'NIR':image.select('nir'),'R':image.select('red'),'B':image.select('blue')}).rename('evi'))};
 ```
 
-### Get Clear Images
+#### Get Clear Images
 
 ```{js qa}
-// Function: QA
+// function: pixel QA for clouds and bodies of water
 var qa_mask = function(lsImg){
   var quality =lsImg.select(['pixel_qa']);
   var clear = quality.bitwiseAnd(8).eq(0) // cloud shadow
@@ -65,10 +67,10 @@ var qa_mask = function(lsImg){
 };
 ```
 
-### Get snow-Covered Pixels
+#### Get snow-Covered Pixels
 
 ```{js snow mask}
-// Function: snow masking
+// function: mask pixels without snow based on NDSI and NDFSI
 var ndfsi_mask = function(image){
   var ndfsi_snow = image.select('ndfsi').gt(0.4);
   return image.updateMask(ndfsi_snow);
@@ -79,63 +81,147 @@ var ndsi_mask = function(image){
 };
 ```
 
-## Create Image Composites
 
 ### Map Functions Across Image Collection
 
 ```{js map and filter}
-// Map functions to create final Landsat collection
+// map functions to create final Landsat collection
 var ls_indices = ls4_8.map(calc_indices)
+                      .map(qa_mask)
                       .map(ndfsi_mask)
-                      .map(ndsi_mask)
-                      .map(qa_mask);
+                      .map(ndsi_mask);
 ```
 
-### Create 3-year Landsat Composites
+## Create Annual Image Composites
 
-```{js composites}
-// create 3-year snow-cover image composites over fire areas            
+### Functions to Create Annual Image Composites
 
-for (var j = 1986; j < 1990; j++){ 
+#### Get Yearly Winter Image Composite
+
+```{js}
+// function: generates landsat composites for a given year's winter
+var get_composites = function(year) {
   
-  // list years within imagery window
-  var years = [j-1,j,j+1,j+2];
+  // format years
+  var year_start = ee.Number(year).format().slice(0,4);
   
-  print("landsat_" + years[0] + "_"+ years[3]);
-
-  var start = ee.Date(years[0] + '-11-01');
-  var end = ee.Date(years[3] + '-05-01');
+  var year2 = ee.Number(year).add(1)
+  var year_end = ee.Number(year2).format().slice(0,4);
   
-  print(start);
-  print(end);
+  var month_start = '-11-01';
+  var month_end = '-05-01'
+  
+  var start_date = ee.String(year_start).cat(month_start)
+  var end_date = ee.String(year_end).cat(month_end)
 
-  // filter images to fire bounds and dates of interest
-  var ls_area = ls_indices
-    .filterBounds(fires_export)
-    .filterDate(start,end)
+  // filter images by bounds, date range, bands; then take composite as median
+  return ls_indices
+    .filterBounds(fires_export_buffer1500)
+    .filterDate(start_date,end_date)
     .filter(ee.Filter.calendarRange(12,4,"month"))	
+    .select("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
     .median()
-    .clip(fires_export);
-    
-  // project image to match training grid
-  var proj4326 = ee.Projection('EPSG:4326').atScale(30);
-  var ls_area_4326= ls_area.reproject(proj4326).clip(fires_export);
-  
-  // view and map
-  print(ls_area_4326);
-  Map.addLayer(ls_area_4326, {min:0,max:1,bands:["ndvi"],palette:["white","green"]}, "ndvi" + years[0] + "_" + years[3],false);
-  Map.addLayer(ls_area_4326, {min:0,max:3000,bands:["red","green","blue"]}, "Landsat EPSG:4326",false);
+    .set("year_start",year_start)
+    .set("year_end",year_end)
+}
+```
 
-  // export to drive
+#### Get the Annual Imagery for Each Fire
+
+```{js}
+// function: clip each image from image collection by each feature in feature collection
+var clip_collections = function(imagecol, featcol){
+  // image collection loop
+  var full_imagecol = imagecol.map(function(image){
+    // feature collection loop
+    var full_featcol = featcol.map(function(feat){
+      // clip image and add feature property id
+      return ee.Image(image).clip(ee.Feature(feat))
+                            .set({'feat': ee.Feature(feat).id()})
+                            .set("Fire_ID",feat.get("Fire_ID"));  
+    });
+    // convert the FeatureCollection to list and convert it to ImageCollection
+    return ee.ImageCollection.fromImages(full_featcol.toList(featcol.size()));
+  });
+  // flatten, unnest lists
+  return ee.ImageCollection(full_imagecol.flatten());
+};
+```
+
+### Apply Functions to Each Image
+
+```{js}
+// list of start years
+var yearlist = ee.List.sequence(1984,2020,1);
+
+// map over the list of years to return landsat image composites for each
+var wrap_img = yearlist.map(get_composites);
+
+// clip landsat composites to each fire boundary
+var landsat_col = ee.ImageCollection.fromImages(wrap_img)
+
+// clip output
+var output = clip_collections(landsat_col, fires_export_buffer1500)
+```
+
+
+## Prepare and Export Images
+
+```{js}
+// list fire IDs and get total number of fires
+var fireID = ee.List(fires_export_buffer1500.aggregate_array('Fire_ID')).getInfo();
+var nFires = fireID.length;
+```
+
+### Functions to Prepare Images
+
+#### Get Year-Wavelength Band Names
+
+```{js}
+// rename bands to include imagery year
+var name_bands = function(image) {
+      var div = ee.String('_');
+      var year = image.getString('year_start');
+      return image.rename(image.bandNames().map(function(bandName){
+        return ee.String(bandName).cat(div).cat(year);
+      }));
+    };
+```
+
+#### Get Cleaned Band Name Strings
+```{js}
+// remove prefix from toBands function
+var clean_band_names = function(bandName){
+        return ee.String(bandName).slice(24,50)
+        }
+```
+
+### Export
+
+```{js}
+// loop through all fires, and create single image with bands from each landsat composite year
+// export to drive
+for (var j = 0; j < nFires; j++){
+  
+  var id   = fireID[j];
+  var fireExport = output.filterMetadata('Fire_ID', 'equals', id)
+  var firePolygon = ee.Feature(fires_export_buffer1500.filterMetadata('Fire_ID', 'equals', id).first()).geometry();
+
+  var fireExport_bands = fireExport.map(name_bands)
+
+  var merge = fireExport_bands.toBands()
+  
+  var exportImg= merge.rename(merge.bandNames().map(clean_band_names));
+    
   Export.image.toDrive({
-        image: ls_area_4326,
-        folder: "landsat_prefire_" + years[0] + "_" + years[3],
-        description: "landsat_prefire_" + years[0] + "_" + years[3],
-        crs: "EPSG:4326",
-        maxPixels: 1e13,
-        scale: 30,
-        region: fires_export
-    }); 
+    image: exportImg,
+    folder: "landsat_clipped_13bandyearly",
+    description: id,
+    crs: "EPSG:4326",
+    maxPixels: 1e13,
+    scale: 30,
+    region: firePolygon
+}); 
 }
 ```
 

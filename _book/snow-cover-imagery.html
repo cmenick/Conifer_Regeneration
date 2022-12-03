@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-11-30" />
+<meta name="date" content="2022-12-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,27 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_crop_cd2435-1/data_stars_forestgroup_cropcfba85.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/raster(rast_predicted)_3f8b24-1/data_stars_rasterrast_predictedced40a.txt"></script>
-<script src="libs/raster(rast_predicted)_e95a78-1/data_stars_rasterrast_predicted4b3ec0.txt"></script>
 
 
 <style type="text/css">
@@ -177,13 +156,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Final Fire Dataset</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.3.1</b> Selected fires by year</a></li>
-<li class="chapter" data-level="2.3.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.3.2</b> Selected fires by majority forest type</a></li>
+<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#dataset-overview"><i class="fa fa-check"></i><b>2.3.1</b> Dataset Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.4</b> Export Data</a>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping-1"><i class="fa fa-check"></i><b>2.4</b> Mapping</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.4.1</b> Final Cleanup for Export</a></li>
-<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.4.2</b> Export</a></li>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.5.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.5.2</b> Export</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
@@ -220,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
-<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-2"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
 <li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
@@ -255,16 +238,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
 <li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions"><i class="fa fa-check"></i><b>7.2</b> Functions</a>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-snow-cover-landsat-collection"><i class="fa fa-check"></i><b>7.2</b> Create Snow-Cover Landsat Collection</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-spectral-indices"><i class="fa fa-check"></i><b>7.2.1</b> Get Spectral Indices</a></li>
-<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-clear-images"><i class="fa fa-check"></i><b>7.2.2</b> Get Clear Images</a></li>
-<li class="chapter" data-level="7.2.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-snow-covered-pixels"><i class="fa fa-check"></i><b>7.2.3</b> Get snow-Covered Pixels</a></li>
+<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images"><i class="fa fa-check"></i><b>7.2.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.2.2</b> Map Functions Across Image Collection</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Image Composites</a>
+<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-annual-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Annual Image Composites</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.3.1</b> Map Functions Across Image Collection</a></li>
-<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-3-year-landsat-composites"><i class="fa fa-check"></i><b>7.3.2</b> Create 3-year Landsat Composites</a></li>
+<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-create-annual-image-composites"><i class="fa fa-check"></i><b>7.3.1</b> Functions to Create Annual Image Composites</a></li>
+<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#apply-functions-to-each-image"><i class="fa fa-check"></i><b>7.3.2</b> Apply Functions to Each Image</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#prepare-and-export-images"><i class="fa fa-check"></i><b>7.4</b> Prepare and Export Images</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images-1"><i class="fa fa-check"></i><b>7.4.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-3"><i class="fa fa-check"></i><b>7.4.2</b> Export</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="model-development.html"><a href="model-development.html"><i class="fa fa-check"></i><b>8</b> Model Development</a>
@@ -272,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat for 2020-2021 winter</a></li>
 <li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
 <li class="chapter" data-level="8.1.4" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
 </ul></li>
@@ -280,7 +267,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
 <li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
-<li class="chapter" data-level="8.2.3" data-path="model-development.html"><a href="model-development.html#training-data-by-sampling-quadrant"><i class="fa fa-check"></i><b>8.2.3</b> Training Data by Sampling Quadrant</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
 <ul>
@@ -292,6 +278,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#random-forest"><i class="fa fa-check"></i><b>8.5</b> Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.1</b> Import Fires</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-landsast"><i class="fa fa-check"></i><b>9.1.2</b> Import Landsast</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -319,36 +313,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.1</span> Set Up<a href="snow-cover-imagery.html#set-up-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="import-fire-boundaries-2" class="section level3 hasAnchor" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Import Fire Boundaries<a href="snow-cover-imagery.html#import-fire-boundaries-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb51"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb51-1"><a href="snow-cover-imagery.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Import fire polygons</span></span>
-<span id="cb51-2"><a href="snow-cover-imagery.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> fires_export <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">&quot;projects/westernconiferregen/assets/fires_export&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="snow-cover-imagery.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// import fire polygons</span></span>
+<span id="cb1-2"><a href="snow-cover-imagery.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> fires_export <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">&quot;projects/westernconiferregen/assets/fires_export&quot;</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="snow-cover-imagery.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="snow-cover-imagery.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> fires_export_buffer1500 <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">&quot;projects/westernconiferregen/assets/fires_export_buffer1500&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
-// Import fire polygons
+// import fire polygons
 var fires_export = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export");
+
+var fires_export_buffer1500 = ee.FeatureCollection("projects/westernconiferregen/assets/fires_export_buffer1500");
 </script>
 </div>
 <div id="import-landsat-imagery" class="section level3 hasAnchor" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> Import Landsat Imagery<a href="snow-cover-imagery.html#import-landsat-imagery" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb52"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb52-1"><a href="snow-cover-imagery.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Import Landsat 4,5,7, rename bands</span></span>
-<span id="cb52-2"><a href="snow-cover-imagery.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls7 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LE07/C01/T1_SR&#39;</span>)<span class="op">,</span></span>
-<span id="cb52-3"><a href="snow-cover-imagery.html#cb52-3" aria-hidden="true" tabindex="-1"></a>    ls5 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LT05/C01/T1_SR&#39;</span>)<span class="op">,</span></span>
-<span id="cb52-4"><a href="snow-cover-imagery.html#cb52-4" aria-hidden="true" tabindex="-1"></a>    ls4 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LT04/C01/T1_SR&#39;</span>)<span class="op">;</span></span>
-<span id="cb52-5"><a href="snow-cover-imagery.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls4_7 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(ls7<span class="op">.</span><span class="fu">merge</span>(ls5)<span class="op">.</span><span class="fu">merge</span>(ls4))<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(image) {</span>
-<span id="cb52-6"><a href="snow-cover-imagery.html#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> bands <span class="op">=</span> [<span class="st">&#39;B1&#39;</span><span class="op">,</span><span class="st">&#39;B2&#39;</span><span class="op">,</span> <span class="st">&#39;B3&#39;</span><span class="op">,</span> <span class="st">&#39;B4&#39;</span><span class="op">,</span> <span class="st">&#39;B5&#39;</span><span class="op">,</span> <span class="st">&#39;B7&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span> </span>
-<span id="cb52-7"><a href="snow-cover-imagery.html#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> new_bands <span class="op">=</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span><span class="op">,</span> <span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;swir1&#39;</span><span class="op">,</span> <span class="st">&#39;swir2&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span></span>
-<span id="cb52-8"><a href="snow-cover-imagery.html#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">rename</span>(new_bands)<span class="op">;</span></span>
-<span id="cb52-9"><a href="snow-cover-imagery.html#cb52-9" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb52-10"><a href="snow-cover-imagery.html#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-11"><a href="snow-cover-imagery.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Import Landsat 8, rename bands</span></span>
-<span id="cb52-12"><a href="snow-cover-imagery.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LC08/C01/T1_SR&#39;</span>)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(image) {</span>
-<span id="cb52-13"><a href="snow-cover-imagery.html#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> bands <span class="op">=</span> [<span class="st">&#39;B2&#39;</span><span class="op">,</span> <span class="st">&#39;B3&#39;</span><span class="op">,</span> <span class="st">&#39;B4&#39;</span><span class="op">,</span> <span class="st">&#39;B5&#39;</span><span class="op">,</span> <span class="st">&#39;B6&#39;</span><span class="op">,</span> <span class="st">&#39;B7&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span> </span>
-<span id="cb52-14"><a href="snow-cover-imagery.html#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> new_bands <span class="op">=</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span><span class="op">,</span> <span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;swir1&#39;</span><span class="op">,</span> <span class="st">&#39;swir2&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span></span>
-<span id="cb52-15"><a href="snow-cover-imagery.html#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">rename</span>(new_bands)<span class="op">;</span></span>
-<span id="cb52-16"><a href="snow-cover-imagery.html#cb52-16" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb52-17"><a href="snow-cover-imagery.html#cb52-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-18"><a href="snow-cover-imagery.html#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Merge Landsat 4-7 and 8 with renamed bands</span></span>
-<span id="cb52-19"><a href="snow-cover-imagery.html#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls4_8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(ls8<span class="op">.</span><span class="fu">merge</span>(ls4_7))<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="snow-cover-imagery.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// import Landsat 4,5,7, rename bands</span></span>
+<span id="cb2-2"><a href="snow-cover-imagery.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls7 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LE07/C01/T1_SR&#39;</span>)<span class="op">,</span></span>
+<span id="cb2-3"><a href="snow-cover-imagery.html#cb2-3" aria-hidden="true" tabindex="-1"></a>    ls5 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LT05/C01/T1_SR&#39;</span>)<span class="op">,</span></span>
+<span id="cb2-4"><a href="snow-cover-imagery.html#cb2-4" aria-hidden="true" tabindex="-1"></a>    ls4 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LT04/C01/T1_SR&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="snow-cover-imagery.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls4_7 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(ls7<span class="op">.</span><span class="fu">merge</span>(ls5)<span class="op">.</span><span class="fu">merge</span>(ls4))<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(image) {</span>
+<span id="cb2-6"><a href="snow-cover-imagery.html#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> bands <span class="op">=</span> [<span class="st">&#39;B1&#39;</span><span class="op">,</span><span class="st">&#39;B2&#39;</span><span class="op">,</span> <span class="st">&#39;B3&#39;</span><span class="op">,</span> <span class="st">&#39;B4&#39;</span><span class="op">,</span> <span class="st">&#39;B5&#39;</span><span class="op">,</span> <span class="st">&#39;B7&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span> </span>
+<span id="cb2-7"><a href="snow-cover-imagery.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> new_bands <span class="op">=</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span><span class="op">,</span> <span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;swir1&#39;</span><span class="op">,</span> <span class="st">&#39;swir2&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span></span>
+<span id="cb2-8"><a href="snow-cover-imagery.html#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">rename</span>(new_bands)<span class="op">;</span></span>
+<span id="cb2-9"><a href="snow-cover-imagery.html#cb2-9" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb2-10"><a href="snow-cover-imagery.html#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="snow-cover-imagery.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">// import Landsat 8, rename bands</span></span>
+<span id="cb2-12"><a href="snow-cover-imagery.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;LANDSAT/LC08/C01/T1_SR&#39;</span>)<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(image) {</span>
+<span id="cb2-13"><a href="snow-cover-imagery.html#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> bands <span class="op">=</span> [<span class="st">&#39;B2&#39;</span><span class="op">,</span> <span class="st">&#39;B3&#39;</span><span class="op">,</span> <span class="st">&#39;B4&#39;</span><span class="op">,</span> <span class="st">&#39;B5&#39;</span><span class="op">,</span> <span class="st">&#39;B6&#39;</span><span class="op">,</span> <span class="st">&#39;B7&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span> </span>
+<span id="cb2-14"><a href="snow-cover-imagery.html#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> new_bands <span class="op">=</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span><span class="op">,</span> <span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;swir1&#39;</span><span class="op">,</span> <span class="st">&#39;swir2&#39;</span><span class="op">,</span> <span class="st">&#39;pixel_qa&#39;</span>]<span class="op">;</span></span>
+<span id="cb2-15"><a href="snow-cover-imagery.html#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image<span class="op">.</span><span class="fu">select</span>(bands)<span class="op">.</span><span class="fu">rename</span>(new_bands)<span class="op">;</span></span>
+<span id="cb2-16"><a href="snow-cover-imagery.html#cb2-16" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb2-17"><a href="snow-cover-imagery.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="snow-cover-imagery.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">// merge Landsat 4-7 and 8 with renamed bands</span></span>
+<span id="cb2-19"><a href="snow-cover-imagery.html#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls4_8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(ls8<span class="op">.</span><span class="fu">merge</span>(ls4_7))<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
-// Import Landsat 4,5,7, rename bands
+// import Landsat 4,5,7, rename bands
 var ls7 = ee.ImageCollection('LANDSAT/LE07/C01/T1_SR'),
     ls5 = ee.ImageCollection('LANDSAT/LT05/C01/T1_SR'),
     ls4 = ee.ImageCollection('LANDSAT/LT04/C01/T1_SR');
@@ -358,37 +356,37 @@ var ls4_7 = ee.ImageCollection(ls7.merge(ls5).merge(ls4)).map(function(image) {
     return image.select(bands).rename(new_bands);
     });
 
-// Import Landsat 8, rename bands
+// import Landsat 8, rename bands
 var ls8 = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').map(function(image) {
     var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'pixel_qa']; 
     var new_bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'pixel_qa'];
     return image.select(bands).rename(new_bands);
     });
 
-// Merge Landsat 4-7 and 8 with renamed bands
+// merge Landsat 4-7 and 8 with renamed bands
 var ls4_8 = ee.ImageCollection(ls8.merge(ls4_7));
 </script>
 </div>
 </div>
-<div id="functions" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Functions<a href="snow-cover-imagery.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="get-spectral-indices" class="section level3 hasAnchor" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Get Spectral Indices<a href="snow-cover-imagery.html#get-spectral-indices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb53"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb53-1"><a href="snow-cover-imagery.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function: get spectral indices</span></span>
-<span id="cb53-2"><a href="snow-cover-imagery.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> calc_indices <span class="op">=</span> <span class="kw">function</span>(image) {</span>
-<span id="cb53-3"><a href="snow-cover-imagery.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image</span>
-<span id="cb53-4"><a href="snow-cover-imagery.html#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndvi&#39;</span>))</span>
-<span id="cb53-5"><a href="snow-cover-imagery.html#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;nir&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndwi&#39;</span>))</span>
-<span id="cb53-6"><a href="snow-cover-imagery.html#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;swir2&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;nbr&#39;</span>))</span>
-<span id="cb53-7"><a href="snow-cover-imagery.html#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;swir1&#39;</span><span class="op">,</span><span class="st">&#39;swir2&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;nbr2&#39;</span>))</span>
-<span id="cb53-8"><a href="snow-cover-imagery.html#cb53-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;swir1&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndsi&#39;</span>))</span>
-<span id="cb53-9"><a href="snow-cover-imagery.html#cb53-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;nir&#39;</span><span class="op">,</span><span class="st">&#39;swir1&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndfsi&#39;</span>))</span>
-<span id="cb53-10"><a href="snow-cover-imagery.html#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">expression</span>(<span class="st">&#39;((NIR - R) / (NIR + R + 0.5)) * (1.5)&#39;</span></span>
-<span id="cb53-11"><a href="snow-cover-imagery.html#cb53-11" aria-hidden="true" tabindex="-1"></a>       <span class="op">,</span>{<span class="st">&#39;NIR&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;nir&#39;</span>)<span class="op">,</span><span class="st">&#39;R&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;red&#39;</span>)})<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;savi&#39;</span>))</span>
-<span id="cb53-12"><a href="snow-cover-imagery.html#cb53-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">expression</span>(<span class="st">&#39;2.5 * ((NIR - R) / (NIR + 6 * R - 7.5 * B + 1))&#39;</span></span>
-<span id="cb53-13"><a href="snow-cover-imagery.html#cb53-13" aria-hidden="true" tabindex="-1"></a>       <span class="op">,</span>{<span class="st">&#39;NIR&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;nir&#39;</span>)<span class="op">,</span><span class="st">&#39;R&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;red&#39;</span>)<span class="op">,</span><span class="st">&#39;B&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;blue&#39;</span>)})<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;evi&#39;</span>))}<span class="op">;</span></span></code></pre></div>
+<div id="create-snow-cover-landsat-collection" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Create Snow-Cover Landsat Collection<a href="snow-cover-imagery.html#create-snow-cover-landsat-collection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functions-to-prepare-images" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Functions to Prepare Images<a href="snow-cover-imagery.html#functions-to-prepare-images" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-spectral-indices" class="section level4 hasAnchor" number="7.2.1.1">
+<h4><span class="header-section-number">7.2.1.1</span> Get Spectral Indices<a href="snow-cover-imagery.html#get-spectral-indices" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="snow-cover-imagery.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// function: get spectral indices</span></span>
+<span id="cb3-2"><a href="snow-cover-imagery.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> calc_indices <span class="op">=</span> <span class="kw">function</span>(image) {</span>
+<span id="cb3-3"><a href="snow-cover-imagery.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image</span>
+<span id="cb3-4"><a href="snow-cover-imagery.html#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndvi&#39;</span>))</span>
+<span id="cb3-5"><a href="snow-cover-imagery.html#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;nir&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndwi&#39;</span>))</span>
+<span id="cb3-6"><a href="snow-cover-imagery.html#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;nir&#39;</span><span class="op">,</span> <span class="st">&#39;swir2&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;nbr&#39;</span>))</span>
+<span id="cb3-7"><a href="snow-cover-imagery.html#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;swir1&#39;</span><span class="op">,</span><span class="st">&#39;swir2&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;nbr2&#39;</span>))</span>
+<span id="cb3-8"><a href="snow-cover-imagery.html#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;green&#39;</span><span class="op">,</span> <span class="st">&#39;swir1&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndsi&#39;</span>))</span>
+<span id="cb3-9"><a href="snow-cover-imagery.html#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">&#39;nir&#39;</span><span class="op">,</span><span class="st">&#39;swir1&#39;</span>])<span class="op">.</span><span class="fu">double</span>()<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;ndfsi&#39;</span>))</span>
+<span id="cb3-10"><a href="snow-cover-imagery.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">addBands</span>(image<span class="op">.</span><span class="fu">expression</span>(<span class="st">&#39;2.5 * ((NIR - R) / (NIR + 6 * R - 7.5 * B + 1))&#39;</span></span>
+<span id="cb3-11"><a href="snow-cover-imagery.html#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="op">,</span>{<span class="st">&#39;NIR&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;nir&#39;</span>)<span class="op">,</span><span class="st">&#39;R&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;red&#39;</span>)<span class="op">,</span><span class="st">&#39;B&#39;</span><span class="op">:</span>image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;blue&#39;</span>)})<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;evi&#39;</span>))}<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
-// Function: get spectral indices
+// function: get spectral indices
 var calc_indices = function(image) {
   return image
     .addBands(image.normalizedDifference(['nir', 'red']).double().rename('ndvi'))
@@ -397,25 +395,23 @@ var calc_indices = function(image) {
     .addBands(image.normalizedDifference(['swir1','swir2']).double().rename('nbr2'))
     .addBands(image.normalizedDifference(['green', 'swir1']).double().rename('ndsi'))
     .addBands(image.normalizedDifference(['nir','swir1']).double().rename('ndfsi'))
-    .addBands(image.expression('((NIR - R) / (NIR + R + 0.5)) * (1.5)'
-       ,{'NIR':image.select('nir'),'R':image.select('red')}).rename('savi'))
     .addBands(image.expression('2.5 * ((NIR - R) / (NIR + 6 * R - 7.5 * B + 1))'
        ,{'NIR':image.select('nir'),'R':image.select('red'),'B':image.select('blue')}).rename('evi'))};
 </script>
 </div>
-<div id="get-clear-images" class="section level3 hasAnchor" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Get Clear Images<a href="snow-cover-imagery.html#get-clear-images" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb54"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb54-1"><a href="snow-cover-imagery.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function: QA</span></span>
-<span id="cb54-2"><a href="snow-cover-imagery.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> qa_mask <span class="op">=</span> <span class="kw">function</span>(lsImg){</span>
-<span id="cb54-3"><a href="snow-cover-imagery.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> quality <span class="op">=</span>lsImg<span class="op">.</span><span class="fu">select</span>([<span class="st">&#39;pixel_qa&#39;</span>])<span class="op">;</span></span>
-<span id="cb54-4"><a href="snow-cover-imagery.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> clear <span class="op">=</span> quality<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">8</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>) <span class="co">// cloud shadow</span></span>
-<span id="cb54-5"><a href="snow-cover-imagery.html#cb54-5" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">and</span>(quality<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">32</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>) <span class="co">// cloud</span></span>
-<span id="cb54-6"><a href="snow-cover-imagery.html#cb54-6" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">and</span>(quality<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">4</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)))<span class="op">;</span> <span class="co">// water</span></span>
-<span id="cb54-7"><a href="snow-cover-imagery.html#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> lsImg<span class="op">.</span><span class="fu">updateMask</span>(clear)                                    </span>
-<span id="cb54-8"><a href="snow-cover-imagery.html#cb54-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">copyProperties</span>(lsImg<span class="op">,</span> [<span class="st">&#39;system:time_start&#39;</span>])<span class="op">;</span></span>
-<span id="cb54-9"><a href="snow-cover-imagery.html#cb54-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<div id="get-clear-images" class="section level4 hasAnchor" number="7.2.1.2">
+<h4><span class="header-section-number">7.2.1.2</span> Get Clear Images<a href="snow-cover-imagery.html#get-clear-images" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="snow-cover-imagery.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// function: pixel QA for clouds and bodies of water</span></span>
+<span id="cb4-2"><a href="snow-cover-imagery.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> qa_mask <span class="op">=</span> <span class="kw">function</span>(lsImg){</span>
+<span id="cb4-3"><a href="snow-cover-imagery.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> quality <span class="op">=</span>lsImg<span class="op">.</span><span class="fu">select</span>([<span class="st">&#39;pixel_qa&#39;</span>])<span class="op">;</span></span>
+<span id="cb4-4"><a href="snow-cover-imagery.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> clear <span class="op">=</span> quality<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">8</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>) <span class="co">// cloud shadow</span></span>
+<span id="cb4-5"><a href="snow-cover-imagery.html#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">and</span>(quality<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">32</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>) <span class="co">// cloud</span></span>
+<span id="cb4-6"><a href="snow-cover-imagery.html#cb4-6" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">and</span>(quality<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">4</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)))<span class="op">;</span> <span class="co">// water</span></span>
+<span id="cb4-7"><a href="snow-cover-imagery.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> lsImg<span class="op">.</span><span class="fu">updateMask</span>(clear)                                    </span>
+<span id="cb4-8"><a href="snow-cover-imagery.html#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">copyProperties</span>(lsImg<span class="op">,</span> [<span class="st">&#39;system:time_start&#39;</span>])<span class="op">;</span></span>
+<span id="cb4-9"><a href="snow-cover-imagery.html#cb4-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
-// Function: QA
+// function: pixel QA for clouds and bodies of water
 var qa_mask = function(lsImg){
   var quality =lsImg.select(['pixel_qa']);
   var clear = quality.bitwiseAnd(8).eq(0) // cloud shadow
@@ -426,19 +422,19 @@ var qa_mask = function(lsImg){
 };
 </script>
 </div>
-<div id="get-snow-covered-pixels" class="section level3 hasAnchor" number="7.2.3">
-<h3><span class="header-section-number">7.2.3</span> Get snow-Covered Pixels<a href="snow-cover-imagery.html#get-snow-covered-pixels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb55"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb55-1"><a href="snow-cover-imagery.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Function: snow masking</span></span>
-<span id="cb55-2"><a href="snow-cover-imagery.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ndfsi_mask <span class="op">=</span> <span class="kw">function</span>(image){</span>
-<span id="cb55-3"><a href="snow-cover-imagery.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> ndfsi_snow <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;ndfsi&#39;</span>)<span class="op">.</span><span class="fu">gt</span>(<span class="fl">0.4</span>)<span class="op">;</span></span>
-<span id="cb55-4"><a href="snow-cover-imagery.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(ndfsi_snow)<span class="op">;</span></span>
-<span id="cb55-5"><a href="snow-cover-imagery.html#cb55-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb55-6"><a href="snow-cover-imagery.html#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ndsi_mask <span class="op">=</span> <span class="kw">function</span>(image){</span>
-<span id="cb55-7"><a href="snow-cover-imagery.html#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> ndsi_snow <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;ndsi&#39;</span>)<span class="op">.</span><span class="fu">gt</span>(<span class="fl">0.4</span>)<span class="op">;</span></span>
-<span id="cb55-8"><a href="snow-cover-imagery.html#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(ndsi_snow)<span class="op">;</span></span>
-<span id="cb55-9"><a href="snow-cover-imagery.html#cb55-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<div id="get-snow-covered-pixels" class="section level4 hasAnchor" number="7.2.1.3">
+<h4><span class="header-section-number">7.2.1.3</span> Get snow-Covered Pixels<a href="snow-cover-imagery.html#get-snow-covered-pixels" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="snow-cover-imagery.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// function: mask pixels without snow based on NDSI and NDFSI</span></span>
+<span id="cb5-2"><a href="snow-cover-imagery.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ndfsi_mask <span class="op">=</span> <span class="kw">function</span>(image){</span>
+<span id="cb5-3"><a href="snow-cover-imagery.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> ndfsi_snow <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;ndfsi&#39;</span>)<span class="op">.</span><span class="fu">gt</span>(<span class="fl">0.4</span>)<span class="op">;</span></span>
+<span id="cb5-4"><a href="snow-cover-imagery.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(ndfsi_snow)<span class="op">;</span></span>
+<span id="cb5-5"><a href="snow-cover-imagery.html#cb5-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb5-6"><a href="snow-cover-imagery.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ndsi_mask <span class="op">=</span> <span class="kw">function</span>(image){</span>
+<span id="cb5-7"><a href="snow-cover-imagery.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> ndsi_snow <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;ndsi&#39;</span>)<span class="op">.</span><span class="fu">gt</span>(<span class="fl">0.4</span>)<span class="op">;</span></span>
+<span id="cb5-8"><a href="snow-cover-imagery.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(ndsi_snow)<span class="op">;</span></span>
+<span id="cb5-9"><a href="snow-cover-imagery.html#cb5-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
-// Function: snow masking
+// function: mask pixels without snow based on NDSI and NDFSI
 var ndfsi_mask = function(image){
   var ndfsi_snow = image.select('ndfsi').gt(0.4);
   return image.updateMask(ndfsi_snow);
@@ -450,111 +446,246 @@ var ndsi_mask = function(image){
 </script>
 </div>
 </div>
-<div id="create-image-composites" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Create Image Composites<a href="snow-cover-imagery.html#create-image-composites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="map-functions-across-image-collection" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Map Functions Across Image Collection<a href="snow-cover-imagery.html#map-functions-across-image-collection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb56-1"><a href="snow-cover-imagery.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Map functions to create final Landsat collection</span></span>
-<span id="cb56-2"><a href="snow-cover-imagery.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls_indices <span class="op">=</span> ls4_8<span class="op">.</span><span class="fu">map</span>(calc_indices)</span>
-<span id="cb56-3"><a href="snow-cover-imagery.html#cb56-3" aria-hidden="true" tabindex="-1"></a>                      <span class="op">.</span><span class="fu">map</span>(ndfsi_mask)</span>
-<span id="cb56-4"><a href="snow-cover-imagery.html#cb56-4" aria-hidden="true" tabindex="-1"></a>                      <span class="op">.</span><span class="fu">map</span>(ndsi_mask)</span>
-<span id="cb56-5"><a href="snow-cover-imagery.html#cb56-5" aria-hidden="true" tabindex="-1"></a>                      <span class="op">.</span><span class="fu">map</span>(qa_mask)<span class="op">;</span></span></code></pre></div>
+<div id="map-functions-across-image-collection" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Map Functions Across Image Collection<a href="snow-cover-imagery.html#map-functions-across-image-collection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="snow-cover-imagery.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// map functions to create final Landsat collection</span></span>
+<span id="cb6-2"><a href="snow-cover-imagery.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> ls_indices <span class="op">=</span> ls4_8<span class="op">.</span><span class="fu">map</span>(calc_indices)</span>
+<span id="cb6-3"><a href="snow-cover-imagery.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                      <span class="op">.</span><span class="fu">map</span>(qa_mask)</span>
+<span id="cb6-4"><a href="snow-cover-imagery.html#cb6-4" aria-hidden="true" tabindex="-1"></a>                      <span class="op">.</span><span class="fu">map</span>(ndfsi_mask)</span>
+<span id="cb6-5"><a href="snow-cover-imagery.html#cb6-5" aria-hidden="true" tabindex="-1"></a>                      <span class="op">.</span><span class="fu">map</span>(ndsi_mask)<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
-// Map functions to create final Landsat collection
+// map functions to create final Landsat collection
 var ls_indices = ls4_8.map(calc_indices)
+                      .map(qa_mask)
                       .map(ndfsi_mask)
-                      .map(ndsi_mask)
-                      .map(qa_mask);
+                      .map(ndsi_mask);
 </script>
 </div>
-<div id="create-3-year-landsat-composites" class="section level3 hasAnchor" number="7.3.2">
-<h3><span class="header-section-number">7.3.2</span> Create 3-year Landsat Composites<a href="snow-cover-imagery.html#create-3-year-landsat-composites" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb57-1"><a href="snow-cover-imagery.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">// create 3-year snow-cover image composites over fire areas            </span></span>
-<span id="cb57-2"><a href="snow-cover-imagery.html#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="snow-cover-imagery.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">var</span> j <span class="op">=</span> <span class="dv">1986</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">1990</span><span class="op">;</span> j<span class="op">++</span>){ </span>
-<span id="cb57-4"><a href="snow-cover-imagery.html#cb57-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-5"><a href="snow-cover-imagery.html#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// list years within imagery window</span></span>
-<span id="cb57-6"><a href="snow-cover-imagery.html#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> years <span class="op">=</span> [j<span class="op">-</span><span class="dv">1</span><span class="op">,</span>j<span class="op">,</span>j<span class="op">+</span><span class="dv">1</span><span class="op">,</span>j<span class="op">+</span><span class="dv">2</span>]<span class="op">;</span></span>
-<span id="cb57-7"><a href="snow-cover-imagery.html#cb57-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-8"><a href="snow-cover-imagery.html#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;landsat_&quot;</span> <span class="op">+</span> years[<span class="dv">0</span>] <span class="op">+</span> <span class="st">&quot;_&quot;</span><span class="op">+</span> years[<span class="dv">3</span>])<span class="op">;</span></span>
-<span id="cb57-9"><a href="snow-cover-imagery.html#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-10"><a href="snow-cover-imagery.html#cb57-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> start <span class="op">=</span> ee<span class="op">.</span><span class="fu">Date</span>(years[<span class="dv">0</span>] <span class="op">+</span> <span class="st">&#39;-11-01&#39;</span>)<span class="op">;</span></span>
-<span id="cb57-11"><a href="snow-cover-imagery.html#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> end <span class="op">=</span> ee<span class="op">.</span><span class="fu">Date</span>(years[<span class="dv">3</span>] <span class="op">+</span> <span class="st">&#39;-05-01&#39;</span>)<span class="op">;</span></span>
-<span id="cb57-12"><a href="snow-cover-imagery.html#cb57-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-13"><a href="snow-cover-imagery.html#cb57-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(start)<span class="op">;</span></span>
-<span id="cb57-14"><a href="snow-cover-imagery.html#cb57-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(end)<span class="op">;</span></span>
-<span id="cb57-15"><a href="snow-cover-imagery.html#cb57-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-16"><a href="snow-cover-imagery.html#cb57-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// filter images to fire bounds and dates of interest</span></span>
-<span id="cb57-17"><a href="snow-cover-imagery.html#cb57-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> ls_area <span class="op">=</span> ls_indices</span>
-<span id="cb57-18"><a href="snow-cover-imagery.html#cb57-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filterBounds</span>(fires_export)</span>
-<span id="cb57-19"><a href="snow-cover-imagery.html#cb57-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filterDate</span>(start<span class="op">,</span>end)</span>
-<span id="cb57-20"><a href="snow-cover-imagery.html#cb57-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">calendarRange</span>(<span class="dv">12</span><span class="op">,</span><span class="dv">4</span><span class="op">,</span><span class="st">&quot;month&quot;</span>))  </span>
-<span id="cb57-21"><a href="snow-cover-imagery.html#cb57-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">median</span>()</span>
-<span id="cb57-22"><a href="snow-cover-imagery.html#cb57-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">clip</span>(fires_export)<span class="op">;</span></span>
-<span id="cb57-23"><a href="snow-cover-imagery.html#cb57-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb57-24"><a href="snow-cover-imagery.html#cb57-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// project image to match training grid</span></span>
-<span id="cb57-25"><a href="snow-cover-imagery.html#cb57-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> proj4326 <span class="op">=</span> ee<span class="op">.</span><span class="fu">Projection</span>(<span class="st">&#39;EPSG:4326&#39;</span>)<span class="op">.</span><span class="fu">atScale</span>(<span class="dv">30</span>)<span class="op">;</span></span>
-<span id="cb57-26"><a href="snow-cover-imagery.html#cb57-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> ls_area_4326<span class="op">=</span> ls_area<span class="op">.</span><span class="fu">reproject</span>(proj4326)<span class="op">.</span><span class="fu">clip</span>(fires_export)<span class="op">;</span></span>
-<span id="cb57-27"><a href="snow-cover-imagery.html#cb57-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-28"><a href="snow-cover-imagery.html#cb57-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// view and map</span></span>
-<span id="cb57-29"><a href="snow-cover-imagery.html#cb57-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(ls_area_4326)<span class="op">;</span></span>
-<span id="cb57-30"><a href="snow-cover-imagery.html#cb57-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(ls_area_4326<span class="op">,</span> {<span class="dt">min</span><span class="op">:</span><span class="dv">0</span><span class="op">,</span><span class="dt">max</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span><span class="dt">bands</span><span class="op">:</span>[<span class="st">&quot;ndvi&quot;</span>]<span class="op">,</span><span class="dt">palette</span><span class="op">:</span>[<span class="st">&quot;white&quot;</span><span class="op">,</span><span class="st">&quot;green&quot;</span>]}<span class="op">,</span> <span class="st">&quot;ndvi&quot;</span> <span class="op">+</span> years[<span class="dv">0</span>] <span class="op">+</span> <span class="st">&quot;_&quot;</span> <span class="op">+</span> years[<span class="dv">3</span>]<span class="op">,</span><span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb57-31"><a href="snow-cover-imagery.html#cb57-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(ls_area_4326<span class="op">,</span> {<span class="dt">min</span><span class="op">:</span><span class="dv">0</span><span class="op">,</span><span class="dt">max</span><span class="op">:</span><span class="dv">3000</span><span class="op">,</span><span class="dt">bands</span><span class="op">:</span>[<span class="st">&quot;red&quot;</span><span class="op">,</span><span class="st">&quot;green&quot;</span><span class="op">,</span><span class="st">&quot;blue&quot;</span>]}<span class="op">,</span> <span class="st">&quot;Landsat EPSG:4326&quot;</span><span class="op">,</span><span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb57-32"><a href="snow-cover-imagery.html#cb57-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-33"><a href="snow-cover-imagery.html#cb57-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// export to drive</span></span>
-<span id="cb57-34"><a href="snow-cover-imagery.html#cb57-34" aria-hidden="true" tabindex="-1"></a>  Export<span class="op">.</span><span class="at">image</span><span class="op">.</span><span class="fu">toDrive</span>({</span>
-<span id="cb57-35"><a href="snow-cover-imagery.html#cb57-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">image</span><span class="op">:</span> ls_area_4326<span class="op">,</span></span>
-<span id="cb57-36"><a href="snow-cover-imagery.html#cb57-36" aria-hidden="true" tabindex="-1"></a>        <span class="dt">folder</span><span class="op">:</span> <span class="st">&quot;landsat_prefire_&quot;</span> <span class="op">+</span> years[<span class="dv">0</span>] <span class="op">+</span> <span class="st">&quot;_&quot;</span> <span class="op">+</span> years[<span class="dv">3</span>]<span class="op">,</span></span>
-<span id="cb57-37"><a href="snow-cover-imagery.html#cb57-37" aria-hidden="true" tabindex="-1"></a>        <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;landsat_prefire_&quot;</span> <span class="op">+</span> years[<span class="dv">0</span>] <span class="op">+</span> <span class="st">&quot;_&quot;</span> <span class="op">+</span> years[<span class="dv">3</span>]<span class="op">,</span></span>
-<span id="cb57-38"><a href="snow-cover-imagery.html#cb57-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">crs</span><span class="op">:</span> <span class="st">&quot;EPSG:4326&quot;</span><span class="op">,</span></span>
-<span id="cb57-39"><a href="snow-cover-imagery.html#cb57-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span><span class="op">,</span></span>
-<span id="cb57-40"><a href="snow-cover-imagery.html#cb57-40" aria-hidden="true" tabindex="-1"></a>        <span class="dt">scale</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
-<span id="cb57-41"><a href="snow-cover-imagery.html#cb57-41" aria-hidden="true" tabindex="-1"></a>        <span class="dt">region</span><span class="op">:</span> fires_export</span>
-<span id="cb57-42"><a href="snow-cover-imagery.html#cb57-42" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span> </span>
-<span id="cb57-43"><a href="snow-cover-imagery.html#cb57-43" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="create-annual-image-composites" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Create Annual Image Composites<a href="snow-cover-imagery.html#create-annual-image-composites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functions-to-create-annual-image-composites" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Functions to Create Annual Image Composites<a href="snow-cover-imagery.html#functions-to-create-annual-image-composites" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-yearly-winter-image-composite" class="section level4 hasAnchor" number="7.3.1.1">
+<h4><span class="header-section-number">7.3.1.1</span> Get Yearly Winter Image Composite<a href="snow-cover-imagery.html#get-yearly-winter-image-composite" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="snow-cover-imagery.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// function: generates landsat composites for a given year&#39;s winter</span></span>
+<span id="cb7-2"><a href="snow-cover-imagery.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> get_composites <span class="op">=</span> <span class="kw">function</span>(year) {</span>
+<span id="cb7-3"><a href="snow-cover-imagery.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-4"><a href="snow-cover-imagery.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// format years</span></span>
+<span id="cb7-5"><a href="snow-cover-imagery.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> year_start <span class="op">=</span> ee<span class="op">.</span><span class="fu">Number</span>(year)<span class="op">.</span><span class="fu">format</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">4</span>)<span class="op">;</span></span>
+<span id="cb7-6"><a href="snow-cover-imagery.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="snow-cover-imagery.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> year2 <span class="op">=</span> ee<span class="op">.</span><span class="fu">Number</span>(year)<span class="op">.</span><span class="fu">add</span>(<span class="dv">1</span>)</span>
+<span id="cb7-8"><a href="snow-cover-imagery.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> year_end <span class="op">=</span> ee<span class="op">.</span><span class="fu">Number</span>(year2)<span class="op">.</span><span class="fu">format</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">4</span>)<span class="op">;</span></span>
+<span id="cb7-9"><a href="snow-cover-imagery.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-10"><a href="snow-cover-imagery.html#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> month_start <span class="op">=</span> <span class="st">&#39;-11-01&#39;</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="snow-cover-imagery.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> month_end <span class="op">=</span> <span class="st">&#39;-05-01&#39;</span></span>
+<span id="cb7-12"><a href="snow-cover-imagery.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-13"><a href="snow-cover-imagery.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> start_date <span class="op">=</span> ee<span class="op">.</span><span class="fu">String</span>(year_start)<span class="op">.</span><span class="fu">cat</span>(month_start)</span>
+<span id="cb7-14"><a href="snow-cover-imagery.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> end_date <span class="op">=</span> ee<span class="op">.</span><span class="fu">String</span>(year_end)<span class="op">.</span><span class="fu">cat</span>(month_end)</span>
+<span id="cb7-15"><a href="snow-cover-imagery.html#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="snow-cover-imagery.html#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// filter images by bounds, date range, bands; then take composite as median</span></span>
+<span id="cb7-17"><a href="snow-cover-imagery.html#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ls_indices</span>
+<span id="cb7-18"><a href="snow-cover-imagery.html#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filterBounds</span>(fires_export_buffer1500)</span>
+<span id="cb7-19"><a href="snow-cover-imagery.html#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filterDate</span>(start_date<span class="op">,</span>end_date)</span>
+<span id="cb7-20"><a href="snow-cover-imagery.html#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">calendarRange</span>(<span class="dv">12</span><span class="op">,</span><span class="dv">4</span><span class="op">,</span><span class="st">&quot;month&quot;</span>))  </span>
+<span id="cb7-21"><a href="snow-cover-imagery.html#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">select</span>(<span class="st">&quot;blue&quot;</span><span class="op">,</span> <span class="st">&quot;green&quot;</span><span class="op">,</span> <span class="st">&quot;red&quot;</span><span class="op">,</span> <span class="st">&quot;nir&quot;</span><span class="op">,</span> <span class="st">&quot;swir1&quot;</span><span class="op">,</span> <span class="st">&quot;swir2&quot;</span><span class="op">,</span> <span class="st">&quot;ndvi&quot;</span><span class="op">,</span> <span class="st">&quot;ndwi&quot;</span><span class="op">,</span> <span class="st">&quot;nbr&quot;</span><span class="op">,</span> <span class="st">&quot;nbr2&quot;</span><span class="op">,</span> <span class="st">&quot;ndsi&quot;</span><span class="op">,</span> <span class="st">&quot;ndfsi&quot;</span><span class="op">,</span> <span class="st">&quot;evi&quot;</span>)</span>
+<span id="cb7-22"><a href="snow-cover-imagery.html#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">median</span>()</span>
+<span id="cb7-23"><a href="snow-cover-imagery.html#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">set</span>(<span class="st">&quot;year_start&quot;</span><span class="op">,</span>year_start)</span>
+<span id="cb7-24"><a href="snow-cover-imagery.html#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">set</span>(<span class="st">&quot;year_end&quot;</span><span class="op">,</span>year_end)</span>
+<span id="cb7-25"><a href="snow-cover-imagery.html#cb7-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <script type="text/javascript">
-// create 3-year snow-cover image composites over fire areas            
-
-for (var j = 1986; j < 1990; j++){ 
+// function: generates landsat composites for a given year's winter
+var get_composites = function(year) {
   
-  // list years within imagery window
-  var years = [j-1,j,j+1,j+2];
+  // format years
+  var year_start = ee.Number(year).format().slice(0,4);
   
-  print("landsat_" + years[0] + "_"+ years[3]);
-
-  var start = ee.Date(years[0] + '-11-01');
-  var end = ee.Date(years[3] + '-05-01');
+  var year2 = ee.Number(year).add(1)
+  var year_end = ee.Number(year2).format().slice(0,4);
   
-  print(start);
-  print(end);
+  var month_start = '-11-01';
+  var month_end = '-05-01'
+  
+  var start_date = ee.String(year_start).cat(month_start)
+  var end_date = ee.String(year_end).cat(month_end)
 
-  // filter images to fire bounds and dates of interest
-  var ls_area = ls_indices
-    .filterBounds(fires_export)
-    .filterDate(start,end)
+  // filter images by bounds, date range, bands; then take composite as median
+  return ls_indices
+    .filterBounds(fires_export_buffer1500)
+    .filterDate(start_date,end_date)
     .filter(ee.Filter.calendarRange(12,4,"month"))  
+    .select("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
     .median()
-    .clip(fires_export);
-    
-  // project image to match training grid
-  var proj4326 = ee.Projection('EPSG:4326').atScale(30);
-  var ls_area_4326= ls_area.reproject(proj4326).clip(fires_export);
-  
-  // view and map
-  print(ls_area_4326);
-  Map.addLayer(ls_area_4326, {min:0,max:1,bands:["ndvi"],palette:["white","green"]}, "ndvi" + years[0] + "_" + years[3],false);
-  Map.addLayer(ls_area_4326, {min:0,max:3000,bands:["red","green","blue"]}, "Landsat EPSG:4326",false);
+    .set("year_start",year_start)
+    .set("year_end",year_end)
+}
+</script>
+</div>
+<div id="get-the-annual-imagery-for-each-fire" class="section level4 hasAnchor" number="7.3.1.2">
+<h4><span class="header-section-number">7.3.1.2</span> Get the Annual Imagery for Each Fire<a href="snow-cover-imagery.html#get-the-annual-imagery-for-each-fire" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="snow-cover-imagery.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// function: clip each image from image collection by each feature in feature collection</span></span>
+<span id="cb8-2"><a href="snow-cover-imagery.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> clip_collections <span class="op">=</span> <span class="kw">function</span>(imagecol<span class="op">,</span> featcol){</span>
+<span id="cb8-3"><a href="snow-cover-imagery.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// image collection loop</span></span>
+<span id="cb8-4"><a href="snow-cover-imagery.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> full_imagecol <span class="op">=</span> imagecol<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(image){</span>
+<span id="cb8-5"><a href="snow-cover-imagery.html#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// feature collection loop</span></span>
+<span id="cb8-6"><a href="snow-cover-imagery.html#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> full_featcol <span class="op">=</span> featcol<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(feat){</span>
+<span id="cb8-7"><a href="snow-cover-imagery.html#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="co">// clip image and add feature property id</span></span>
+<span id="cb8-8"><a href="snow-cover-imagery.html#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> ee<span class="op">.</span><span class="fu">Image</span>(image)<span class="op">.</span><span class="fu">clip</span>(ee<span class="op">.</span><span class="fu">Feature</span>(feat))</span>
+<span id="cb8-9"><a href="snow-cover-imagery.html#cb8-9" aria-hidden="true" tabindex="-1"></a>                            <span class="op">.</span><span class="fu">set</span>({<span class="st">&#39;feat&#39;</span><span class="op">:</span> ee<span class="op">.</span><span class="fu">Feature</span>(feat)<span class="op">.</span><span class="fu">id</span>()})</span>
+<span id="cb8-10"><a href="snow-cover-imagery.html#cb8-10" aria-hidden="true" tabindex="-1"></a>                            <span class="op">.</span><span class="fu">set</span>(<span class="st">&quot;Fire_ID&quot;</span><span class="op">,</span>feat<span class="op">.</span><span class="fu">get</span>(<span class="st">&quot;Fire_ID&quot;</span>))<span class="op">;</span>  </span>
+<span id="cb8-11"><a href="snow-cover-imagery.html#cb8-11" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb8-12"><a href="snow-cover-imagery.html#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// convert the FeatureCollection to list and convert it to ImageCollection</span></span>
+<span id="cb8-13"><a href="snow-cover-imagery.html#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ee<span class="op">.</span><span class="at">ImageCollection</span><span class="op">.</span><span class="fu">fromImages</span>(full_featcol<span class="op">.</span><span class="fu">toList</span>(featcol<span class="op">.</span><span class="fu">size</span>()))<span class="op">;</span></span>
+<span id="cb8-14"><a href="snow-cover-imagery.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-15"><a href="snow-cover-imagery.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// flatten, unnest lists</span></span>
+<span id="cb8-16"><a href="snow-cover-imagery.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(full_imagecol<span class="op">.</span><span class="fu">flatten</span>())<span class="op">;</span></span>
+<span id="cb8-17"><a href="snow-cover-imagery.html#cb8-17" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<script type="text/javascript">
+// function: clip each image from image collection by each feature in feature collection
+var clip_collections = function(imagecol, featcol){
+  // image collection loop
+  var full_imagecol = imagecol.map(function(image){
+    // feature collection loop
+    var full_featcol = featcol.map(function(feat){
+      // clip image and add feature property id
+      return ee.Image(image).clip(ee.Feature(feat))
+                            .set({'feat': ee.Feature(feat).id()})
+                            .set("Fire_ID",feat.get("Fire_ID"));  
+    });
+    // convert the FeatureCollection to list and convert it to ImageCollection
+    return ee.ImageCollection.fromImages(full_featcol.toList(featcol.size()));
+  });
+  // flatten, unnest lists
+  return ee.ImageCollection(full_imagecol.flatten());
+};
+</script>
+</div>
+</div>
+<div id="apply-functions-to-each-image" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Apply Functions to Each Image<a href="snow-cover-imagery.html#apply-functions-to-each-image" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="snow-cover-imagery.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// list of start years</span></span>
+<span id="cb9-2"><a href="snow-cover-imagery.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> yearlist <span class="op">=</span> ee<span class="op">.</span><span class="at">List</span><span class="op">.</span><span class="fu">sequence</span>(<span class="dv">1984</span><span class="op">,</span><span class="dv">2020</span><span class="op">,</span><span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb9-3"><a href="snow-cover-imagery.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="snow-cover-imagery.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">// map over the list of years to return landsat image composites for each</span></span>
+<span id="cb9-5"><a href="snow-cover-imagery.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> wrap_img <span class="op">=</span> yearlist<span class="op">.</span><span class="fu">map</span>(get_composites)<span class="op">;</span></span>
+<span id="cb9-6"><a href="snow-cover-imagery.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="snow-cover-imagery.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">// clip landsat composites to each fire boundary</span></span>
+<span id="cb9-8"><a href="snow-cover-imagery.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat_col <span class="op">=</span> ee<span class="op">.</span><span class="at">ImageCollection</span><span class="op">.</span><span class="fu">fromImages</span>(wrap_img)</span>
+<span id="cb9-9"><a href="snow-cover-imagery.html#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="snow-cover-imagery.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">// clip output</span></span>
+<span id="cb9-11"><a href="snow-cover-imagery.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> output <span class="op">=</span> <span class="fu">clip_collections</span>(landsat_col<span class="op">,</span> fires_export_buffer1500)</span></code></pre></div>
+<script type="text/javascript">
+// list of start years
+var yearlist = ee.List.sequence(1984,2020,1);
 
-  // export to drive
+// map over the list of years to return landsat image composites for each
+var wrap_img = yearlist.map(get_composites);
+
+// clip landsat composites to each fire boundary
+var landsat_col = ee.ImageCollection.fromImages(wrap_img)
+
+// clip output
+var output = clip_collections(landsat_col, fires_export_buffer1500)
+</script>
+</div>
+</div>
+<div id="prepare-and-export-images" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Prepare and Export Images<a href="snow-cover-imagery.html#prepare-and-export-images" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="snow-cover-imagery.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// list fire IDs and get total number of fires</span></span>
+<span id="cb10-2"><a href="snow-cover-imagery.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> fireID <span class="op">=</span> ee<span class="op">.</span><span class="fu">List</span>(fires_export_buffer1500<span class="op">.</span><span class="fu">aggregate_array</span>(<span class="st">&#39;Fire_ID&#39;</span>))<span class="op">.</span><span class="fu">getInfo</span>()<span class="op">;</span></span>
+<span id="cb10-3"><a href="snow-cover-imagery.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> nFires <span class="op">=</span> fireID<span class="op">.</span><span class="at">length</span><span class="op">;</span></span></code></pre></div>
+<script type="text/javascript">
+// list fire IDs and get total number of fires
+var fireID = ee.List(fires_export_buffer1500.aggregate_array('Fire_ID')).getInfo();
+var nFires = fireID.length;
+</script>
+<div id="functions-to-prepare-images-1" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Functions to Prepare Images<a href="snow-cover-imagery.html#functions-to-prepare-images-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="get-year-wavelength-band-names" class="section level4 hasAnchor" number="7.4.1.1">
+<h4><span class="header-section-number">7.4.1.1</span> Get Year-Wavelength Band Names<a href="snow-cover-imagery.html#get-year-wavelength-band-names" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb11-1"><a href="snow-cover-imagery.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// rename bands to include imagery year</span></span>
+<span id="cb11-2"><a href="snow-cover-imagery.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> name_bands <span class="op">=</span> <span class="kw">function</span>(image) {</span>
+<span id="cb11-3"><a href="snow-cover-imagery.html#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="kw">var</span> div <span class="op">=</span> ee<span class="op">.</span><span class="fu">String</span>(<span class="st">&#39;_&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-4"><a href="snow-cover-imagery.html#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">var</span> year <span class="op">=</span> image<span class="op">.</span><span class="fu">getString</span>(<span class="st">&#39;year_start&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-5"><a href="snow-cover-imagery.html#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> image<span class="op">.</span><span class="fu">rename</span>(image<span class="op">.</span><span class="fu">bandNames</span>()<span class="op">.</span><span class="fu">map</span>(<span class="kw">function</span>(bandName){</span>
+<span id="cb11-6"><a href="snow-cover-imagery.html#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ee<span class="op">.</span><span class="fu">String</span>(bandName)<span class="op">.</span><span class="fu">cat</span>(div)<span class="op">.</span><span class="fu">cat</span>(year)<span class="op">;</span></span>
+<span id="cb11-7"><a href="snow-cover-imagery.html#cb11-7" aria-hidden="true" tabindex="-1"></a>      }))<span class="op">;</span></span>
+<span id="cb11-8"><a href="snow-cover-imagery.html#cb11-8" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span></code></pre></div>
+<script type="text/javascript">
+// rename bands to include imagery year
+var name_bands = function(image) {
+      var div = ee.String('_');
+      var year = image.getString('year_start');
+      return image.rename(image.bandNames().map(function(bandName){
+        return ee.String(bandName).cat(div).cat(year);
+      }));
+    };
+</script>
+</div>
+<div id="get-cleaned-band-name-strings" class="section level4 hasAnchor" number="7.4.1.2">
+<h4><span class="header-section-number">7.4.1.2</span> Get Cleaned Band Name Strings<a href="snow-cover-imagery.html#get-cleaned-band-name-strings" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb12-1"><a href="snow-cover-imagery.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// remove prefix from toBands function</span></span>
+<span id="cb12-2"><a href="snow-cover-imagery.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> clean_band_names <span class="op">=</span> <span class="kw">function</span>(bandName){</span>
+<span id="cb12-3"><a href="snow-cover-imagery.html#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ee<span class="op">.</span><span class="fu">String</span>(bandName)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">24</span><span class="op">,</span><span class="dv">50</span>)</span>
+<span id="cb12-4"><a href="snow-cover-imagery.html#cb12-4" aria-hidden="true" tabindex="-1"></a>        }</span></code></pre></div>
+<script type="text/javascript">
+// remove prefix from toBands function
+var clean_band_names = function(bandName){
+        return ee.String(bandName).slice(24,50)
+        }
+</script>
+</div>
+</div>
+<div id="export-3" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Export<a href="snow-cover-imagery.html#export-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb13-1"><a href="snow-cover-imagery.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// loop through all fires, and create single image with bands from each landsat composite year</span></span>
+<span id="cb13-2"><a href="snow-cover-imagery.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">// export to drive</span></span>
+<span id="cb13-3"><a href="snow-cover-imagery.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">var</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> nFires<span class="op">;</span> j<span class="op">++</span>){</span>
+<span id="cb13-4"><a href="snow-cover-imagery.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="snow-cover-imagery.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> id   <span class="op">=</span> fireID[j]<span class="op">;</span></span>
+<span id="cb13-6"><a href="snow-cover-imagery.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> fireExport <span class="op">=</span> output<span class="op">.</span><span class="fu">filterMetadata</span>(<span class="st">&#39;Fire_ID&#39;</span><span class="op">,</span> <span class="st">&#39;equals&#39;</span><span class="op">,</span> id)</span>
+<span id="cb13-7"><a href="snow-cover-imagery.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> firePolygon <span class="op">=</span> ee<span class="op">.</span><span class="fu">Feature</span>(fires_export_buffer1500<span class="op">.</span><span class="fu">filterMetadata</span>(<span class="st">&#39;Fire_ID&#39;</span><span class="op">,</span> <span class="st">&#39;equals&#39;</span><span class="op">,</span> id)<span class="op">.</span><span class="fu">first</span>())<span class="op">.</span><span class="fu">geometry</span>()<span class="op">;</span></span>
+<span id="cb13-8"><a href="snow-cover-imagery.html#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="snow-cover-imagery.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> fireExport_bands <span class="op">=</span> fireExport<span class="op">.</span><span class="fu">map</span>(name_bands)</span>
+<span id="cb13-10"><a href="snow-cover-imagery.html#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="snow-cover-imagery.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> merge <span class="op">=</span> fireExport_bands<span class="op">.</span><span class="fu">toBands</span>()</span>
+<span id="cb13-12"><a href="snow-cover-imagery.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-13"><a href="snow-cover-imagery.html#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> exportImg<span class="op">=</span> merge<span class="op">.</span><span class="fu">rename</span>(merge<span class="op">.</span><span class="fu">bandNames</span>()<span class="op">.</span><span class="fu">map</span>(clean_band_names))<span class="op">;</span></span>
+<span id="cb13-14"><a href="snow-cover-imagery.html#cb13-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-15"><a href="snow-cover-imagery.html#cb13-15" aria-hidden="true" tabindex="-1"></a>  Export<span class="op">.</span><span class="at">image</span><span class="op">.</span><span class="fu">toDrive</span>({</span>
+<span id="cb13-16"><a href="snow-cover-imagery.html#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">image</span><span class="op">:</span> exportImg<span class="op">,</span></span>
+<span id="cb13-17"><a href="snow-cover-imagery.html#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">folder</span><span class="op">:</span> <span class="st">&quot;landsat_clipped_13bandyearly&quot;</span><span class="op">,</span></span>
+<span id="cb13-18"><a href="snow-cover-imagery.html#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">description</span><span class="op">:</span> id<span class="op">,</span></span>
+<span id="cb13-19"><a href="snow-cover-imagery.html#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">crs</span><span class="op">:</span> <span class="st">&quot;EPSG:4326&quot;</span><span class="op">,</span></span>
+<span id="cb13-20"><a href="snow-cover-imagery.html#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span><span class="op">,</span></span>
+<span id="cb13-21"><a href="snow-cover-imagery.html#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">scale</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
+<span id="cb13-22"><a href="snow-cover-imagery.html#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">region</span><span class="op">:</span> firePolygon</span>
+<span id="cb13-23"><a href="snow-cover-imagery.html#cb13-23" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span> </span>
+<span id="cb13-24"><a href="snow-cover-imagery.html#cb13-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<script type="text/javascript">
+// loop through all fires, and create single image with bands from each landsat composite year
+// export to drive
+for (var j = 0; j < nFires; j++){
+  
+  var id   = fireID[j];
+  var fireExport = output.filterMetadata('Fire_ID', 'equals', id)
+  var firePolygon = ee.Feature(fires_export_buffer1500.filterMetadata('Fire_ID', 'equals', id).first()).geometry();
+
+  var fireExport_bands = fireExport.map(name_bands)
+
+  var merge = fireExport_bands.toBands()
+  
+  var exportImg= merge.rename(merge.bandNames().map(clean_band_names));
+    
   Export.image.toDrive({
-        image: ls_area_4326,
-        folder: "landsat_prefire_" + years[0] + "_" + years[3],
-        description: "landsat_prefire_" + years[0] + "_" + years[3],
-        crs: "EPSG:4326",
-        maxPixels: 1e13,
-        scale: 30,
-        region: fires_export
-    }); 
+    image: exportImg,
+    folder: "landsat_clipped_13bandyearly",
+    description: id,
+    crs: "EPSG:4326",
+    maxPixels: 1e13,
+    scale: 30,
+    region: firePolygon
+}); 
 }
 </script>
 

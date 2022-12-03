@@ -14,6 +14,10 @@ always_allow_html: true
 
 # About
 
+Code in progress!
+
+The project seeks to analyze the trajectory and patterning of conifer regeneration following high-severity wildfire
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(

@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-11-30" />
+<meta name="date" content="2022-12-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="snow-cover-imagery.html"/>
-
+<link rel="next" href="ndvi-trajectory.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,27 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_crop_cd2435-1/data_stars_forestgroup_cropcfba85.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/raster(rast_predicted)_3f8b24-1/data_stars_rasterrast_predictedced40a.txt"></script>
-<script src="libs/raster(rast_predicted)_e95a78-1/data_stars_rasterrast_predicted4b3ec0.txt"></script>
 
 
 <style type="text/css">
@@ -177,13 +156,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Final Fire Dataset</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.3.1</b> Selected fires by year</a></li>
-<li class="chapter" data-level="2.3.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.3.2</b> Selected fires by majority forest type</a></li>
+<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#dataset-overview"><i class="fa fa-check"></i><b>2.3.1</b> Dataset Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.4</b> Export Data</a>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping-1"><i class="fa fa-check"></i><b>2.4</b> Mapping</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.4.1</b> Final Cleanup for Export</a></li>
-<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.4.2</b> Export</a></li>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.5.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.5.2</b> Export</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
@@ -220,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
-<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-2"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
 <li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
@@ -246,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
 <li class="chapter" data-level="6.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-2"><i class="fa fa-check"></i><b>6.4</b> Export</a></li>
+<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-data-3"><i class="fa fa-check"></i><b>6.4</b> Export Data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow Cover Imagery</a>
 <ul>
@@ -255,16 +238,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
 <li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions"><i class="fa fa-check"></i><b>7.2</b> Functions</a>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-snow-cover-landsat-collection"><i class="fa fa-check"></i><b>7.2</b> Create Snow-Cover Landsat Collection</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-spectral-indices"><i class="fa fa-check"></i><b>7.2.1</b> Get Spectral Indices</a></li>
-<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-clear-images"><i class="fa fa-check"></i><b>7.2.2</b> Get Clear Images</a></li>
-<li class="chapter" data-level="7.2.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#get-snow-covered-pixels"><i class="fa fa-check"></i><b>7.2.3</b> Get snow-Covered Pixels</a></li>
+<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images"><i class="fa fa-check"></i><b>7.2.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.2.2</b> Map Functions Across Image Collection</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Image Composites</a>
+<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-annual-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Annual Image Composites</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.3.1</b> Map Functions Across Image Collection</a></li>
-<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-3-year-landsat-composites"><i class="fa fa-check"></i><b>7.3.2</b> Create 3-year Landsat Composites</a></li>
+<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-create-annual-image-composites"><i class="fa fa-check"></i><b>7.3.1</b> Functions to Create Annual Image Composites</a></li>
+<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#apply-functions-to-each-image"><i class="fa fa-check"></i><b>7.3.2</b> Apply Functions to Each Image</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#prepare-and-export-images"><i class="fa fa-check"></i><b>7.4</b> Prepare and Export Images</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images-1"><i class="fa fa-check"></i><b>7.4.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-2"><i class="fa fa-check"></i><b>7.4.2</b> Export</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="model-development.html"><a href="model-development.html"><i class="fa fa-check"></i><b>8</b> Model Development</a>
@@ -272,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat for 2020-2021 Winter</a></li>
 <li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
 <li class="chapter" data-level="8.1.4" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
 </ul></li>
@@ -280,18 +267,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
 <li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
-<li class="chapter" data-level="8.2.3" data-path="model-development.html"><a href="model-development.html#training-data-by-sampling-quadrant"><i class="fa fa-check"></i><b>8.2.3</b> Training Data by Sampling Quadrant</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
 <ul>
 <li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
-<li class="chapter" data-level="8.3.2" data-path="model-development.html"><a href="model-development.html#examine-variable-correlation"><i class="fa fa-check"></i><b>8.3.2</b> Examine Variable Correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.4</b> Model</a>
 <ul>
 <li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#random-forest"><i class="fa fa-check"></i><b>8.5</b> Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.1</b> Import Fires</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-landsast"><i class="fa fa-check"></i><b>9.1.2</b> Import Landsast</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -319,29 +312,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.1</span> Set Up<a href="model-development.html#set-up-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="libraries-4" class="section level3 hasAnchor" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Libraries<a href="model-development.html#libraries-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="model-development.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
-<span id="cb58-2"><a href="model-development.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb58-3"><a href="model-development.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb58-4"><a href="model-development.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb58-5"><a href="model-development.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb58-6"><a href="model-development.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb58-7"><a href="model-development.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
-<span id="cb58-8"><a href="model-development.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
-<span id="cb58-9"><a href="model-development.html#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="model-development.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb1-2"><a href="model-development.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-3"><a href="model-development.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-4"><a href="model-development.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="model-development.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="model-development.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb1-7"><a href="model-development.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb1-8"><a href="model-development.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb1-9"><a href="model-development.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code></pre></div>
 </div>
-<div id="import-snow-cover-landsat" class="section level3 hasAnchor" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Import Snow-Cover Landsat<a href="model-development.html#import-snow-cover-landsat" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="model-development.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in snow-on landsat imagery tiles, merge into collection</span></span>
-<span id="cb59-2"><a href="model-development.html#cb59-2" aria-hidden="true" tabindex="-1"></a>rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_2019_2022&quot;</span>, <span class="at">pattern=</span><span class="st">&#39;.tif&#39;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
-<span id="cb59-3"><a href="model-development.html#cb59-3" aria-hidden="true" tabindex="-1"></a>rast_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rast_list, rast)</span>
-<span id="cb59-4"><a href="model-development.html#cb59-4" aria-hidden="true" tabindex="-1"></a>rast_collection <span class="ot">&lt;-</span> <span class="fu">sprc</span>(rast_all)</span>
-<span id="cb59-5"><a href="model-development.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="model-development.html#cb59-6" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(rast_collection[<span class="dv">1</span>])</span></code></pre></div>
+<div id="import-snow-cover-landsat-for-2020-2021-winter" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Import Snow-Cover Landsat for 2020-2021 Winter<a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="model-development.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in snow-on landsat imagery tiles, merge into collection</span></span>
+<span id="cb2-2"><a href="model-development.html#cb2-2" aria-hidden="true" tabindex="-1"></a>rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_2021&quot;</span>, <span class="at">pattern=</span><span class="st">&#39;.tif&#39;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="model-development.html#cb2-3" aria-hidden="true" tabindex="-1"></a>rast_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rast_list, rast)</span>
+<span id="cb2-4"><a href="model-development.html#cb2-4" aria-hidden="true" tabindex="-1"></a>rast_collection <span class="ot">&lt;-</span> <span class="fu">sprc</span>(rast_all)</span>
+<span id="cb2-5"><a href="model-development.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="model-development.html#cb2-6" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(rast_collection[<span class="dv">1</span>])</span></code></pre></div>
 </div>
 <div id="import-fire-boundaries-3" class="section level3 hasAnchor" number="8.1.3">
 <h3><span class="header-section-number">8.1.3</span> Import Fire Boundaries<a href="model-development.html#import-fire-boundaries-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="model-development.html#cb60-1" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb60-2"><a href="model-development.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="model-development.html#cb3-1" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="model-development.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span></code></pre></div>
 <pre><code>## Reading layer `fires_export&#39; from data source 
 ##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\fire_boundaries\fires_export.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -353,9 +346,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="import-training-points" class="section level3 hasAnchor" number="8.1.4">
 <h3><span class="header-section-number">8.1.4</span> Import Training Points<a href="model-development.html#import-training-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="model-development.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in training points</span></span>
-<span id="cb62-2"><a href="model-development.html#cb62-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/points/points_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb62-3"><a href="model-development.html#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="model-development.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in training points</span></span>
+<span id="cb5-2"><a href="model-development.html#cb5-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/points/points_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="model-development.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 <pre><code>## Reading layer `points_export&#39; from data source 
 ##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\points\points_export.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -370,253 +363,163 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.2</span> Prepare Training Data<a href="model-development.html#prepare-training-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="extract-landsat-values" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Extract Landsat Values<a href="model-development.html#extract-landsat-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="model-development.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract landsat values to each training point</span></span>
-<span id="cb64-2"><a href="model-development.html#cb64-2" aria-hidden="true" tabindex="-1"></a>extracted_df <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb64-3"><a href="model-development.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rast_all)){</span>
-<span id="cb64-4"><a href="model-development.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb64-5"><a href="model-development.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  extracted_points <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(terra<span class="sc">::</span><span class="fu">extract</span>(rast_collection[i], points,<span class="at">bind =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb64-6"><a href="model-development.html#cb64-6" aria-hidden="true" tabindex="-1"></a>  extracted_df[[i]] <span class="ot">&lt;-</span> extracted_points </span>
-<span id="cb64-7"><a href="model-development.html#cb64-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5
-## [1] 6
-## [1] 7
-## [1] 8
-## [1] 9
-## [1] 10
-## [1] 11
-## [1] 12
-## [1] 13
-## [1] 14
-## [1] 15
-## [1] 16
-## [1] 17
-## [1] 18
-## [1] 19
-## [1] 20
-## [1] 21
-## [1] 22
-## [1] 23
-## [1] 24
-## [1] 25
-## [1] 26
-## [1] 27
-## [1] 28
-## [1] 29
-## [1] 30
-## [1] 31
-## [1] 32</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="model-development.html#cb66-1" aria-hidden="true" tabindex="-1"></a>training_dataset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,extracted_df) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-2"><a href="model-development.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">absence =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(class <span class="sc">==</span> <span class="st">&quot;absence&quot;</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>,</span>
-<span id="cb66-3"><a href="model-development.html#cb66-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;presence&quot;</span>)),</span>
-<span id="cb66-4"><a href="model-development.html#cb66-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">class =</span> <span class="fu">fct_relevel</span>(<span class="fu">as.factor</span>(class),<span class="fu">c</span>(<span class="st">&quot;absence&quot;</span>,<span class="st">&quot;presencetrace&quot;</span>,<span class="st">&quot;presence1to10&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-5"><a href="model-development.html#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">f_type =</span> ptch_fr,</span>
-<span id="cb66-6"><a href="model-development.html#cb66-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_ha =</span> ptch_r_) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-7"><a href="model-development.html#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb66-8"><a href="model-development.html#cb66-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pixel_qa,<span class="sc">-</span>qd_vnt_,<span class="sc">-</span>qd_fr_d) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-9"><a href="model-development.html#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ndvi)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="model-development.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract landsat values to each training point</span></span>
+<span id="cb7-2"><a href="model-development.html#cb7-2" aria-hidden="true" tabindex="-1"></a>extracted_df <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb7-3"><a href="model-development.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(rast_all)){</span>
+<span id="cb7-4"><a href="model-development.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  extracted_points <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(terra<span class="sc">::</span><span class="fu">extract</span>(rast_collection[i], points,<span class="at">bind =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb7-5"><a href="model-development.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  extracted_df[[i]] <span class="ot">&lt;-</span> extracted_points </span>
+<span id="cb7-6"><a href="model-development.html#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-7"><a href="model-development.html#cb7-7" aria-hidden="true" tabindex="-1"></a>training_dataset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,extracted_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="model-development.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">absence =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(class <span class="sc">==</span> <span class="st">&quot;absence&quot;</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>,</span>
+<span id="cb7-9"><a href="model-development.html#cb7-9" aria-hidden="true" tabindex="-1"></a>                                       <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;presence&quot;</span>)),</span>
+<span id="cb7-10"><a href="model-development.html#cb7-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">class =</span> <span class="fu">case_when</span>(class <span class="sc">==</span> <span class="st">&quot;presence20to40&quot;</span> <span class="sc">~</span> <span class="st">&quot;20-60%&quot;</span>,</span>
+<span id="cb7-11"><a href="model-development.html#cb7-11" aria-hidden="true" tabindex="-1"></a>                           class <span class="sc">==</span> <span class="st">&quot;presence40to60&quot;</span> <span class="sc">~</span> <span class="st">&quot;20-60%&quot;</span>,</span>
+<span id="cb7-12"><a href="model-development.html#cb7-12" aria-hidden="true" tabindex="-1"></a>                           class <span class="sc">==</span> <span class="st">&quot;presence10to20&quot;</span> <span class="sc">~</span> <span class="st">&quot;10-20%&quot;</span>,</span>
+<span id="cb7-13"><a href="model-development.html#cb7-13" aria-hidden="true" tabindex="-1"></a>                           class <span class="sc">==</span> <span class="st">&quot;presence1to10&quot;</span> <span class="sc">~</span> <span class="st">&quot;1-10%&quot;</span>,</span>
+<span id="cb7-14"><a href="model-development.html#cb7-14" aria-hidden="true" tabindex="-1"></a>                           class <span class="sc">==</span> <span class="st">&quot;presencetrace&quot;</span> <span class="sc">~</span> <span class="st">&quot;&lt;1%&quot;</span>,</span>
+<span id="cb7-15"><a href="model-development.html#cb7-15" aria-hidden="true" tabindex="-1"></a>                           class <span class="sc">==</span> <span class="st">&quot;presence60plus&quot;</span> <span class="sc">~</span> <span class="st">&quot;&gt;60%&quot;</span>,</span>
+<span id="cb7-16"><a href="model-development.html#cb7-16" aria-hidden="true" tabindex="-1"></a>                           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>),</span>
+<span id="cb7-17"><a href="model-development.html#cb7-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">class =</span> <span class="fu">fct_relevel</span>(<span class="fu">as.factor</span>(class),<span class="fu">c</span>(<span class="st">&quot;absence&quot;</span>,<span class="st">&quot;&lt;1%&quot;</span>,<span class="st">&quot;1-10%&quot;</span>,<span class="st">&quot;10-20%&quot;</span>,<span class="st">&quot;20-60%&quot;</span>,<span class="st">&quot;&gt;60%&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-18"><a href="model-development.html#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">f_type =</span> ptch_fr,</span>
+<span id="cb7-19"><a href="model-development.html#cb7-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_ha =</span> ptch_r_) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-20"><a href="model-development.html#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-21"><a href="model-development.html#cb7-21" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pixel_qa,<span class="sc">-</span>qd_vnt_,<span class="sc">-</span>qd_fr_d) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-22"><a href="model-development.html#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ndvi)</span></code></pre></div>
 </div>
 <div id="training-data-by-forest-type" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Training Data by Forest Type<a href="model-development.html#training-data-by-forest-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="model-development.html#cb67-1" aria-hidden="true" tabindex="-1"></a>pres_abs_type <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb67-2"><a href="model-development.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(f_type,absence) <span class="sc">%&gt;%</span> </span>
-<span id="cb67-3"><a href="model-development.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb67-4"><a href="model-development.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent=</span> <span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb67-5"><a href="model-development.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(absence<span class="sc">==</span><span class="st">&quot;presence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="model-development.html#cb8-1" aria-hidden="true" tabindex="-1"></a>pres_abs_type <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="model-development.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(f_type,absence) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="model-development.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="model-development.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent=</span> <span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="model-development.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(absence<span class="sc">==</span><span class="st">&quot;presence&quot;</span>)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;f_type&#39;. You can override using the
 ## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="model-development.html#cb69-1" aria-hidden="true" tabindex="-1"></a>pres_abs_type</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="model-development.html#cb10-1" aria-hidden="true" tabindex="-1"></a>pres_abs_type</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 4
 ## # Groups:   f_type [7]
 ##   f_type          absence      n percent
 ##   &lt;chr&gt;           &lt;fct&gt;    &lt;int&gt;   &lt;dbl&gt;
-## 1 Douglas-Fir     presence   484    75.4
-## 2 Fir-Spruce      presence   516    68.3
-## 3 Lodegepole Pine presence  1064    85.7
-## 4 Other           presence    25    75.8
-## 5 Ponderosa       presence    19   100  
-## 6 Unforested      presence   399    70  
+## 1 Douglas-Fir     presence   414    75.8
+## 2 Fir-Spruce      presence   510    68.1
+## 3 Lodegepole Pine presence  1023    85.3
+## 4 Other           presence    16    66.7
+## 5 Ponderosa       presence    11   100  
+## 6 Unforested      presence   396    70.8
 ## 7 &lt;NA&gt;            presence     1    50</code></pre>
-</div>
-<div id="training-data-by-sampling-quadrant" class="section level3 hasAnchor" number="8.2.3">
-<h3><span class="header-section-number">8.2.3</span> Training Data by Sampling Quadrant<a href="model-development.html#training-data-by-sampling-quadrant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="model-development.html#cb71-1" aria-hidden="true" tabindex="-1"></a>pres_abs_quad <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb71-2"><a href="model-development.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(quad,absence) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-3"><a href="model-development.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-4"><a href="model-development.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent=</span> <span class="dv">100</span><span class="sc">*</span>n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-5"><a href="model-development.html#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(absence<span class="sc">==</span><span class="st">&quot;presence&quot;</span>)</span></code></pre></div>
-<pre><code>## `summarise()` has grouped output by &#39;quad&#39;. You can override using the
-## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="model-development.html#cb73-1" aria-hidden="true" tabindex="-1"></a>pres_abs_quad</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 4
-## # Groups:   quad [5]
-##   quad    absence      n percent
-##   &lt;chr&gt;   &lt;fct&gt;    &lt;int&gt;   &lt;dbl&gt;
-## 1 neg_ext presence   592    72.5
-## 2 neg_int presence   628    77.1
-## 3 pos_ext presence   656    79.5
-## 4 pos_int presence   631    78.5
-## 5 &lt;NA&gt;    presence     1    50</code></pre>
 </div>
 </div>
 <div id="examine-data" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Examine Data<a href="model-development.html#examine-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="plot-ndvi-by-density-class" class="section level3 hasAnchor" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> Plot NDVI by Density Class<a href="model-development.html#plot-ndvi-by-density-class" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="model-development.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset,<span class="fu">aes</span>(class,ndvi)) <span class="sc">+</span></span>
-<span id="cb75-2"><a href="model-development.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="model-development.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset,<span class="fu">aes</span>(class,ndvi)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="model-development.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="model-development.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;NDVI by Percent Conifer Cover Class: All Classes&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Visually Estimated Conifer Percent Cover&quot;</span>,<span class="at">y =</span> <span class="st">&quot;NDVI&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/ggplotting-1.png" width="672" /></p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="model-development.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;absence&quot;</span>,<span class="st">&quot;presencetrace&quot;</span>)),<span class="fu">aes</span>(class,ndvi)) <span class="sc">+</span></span>
-<span id="cb76-2"><a href="model-development.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb76-3"><a href="model-development.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span>.<span class="dv">1</span>,.<span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 6 rows containing non-finite values (stat_boxplot).</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="model-development.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;absence&quot;</span>,<span class="st">&quot;&lt;1%&quot;</span>)),<span class="fu">aes</span>(class,ndvi)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="model-development.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb13-3"><a href="model-development.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span>.<span class="dv">1</span>,.<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="model-development.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;NDVI by Percent Conifer Cover Class: Trace Conifer Class vs. Absence&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Visually Estimated Conifer Percent Cover&quot;</span>,<span class="at">y =</span> <span class="st">&quot;NDVI&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/ggplotting-2.png" width="672" /></p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-development.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset,<span class="fu">aes</span>(absence,ndvi)) <span class="sc">+</span></span>
-<span id="cb78-2"><a href="model-development.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="model-development.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(training_dataset,<span class="fu">aes</span>(absence,ndvi)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="model-development.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="model-development.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;NDVI by Percent Conifer Cover Class: Presence vs. Absence &quot;</span>,<span class="at">x =</span> <span class="st">&quot;Visually Estimated Conifer Percent Cover&quot;</span>,<span class="at">y =</span> <span class="st">&quot;NDVI&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/ggplotting-3.png" width="672" /></p>
-</div>
-<div id="examine-variable-correlation" class="section level3 hasAnchor" number="8.3.2">
-<h3><span class="header-section-number">8.3.2</span> Examine Variable Correlation<a href="model-development.html#examine-variable-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="model-development.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(training_dataset <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;class&quot;</span>,<span class="st">&quot;ndvi&quot;</span>,<span class="st">&quot;savi&quot;</span>,<span class="st">&quot;ndsi&quot;</span>,<span class="st">&quot;ndfsi&quot;</span>,<span class="st">&quot;nbr2&quot;</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/pairs%20plots-1.png" width="672" /></p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-development.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(training_dataset <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;ndvi&quot;</span>,<span class="st">&quot;ndfsi&quot;</span>),</span>
-<span id="cb80-2"><a href="model-development.html#cb80-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">16</span>),</span>
-<span id="cb80-3"><a href="model-development.html#cb80-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;dark green&quot;</span>)[training_dataset<span class="sc">$</span>absence])</span></code></pre></div>
-<p><img src="_main_files/figure-html/pairs%20plots-2.png" width="672" /></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="model-development.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(training_dataset <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ndvi, evi, savi, ndsi,ndfsi, ndwi, nbr, nbr2)) </span></code></pre></div>
-<pre><code>##               ndvi         evi         savi       ndsi        ndfsi        ndwi
-## ndvi   1.000000000  0.30491671  0.996454457 -0.7427875 -0.002754375 -0.97989942
-## evi    0.304916712  1.00000000  0.302528158 -0.2373597  0.045823412 -0.34051426
-## savi   0.996454457  0.30252816  1.000000000 -0.7409383  0.002289476 -0.98127829
-## ndsi  -0.742787463 -0.23735975 -0.740938317  1.0000000  0.594820090  0.75443408
-## ndfsi -0.002754375  0.04582341  0.002289476  0.5948201  1.000000000  0.00476788
-## ndwi  -0.979899418 -0.34051426 -0.981278294  0.7544341  0.004767880  1.00000000
-## nbr    0.269451200  0.17265615  0.266491644  0.1629191  0.684603934 -0.28449883
-## nbr2   0.219373399  0.13925969  0.206800607 -0.4593308 -0.314543919 -0.24868557
-##              nbr       nbr2
-## ndvi   0.2694512  0.2193734
-## evi    0.1726561  0.1392597
-## savi   0.2664916  0.2068006
-## ndsi   0.1629191 -0.4593308
-## ndfsi  0.6846039 -0.3145439
-## ndwi  -0.2844988 -0.2486856
-## nbr    1.0000000  0.3247287
-## nbr2   0.3247287  1.0000000</code></pre>
 </div>
 </div>
 <div id="model" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Model<a href="model-development.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="logistic" class="section level3 hasAnchor" number="8.4.1">
 <h3><span class="header-section-number">8.4.1</span> Logistic<a href="model-development.html#logistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="model-development.html#cb83-1" aria-hidden="true" tabindex="-1"></a>training_dataset <span class="ot">&lt;-</span> training_dataset <span class="sc">%&gt;%</span> </span>
-<span id="cb83-2"><a href="model-development.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">binom=</span><span class="fu">case_when</span>(absence<span class="sc">==</span><span class="st">&quot;absence&quot;</span><span class="sc">~</span><span class="dv">0</span>,</span>
-<span id="cb83-3"><a href="model-development.html#cb83-3" aria-hidden="true" tabindex="-1"></a>                         <span class="cn">TRUE</span> <span class="sc">~</span><span class="dv">1</span>),</span>
-<span id="cb83-4"><a href="model-development.html#cb83-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">binom=</span><span class="fu">as.factor</span>(binom)) <span class="sc">%&gt;%</span> </span>
-<span id="cb83-5"><a href="model-development.html#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="model-development.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full model </span></span>
-<span id="cb84-2"><a href="model-development.html#cb84-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(binom <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> savi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="model-development.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##         red       green        blue         nir       swir1       swir2 
-##   40.235624   39.136461   35.594514   19.229265   24.435774   22.559527 
-##        ndsi       ndfsi        savi        ndvi         evi         nbr 
-##   11.708580   10.725242 3767.066381 3782.203445    1.459624    7.957492 
-##        nbr2        ndwi 
-##    1.679466    6.815018</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="model-development.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove savi </span></span>
-<span id="cb88-2"><a href="model-development.html#cb88-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="model-development.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="model-development.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full model </span></span>
+<span id="cb15-2"><a href="model-development.html#cb15-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, </span>
+<span id="cb15-3"><a href="model-development.html#cb15-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb15-4"><a href="model-development.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
 <pre><code>##       red     green      blue       nir     swir1     swir2      ndsi     ndfsi 
-## 40.214274 39.126259 35.587646 19.218533 24.433118 22.555966 11.693810 10.723308 
+## 24.774409 18.529373 12.977073 12.276477 19.984143 17.953243 11.134529 13.744253 
 ##      ndvi       evi       nbr      nbr2      ndwi 
-##  5.851116  1.459246  7.955661  1.678455  6.810776</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="model-development.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove red </span></span>
-<span id="cb92-2"><a href="model-development.html#cb92-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="model-development.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##     green      blue       nir     swir1     swir2      ndsi     ndfsi      ndvi 
-## 36.396132 23.319884 17.297794 24.197945 22.315908 11.604013 10.617050  5.538773 
-##       evi       nbr      nbr2      ndwi 
-##  1.456638  7.927216  1.628194  6.698962</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="model-development.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove swir1</span></span>
-<span id="cb96-2"><a href="model-development.html#cb96-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="model-development.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##     green      blue       nir     swir2      ndsi     ndfsi      ndvi       evi 
-## 36.049444 23.349710 16.817068  9.416591 11.644033 10.160828  5.552099  1.456431 
-##       nbr      nbr2      ndwi 
-##  7.929256  1.421744  6.706886</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="model-development.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove green</span></span>
-<span id="cb100-2"><a href="model-development.html#cb100-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="model-development.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##      blue       nir     swir2      ndsi     ndfsi      ndvi       evi       nbr 
-##  6.452192 13.072599  9.336570 11.525160 10.099043  5.398357  1.456322  7.930256 
-##      nbr2      ndwi 
-##  1.419714  6.440838</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="model-development.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove ndfsi</span></span>
-<span id="cb104-2"><a href="model-development.html#cb104-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="model-development.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##      blue       nir     swir2      ndsi      ndvi       evi       nbr      nbr2 
-##  6.427382 13.040423  9.307760  7.631528  5.438639  1.452517  6.103190  1.372902 
-##      ndwi 
-##  6.366622</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="model-development.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove nir</span></span>
-<span id="cb108-2"><a href="model-development.html#cb108-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> blue <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span>nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="model-development.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##     blue    swir2     ndsi     ndvi      evi      nbr     nbr2     ndwi 
-## 4.316539 4.881275 7.523335 5.555723 1.456012 5.337671 1.366129 6.150173</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="model-development.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove ndsi</span></span>
-<span id="cb112-2"><a href="model-development.html#cb112-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> blue <span class="sc">+</span> swir2 <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="model-development.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
-<pre><code>##     blue    swir2     ndvi      evi      nbr     nbr2     ndwi 
-## 4.068954 4.471110 5.528265 1.454677 2.264452 1.113399 5.662548</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="model-development.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># final model</span></span>
-<span id="cb116-2"><a href="model-development.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_conifer)</span></code></pre></div>
+##  4.099328  1.043081  8.597776  1.738429  4.990175</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="model-development.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove</span></span>
+<span id="cb17-2"><a href="model-development.html#cb17-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, </span>
+<span id="cb17-3"><a href="model-development.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb17-4"><a href="model-development.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##       red     green      blue       nir     swir1     swir2      ndsi     ndfsi 
+## 24.774409 18.529373 12.977073 12.276477 19.984143 17.953243 11.134529 13.744253 
+##      ndvi       evi       nbr      nbr2      ndwi 
+##  4.099328  1.043081  8.597776  1.738429  4.990175</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="model-development.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove</span></span>
+<span id="cb19-2"><a href="model-development.html#cb19-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, </span>
+<span id="cb19-3"><a href="model-development.html#cb19-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb19-4"><a href="model-development.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##       red     green      blue       nir     swir1     swir2      ndsi     ndfsi 
+## 24.774409 18.529373 12.977073 12.276477 19.984143 17.953243 11.134529 13.744253 
+##      ndvi       evi       nbr      nbr2      ndwi 
+##  4.099328  1.043081  8.597776  1.738429  4.990175</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="model-development.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove</span></span>
+<span id="cb21-2"><a href="model-development.html#cb21-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, </span>
+<span id="cb21-3"><a href="model-development.html#cb21-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb21-4"><a href="model-development.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##       red     green      blue       nir     swir1     swir2      ndsi     ndfsi 
+## 24.774409 18.529373 12.977073 12.276477 19.984143 17.953243 11.134529 13.744253 
+##      ndvi       evi       nbr      nbr2      ndwi 
+##  4.099328  1.043081  8.597776  1.738429  4.990175</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="model-development.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove</span></span>
+<span id="cb23-2"><a href="model-development.html#cb23-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, </span>
+<span id="cb23-3"><a href="model-development.html#cb23-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb23-4"><a href="model-development.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##       red     green      blue       nir     swir1     swir2      ndsi     ndfsi 
+## 24.774409 18.529373 12.977073 12.276477 19.984143 17.953243 11.134529 13.744253 
+##      ndvi       evi       nbr      nbr2      ndwi 
+##  4.099328  1.043081  8.597776  1.738429  4.990175</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="model-development.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove</span></span>
+<span id="cb25-2"><a href="model-development.html#cb25-2" aria-hidden="true" tabindex="-1"></a>lm_conifer <span class="ot">&lt;-</span> <span class="fu">glm</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, </span>
+<span id="cb25-3"><a href="model-development.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> training_dataset, <span class="at">family =</span> <span class="fu">binomial</span>(logit))</span>
+<span id="cb25-4"><a href="model-development.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_conifer)</span></code></pre></div>
+<pre><code>##       red     green      blue       nir     swir1     swir2      ndsi     ndfsi 
+## 24.774409 18.529373 12.977073 12.276477 19.984143 17.953243 11.134529 13.744253 
+##      ndvi       evi       nbr      nbr2      ndwi 
+##  4.099328  1.043081  8.597776  1.738429  4.990175</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="model-development.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># final model</span></span>
+<span id="cb27-2"><a href="model-development.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_conifer)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = absence ~ blue + swir2 + ndvi + evi + nbr + nbr2 + 
-##     ndwi, family = binomial(logit), data = training_dataset)
+## glm(formula = absence ~ red + green + blue + nir + swir1 + swir2 + 
+##     ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, family = binomial(logit), 
+##     data = training_dataset)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -3.4229   0.0000   0.0051   0.2532   2.6226  
+## -2.9521   0.0006   0.0375   0.4373   4.5493  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -9.413e+00  1.623e+00  -5.800 6.63e-09 ***
-## blue         9.148e-05  4.065e-05   2.250  0.02443 *  
-## swir2       -2.518e-03  3.990e-04  -6.312 2.76e-10 ***
-## ndvi         2.144e+01  4.604e+00   4.657 3.21e-06 ***
-## evi          1.742e-01  2.301e-01   0.757  0.44899    
-## nbr          1.392e+01  2.009e+00   6.926 4.34e-12 ***
-## nbr2         4.097e+00  1.249e+00   3.280  0.00104 ** 
-## ndwi        -1.895e+01  4.161e+00  -4.554 5.26e-06 ***
+## (Intercept) -7.695e+00  1.456e+00  -5.286 1.25e-07 ***
+## red          2.171e-04  6.980e-05   3.110 0.001870 ** 
+## green       -1.083e-04  7.110e-05  -1.523 0.127787    
+## blue        -1.739e-05  5.454e-05  -0.319 0.749824    
+## nir         -1.581e-04  7.091e-05  -2.230 0.025749 *  
+## swir1        2.056e-04  6.468e-04   0.318 0.750608    
+## swir2       -1.315e-03  6.807e-04  -1.932 0.053308 .  
+## ndsi         6.203e+00  2.598e+00   2.387 0.016964 *  
+## ndfsi        9.988e+00  3.575e+00   2.794 0.005204 ** 
+## ndvi         1.260e+01  2.378e+00   5.298 1.17e-07 ***
+## evi         -4.026e-03  4.782e-02  -0.084 0.932919    
+## nbr         -4.523e+00  3.073e+00  -1.472 0.141074    
+## nbr2         4.401e+00  1.151e+00   3.824 0.000131 ***
+## ndwi        -1.727e+01  2.789e+00  -6.191 5.98e-10 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 3525.7  on 3258  degrees of freedom
-## Residual deviance: 1674.7  on 3251  degrees of freedom
-## AIC: 1690.7
+##     Null deviance: 3351.1  on 3086  degrees of freedom
+## Residual deviance: 1871.5  on 3073  degrees of freedom
+##   (3 observations deleted due to missingness)
+## AIC: 1899.5
 ## 
-## Number of Fisher Scoring iterations: 9</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="model-development.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_conifer)</span></code></pre></div>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-
-## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-
-## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-
-## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+## Number of Fisher Scoring iterations: 8</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="model-development.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm_conifer)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: binomial, link: logit
@@ -627,75 +530,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## 
 ##       Df Deviance Resid. Df Resid. Dev
-## NULL                   3258     3525.7
-## blue   1   691.00      3257     2834.7
-## swir2  1    91.16      3256     2743.5
-## ndvi   1   958.47      3255     1785.0
-## evi    1     6.42      3254     1778.6
-## nbr    1    69.64      3253     1709.0
-## nbr2   1    13.97      3252     1695.0
-## ndwi   1    20.35      3251     1674.7</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="model-development.html#cb121-1" aria-hidden="true" tabindex="-1"></a>image_subset <span class="ot">&lt;-</span> <span class="fu">mask</span>(rast_collection[<span class="dv">1</span>],fires_export)</span>
-<span id="cb121-2"><a href="model-development.html#cb121-2" aria-hidden="true" tabindex="-1"></a>rast_predicted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">predict</span>(image_subset,lm_conifer, <span class="at">type=</span><span class="st">&quot;response&quot;</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>)</span>
-<span id="cb121-3"><a href="model-development.html#cb121-3" aria-hidden="true" tabindex="-1"></a>rast_predicted[rast_predicted <span class="sc">&lt;</span> .<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb121-4"><a href="model-development.html#cb121-4" aria-hidden="true" tabindex="-1"></a>rast_predicted[rast_predicted <span class="sc">&gt;=</span> .<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb121-5"><a href="model-development.html#cb121-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(<span class="fu">raster</span>(rast_predicted))</span></code></pre></div>
-<pre><code>## Warning in rasterCheckSize(x, maxpixels = maxpixels): maximum number of pixels for Raster* viewing is 5e+05 ; 
-## the supplied Raster* has 37748736 
-##  ... decreasing Raster* resolution to 5e+05 pixels
-##  to view full resolution set &#39;maxpixels =  37748736 &#39;</code></pre>
-<div id="htmlwidget-28feedcaa7db3048d38b" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-28feedcaa7db3048d38b">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[48.9348267871268,-118.626126529119],[48.3950389024631,-117.656549812119]],0.8,null,"raster(rast_predicted)","raster(rast_predicted)"]},{"method":"removeLayersControl","args":[]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"raster(rast_predicted)",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addControl","args":["","topright","imageValues-raster(rast_predicted)","info legend "]},{"method":"addImageQuery","args":["raster(rast_predicted)",[-118.626126529119,48.3950389024631,-117.656549812119,48.9348267871268],"mousemove",7,"Layer"]},{"method":"addLegend","args":[{"colors":["#040404 , #040404 0%, #4C1258 20%, #A01975 40%, #E45358 60%, #F7AA2D 80%, #FFFE9E 100%, #FFFE9E "],"labels":["0.0","0.2","0.4","0.6","0.8","1.0"],"na_color":"#BEBEBE","na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"raster(rast_predicted)","extra":{"p_1":0,"p_n":1},"layerId":null,"className":"info legend","group":"raster(rast_predicted)"}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-118.626126529119,47.2790520554377,-116.97035179743,48.9348267871268,true,"raster(rast_predicted)","Zoom to raster(rast_predicted)","<strong> raster(rast_predicted) <\/strong>","bottomright"]}],"limits":{"lat":[48.3950389024631,48.9348267871268],"lng":[-118.626126529119,-117.656549812119]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+## NULL                   3086     3351.1
+## red    1   417.35      3085     2933.7
+## green  1    53.22      3084     2880.5
+## blue   1    11.06      3083     2869.4
+## nir    1    49.60      3082     2819.8
+## swir1  1   146.73      3081     2673.1
+## swir2  1    73.56      3080     2599.5
+## ndsi   1   104.92      3079     2494.6
+## ndfsi  1   297.84      3078     2196.8
+## ndvi   1   268.16      3077     1928.6
+## evi    1     0.02      3076     1928.6
+## nbr    1     0.80      3075     1927.8
+## nbr2   1    19.15      3074     1908.6
+## ndwi   1    37.15      3073     1871.5</code></pre>
 </div>
 </div>
 <div id="random-forest" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Random Forest<a href="model-development.html#random-forest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="model-development.html#cb123-1" aria-hidden="true" tabindex="-1"></a>rf_conifer <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndvi <span class="sc">+</span> savi <span class="sc">+</span> evi <span class="sc">+</span> ndsi<span class="sc">+</span>ndfsi<span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi, <span class="at">data=</span> training_dataset)</span>
-<span id="cb123-2"><a href="model-development.html#cb123-2" aria-hidden="true" tabindex="-1"></a>randomForest<span class="sc">::</span><span class="fu">importance</span>(rf_conifer)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="model-development.html#cb31-1" aria-hidden="true" tabindex="-1"></a>rf_conifer <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(absence <span class="sc">~</span> red <span class="sc">+</span> green <span class="sc">+</span> blue <span class="sc">+</span> nir <span class="sc">+</span> swir1 <span class="sc">+</span> swir2 <span class="sc">+</span> ndsi <span class="sc">+</span> ndfsi <span class="sc">+</span> ndvi <span class="sc">+</span> evi <span class="sc">+</span> nbr <span class="sc">+</span> nbr2 <span class="sc">+</span> ndwi,</span>
+<span id="cb31-2"><a href="model-development.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data=</span> training_dataset <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="model-development.html#cb32-1" aria-hidden="true" tabindex="-1"></a>randomForest<span class="sc">::</span><span class="fu">importance</span>(rf_conifer)</span></code></pre></div>
 <pre><code>##       MeanDecreaseGini
-## red           50.18582
-## green         55.12659
-## blue          62.76091
-## nir           43.16774
-## swir1         51.66101
-## swir2         69.06332
-## ndvi         191.08833
-## savi         189.37411
-## evi           45.00630
-## ndsi          54.96172
-## ndfsi         60.66696
-## nbr           75.04712
-## nbr2          79.92951
-## ndwi         130.85822</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="model-development.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rf_conifer)</span></code></pre></div>
+## red           61.81990
+## green         64.00488
+## blue          74.47025
+## nir           50.30442
+## swir1         64.28877
+## swir2         70.70463
+## ndsi          64.67439
+## ndfsi         70.76357
+## ndvi         227.47471
+## evi           57.25009
+## nbr           78.62937
+## nbr2          59.64392
+## ndwi         158.12495</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="model-development.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rf_conifer)</span></code></pre></div>
 <pre><code>##                 Length Class  Mode     
 ## call               3   -none- call     
 ## type               1   -none- character
-## predicted       3259   factor numeric  
+## predicted       3085   factor numeric  
 ## err.rate        1500   -none- numeric  
 ## confusion          6   -none- numeric  
-## votes           6518   matrix numeric  
-## oob.times       3259   -none- numeric  
+## votes           6170   matrix numeric  
+## oob.times       3085   -none- numeric  
 ## classes            2   -none- character
-## importance        14   -none- numeric  
+## importance        13   -none- numeric  
 ## importanceSD       0   -none- NULL     
 ## localImportance    0   -none- NULL     
 ## proximity          0   -none- NULL     
 ## ntree              1   -none- numeric  
 ## mtry               1   -none- numeric  
 ## forest            14   -none- list     
-## y               3259   factor numeric  
+## y               3085   factor numeric  
 ## test               0   -none- NULL     
 ## inbag              0   -none- NULL     
 ## terms              3   terms  call</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="model-development.html#cb127-1" aria-hidden="true" tabindex="-1"></a>rast_predicted <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">predict</span>(image_subset,rf_conifer, <span class="at">type=</span><span class="st">&quot;response&quot;</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>)</span>
-<span id="cb127-2"><a href="model-development.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(<span class="fu">raster</span>(rast_predicted))</span></code></pre></div>
-<pre><code>## Warning in rasterCheckSize(x, maxpixels = maxpixels): maximum number of pixels for Raster* viewing is 5e+05 ; 
-## the supplied Raster* has 37748736 
-##  ... decreasing Raster* resolution to 5e+05 pixels
-##  to view full resolution set &#39;maxpixels =  37748736 &#39;</code></pre>
-<div id="htmlwidget-91260312d9eaadb4c903" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-91260312d9eaadb4c903">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[48.9348267871268,-118.626126529119],[48.3950389024631,-117.656549812119]],0.8,null,"raster(rast_predicted)","raster(rast_predicted)"]},{"method":"removeLayersControl","args":[]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"raster(rast_predicted)",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addControl","args":["","topright","imageValues-raster(rast_predicted)","info legend "]},{"method":"addImageQuery","args":["raster(rast_predicted)",[-118.626126529119,48.3950389024631,-117.656549812119,48.9348267871268],"mousemove",7,"Layer"]},{"method":"addLegend","args":[{"colors":["#040404 , #040404 0%, #4B1258 20%, #A01975 40%, #E45358 60%, #F7AA2D 80%, #FFFE9E 100%, #FFFE9E "],"labels":["1.0","1.2","1.4","1.6","1.8","2.0"],"na_color":"#BEBEBE","na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"raster(rast_predicted)","extra":{"p_1":0,"p_n":1},"layerId":null,"className":"info legend","group":"raster(rast_predicted)"}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-118.626126529119,47.2790520554377,-116.97035179743,48.9348267871268,true,"raster(rast_predicted)","Zoom to raster(rast_predicted)","<strong> raster(rast_predicted) <\/strong>","bottomright"]}],"limits":{"lat":[48.3950389024631,48.9348267871268],"lng":[-118.626126529119,-117.656549812119]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
 
 </div>
 </div>
@@ -704,8 +594,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="snow-cover-imagery.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="snow-cover-imagery.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ndvi-trajectory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,178 @@
+# NDVI Trajectory
+
+## Set Up
+```{r libraries6, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(sf)
+library(terra)
+library(raster)
+library(mapview)
+library(exactextractr)
+```
+
+### Import Fires
+
+```{r patch and fire import, message=FALSE, warning=FALSE, results='hide'}
+# import high-severity patches
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG: 4326")
+
+# set crs
+crs <- crs(patches)
+
+# import fire boundaries
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(., crs=crs)
+```
+
+### Import Landsast
+
+```{r band names, message=FALSE, warning=FALSE}
+# list band names and years
+bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "pixel_qa", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "savi", "evi")
+years <- c(1988:2021)
+
+# create list of all combinations of bands, in the appropriate order
+bandnames <- list(bands,years) %>%
+  cross() %>%
+  map(lift(paste0))
+
+bandlist <- do.call(rbind,bandnames)
+```
+
+```{r extract function, message=FALSE, warning=FALSE}
+# get list of fire names
+fire_names <- unique(fires_export$Fire_ID)
+
+## subset for testing
+fire_names <- c("Fire_44_1990","Fire_45_1990","Fire_46_1990","Fire_47_1990","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_52_1991","Fire_53_1991")
+
+# create function 
+extract_landsat <- function(fire_name){
+  # print(paste0("Starting Fire ",fire_name))
+  
+  # get list of this fire's tif files
+  rast_list <- list.files(path = "data/landsat/landsat_clipped", pattern=fire_name, all.files=TRUE, full.names=TRUE)
+  
+  # larger rasters were exported as multiple files, need to be combined before importing
+  if (length(rast_list)>1) { 
+    # print(paste0(length(rast_list)," rasters, merging..."))
+    rast_all <- lapply(rast_list, rast)
+    rast_collection <- do.call(merge,rast_all)
+    } else { 
+    # print("Only one raster, adding directly to raster list")
+    rast_collection <- rast(rast_list)  
+    }
+  
+  # name the bands
+  names(rast_collection) <- bandlist
+  
+  # verify crs
+  crs(rast_collection) <- "EPSG: 4326"
+  
+  # filter the patches for this fire
+  fire_patches <- patches %>% 
+    filter(Fire_ID==fire_name) %>% 
+    st_transform(crs=crs(rast_collection))
+  
+  # get the mean landsat values for each patch in this fire
+  extracted_data <- left_join(fire_patches, exact_extract(rast_collection,fire_patches, append_cols = TRUE, max_cells_in_memory = 3e+08, fun = "mean")) %>% 
+    st_drop_geometry()
+  
+  # export
+  return(extracted_data)
+}
+```
+
+
+```{r extract, message=FALSE, warning=FALSE, results='hide'}
+# map extraction function across all fires
+extracted_fires <- map(fire_names,extract_landsat)
+
+# combine dataset
+landsat_dataset <- do.call(rbind, extracted_fires)
+```
+
+```{r clean dataset}
+ndvi_dataset <- landsat_dataset %>% 
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n()),
+         prefire_yr = year-1,
+         patch_area_class = case_when(ptch_r_ >= 1000 ~ "giant",
+                                 ptch_r_ < 1000 & ptch_r_ >= 500 ~ "large",
+                                 ptch_r_ < 500 & ptch_r_ >= 100 ~ "big",
+                                 ptch_r_ < 100 & ptch_r_ >= 50 ~ "medium",
+                                 ptch_r_ < 50 & ptch_r_ >= 10 ~ "small",
+                                 TRUE ~ "tiny")) %>% 
+  rename(fire_yr = year,
+         patch_area = ptch_r_,
+         patch_foresttype = ptch_fr,
+         Event_ID = Evnt_ID,
+         Incid_Name = Incd_Nm,
+         ecoregion = ecoregn) %>% 
+  dplyr::select(Event_ID, Incid_Name, Fire_ID, Patch_ID, prefire_yr, fire_yr, 
+                ecoregion, patch_foresttype, patch_area, patch_area_class, contains("ndvi")) %>%
+  pivot_longer(.,contains("ndvi"),names_to = "landsat_yr", values_to = "ndvi") %>% 
+  mutate(landsat_yr = landsat_yr %>%  stringr::str_remove("mean.ndvi")) %>% 
+  mutate(prefire_ndvi = case_when(prefire_yr == landsat_yr ~ ndvi)) %>% 
+  group_by(Patch_ID) %>% 
+  mutate(prefire_ndvi = mean(prefire_ndvi, na.rm=TRUE)) %>%
+  ungroup() %>% 
+  mutate(delta_ndvi = ndvi - prefire_ndvi)
+```
+
+```{r group datasets}
+ndvi_grouped_type <- ndvi_dataset %>% 
+  group_by(patch_foresttype,landsat_yr) %>% 
+  summarize(ndvi=mean(ndvi),
+            delta_ndvi = mean(delta_ndvi)) %>% 
+  drop_na()
+
+ndvi_grouped_size <- ndvi_dataset %>% 
+  group_by(patch_area_class,landsat_yr) %>% 
+  summarize(ndvi=mean(ndvi),
+            delta_ndvi = mean(delta_ndvi)) %>% 
+  drop_na() 
+```
+
+
+```{r graphs!! type}
+ggplot(ndvi_grouped_type,aes(landsat_yr,ndvi,color=patch_foresttype,group=patch_foresttype))+
+  geom_point() + 
+  geom_smooth(method="auto",se=FALSE) + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+
+ggplot(ndvi_grouped_type,aes(landsat_yr,ndvi,color=patch_foresttype,group=patch_foresttype))+
+  geom_line(size=1) + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+
+ggplot(ndvi_grouped_type%>%  dplyr::filter (patch_foresttype %in% c("Douglas-Fir","Fir-Spruce","Lodegepole Pine")),aes(landsat_yr ,ndvi,color=patch_foresttype,group=patch_foresttype)) +
+  geom_line(size=1) + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+```
+
+
+```{r graphs!! typediff}
+# by ndvi diff
+ggplot(ndvi_grouped_type,aes(landsat_yr,delta_ndvi,color=patch_foresttype,group=patch_foresttype))+
+  geom_point() + 
+  geom_smooth(method="auto",se=FALSE) + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+
+ggplot(ndvi_grouped_type,aes(landsat_yr,delta_ndvi,color=patch_foresttype,group=patch_foresttype))+
+  geom_line(size=1) + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+```
+
+
+```{r graphs!! size}
+ggplot(ndvi_grouped_size,aes(landsat_yr,ndvi,color=patch_area_class,group=patch_area_class))+
+  geom_point() + 
+  geom_smooth(method="auto",se=FALSE) + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+
+ggplot(ndvi_grouped_size,aes(landsat_yr,ndvi,color=patch_area_class,group=patch_area_class))+
+  geom_line() + 
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+
+```

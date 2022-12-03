@@ -17,6 +17,10 @@ library(ggplot2)
 library(exactextractr)
 library(patchwoRk)
 library(gridExtra)
+library(knitr)
+library(rasterVis)
+library(RColorBrewer)
+
 ```
 
 ### USDA National Forest Type Group Dataset
@@ -48,14 +52,28 @@ eco_select <- l3eco %>%
 #### Ecoregions
 
 ```{r mapping ecoregion, message=FALSE, warning=FALSE}
-mapview(eco_select)
+# mapview
+palette <- brewer.pal(18,"YlGn")
+palette[1] <- rgb(255, 255, 255, maxColorValue=255, alpha=1)
+mapview(eco_select,na.color=palette[1],legend=TRUE)
 ```
 
 #### Forest Type Groups
 
 ```{r mapping ftype, message=FALSE, warning=FALSE}
-forestgroup_crop <- crop(conus_forestgroup,l3eco)
-mapview(forestgroup_crop)
+# convert raster values to factors
+forestgroup_eco <- crop(conus_forestgroup,eco_select) %>% 
+  mask(.,eco_select) %>% 
+  as.factor()
+
+# add a labels for forest type code 
+group_levels <- levels(forestgroup_eco)[[1]]
+group_levels[["forest_type"]] <- c("0: Unforested","120: Spruce/Fir","180: Pinyon/Juniper","200: Douglas-fir","220: Ponderosa Pine","240: Western White Pine","260: Fir/Spruce/Mountain Hemlock","280: Lodgepole Pine","300: Hemlock/Sitka Spruce","320: Western Larch","360: Other Western Softwood","370: California Mixed Conifer","400: Oak/Pine","500: Oak/Hickory","700: Elm/Ash/Cottonwood","900: Aspen/Birch","920: Western Oak","950: Other Western Hardwoods")
+
+levels(forestgroup_eco) <- group_levels
+
+# mapview
+mapview(forestgroup_eco, col.regions=palette,na.color=palette[1],legend=TRUE)
 ```
 
 ## Define Fire Parameters
@@ -261,6 +279,25 @@ fires_mtbs <- st_join(mtbs_select,fires_select,left=FALSE,largest=TRUE) %>%
 ```
 
 ## Final Fire Dataset
+
+### Dataset Overview
+
+```{r}
+full_dataset <- fires_select %>% 
+  st_drop_geometry() %>% 
+  dplyr::select(Fire_ID,year,ecoregion,fire_foresttype,area_acres,highsev) %>% 
+  mutate(highsev = round(highsev,2),
+         area_acres = round(area_acres,0))  
+
+kable(full_dataset, 
+      align = 'c',
+      padding = 1,
+      col.names = c("Fire ID", "Year", "Ecoregion", "Majority Forest Type","Area (acres)", "High Severity %"),
+      caption = "High-Severity Conifer-Dominated Fires 1988-1991")
+```
+
+
+## Mapping
 
 ### Selected fires by year
 ```{r plot year}
