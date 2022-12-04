@@ -35,8 +35,8 @@ fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>%
 #### Bands
 ```{r band names, message=FALSE, warning=FALSE}
 # list band names and years
-bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "pixel_qa", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "savi", "evi")
-years <- c(1988:2021)
+bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
+years <- c(1984:2020)
 
 # create list of all combinations of bands, in the appropriate order
 bandnames <- list(bands,years) %>%
@@ -52,29 +52,29 @@ bandlist <- do.call(rbind,bandnames)
 # get list of fire names
 fire_names <- unique(fires_export$Fire_ID)
 
-## subset for testing
-fire_names <- c("Fire_44_1990","Fire_45_1990","Fire_46_1990","Fire_47_1990","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_52_1991","Fire_53_1991")
+# ## subset for testing
+# fire_names <- c("Fire_44_1990","Fire_45_1990","Fire_46_1990","Fire_47_1990","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_52_1991","Fire_53_1991")
 ```
 
 ## Connect Landsat and High-Severity Patches
 
 ### Function to Extract Landsat
 
-```{r extract function, message=FALSE, warning=FALSE}
+```{r extract function, message=FALSE, warning=FALSE,results='hide'}
 # create function 
 extract_landsat <- function(fire_name){
-  # print(paste0("Starting Fire ",fire_name))
+  print(paste0("Starting Fire ",fire_name))
   
   # get list of this fire's tif files
-  rast_list <- list.files(path = "data/landsat/landsat_clipped", pattern=fire_name, all.files=TRUE, full.names=TRUE)
+  rast_list <- list.files(path = "data/landsat/landsat_annual", pattern=fire_name, all.files=TRUE, full.names=TRUE)
   
   # larger rasters were exported from GEE as multiple files, need to be combined before importing
   if (length(rast_list)>1) { 
-    # print(paste0(length(rast_list)," rasters, merging..."))
+    print(paste0(length(rast_list)," rasters, merging..."))
     rast_all <- lapply(rast_list, rast)
     rast_collection <- do.call(merge,rast_all)
     } else { 
-    # print("Only one raster, adding directly to raster list")
+    print("Only one raster, can extract directly")
     rast_collection <- rast(rast_list)  
     }
   
@@ -90,6 +90,7 @@ extract_landsat <- function(fire_name){
     st_transform(crs=crs(rast_collection))
   
   # get the mean landsat values for each patch in this fire
+  print("Extracting raster...")
   extracted_data <- left_join(fire_patches, exact_extract(rast_collection,fire_patches, append_cols = TRUE, max_cells_in_memory = 3e+08, fun = "mean")) %>% 
     st_drop_geometry()
   
@@ -105,7 +106,8 @@ extract_landsat <- function(fire_name){
 extracted_fires <- map(fire_names,extract_landsat)
 
 # combine dataset
-landsat_dataset <- do.call(rbind, extracted_fires)
+landsat_dataset <- do.call(rbind, extracted_fires) %>% 
+  st_drop_geometry()
 ```
 
 ## Prepare Dataset 
@@ -116,13 +118,13 @@ landsat_dataset <- do.call(rbind, extracted_fires)
 # clean dataset, label, select only ndvi, calculate pre-fire ndvi & differenced ndvi
 ndvi_dataset <- landsat_dataset %>% 
   mutate(Patch_ID = str_c(Fire_ID,"-",1:n()),
-         prefire_yr = year-1,
-         patch_area_class = case_when(ptch_r_ >= 1000 ~ "giant",
-                                 ptch_r_ < 1000 & ptch_r_ >= 500 ~ "large",
-                                 ptch_r_ < 500 & ptch_r_ >= 100 ~ "big",
-                                 ptch_r_ < 100 & ptch_r_ >= 50 ~ "medium",
-                                 ptch_r_ < 50 & ptch_r_ >= 10 ~ "small",
-                                 TRUE ~ "tiny")) %>% 
+         prefire_yr = as.integer(year-1),
+         patch_area_class = as.factor(case_when(ptch_r_ >= 1000 ~ ">1000 acres",
+                                                ptch_r_ < 1000 & ptch_r_ >= 500 ~ "500-1000 acres",
+                                                ptch_r_ < 500 & ptch_r_ >= 100 ~ "100-500 acres",
+                                                ptch_r_ < 100 & ptch_r_ >= 50 ~ "50-100 acres",
+                                                ptch_r_ < 50 & ptch_r_ >= 10 ~ "10-50 acres",
+                                                TRUE ~ "<10"))) %>% 
   rename(fire_yr = year,
          patch_area = ptch_r_,
          patch_foresttype = ptch_fr,
@@ -131,75 +133,113 @@ ndvi_dataset <- landsat_dataset %>%
          ecoregion = ecoregn) %>% 
   dplyr::select(Event_ID, Incid_Name, Fire_ID, Patch_ID, prefire_yr, fire_yr, 
                 ecoregion, patch_foresttype, patch_area, patch_area_class, contains("ndvi")) %>%
-  pivot_longer(.,contains("ndvi"),names_to = "landsat_yr", values_to = "ndvi") %>% 
-  mutate(landsat_yr = landsat_yr %>%  stringr::str_remove("mean.ndvi")) %>% 
-  mutate(prefire_ndvi = case_when(prefire_yr == landsat_yr ~ ndvi)) %>% 
+  pivot_longer(.,contains("ndvi"),names_to = "landsat_yr", values_to = "ndvi")%>% 
+  mutate(landsat_yr = as.integer(landsat_yr %>%  stringr::str_remove("mean.ndvi")),
+         years_postfire = landsat_yr - fire_yr) %>% 
+  mutate(prefire_ndvi = case_when(years_postfire == -1 ~ ndvi)) %>% 
   group_by(Patch_ID) %>% 
   mutate(prefire_ndvi = mean(prefire_ndvi, na.rm=TRUE)) %>%
   ungroup() %>% 
-  mutate(delta_ndvi = ndvi - prefire_ndvi)
+  mutate(delta_ndvi = ndvi - prefire_ndvi)%>%  
+  filter(patch_foresttype %in% c("Lodegepole Pine","Douglas-Fir","Fir-Spruce"))
+
+sum(is.na(ndvi_dataset$ndvi))
+
+str(ndvi_dataset)
 ```
 
 ### Regroup Data
 
-```{r group datasets}
+```{r group datasets, message=FALSE, warning=FALSE}
 ndvi_grouped_type <- ndvi_dataset %>% 
-  group_by(patch_foresttype,landsat_yr) %>% 
-  summarize(ndvi=mean(ndvi),
-            delta_ndvi = mean(delta_ndvi)) %>% 
+  group_by(patch_foresttype,years_postfire) %>% 
+  summarize(ndvi=mean(ndvi,na.rm=TRUE),
+            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
   drop_na()
 
 ndvi_grouped_size <- ndvi_dataset %>% 
-  group_by(patch_area_class,landsat_yr) %>% 
-  summarize(ndvi=mean(ndvi),
-            delta_ndvi = mean(delta_ndvi)) %>% 
+  group_by(patch_area_class,years_postfire) %>% 
+  summarize(ndvi=mean(ndvi,na.rm=TRUE),
+            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
+  drop_na() 
+
+ndvi_grouped_ecoregion <- ndvi_dataset %>% 
+  group_by(ecoregion,years_postfire) %>% 
+  summarize(ndvi=mean(ndvi,na.rm=TRUE),
+            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
   drop_na() 
 ```
 ## Plot
 
-### NDVI Change by Forest Type
+### Forest Type
+
+#### NDVI Over Time by Forest Type
 
 ```{r graphs!! type}
+ggplot(ndvi_dataset ,aes(years_postfire,ndvi,color=patch_foresttype))+
+  geom_point(size=1) +
+  geom_smooth(method="auto",se=FALSE) +
+  labs(x="Year",y="NDVI",title= "All High-Severity Patch NDVI Change 30 Years Post-Fire", subtitle = "Comparing Forest Types", color = "Patch Forest Type") 
 
-ggplot(ndvi_grouped_type,aes(landsat_yr,ndvi,color=patch_foresttype,group=patch_foresttype))+
-  geom_line(size=1) +
-  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) + 
-  labs(x="Year",y="NDVI",title= "NDVI Change Overtime 30 Years Post-Fire",color = "Patch Forest Type") 
+# ggplot(ndvi_grouped_type ,aes(years_postfire,ndvi,color=patch_foresttype,group=patch_foresttype))+
+#   geom_line(size=1) +
+#   labs(x="Year",y="NDVI",title= "NDVI Change Overtime 30 Years Post-Fire",color = "Patch Forest Type") 
 
-# ggplot(ndvi_grouped_type,aes(landsat_yr,ndvi,color=patch_foresttype,group=patch_foresttype))+
-#   geom_point() + 
-#   geom_smooth(method="auto",se=FALSE) + 
-#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+ggplot(ndvi_grouped_type,aes(years_postfire,ndvi,color=patch_foresttype,group=patch_foresttype))+
+  geom_point() +
+  geom_smooth(method="auto",se=FALSE) +
+  labs(x="Year",y="NDVI",title= "Average NDVI Change 30 Years Post-Fire", subtitle = "Comparing Forest Types",color = "Patch Forest Type") 
 
-# ggplot(ndvi_grouped_type%>%  dplyr::filter (patch_foresttype %in% c("Douglas-Fir","Fir-Spruce","Lodegepole Pine")),aes(landsat_yr ,ndvi,color=patch_foresttype,group=patch_foresttype)) +
-#   geom_line(size=1) + 
-#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
 ```
 
-### NDVI Recovery by Forest Type
+#### NDVI Recovery by Forest Type
 
 ```{r graphs!! typediff}
-# by ndvi diff
-# ggplot(ndvi_grouped_type,aes(landsat_yr,delta_ndvi,color=patch_foresttype,group=patch_foresttype))+
-#   geom_point() + 
-#   geom_smooth(method="auto",se=FALSE) + 
-#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+ggplot(ndvi_dataset ,aes(years_postfire,delta_ndvi,color=patch_foresttype))+
+  geom_point(size=1) +
+  geom_smooth(method="auto",se=FALSE) +
+  labs(x="Year",y="NDVI",title= "All High-Severity Patch NDVI Recovery 30 Years Post-Fire", subtitle = "Comparing Forest Types", color = "Patch Forest Type") +
+  geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)
 
-ggplot(ndvi_grouped_type,aes(landsat_yr,delta_ndvi,color=patch_foresttype,group=patch_foresttype))+
-  geom_line(size=1) +
-  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) + 
-  labs(x="Year",y="Change in NDVI from Pre-Fire",title= "NDVI Difference from Pre-Fire 30 Years Post-Fire",color = "Patch Forest Type") 
+
+ggplot(ndvi_grouped_type ,aes(years_postfire,delta_ndvi,color=patch_foresttype,group=patch_foresttype))+
+  geom_point(size=1) +
+  geom_smooth(method="auto",se=FALSE) + 
+  labs(x="Year",y="Change in NDVI from Pre-Fire",title= "Average NDVI Recovery 30 Years Post-Fire", subtitle = "Comparing Forest Types",color = "Patch Forest Type") +
+  geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)
 ```
-### NDVI Chaneg by Patch Area
+
+### Patch Area
+
+#### NDVI Change over Time by Patch Area
 
 ```{r graphs!! size}
-# ggplot(ndvi_grouped_size,aes(landsat_yr,ndvi,color=patch_area_class,group=patch_area_class))+
-#   geom_point() + 
-#   geom_smooth(method="auto",se=FALSE) + 
-#   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+ggplot(ndvi_grouped_size,aes(years_postfire,ndvi,color=patch_area_class,group=patch_area_class))+
+  geom_point(size=1) +
+  geom_smooth(se=FALSE,method="auto") +
+  labs(x="Year",y="NDVI",title= "All High-Severity Patch NDVI Change 30 Years Post-Fire", subtitle = "Comparing Patch Size",color = "Patch Size") 
+```
 
-ggplot(ndvi_grouped_size,aes(landsat_yr,ndvi,color=patch_area_class,group=patch_area_class))+
-  geom_line(size=1) +
+### Ecoregion
+
+### NDVI Change over Time by Ecoregion
+
+```{r graphs!! ecochange}
+ggplot(ndvi_grouped_ecoregion,aes(years_postfire,ndvi,color=ecoregion,group=ecoregion))+
+  geom_point(size=1) +
+  geom_smooth(se=FALSE,method="auto") +
   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) + 
-  labs(x="Year",y="NDVI",title= "NDVI Change Overtime 30 Years Post-Fire",color = "Patch Size") 
+  labs(x="Year",y="NDVI",title= "NDVI Change Overtime 30 Years Post-Fire",subtitle= "Comparing Ecoegions",color = "Ecoregion") 
+```
+
+#### NDVI Recovery by Ecoregion
+
+```{r graphs!! eco}
+
+ggplot(ndvi_grouped_ecoregion,aes(years_postfire,delta_ndvi,color=ecoregion,group=ecoregion))+
+  geom_point(size=1) +
+  geom_smooth(se=FALSE,method="auto") +
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) + 
+  labs(x="Year",y="Change in NDVI from Pre-Fire",title= "NDVI Change Overtime 30 Years Post-Fire",color = "Ecoregion") +
+  geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)
 ```
