@@ -46,13 +46,14 @@ points <- st_read("data/points/points_export.shp") %>%
 
 ### Extract Landsat Values
 
-```{r extract landsat}
+```{r extract landsat, cache=TRUE}
 # extract landsat values to each training point
 extracted_df <- list()
 for(i in 1:length(rast_all)){
   extracted_points <- st_as_sf(terra::extract(rast_collection[i], points,bind = TRUE))
   extracted_df[[i]] <- extracted_points 
 }
+
 training_dataset <- do.call(rbind,extracted_df) %>% 
   mutate(absence = as.factor(case_when(class == "absence" ~ "absence",
                                        TRUE ~ "presence")),
@@ -105,36 +106,43 @@ ggplot(training_dataset,aes(absence,ndvi)) +
 
 ### Logistic
 
-```{r log model vif}
+```{r log model vif, message=FALSE}
 # full model 
 lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
 
-# remove
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+# remove red (highest vif)
+lm_conifer <- glm(absence ~ green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
 
-# remove
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+# remove swir1 (highest vif)
+lm_conifer <- glm(absence ~ green + blue + nir + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
 
-# remove
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+# remove green (highest vif)
+lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
 
-# remove
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+# remove ndfsi (highest vif)
+lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
 
-# remove
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+# remove nir (highest vif)
+lm_conifer <- glm(absence ~ blue + swir2 + ndsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
+
+# remove ndsi (highest vif)
+lm_conifer <- glm(absence ~ blue + swir2 + ndvi + evi + nbr + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+
+# all vif now below 5
 ```
 
 

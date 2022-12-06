@@ -43,7 +43,7 @@ forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
 ## Create High-Severity Patches
 
 ### PatchMorph
-```{r patchmorph, message=FALSE, warning=FALSE, results='hide'}
+```{r patchmorph, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # loop through RdNBR rasters, assign >640 to high severity category
 # utilize patchmorph to act as 3x3 cell majority filter
 patch_df <- list()
@@ -73,7 +73,7 @@ patches_full <- patch_poly_all %>%
   filter(patch_area_ha > 2.25)
 ```
 
-```{r inform patches, message=FALSE, warning=FALSE, results='hide'}
+```{r inform patches, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # join patches back to grouped fires
 patches_joined <- st_join(patches_full,mtbs_export,join = st_intersects,left= FALSE,largest = TRUE) %>%
   dplyr::select(-layer,-BurnBndAc) %>% 

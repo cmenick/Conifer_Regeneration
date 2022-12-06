@@ -37,7 +37,7 @@ fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>%
 
 ### Split Patches by North/South Aspects and Interior/Exterior
 
-```{r quadrant creation, message=FALSE, warning=FALSE, results='hide'}
+```{r quadrant creation, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # create list of fire IDs
 fire_list <- unique(patches$Evnt_ID)
 

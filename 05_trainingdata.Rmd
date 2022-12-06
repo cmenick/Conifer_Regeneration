@@ -26,7 +26,7 @@ quadrants <- st_read("data/patches/quadrants_export.shp") %>%
 
 ### Import and Combine Training Points
 
-```{r combine training points, message=FALSE, warning=FALSE, results='hide'}
+```{r combine training points, message=FALSE, warning=FALSE, results='hide',cache=TRUE}
 points_list <- list.files(path = "data/points/individual_fire_points/", pattern='.shp', all.files=TRUE, full.names=TRUE)
 points_all <- lapply(points_list, st_read)
 
@@ -36,7 +36,7 @@ points <- do.call(rbind,points_all) %>%
 
 ### Assign Points and Clean Data
 
-```{r join points}
+```{r join points, cache=TRUE}
 # join points dataset back to fires to fill out dataset
 points_joined <- st_join(points,patches,left=TRUE,largest=TRUE) %>% 
   st_join(.,quadrants,left=TRUE,largest=TRUE)

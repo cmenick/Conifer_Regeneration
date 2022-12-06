@@ -167,7 +167,7 @@ group_fires <- function(mtbs_year) {
 }
 ```
 
-```{r group adjacent or overlapping polygons, message=FALSE, warning=FALSE}
+```{r group adjacent or overlapping polygons, message=FALSE, warning=FALSE, cache=TRUE}
 # group adjacent polygons within each fire year
 fires_88 <- group_fires(mtbs_select %>%  filter(year == 1988))
 fires_89 <- group_fires(mtbs_select %>%  filter(year == 1989))
@@ -181,7 +181,7 @@ mtbs_grouped <- rbind(fires_88,fires_89,fires_90,fires_91)%>%
 ```
 ### Select Fires by Ecoregion and Forest Type 
 
-```{r forest typing, message=FALSE, warning=FALSE, results='hide'}
+```{r forest typing, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # assign ecoregion and proportions of forest type to each fire polygon
 fires_join <- st_join(mtbs_grouped,eco_select,join=st_intersects,left=FALSE,largest=TRUE) %>% 
   left_join(., exact_extract(conus_forestgroup,mtbs_grouped, append_cols = TRUE, max_cells_in_memory = 3e+08, 
@@ -212,7 +212,7 @@ fires <- fires_join %>%
 ```
 ### Select Fires by Burn Severity
 
-```{r extract burn severity, message=FALSE, warning=FALSE, results='hide'}
+```{r extract burn severity, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # import all mtbs rasters via a list
 rastlist <- list.files(path = "data/mtbs", pattern='.tif', all.files=TRUE, full.names=TRUE)
 allrasters <- lapply(rastlist, raster)
@@ -254,7 +254,7 @@ fires_severity <- left_join(fires,severity_df,by="Fire_ID")%>%
   filter(highsev_acres > 500)
 ```
 ### Clean Up Dataset
-```{r extract majority forest type, message=FALSE, warning=FALSE, results='hide'}
+```{r extract majority forest type, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # get the most common forest type within each polygon
 fires_select <- fires_severity %>%
   left_join(.,exact_extract(conus_forestgroup,fires_severity, 'mode', append_cols = TRUE, max_cells_in_memory = 3e+08)) 
@@ -270,7 +270,7 @@ fires_select <- fires_select %>%
            Fire_ID = str_c("Fire_",c(1:nrow(.)),"_",year))
 ```
 
-```{r get mtbs fires, message=FALSE, warning=FALSE}
+```{r get mtbs fires, message=FALSE, warning=FALSE, cache=TRUE}
 # join the grouped fires back to original mtbs boundaries
 fires_mtbs <- st_join(mtbs_select,fires_select,left=FALSE,largest=TRUE) %>% 
   filter(year.x==year.y)%>% 
