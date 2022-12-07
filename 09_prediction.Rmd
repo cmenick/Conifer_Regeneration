@@ -1,0 +1,131 @@
+# Prediction
+
+## Set Up
+
+### Libraries
+
+```{r libraries7, message=FALSE, warning=FALSE}
+library(sf)
+library(terra)
+library(tidyverse)
+library(ggplot2)
+library(randomForest)
+library(raster)
+```
+
+### Import Fire Boundaries
+
+```{r patches and fire import, message=FALSE, warning=FALSE, results='hide'}
+# import high-severity patches
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG: 4326")
+
+# set crs
+crs <- crs(patches)
+
+# import fire boundaries
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(., crs=crs)
+```
+
+### Import Models
+
+```{r}
+rf_conifer <- readRDS("data/models/rf_conifer.rds")
+lm_conifer <- readRDS("data/models/lm_conifer.rds")
+```
+
+
+### Prepare Raster Naming
+
+#### Bands
+```{r band names2, message=FALSE, warning=FALSE}
+# list band names and years
+bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
+years <- c(1984:2020)
+
+# create list of all combinations of bands, in the appropriate order
+bandnames <- list(bands,years) %>%
+  cross() %>%
+  map(lift(paste0))
+
+bandlist <- do.call(rbind,bandnames)
+```
+
+#### Fire Names
+
+```{r fire names2, message=FALSE, warning=FALSE}
+# get list of fire names
+fire_names <- unique(fires_export$Fire_ID)
+```
+
+
+## Prediction Rasters
+
+### Predict Across Rasters
+
+```{r prediction function, message=FALSE,warning=FALSE, eval = FALSE}
+
+# false eval
+
+x <- stack()
+}
+extract_landsat <- function(fire_name){
+  print(paste0("Starting Fire ",fire_name))
+  
+  fire_name = "Fire_9_1988"
+  
+  # get list of this fire's tif files
+  rast_list <- list.files(path = "data/landsat/landsat_annual", pattern=str_c(fire_name,".tif"), all.files=TRUE, full.names=TRUE)
+  fire_raster <- rast(rast_list)  
+
+  # name the bands
+  names(fire_raster) <- bandlist
+  
+  # verify crs
+  crs(fire_raster) <- "EPSG: 4326"
+  
+  # filter the patches for this fire
+  fire_patches <- patches %>% 
+    filter(Fire_ID==fire_name) %>% 
+    st_transform(crs=crs(fire_raster))
+  
+  # clip raster to patches
+  raster_clip <- mask(fire_raster,fire_patches)
+  
+  # filter rasters by year
+  # years_list <- c("1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","1990",)
+  # 2000
+  # 
+  raster_yr <- raster_clip["2020"]
+  names(raster_yr) <- list("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
+
+  
+  # Predict
+  rast_predicted <- terra::predict(raster_yr,lm_conifer, type="response", se.fit=TRUE)
+  
+  rast_predicted[rast_predicted < .5] <- 0
+rast_predicted[rast_predicted >= .5] <- 1
+  
+  mapview(raster(rast_predicted))
+  
+  library(landscapemetrics)
+  
+  lsm_l_contag(rast_predicted)
+  
+  show_landscape(rast_predicted)
+  
+  
+  
+  
+  
+  
+x<- stack(rast_predicted)
+
+
+  # export
+  return(looped_stack)
+}
+```
+
+

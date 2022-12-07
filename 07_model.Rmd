@@ -150,9 +150,12 @@ vif(lm_conifer)
 # final model
 summary(lm_conifer)
 anova(lm_conifer)
+
+# export
+# saveRDS(lm_conifer,"data/models/lm_conifer.rds")
 ```
 
-## Random Forest
+### Random Forest
 
 ```{r rf model}
 rf_conifer <- randomForest(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi,
@@ -165,4 +168,10 @@ randomForest::importance(rf_conifer)
 
 ```{r rf model summary}
 summary(rf_conifer)
+
+# export 
+# saveRDS(rf_conifer,"data/models/rf_conifer.rds")
 ```
+
+
+

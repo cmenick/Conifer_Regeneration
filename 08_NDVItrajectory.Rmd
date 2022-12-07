@@ -15,6 +15,8 @@ library(mapview)
 library(exactextractr)
 library(forcats)
 library(broom)
+library(knitr)
+library(sjPlot)
 ```
 
 ### Import Fires
@@ -60,7 +62,7 @@ fire_names <- unique(fires_export$Fire_ID)
 ### Merge Rasters
 
 ```{r merge function, message=FALSE, warning=FALSE,results='hide'}
-## function to merge rasters, if there are multiple in the folder
+# function to merge rasters, if there are multiple in the folder
 export_rasters <- function(fire_name){
   print(paste0("Starting Fire ",fire_name))
   
@@ -268,15 +270,20 @@ model_ndvi <- ndvi_grouped_type%>%
   map(function(df) 
   lm(delta_ndvi ~ years_postfire, data = df))
 
-model_ndvi_df <- as.data.frame(do.call(rbind,map(model_ndvi, coef)))%>% 
-  rownames_to_column(var = "patch_foresttype") %>% 
+model_ndvi_df <- as.data.frame(do.call(rbind,map(model_ndvi, coef))) %>% 
+  rownames_to_column("patch_foresttype") %>% 
   rename(intercept = "(Intercept)",
          slope = years_postfire) %>% 
   mutate(years_recovery = -intercept / slope)
-model_ndvi_df
 
-# Print the summary of each model
-lapply(model_ndvi, summary)
+kable(model_ndvi_df, 
+      align = 'c',
+      padding = 1,
+      col.names = c("Forest Type", "Intercept", "Slope", "Est Years to Pre-Fire NDVI"),
+      caption = "Estimated NDVI Recovery by Forest Type")
+
+tab_model(model_ndvi,dv.labels=c("Douglas-Fir","Fir-Spruce","Lodgepole Pine"),digits=3)
+
 ```
 
 ### Ecoregion
@@ -302,10 +309,14 @@ model_eco_df <- as.data.frame(do.call(rbind,map(model_eco, coef)))%>%
   rename(intercept = "(Intercept)",
          slope = years_postfire) %>% 
   mutate(years_recovery = -intercept / slope)
-model_eco_df
 
-# Print the summary of each model
-lapply(model_eco, summary)
+kable(model_eco_df, 
+      align = 'c',
+      padding = 1,
+      col.names = c("Ecoregion", "Intercept", "Slope", "Est Years to Pre-Fire NDVI"),
+      caption = "Estimated NDVI Recovery by Ecoregion")
+
+tab_model(model_eco,dv.labels=unique(model_eco_df$ecoregion),digits=3)
 
 ```
 
@@ -341,55 +352,38 @@ model_eco_type_df <- as.data.frame(do.call(rbind,map(model_eco_type, coef)))%>%
          slope = years_postfire) %>% 
   mutate(years_recovery = -intercept / slope) %>% 
   within(., do.call('rbind', strsplit(as.character(ecoregion_foresttype), '.', fixed=TRUE)))
-model_eco_type_df
 
-# Print the summary of each model
-# lapply(model_eco_type, summary)
+
+kable(model_eco_type_df, 
+      align = 'c',
+      padding = 1,
+      col.names = c("Ecoregion + ForestType", "Intercept", "Slope", "Est Years to Pre-Fire NDVI"),
+      caption = "Estimated NDVI Recovery by Ecoregion")
+
+tab_model(model_eco_type[1:4],dv.labels=unique(model_eco_df$ecoregion),digits=3,title="Douglas-Fir")
+tab_model(model_eco_type[5:8],dv.labels=unique(model_eco_df$ecoregion),digits=3,title="Fir-Spruce")
+tab_model(model_eco_type[9:12],dv.labels=unique(model_eco_df$ecoregion),digits=3,title="Lodgepole Pine")
 ```
-
-
-
-
-
-
-
 
 ```{r}
-# # model NDVI difference for each forest type
-# models <- dlply(ndvi_dataset%>%  filter(years_postfire>9), "patch_foresttype", function(df) 
-#   lmer(delta_ndvi ~ years_postfire + (1|Fire_ID), data = df, REML=TRUE))
-# 
-# # apply coef to each model and return a data frame
-# model_coef_df <- coef(models$`Douglas-Fir`)
-# model_coef_df
-# 
-# summary(models$`Douglas-Fir`)
-# 
-# colnames(model_coef_df) <- c("patch_foresttype","intercept","years_slope")
-# 
-# model_coef <- model_coef_df%>% 
-#   mutate(years_recovery = -intercept / years_slope)
-# model_coef
-# 
-# # Print the summary of each model
-# model_sums <- l_ply(models, summary, .print = TRUE)
-```
+# including patch as random effect
 
-
-
-```{r}
-# ggplotRegression <- function (fit) {
-# ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
-#   geom_point() +    
-#   stat_smooth(method = "lm", col = "red") +
-#   labs(title = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
-#                      "Intercept =",signif(fit$coef[[1]],5 ),
-#                      " Slope =",signif(fit$coef[[2]], 5),
-#                      " P =",signif(summary(fit)$coef[2,4], 5)))
-# }
+# model_ndvi_full <- ndvi_dataset%>% 
+#   filter(years_postfire>9) %>% 
+#   drop_na() %>%
+#   split(f = .$patch_foresttype) %>% 
+#   map(function(df) 
+#   lme4::lmer(delta_ndvi ~ years_postfire + (1|Patch_ID), data = df))
 # 
+# model_ndvi_full_df <- as.data.frame(do.call(rbind,map(model_ndvi_full, coef)))%>% 
+#   rownames_to_column(var = "ecoregion_foresttype")
 # 
-# ggplotRegression(fitted_models[1]$model)
+# %>% 
+#   rename(intercept = "(Intercept)",
+#          slope = years_postfire) %>% 
+#   mutate(years_recovery = -intercept / slope) %>% 
+#   within(., do.call('rbind', strsplit(as.character(ecoregion_foresttype), '.', fixed=TRUE)))
 
 ```
+
 
