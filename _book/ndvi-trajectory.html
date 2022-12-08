@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-12-06" />
+<meta name="date" content="2022-12-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -68,7 +68,7 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_0159f8-1/data_stars_forestgroup_ecob9a23f.txt"></script>
+<script src="libs/forestgroup_eco_5a268d-1/data_stars_forestgroup_ecofd0a86.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 
@@ -534,7 +534,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb114-20"><a href="ndvi-trajectory.html#cb114-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecoregion,patch_foresttype,years_postfire) <span class="sc">%&gt;%</span> </span>
 <span id="cb114-21"><a href="ndvi-trajectory.html#cb114-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
 <span id="cb114-22"><a href="ndvi-trajectory.html#cb114-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb114-23"><a href="ndvi-trajectory.html#cb114-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span></code></pre></div>
+<span id="cb114-23"><a href="ndvi-trajectory.html#cb114-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span>
+<span id="cb114-24"><a href="ndvi-trajectory.html#cb114-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-25"><a href="ndvi-trajectory.html#cb114-25" aria-hidden="true" tabindex="-1"></a>ndvi_grouped_size_type <span class="ot">&lt;-</span> ndvi_dataset <span class="sc">%&gt;%</span> </span>
+<span id="cb114-26"><a href="ndvi-trajectory.html#cb114-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(patch_area_class,patch_foresttype,years_postfire) <span class="sc">%&gt;%</span> </span>
+<span id="cb114-27"><a href="ndvi-trajectory.html#cb114-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ndvi=</span><span class="fu">mean</span>(ndvi,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb114-28"><a href="ndvi-trajectory.html#cb114-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">delta_ndvi =</span> <span class="fu">mean</span>(delta_ndvi,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb114-29"><a href="ndvi-trajectory.html#cb114-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() </span></code></pre></div>
 </div>
 </div>
 <div id="plot" class="section level2 hasAnchor" number="9.4">

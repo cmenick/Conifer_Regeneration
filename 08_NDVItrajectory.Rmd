@@ -189,6 +189,12 @@ ndvi_grouped_eco_type<- ndvi_dataset %>%
   summarize(ndvi=mean(ndvi,na.rm=TRUE),
             delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
   drop_na() 
+
+ndvi_grouped_size_type <- ndvi_dataset %>% 
+  group_by(patch_area_class,patch_foresttype,years_postfire) %>% 
+  summarize(ndvi=mean(ndvi,na.rm=TRUE),
+            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
+  drop_na() 
 ```
 
 ## Plot
