@@ -16,22 +16,13 @@ library(randomForest)
 library(raster)
 ```
 
-### Import Snow-Cover Landsat for 2020-2021 Winter
-
-```{r landsat import}
-# bring in snow-on landsat imagery tiles, merge into collection
-rast_list <- list.files(path = "data/landsat/landsat_2021", pattern='.tif', all.files=TRUE, full.names=TRUE)
-rast_all <- lapply(rast_list, rast)
-rast_collection <- sprc(rast_all)
-
-crs <- crs(rast_collection[1])
-```
-
 ### Import Fire Boundaries
 
 ```{r fire boundary import}
 fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
-  st_transform(., crs=crs)
+  st_transform(., crs="EPSG: 4326")
+
+crs <- crs(fires_export)
 ```
 
 ### Import Training Points
@@ -39,24 +30,106 @@ fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>%
 ```{r import points}
 # bring in training points
 points <- st_read("data/points/points_export.shp") %>% 
-  st_transform(crs=crs)
+  st_transform(crs=crs)%>% 
+  drop_na()
 ```
 
-## Prepare Training Data
+## Prepare Imagery
 
-### Extract Landsat Values
+### Prepare Data for Bands and Fire Names
 
-```{r extract landsat, cache=TRUE}
-# extract landsat values to each training point
-extracted_df <- list()
-for(i in 1:length(rast_all)){
-  extracted_points <- st_as_sf(terra::extract(rast_collection[i], points,bind = TRUE))
-  extracted_df[[i]] <- extracted_points 
+#### Bands
+```{r band names, message=FALSE, warning=FALSE}
+# list band names and years
+bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
+years <- c(1984:2020)
+
+# create list of all combinations of bands, in the appropriate order
+bandnames <- list(bands,years) %>%
+  cross() %>%
+  map(lift(paste0))
+
+bandlist <- do.call(rbind,bandnames)
+```
+
+#### Fire Names
+
+```{r fire names, message=FALSE, warning=FALSE}
+# get list of fire names
+fire_names_all <- unique(fires_export$Fire_ID)
+fire_names_points <- unique(points$Fire_ID,na.rm=TRUE)
+```
+
+### Merge Large Rasters
+
+```{r merge function, message=FALSE, warning=FALSE,results='hide'}
+# function to merge rasters, if there are multiple in the folder
+export_rasters <- function(fire_name){
+  print(paste0("Starting Fire ",fire_name))
+  
+  # get list of this fire's tif files
+  rast_list <- list.files(path = "data/landsat/landsat_annual", pattern=fire_name, all.files=TRUE, full.names=TRUE)
+  
+  # larger rasters were exported from GEE as multiple files, need to be combined before importing
+  if (length(rast_list)>1) { 
+    print(paste0(length(rast_list)," rasters, merging..."))
+    rast_all <- lapply(rast_list, rast)
+    rast_collection <- do.call(merge,rast_all)
+    writeRaster(rast_collection, str_c("data/landsat/landsat_annual/",fire_name,".tif"), overwrite=FALSE,gdal="COMPRESS=NONE")
+    } else { 
+    print("Only one raster, can extract directly")
+    }
 }
+```
 
+```{r message=FALSE, warning=FALSE,eval=FALSE}
+# map(fire_names_all,export_rasters)
+```
+
+## Extract Landsat Data 
+
+```{r extract function, message=FALSE,warning=FALSE}
+extract_landsat <- function(fire_name){
+  
+  print(paste0("Starting Fire ",fire_name))
+  
+  # get this fire's tif files
+  rast_list <- list.files(path = "data/landsat/landsat_training", pattern=str_c(fire_name,".tif"), all.files=TRUE, full.names=TRUE)
+  rast_fire <- rast(rast_list)  
+
+  # name the bands
+  names(rast_fire) <- bands
+  
+  # verify crs
+  crs(rast_fire) <- "EPSG: 4326"
+  
+  # filter the points for this fire
+  fire_points <- points %>% 
+    filter(Fire_ID==fire_name) %>% 
+    st_transform(crs=crs(rast_fire))
+  
+  # get the mean landsat values for each patch in this fire
+  extracted_points <- st_as_sf(terra::extract(rast_fire, fire_points,bind = TRUE))
+  
+  # export
+  return(extracted_points)
+}
+```
+
+```{r extract, message=FALSE, warning=FALSE,results = 'hide',cache=TRUE}
+# extract landsat values to each training point
+extracted_df <- map(fire_names_points, extract_landsat)
+```
+
+### Prepare Dataset
+
+```{r clean dataset}
+# compile dataset and clean dataset
 training_dataset <- do.call(rbind,extracted_df) %>% 
   mutate(absence = as.factor(case_when(class == "absence" ~ "absence",
                                        TRUE ~ "presence")),
+         binom = as.factor(case_when(class == "absence" ~ 0,
+                                       TRUE ~ 1)),
          class = case_when(class == "presence20to40" ~ "20-60%",
                            class == "presence40to60" ~ "20-60%",
                            class == "presence10to20" ~ "10-20%",
@@ -68,7 +141,7 @@ training_dataset <- do.call(rbind,extracted_df) %>%
   rename(f_type = ptch_fr,
          area_ha = ptch_r_) %>% 
   st_drop_geometry() %>% 
-  dplyr::select(-pixel_qa,-qd_vnt_,-qd_fr_d) %>% 
+  dplyr::select(-qd_vnt_,-qd_fr_d) %>% 
   drop_na(ndvi)
 ```
 
@@ -108,39 +181,52 @@ ggplot(training_dataset,aes(absence,ndvi)) +
 
 ```{r log model vif, message=FALSE}
 # full model 
-lm_conifer <- glm(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+lm_conifer <- glm(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
+max(vif(lm_conifer))
 
 # remove red (highest vif)
-lm_conifer <- glm(absence ~ green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+lm_conifer <- glm(binom ~ green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
-
-# remove swir1 (highest vif)
-lm_conifer <- glm(absence ~ green + blue + nir + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
-                  data = training_dataset, family = binomial(logit))
-vif(lm_conifer)
+max(vif(lm_conifer))
 
 # remove green (highest vif)
-lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
+lm_conifer <- glm(binom ~ blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
+max(vif(lm_conifer))
 
-# remove ndfsi (highest vif)
-lm_conifer <- glm(absence ~ blue + nir + swir2 + ndsi + ndvi + evi + nbr + nbr2 + ndwi, 
+# remove swir1 (highest vif)
+lm_conifer <- glm(binom ~ blue + nir + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
+max(vif(lm_conifer))
 
 # remove nir (highest vif)
-lm_conifer <- glm(absence ~ blue + swir2 + ndsi + ndvi + evi + nbr + nbr2 + ndwi, 
+lm_conifer <- glm(binom ~ blue + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
+max(vif(lm_conifer))
 
 # remove ndsi (highest vif)
-lm_conifer <- glm(absence ~ blue + swir2 + ndvi + evi + nbr + nbr2 + ndwi, 
+lm_conifer <- glm(binom ~ blue + swir2 + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, 
                   data = training_dataset, family = binomial(logit))
 vif(lm_conifer)
+max(vif(lm_conifer))
+
+# remove nbr (highest vif)
+lm_conifer <- glm(binom ~ blue + swir2 + ndfsi + ndvi + evi + nbr2 + ndwi, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+max(vif(lm_conifer))
+
+# remove ndwi (highest vif)
+lm_conifer <- glm(binom ~ blue + swir2 + ndfsi + ndvi + evi + nbr2, 
+                  data = training_dataset, family = binomial(logit))
+vif(lm_conifer)
+max(vif(lm_conifer))
 
 # all vif now below 5
 ```
@@ -158,7 +244,7 @@ anova(lm_conifer)
 ### Random Forest
 
 ```{r rf model}
-rf_conifer <- randomForest(absence ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi,
+rf_conifer <- randomForest(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi,
                            data= training_dataset %>% drop_na())
 ```
 
@@ -168,10 +254,6 @@ randomForest::importance(rf_conifer)
 
 ```{r rf model summary}
 summary(rf_conifer)
-
 # export 
 # saveRDS(rf_conifer,"data/models/rf_conifer.rds")
 ```
-
-
-

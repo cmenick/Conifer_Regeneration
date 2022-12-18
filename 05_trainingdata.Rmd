@@ -10,9 +10,16 @@ library(sf)
 library(terra)
 ```
 
+### Fire List
+
+```{r}
+fire_list <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
+```
+
+
 ## Import Data
 
-```{r patch import, message=FALSE, warning=FALSE, results='hide'}
+```{r patch import, message=FALSE, warning=FALSE, results='hide',cache = TRUE}
 patches <- st_read("data/patches/highsev_patches.shp") %>% 
   st_transform(crs="EPSG: 4326")
 
@@ -26,7 +33,8 @@ quadrants <- st_read("data/patches/quadrants_export.shp") %>%
 
 ### Import and Combine Training Points
 
-```{r combine training points, message=FALSE, warning=FALSE, results='hide',cache=TRUE}
+```{r combine training points, message=FALSE, results='hide',cache=TRUE}
+# list and combine training data points
 points_list <- list.files(path = "data/points/individual_fire_points/", pattern='.shp', all.files=TRUE, full.names=TRUE)
 points_all <- lapply(points_list, st_read)
 
@@ -36,14 +44,13 @@ points <- do.call(rbind,points_all) %>%
 
 ### Assign Points and Clean Data
 
-```{r join points, cache=TRUE}
+```{r join points, message=FALSE, warning=FALSE, cache=TRUE}
 # join points dataset back to fires to fill out dataset
 points_joined <- st_join(points,patches,left=TRUE,largest=TRUE) %>% 
   st_join(.,quadrants,left=TRUE,largest=TRUE)
 
 points_cleaned <- points_joined %>% 
-  dplyr::select("class","ptch_r_","Evnt_ID.x","Incd_Nm","Fire_ID.x","year","ecoregn","ptch_fr","quadrnt","qd_d_vn","qd_d_fr") %>% 
-  rename(patch_area_ha = ptch_r_,
+  dplyr::select("class","ptch_r_","Evnt_ID.x","Incd_Nm","Fire_ID.x","year","ecoregn","ptch_fr","quadrnt","qd_d_vn","qd_d_fr") %>%   rename(patch_area_ha = ptch_r_,
          Event_ID = Evnt_ID.x,
          Incid_Name = Incd_Nm,
          Fire_ID = Fire_ID.x,
@@ -51,6 +58,7 @@ points_cleaned <- points_joined %>%
          quad = quadrnt,
          quad_event_id= qd_d_vn,
          quad_fire_id=qd_d_fr) %>% 
+  filter(Fire_ID %in% fire_list) %>% 
   st_transform(crs=crs)
 ```
 

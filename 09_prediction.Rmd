@@ -27,6 +27,12 @@ crs <- crs(patches)
 # import fire boundaries
 fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
   st_transform(., crs=crs)
+
+# import mask
+# import mask of plantings and fires
+mask <- st_read("data/patches/points_dataset_MASK.shp") %>% 
+  st_transform(crs=crs) %>% 
+  st_join(.,fires_export)
 ```
 
 ### Import Models
@@ -57,7 +63,7 @@ bandlist <- do.call(rbind,bandnames)
 
 ```{r fire names2, message=FALSE, warning=FALSE}
 # get list of fire names
-fire_names <- unique(fires_export$Fire_ID)
+fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 ```
 
 
@@ -67,7 +73,11 @@ fire_names <- unique(fires_export$Fire_ID)
 
 ```{r prediction function, message=FALSE,warning=FALSE}
 
-predict_landsat_lm <- function(fire_name){
+### testing
+# fire_name <- "Fire_9_1988"
+# i = 1
+
+predict_landsat <- function(fire_name){
   print(paste0("Starting Fire ",fire_name))
   
   # import fire raster
@@ -78,13 +88,20 @@ predict_landsat_lm <- function(fire_name){
   names(fire_raster) <- bandlist
   crs(fire_raster) <- "EPSG: 4326"
   
-    # filter the patches for this fire
+  # filter the patches for this fire
   fire_patches <- patches %>% 
     filter(Fire_ID==fire_name) %>% 
     st_transform(crs=crs(fire_raster))
   
+  # filter mask for this fir
+  fire_mask <- mask %>% 
+    filter(Fire_ID == fire_name)
+  
+  # clip raster to outside of any masked areas
+  fire_raster_mask <- mask(fire_raster,fire_mask,inverse=TRUE)
+  
   # clip raster to patches
-  raster_clip <- mask(fire_raster,fire_patches)
+  raster_clip <- mask(fire_raster_mask,fire_patches)
   
   # set fire year
   fire_year_start <- mean(fire_patches$year)
@@ -107,59 +124,12 @@ predict_landsat_lm <- function(fire_name){
     
     raster_set <- mean(raster_yr1,raster_yr2,raster_yr3,na.rm=TRUE)
     
-    rast_predicted <- terra::predict(raster_set,lm_conifer, type="response", se.fit=TRUE)
+    rast_predicted_lm <- terra::predict(raster_set,lm_conifer, type="response", se.fit=TRUE, na.rm = TRUE,filename = str_c("data/prediction_rasters/",fire_name,"_lm_year",1+((i-1)*3),"to",i*3,".tif"))
     
-    pred_rasters[str_c("year",1+((i-1)*3),"to",i*3)] <- rast_predicted
-  }
-  
-  # export
-  return(pred_rasters)
-}
-
-predict_landsat_rf <- function(fire_name){
-  print(paste0("Starting Fire ",fire_name))
-  
-  # import fire raster
-  rast_list <- list.files(path = "data/landsat/landsat_annual", pattern=str_c(fire_name,".tif"), all.files=TRUE, full.names=TRUE)
-  fire_raster <- rast(rast_list)  
-
-  # name the bands, verify crs
-  names(fire_raster) <- bandlist
-  crs(fire_raster) <- "EPSG: 4326"
-  
-    # filter the patches for this fire
-  fire_patches <- patches %>% 
-    filter(Fire_ID==fire_name) %>% 
-    st_transform(crs=crs(fire_raster))
-  
-  # clip raster to patches
-  raster_clip <- mask(fire_raster,fire_patches)
-  
-  # set fire year
-  fire_year_start <- mean(fire_patches$year)
-  fire_year_end <- fire_year_start + 30
-  
-  # string of start years for 3-year image composites
-  fire_year_seq <- sequence(10,from=fire_year_start, by = 3)
-  
-  pred_rasters <- list()
-  for(i in 1:10){
-    print(i)
+    rast_predicted_rf <- terra::predict(raster_set,rf_conifer, type="response", se.fit=TRUE, na.rm = TRUE,filename = str_c("data/prediction_rasters/",fire_name,"_rf_year",1+((i-1)*3),"to",i*3,".tif"))
     
-    raster_yr1 <- raster_clip[as.character(fire_year_seq[i])]
-    raster_yr2 <- raster_clip[as.character(fire_year_seq[i]+1)]
-    raster_yr3 <- raster_clip[as.character(fire_year_seq[i]+2)]
-    
-    names(raster_yr1) <- list("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
-    names(raster_yr2) <- list("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
-    names(raster_yr3) <- list("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
-    
-    raster_set <- mean(raster_yr1,raster_yr2,raster_yr3,na.rm=TRUE)
-    
-    rast_predicted <- terra::predict(raster_set,rf_conifer, type="response", se.fit=TRUE)
-  
-    
-    pred_rasters[str_c("year",1+((i-1)*3),"to",i*3)] <- rast_predicted
+    pred_rasters[str_c("lm_year",1+((i-1)*3),"to",i*3)] <- rast_predicted_lm
+    pred_rasters[str_c("rf_year",1+((i-1)*3),"to",i*3)] <- rast_predicted_rf
   }
   
   # export
@@ -167,30 +137,9 @@ predict_landsat_rf <- function(fire_name){
 }
 ```
 
-
-```{r message=FALSE, warning=FALSE, cache = TRUE, results='hide', eval= FALSE}
-
+```{r message=FALSE, warning=FALSE, results='hide', eval= FALSE}
 # create dataset of prediction rasters for each model in 3 year increments
-prediction_dataset_lm <- map(fire_names,predict_landsat_lm)
+prediction_dataset_lm <- map(fire_names,predict_landsat)
 
 names(prediction_dataset_lm) <- fire_names
-
-prediction_dataset_rf <- map(fire_names,predict_landsat_rf)
-
-names(prediction_dataset_rf) <- fire_names
-
-
-# rast_predicted[rast_predicted < .5] <- 0
-# rast_predicted[rast_predicted >= .5] <- 1
 ```
-
-
-```{r}
-# test <- prediction_dataset_lm$Fire_21_1988$year1to3
-# test2 <- prediction_dataset_lm$Fire_21_1988$year16to18
-# test3 <- prediction_dataset_lm$Fire_21_1988$year28to30
-# 
-# 
-# mapview(raster(test)) + mapview(raster(test2)) + mapview(raster(test3))
-```
-
