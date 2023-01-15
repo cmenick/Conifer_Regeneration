@@ -7,10 +7,12 @@
 /output
 /testingR
 /workspace
+/figs
 data/
 output/
 testingR/
 workspace/
+figs/
 
 # Session Data files
 *.RData

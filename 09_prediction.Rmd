@@ -72,11 +72,6 @@ fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_
 ### Predict Across Rasters
 
 ```{r prediction function, message=FALSE,warning=FALSE}
-
-### testing
-# fire_name <- "Fire_9_1988"
-# i = 1
-
 predict_landsat <- function(fire_name){
   print(paste0("Starting Fire ",fire_name))
   

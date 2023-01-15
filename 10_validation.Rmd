@@ -1,0 +1,69 @@
+# Model Validation
+
+```{r}
+library(sf)
+library(terra)
+library(raster)
+library(tidyverse)
+library(mapview)
+```
+
+```{r}
+# final fire list
+fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
+
+# import fire and patch boundaries
+mtbs_fires <- st_read("data/fire_boundaries/mtbs_export.shp") %>% 
+  filter(Fire_ID %in% fire_names)%>% 
+  st_transform(crs="EPSG:4326")
+
+highsev_patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  filter(Fire_ID %in% fire_names)%>% 
+  st_transform(crs="EPSG:4326") 
+```
+
+```{r}
+# get all rasters from final timepoint
+rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
+```
+
+```{r}
+# create and map function to determine areal proportion of presence/absence for each fire
+get_percentages <- function(rast_file){
+  fire_rast <- rast(rast_file)
+  perc <- freq(fire_rast) %>% 
+    mutate(Fire_ID = sub( ".*rasters/", "", sub( "_rf_t.*", "", rast_file)),
+           class = case_when(value == 1 ~ "absence",
+                             value == 2 ~ "presence"),
+           percent_area = round(count/sum(count),3),
+           val_points = round(5+10*percent_area,0))
+  return(perc)
+}
+
+valid_points_df <- do.call(rbind,map(rast_list,get_percentages))
+```
+
+```{r}
+# create and map function to create presence/absence polygons from prediction raster
+get_polygons <- function(rast_file){
+  fire_rast <- rast(rast_file)
+  fire_poly <- as.polygons(fire_rast)
+  fire_poly_sf <- st_as_sf(fire_poly) %>% 
+  mutate(class = case_when(lyr1 == 1 ~ "absence",
+                           lyr1 == 2 ~ "presence"),
+         Fire_ID = sub( ".*rasters/", "", sub( "_rf_t.*", "", rast_file)))
+  return(fire_poly_sf)
+}
+
+class_polys <- do.call(rbind,map(rast_list,get_polygons))
+```
+
+```{r}
+sample_polys <- left_join(class_polys,valid_points_df,by=c("Fire_ID","class")) %>% 
+  st_transform(., crs="EPSG:4326")
+```
+
+```{r}
+# st_write(sample_polys,"data/validation/validation_polygons.shp")
+```
+

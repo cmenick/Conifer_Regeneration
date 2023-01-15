@@ -26,68 +26,114 @@ get_lsm <- function(fire_name){
   rast_fire <- rast(rast_list)
   names(rast_fire) <- rast_names
 
-  lsm_df <- list()
-  
+  fire_df <- list()
+
   for(i in rast_names){
     print(i)
+    
     # set up rasters
     rast_fire_tp <- rast_fire[[i]] %>% 
-      as.factor() %>% 
-      terra::project(.,"EPSG: 3857")
+        as.factor() %>% 
+        terra::project(.,"EPSG: 3857")
 
     patches_fire <- patches %>% 
       filter(Fire_ID == fire_name) %>% 
-      st_transform(crs = "EPSG: 3857")      
+      st_transform(crs = "EPSG: 3857")
     
-    masked_rast <- mask(rast_fire_tp,patches_fire) 
-       
-     patch_lsm <- calculate_lsm(masked_rast, 
-                                what = c("lsm_c_clumpy","lsm_c_ai","lsm_c_enn_mn","lsm_c_cohesion",
-                                         "lsm_c_pland","lsm_c_np","lsm_c_ca",
-                                         "lsm_c_area_mn","lsm_l_contag"), 
-                                count_boundary=TRUE) %>% 
-      mutate(value = round(value,digits = 4),
-             timepoint = i,
-             Fire_ID = fire_name) %>% 
-       pivot_wider(.,names_from = metric,values_from = value) %>% 
-       group_by(timepoint) %>% 
-       mutate(contag=mean(contag,na.rm=TRUE))%>% 
-       ungroup() %>% 
-       filter(class == 2)
+    lsm_df <- list()
+    
+    for(j in unique(patches_fire$Patch_ID)){
+      print(j)
 
-      lsm_df[[i]] <- patch_lsm
+      patch_patch <- patches_fire %>% 
+        filter(Patch_ID == j)
+      
+      masked_rast <- mask(rast_fire_tp,patch_patch) 
+      
+      if(all(is.na(values(masked_rast))) == FALSE){
+  
+        patch_lsm <- calculate_lsm(masked_rast, 
+                                   what = c("lsm_c_clumpy","lsm_c_ai","lsm_c_enn_mn","lsm_c_cohesion",
+                                             "lsm_c_pland","lsm_c_np","lsm_c_ca",
+                                             "lsm_c_area_mn","lsm_l_contag"), 
+                                   count_boundary=TRUE) %>% 
+          mutate(value = round(value,digits = 4),
+                 timepoint = i,
+                 Fire_ID = fire_name,
+                 patch_foresttype = patch_patch$ptch_fr,
+                 ecoregion = patch_patch$ecoregn, 
+                 patch_area = patch_patch$ptch_r_,
+                 Patch_ID = j) %>% 
+          pivot_wider(.,names_from = metric,values_from = value) %>% 
+          group_by(timepoint) %>% 
+          mutate(contag=mean(contag,na.rm=TRUE))%>% 
+          ungroup() %>% 
+          filter(class == 2)
+  
+          lsm_df[[j]] <- patch_lsm
+      } else{
+        lsm_df[[j]] <- data.frame(row.names = c("empty"))
+      }
+    } 
+    lsm_df_fire <- do.call(rbind,lsm_df)
+    fire_df[[i]] <- lsm_df_fire
   }
-  return(lsm_df)
+  return(fire_df)
 }
 ```
 
 
 ```{r message=FALSE, warning=FALSE}
-lsm_df_allfires <- map(fire_list,get_lsm)  
-lsm_dataset <- as_tibble(do.call(rbind, do.call(rbind,lsm_df_allfires)))
+subset <- fire_list[8:34]
 
-lsm_dataset_info <- left_join(lsm_dataset,fires_export,by="Fire_ID") %>% 
+lsm_df_allfires <- map(subset,get_lsm)  
+lsm_dataset <- as_tibble(do.call(rbind, do.call(rbind,lsm_df_allfires)))%>% 
   filter(timepoint != "t0")
 
 colnames(lsm_dataset)
 ```
 
+
 ```{r}
-ggplot(lsm_dataset_info %>% filter(fr_frst != "Other"),aes(timepoint,contag,group=fr_frst,color = fr_frst)) + 
-  geom_point(size = 1) +
-  geom_smooth(method = "auto",se=FALSE)
+lsm_dataset_type <- lsm_dataset %>% 
+  filter(timepoint != "t0",
+         patch_foresttype == c("Douglas-Fir","Fir-Spruce","Lodegepole Pine")) %>% 
+  group_by(patch_foresttype,timepoint) %>% 
+  summarize(pland = mean(pland,na.rm=TRUE),
+            contag = mean(contag,na.rm=TRUE),
+            ai = mean(ai,na.rm=TRUE),
+            clumpy = mean(clumpy,na.rm=TRUE),
+            enn_mn = mean(enn_mn,na.rm=TRUE),
+            cohesion= mean(cohesion,na.rm=TRUE))
 ```
 
 
 ```{r}
+# ggplot(lsm_dataset_type,aes(timepoint,cohesion,group = patch_foresttype,color=patch_foresttype)) + 
+#   geom_point(size = 1) +
+#   geom_smooth(se=FALSE) + 
+#   labs(title = "Presence Cohension",subtitle="asses if patches of the same class are located aggregated or rather isolated")
 
-lsm_foresttype <- lsm_dataset_info %>% 
-  filter(timepoint != "t0",
-         fr_frst != "Other") %>% 
-  group_by(fr_frst,timepoint) %>% 
-  summarize(pland = mean(pland))
+ggplot(lsm_dataset_type,aes(timepoint,pland,group = patch_foresttype,color=patch_foresttype)) + 
+  geom_point(size = 1) +
+  geom_smooth(se=FALSE) + 
+  labs(title = "Percent of Patch Area Forested")
 
-ggplot(lsm_foresttype,aes(timepoint,pland,group = fr_frst,color=fr_frst)) + 
-  geom_line(size = 1)
+ggplot(lsm_dataset_type ,aes(timepoint,enn_mn,group = patch_foresttype,color=patch_foresttype)) + 
+  geom_point(size = 1) +
+  geom_smooth(se=FALSE) + 
+  labs(title = "Nearest Neighbor Distances (m)")
+
+ggplot(lsm_dataset_type,aes(timepoint,contag,group = patch_foresttype,color=patch_foresttype)) + 
+  geom_point(size = 1) +
+  geom_smooth(se=FALSE) + 
+  labs(title = "Landscape Contagion",subtitle = " 0 if all cells are unevenly distributed and 100 indicates that all cells are equally adjacent to all other classes")
+
+ggplot(lsm_dataset_type,aes(timepoint,ai,group = patch_foresttype,color=patch_foresttype)) + 
+  geom_point(size = 1) +
+  geom_smooth(se=FALSE) + 
+  labs(title = "Aggregation Index",subtitle = "number of like adjacencies divided by the theoretical maximum possible number of like adjacencies")
+
+
 ```
 

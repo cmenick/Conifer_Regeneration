@@ -1,5 +1,5 @@
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(sf)
 library(terra)
 library(mapview)
@@ -31,6 +31,8 @@ fire_list <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1
 
 patches <- st_read("data/patches/highsev_patches.shp") %>% 
   mutate(Patch_ID = str_c(Fire_ID,"-",1:n()))
+
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")
 ```
 
 
@@ -100,27 +102,26 @@ get_lei <- function(fire_name){
             summarize(n=n()) %>% 
             ungroup() %>% 
             mutate(lei = n/sum(n),
-                   area_ha = as.numeric(st_area(step2_newgrowth))/10000,
-                   edge_dist_m = as.numeric(min(st_distance(st_centroid(step2_newgrowth),patch_edge))),
-                   timepoint = i) %>% 
+                   area_ha = round(as.numeric(st_area(step2_newgrowth))/10000,3),
+                   edge_dist_m = round(as.numeric(min(st_distance(st_centroid(step2_newgrowth),patch_edge))),3),
+                   timepoint = i,
+                   Fire_ID = fire_name) %>% 
             filter(value == 2)
         } else {
-          lei <- data.frame(row.names = c("value","n","lei","area-ha","edge_dist_m","category"))
+          lei <- data.frame(row.names = c("value","n","lei","area_ha","edge_dist_m",
+                                          "category","Fire_ID"))
         }
         lei_df[[j]] <- lei
       }
       }
-      else {
+    else {
         print("no new growth")
       }
   
     lei_data <- do.call(rbind,lei_df) %>% 
       mutate(category = case_when(lei > 0.5 ~ "infill",
                                   lei < .01 ~ "leapfrog",
-                                  TRUE ~ "expansion"),
-             area_ha = round(area_ha,2),
-             edge_dist_m = round(edge_dist_m,2),
-             Fire_ID = fire_name) 
+                                  TRUE ~ "expansion"))
     fire_df[[i]] <- lei_data
   }
 return(fire_df)
@@ -128,32 +129,62 @@ return(fire_df)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-# test <- get_lei("Fire_48_1990")
-# test2 <- get_lei("Fire_32_1989")
-# test3 <- get_lei("Fire_26_1988")
-# test4 <- get_lei("Fire_10_1988")
-# 
-# df <- do.call(rbind,test3)
-# 
-# bigdata <- rbind(do.call(rbind,test),do.call(rbind,test2),do.call(rbind,test3))
+test <- get_lei("Fire_12_1988")
+test2 <- get_lei("Fire_32_1989")
+test3 <- get_lei("Fire_26_1988")
+test4 <- get_lei("Fire_33_1989")
+test5 <- get_lei("Fire_20_1988")
+test6 <- get_lei("Fire_23_1988")
+test7 <- get_lei("Fire_41_1989")
+test8 <- get_lei("Fire_54_1991")
+test9 <- get_lei("Fire_33_1989")
 
+
+bigdata <- rbind(do.call(rbind,test),do.call(rbind,test2),do.call(rbind,test3),do.call(rbind,test4),do.call(rbind,test5),do.call(rbind,test6),do.call(rbind,test7),do.call(rbind,test8),do.call(rbind,test8)) %>% 
+  left_join(.,fires_export,by="Fire_ID")
+```
+
+
+```{r message=FALSE, warning=FALSE}
 lei_dataset <- map(fire_list,get_lei)
 ```
 
 
 ```{r message=FALSE, warning=FALSE}
 bigdata_dist <- bigdata %>% 
-  group_by(timepoint,Fire_ID) %>% 
-  summarize(edge_dist_m = mean(edge_dist_m))
+  group_by(timepoint,fr_frst) %>% 
+  filter(fr_frst != "Other") %>% 
+  summarize(edge_dist_m = mean(edge_dist_m),
+            lei = mean(lei,na.rm=TRUE),
+            area_ha = mean(area_ha.x,na.rm=TRUE))
 
-ggplot(bigdata_dist,aes(timepoint,edge_dist_m,group= Fire_ID,color = Fire_ID)) + 
+ggplot(bigdata_dist,aes(timepoint,edge_dist_m,group= fr_frst,color = fr_frst)) + 
   geom_point() + 
-  geom_smooth()
+  geom_smooth(se = FALSE) + 
+  labs(title="New Growth Distance from Patch Edge")
 
-ggplot(bigdata %>% group_by (timepoint) %>%  summarize(edge_dist_m = mean(edge_dist_m)),aes(timepoint,edge_dist_m)) + geom_point()
+ggplot(bigdata_dist,aes(timepoint,lei,group= fr_frst,color = fr_frst)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE) + 
+  labs(title="LEI over Time", subtitle = "values >0.5 are considered infill, values, <0.5 are expansion, 0 = leapfrog")
 
-ggplot(bigdata %>% group_by (timepoint) %>%  summarize(edge_dist_m = mean(edge_dist_m)),aes(timepoint,edge_dist_m)) + geom_point()
+# ggplot(bigdata_dist,aes(timepoint,area_ha,group= fr_frst,color = fr_frst)) + 
+#   geom_point() + 
+#   geom_smooth(se = FALSE) + 
+#   labs(title="Area of New Growth Over Time")
+```
 
+
+```{r message=FALSE, warning=FALSE}
+bigdata_lei <- bigdata %>% 
+  group_by(timepoint,fr_frst,category) %>% 
+  summarize(area_ha = mean(area_ha.x,na.rm=TRUE))%>% 
+  filter(fr_frst != "Other")
+
+ggplot(bigdata_lei,aes(timepoint,area_ha,group=fr_frst,color = fr_frst)) +
+  geom_point()+
+  geom_smooth(se = FALSE) +
+  facet_wrap(~category)
 ```
 
 

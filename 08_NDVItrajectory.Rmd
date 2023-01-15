@@ -1,5 +1,8 @@
 # NDVI Trajectory
 
+
+try looking at rate with patch complexity; with multiple sources?
+
 ## Set Up
 
 ### Libraries 
