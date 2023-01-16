@@ -1,6 +1,6 @@
 # Model Validation
 
-```{r}
+```{r libraries 8, message=FALSE, warning=FALSE}
 library(sf)
 library(terra)
 library(raster)
@@ -8,7 +8,7 @@ library(tidyverse)
 library(mapview)
 ```
 
-```{r}
+```{r import necessary boundaries, message=FALSE, warning=FALSE}
 # final fire list
 fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 
@@ -22,12 +22,12 @@ highsev_patches <- st_read("data/patches/highsev_patches.shp") %>%
   st_transform(crs="EPSG:4326") 
 ```
 
-```{r}
+```{r list rast, message=FALSE, warning=FALSE}
 # get all rasters from final timepoint
 rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
 ```
 
-```{r}
+```{r get props, message=FALSE, warning=FALSE}
 # create and map function to determine areal proportion of presence/absence for each fire
 get_percentages <- function(rast_file){
   fire_rast <- rast(rast_file)
@@ -43,7 +43,7 @@ get_percentages <- function(rast_file){
 valid_points_df <- do.call(rbind,map(rast_list,get_percentages))
 ```
 
-```{r}
+```{r create pres abs polys, message=FALSE, warning=FALSE}
 # create and map function to create presence/absence polygons from prediction raster
 get_polygons <- function(rast_file){
   fire_rast <- rast(rast_file)
@@ -58,12 +58,12 @@ get_polygons <- function(rast_file){
 class_polys <- do.call(rbind,map(rast_list,get_polygons))
 ```
 
-```{r}
+```{r inform sample polys, message=FALSE, warning=FALSE}
 sample_polys <- left_join(class_polys,valid_points_df,by=c("Fire_ID","class")) %>% 
   st_transform(., crs="EPSG:4326")
 ```
 
-```{r}
+```{r expost sample polygons,message=FALSE, warning=FALSE,eval = FALSE}
 # st_write(sample_polys,"data/validation/validation_polygons.shp")
 ```
 

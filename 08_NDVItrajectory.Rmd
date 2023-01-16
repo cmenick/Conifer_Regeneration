@@ -147,7 +147,9 @@ ndvi_dataset_full <- landsat_dataset %>%
   mutate(prefire_ndvi = mean(prefire_ndvi, na.rm=TRUE)) %>%
   ungroup() %>% 
   mutate(delta_ndvi = ndvi - prefire_ndvi)%>%  
-  filter(patch_foresttype %in% c("Lodegepole Pine","Douglas-Fir","Fir-Spruce"))
+  filter(patch_foresttype %in% c("Lodegepole Pine","Douglas-Fir","Fir-Spruce")) %>% 
+  mutate(patch_foresttype = case_when(patch_foresttype == "Lodegepole Pine" ~ "Lodgepole Pine",
+                                      TRUE ~ patch_foresttype))
 
 # filter list to fires w/o reburning, planting, etc
 ndvi_dataset <- ndvi_dataset_full %>% 
@@ -358,5 +360,3 @@ tab_model(model_eco_type[1:4],dv.labels=unique(model_eco_df$ecoregion),digits=3,
 tab_model(model_eco_type[5:8],dv.labels=unique(model_eco_df$ecoregion),digits=3,title="Fir-Spruce")
 tab_model(model_eco_type[9:12],dv.labels=unique(model_eco_df$ecoregion),digits=3,title="Lodgepole Pine")
 ```
-
-

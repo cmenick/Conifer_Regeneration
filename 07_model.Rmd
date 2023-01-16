@@ -231,7 +231,6 @@ max(vif(lm_conifer))
 # all vif now below 5
 ```
 
-
 ```{r log model}
 # final model
 summary(lm_conifer)

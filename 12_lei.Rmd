@@ -1,38 +1,35 @@
+# Landscape Expansion
 
-```{r message=FALSE, warning=FALSE}
+## Set Up
+
+### Import Libraries
+
+```{r libraries 10, message=FALSE, warning=FALSE}
 library(sf)
 library(terra)
 library(mapview)
 library(raster)
 library(tidyverse)
 library(ggplot2) 
-
 ```
 
-```{r,eval=FALSE}
-# # rename files
-# rast_list <- list.files(path = "data/prediction_rasters", pattern = "rf", all.files=TRUE, full.names=TRUE)
-# 
-# file.rename(rast_list,sub("year1to3*", "t0", rast_list))
-# file.rename(rast_list,sub("year4to6*", "t1", rast_list))
-# file.rename(rast_list,sub("year7to9*", "t2", rast_list))
-# file.rename(rast_list,sub("year10to12*", "t3", rast_list))
-# file.rename(rast_list,sub("year13to15*", "t4", rast_list))
-# file.rename(rast_list,sub("year16to18*", "t5", rast_list))
-# file.rename(rast_list,sub("year19to21*", "t6", rast_list))
-# file.rename(rast_list,sub("year22to24*", "t7", rast_list))
-# file.rename(rast_list,sub("year25to27*", "t8", rast_list))
-# file.rename(rast_list,sub("year28to30*", "t9", rast_list))
-```
+### Import Patch Polygons
 
-
-```{r}
+```{r import patch4, message=FALSE, warning=FALSE}
+# fire list
 fire_list <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 
+# import high-severity patches
 patches <- st_read("data/patches/highsev_patches.shp") %>% 
-  mutate(Patch_ID = str_c(Fire_ID,"-",1:n()))
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n())) %>% 
+  st_transform(crs = "EPSG:4326")
 
-fires_export <- st_read("data/fire_boundaries/fires_export.shp")
+# set crs 
+crs <- crs(patches)
+
+# import fire polygons
+fires_export <- st_read("data/fire_boundaries/fires_export.shp") %>% 
+  st_transform(crs = crs)
 ```
 
 
