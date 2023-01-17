@@ -11,6 +11,7 @@ library(mapview)
 library(raster)
 library(tidyverse)
 library(ggplot2) 
+library(exactextractr)
 ```
 
 ### Import Patch Polygons
@@ -31,157 +32,126 @@ crs <- crs(patches)
 fires_export <- st_read("data/fire_boundaries/fires_export.shp") %>% 
   st_transform(crs = crs)
 ```
+## Calculate Landscape Expansion
 
+### Create Functions
+
+```{r}
+# function to calculate landscape expansion index dataset for each polygon
+calculate_newgrowth_lei <- function(poly,timepoint1_raster,rast_name,fire_name,patch_edge){
+  poly_buff <- st_as_sf(buffer(vect(poly),100))
+  poly_ring <- st_difference(poly_buff, poly)
+  
+  patch_id <- poly$Patch_ID
+  patch_foresttype <- poly$ptch_fr
+  
+  lei <- as.data.frame(exact_extract(timepoint1_raster,poly_ring)) %>% 
+          group_by(value) %>% 
+          summarize(n=n()) %>% 
+          ungroup() %>% 
+          mutate(lei = n/sum(n),
+                 area_ha = round(as.numeric(st_area(poly))/10000,3),
+                 timepoint = rast_name,
+                 Fire_ID = fire_name,
+                 Patch_ID = patch_id,
+                 patch_foresttype = patch_foresttype,
+                 category = case_when(lei > 0.5 ~ "infill",
+                                      lei < .01 ~ "leapfrog",
+                                      TRUE ~ "expansion"))%>% 
+          filter(value == 2)
+  return(lei)
+  }
+```
 
 ```{r message=FALSE, warning=FALSE}
-get_lei <- function(fire_name){
-  print(fire_name)
-  rast_list <- list.files(path = "data/prediction_rasters", pattern = str_c(fire_name,"_rf"), all.files=TRUE, full.names=TRUE)
-  rast_names <- str_sub(rast_list,start = -6, end = -5)  
-  rast_fire <- rast(rast_list)
-  names(rast_fire) <- rast_names
-
-  patch_edge <- patches %>% 
-    filter(Fire_ID == fire_name) %>% 
-    st_cast(.,"LINESTRING") %>% 
-    st_transform(crs = "EPSG: 3857")
-
-  fire_df <- list()
+# function to create LEI dataset for each fire's time steps
+get_timesteps <- function(rast_name,rast_fire,fire_patches,patch_edge){
+  print(rast_name)
   
-  loop_names <- rast_names[1:9]
+  # select the timepoint and corresponding raster
+  timepoint1 <- rast_name
   
-  for(i in loop_names){
-    # second time point 
-    print(i)
-    i2 <- str_c("t",as.numeric(str_sub(i,2,2))+1)
-      
-    # set up rasters
-    step1 <- rast_fire[[i]]  %>% 
-      as.factor() %>% 
-      terra::project(.,"EPSG: 3857")
-    step2 <- rast_fire[[i2]] %>% 
-      as.factor() %>% 
-      terra::project(.,"EPSG: 3857")
-    
-        # set area outside of patches to "forested"
-    ## later change this to ndvi that is reliably tree covered in snow
-    step1[is.na(step1)] <- 2
-    
-    # convert to polygons
-    step1_polygons <- as.polygons(step1) %>%
-        st_as_sf() %>%
-        st_cast("POLYGON") %>% 
-        filter(.[[1]] == 2)
+  timepoint1_raster <- rast_fire[[timepoint1]]  %>% 
+      as.factor() 
+  # %>% terra::project(.,"EPSG:3857")
   
-    step2_polygons <- as.polygons(step2) %>%
-        st_as_sf() %>%
-        st_cast("POLYGON") %>% 
-        filter(.[[1]] == 2) 
-    
-    lei_df <- list()
-    
-    if(nrow(step2_polygons)>0){
-      for(j in 1:nrow(step2_polygons)){
-        print(str_c(fire_name," : ",i," : ",100*round(j/nrow(step2_polygons),2),"%"))
-        step2_poly <- step2_polygons[j,]
-      
-        step2_newgrowth <- st_difference(step2_poly,st_union(st_as_sf(step1_polygons)) %>%  st_make_valid())
-        
-        step2_newgrowth_buffer <- st_as_sf(buffer(vect(step2_newgrowth),150))
-        
-        step2_newgrowth_buffer_diff <- st_difference(st_union(step2_newgrowth_buffer) %>% st_make_valid(),
-                                                     st_union(step2_newgrowth) %>%  st_make_valid())
-        
-        
-        if(nrow(step2_newgrowth)>0){
-          lei <- as.data.frame(exactextractr::exact_extract(step1,step2_newgrowth_buffer_diff)) %>% 
-            group_by(value) %>% 
-            summarize(n=n()) %>% 
-            ungroup() %>% 
-            mutate(lei = n/sum(n),
-                   area_ha = round(as.numeric(st_area(step2_newgrowth))/10000,3),
-                   edge_dist_m = round(as.numeric(min(st_distance(st_centroid(step2_newgrowth),patch_edge))),3),
-                   timepoint = i,
-                   Fire_ID = fire_name) %>% 
-            filter(value == 2)
-        } else {
-          lei <- data.frame(row.names = c("value","n","lei","area_ha","edge_dist_m",
-                                          "category","Fire_ID"))
-        }
-        lei_df[[j]] <- lei
-      }
-      }
-    else {
-        print("no new growth")
-      }
+  # set up raster for the following timepoint
+  timepoint2 <- str_c("t",as.numeric(str_sub(timepoint1,2,2))+1)
+  timepoint2_raster <- rast_fire[[timepoint2]]  %>% 
+    as.factor() 
+  # %>% terra::project(.,"EPSG:3857")
   
-    lei_data <- do.call(rbind,lei_df) %>% 
-      mutate(category = case_when(lei > 0.5 ~ "infill",
-                                  lei < .01 ~ "leapfrog",
-                                  TRUE ~ "expansion"))
-    fire_df[[i]] <- lei_data
-  }
-return(fire_df)
+  # set area outside of patches to "forested"
+  ## later change this to ndvi that is reliably tree covered in snow
+  timepoint1_raster[is.na(timepoint1_raster)] <- 2
+  
+  timepoint_difference_raster <- timepoint2_raster - timepoint1_raster 
+  
+  # convert to polygons
+  timepoint_difference_polys <- as.polygons(timepoint_difference_raster) %>%
+    st_as_sf() %>%
+    st_cast("POLYGON") %>% 
+    filter(.[[1]] == 1) %>% 
+    st_transform(crs=crs) %>%
+    st_join(.,fire_patches)
+  
+  full_lei <- timepoint_difference_polys %>% 
+    rowwise() %>% 
+    transmute(leidf = list(calculate_newgrowth_lei(geometry,timepoint1_raster,rast_name,fire_name,patch_edge))) %>% 
+    st_drop_geometry() 
+  
+  lei_df <- do.call(rbind,do.call(rbind,full_lei))
+  
+  return(lei_df)
 }
 ```
 
 ```{r message=FALSE, warning=FALSE}
-test <- get_lei("Fire_12_1988")
-test2 <- get_lei("Fire_32_1989")
-test3 <- get_lei("Fire_26_1988")
-test4 <- get_lei("Fire_33_1989")
-test5 <- get_lei("Fire_20_1988")
-test6 <- get_lei("Fire_23_1988")
-test7 <- get_lei("Fire_41_1989")
-test8 <- get_lei("Fire_54_1991")
-test9 <- get_lei("Fire_33_1989")
+get_lei <- function(fire_name){
+  # print fire ID 
+  print(fire_name)
+  
+  # import and name rasters for that fire
+  rast_list <- list.files(path = "data/prediction_rasters", pattern = str_c(fire_name,"_rf"), all.files=TRUE, full.names=TRUE)
+  rast_names <- str_sub(rast_list,start = -6, end = -5)  
+  rast_fire <- rast(rast_list)
+  names(rast_fire) <- rast_names
+  
+  # convert patch edge to linestring and reproject for distance calculation
+  fire_patches <- patches %>% 
+    filter(Fire_ID == fire_name) 
 
-
-bigdata <- rbind(do.call(rbind,test),do.call(rbind,test2),do.call(rbind,test3),do.call(rbind,test4),do.call(rbind,test5),do.call(rbind,test6),do.call(rbind,test7),do.call(rbind,test8),do.call(rbind,test8)) %>% 
-  left_join(.,fires_export,by="Fire_ID")
+  patch_edge <- fire_patches %>% 
+    st_cast(.,"LINESTRING")
+    
+  loop_names <- rast_names[1:9]
+  
+  lei_fullset <- lapply(loop_names, get_timesteps,rast_fire=rast_fire,fire_patches=fire_patches,patch_edge = patch_edge)
+  
+  
+  lei_df <- do.call(rbind,lei_fullset)
+  
+  # lei_df <- map_dfr(loop_names,get_timesteps(rast_name=loop_names))
+  return(lei_df)
+}
 ```
 
-
+### Calculate Metrics
 ```{r message=FALSE, warning=FALSE}
-lei_dataset <- map(fire_list,get_lei)
-```
+test <- get_lei(fire_name)
 
+df <- test %>% 
+  group_by(timepoint,category) %>% 
+  summarize(area_ha = sum(area_ha),
+            dist = mean(edge_dist_m))
 
-```{r message=FALSE, warning=FALSE}
-bigdata_dist <- bigdata %>% 
-  group_by(timepoint,fr_frst) %>% 
-  filter(fr_frst != "Other") %>% 
-  summarize(edge_dist_m = mean(edge_dist_m),
-            lei = mean(lei,na.rm=TRUE),
-            area_ha = mean(area_ha.x,na.rm=TRUE))
-
-ggplot(bigdata_dist,aes(timepoint,edge_dist_m,group= fr_frst,color = fr_frst)) + 
+ggplot(df,aes(timepoint,area_ha,color=category,group = category)) + 
   geom_point() + 
-  geom_smooth(se = FALSE) + 
-  labs(title="New Growth Distance from Patch Edge")
+  geom_smooth()
 
-ggplot(bigdata_dist,aes(timepoint,lei,group= fr_frst,color = fr_frst)) + 
+ggplot(df,aes(timepoint,dist,color=category,group = category)) + 
   geom_point() + 
-  geom_smooth(se = FALSE) + 
-  labs(title="LEI over Time", subtitle = "values >0.5 are considered infill, values, <0.5 are expansion, 0 = leapfrog")
-
-# ggplot(bigdata_dist,aes(timepoint,area_ha,group= fr_frst,color = fr_frst)) + 
-#   geom_point() + 
-#   geom_smooth(se = FALSE) + 
-#   labs(title="Area of New Growth Over Time")
-```
-
-
-```{r message=FALSE, warning=FALSE}
-bigdata_lei <- bigdata %>% 
-  group_by(timepoint,fr_frst,category) %>% 
-  summarize(area_ha = mean(area_ha.x,na.rm=TRUE))%>% 
-  filter(fr_frst != "Other")
-
-ggplot(bigdata_lei,aes(timepoint,area_ha,group=fr_frst,color = fr_frst)) +
-  geom_point()+
-  geom_smooth(se = FALSE) +
-  facet_wrap(~category)
+  geom_smooth()
 ```
 
 

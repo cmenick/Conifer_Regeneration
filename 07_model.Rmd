@@ -180,8 +180,7 @@ ggplot(training_dataset,aes(absence,ndvi)) +
 ### Create Random Forest
 
 ```{r rf model}
-rf_conifer <- randomForest(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi,
-                           data= training_dataset %>% drop_na())
+rf_conifer <- randomForest(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, data= training_dataset %>% drop_na())
 ```
 
 ### Evaluate
