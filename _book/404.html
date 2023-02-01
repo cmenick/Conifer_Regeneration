@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-12-08" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,25 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_5a268d-1/data_stars_forestgroup_ecofd0a86.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 
 
 <style type="text/css">
@@ -181,6 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
 <li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+<li class="chapter" data-level="2.4.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.4.3</b> Final Fires</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
 <ul>
@@ -241,7 +223,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a></li>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="training-data.html"><a href="training-data.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
 <li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
 <ul>
@@ -278,23 +263,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat for 2020-2021 Winter</a></li>
-<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="8.1.4" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Training Points</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-imagery"><i class="fa fa-check"></i><b>8.2</b> Prepare Imagery</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
-<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#merge-large-rasters"><i class="fa fa-check"></i><b>8.2.2</b> Merge Large Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#extract-landsat-data"><i class="fa fa-check"></i><b>8.3</b> Extract Landsat Data</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#prepare-dataset"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Dataset</a></li>
+<li class="chapter" data-level="8.3.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.3.2</b> Training Data by Forest Type</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.4</b> Model</a>
+<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.4</b> Examine Data</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
-<li class="chapter" data-level="8.4.2" data-path="model-development.html"><a href="model-development.html#random-forest"><i class="fa fa-check"></i><b>8.4.2</b> Random Forest</a></li>
+<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="model-development.html"><a href="model-development.html#create-random-forest"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest</a></li>
+<li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
@@ -303,14 +292,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
 <li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
-<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#merge-rasters"><i class="fa fa-check"></i><b>9.2.1</b> Merge Rasters</a></li>
-<li class="chapter" data-level="9.2.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.2</b> Extract Landsat Data for Each Patch</a></li>
+<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.1</b> Extract Landsat Data for Each Patch</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
+<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
 <ul>
 <li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
 <li class="chapter" data-level="9.3.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#regroup-data"><i class="fa fa-check"></i><b>9.3.2</b> Regroup Data</a></li>
@@ -341,6 +329,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a></li>
+<li class="chapter" data-level="12" data-path="edge-encroachment.html"><a href="edge-encroachment.html"><i class="fa fa-check"></i><b>12</b> Edge Encroachment</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="edge-encroachment.html"><a href="edge-encroachment.html#set-up-9"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="edge-encroachment.html"><a href="edge-encroachment.html#import-libraries"><i class="fa fa-check"></i><b>12.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="12.1.2" data-path="edge-encroachment.html"><a href="edge-encroachment.html#import-patch-polygons"><i class="fa fa-check"></i><b>12.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="edge-encroachment.html"><a href="edge-encroachment.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>12.2</b> Calculate Landscape Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-10"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries-1"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons-1"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#set-up-11"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-libraries-2"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="14.1.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-patch-polygons-2"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#calculate-landscape-patterns-2"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="landscape-expansion-2.html"><a href="landscape-expansion-2.html"><i class="fa fa-check"></i><b>15</b> Landscape Expansion</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="landscape-expansion-2.html"><a href="landscape-expansion-2.html#set-up-12"><i class="fa fa-check"></i><b>15.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="landscape-expansion-2.html"><a href="landscape-expansion-2.html#import-libraries-3"><i class="fa fa-check"></i><b>15.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="15.1.2" data-path="landscape-expansion-2.html"><a href="landscape-expansion-2.html#import-patch-polygons-3"><i class="fa fa-check"></i><b>15.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="landscape-expansion-2.html"><a href="landscape-expansion-2.html#calculate-landscape-patterns-3"><i class="fa fa-check"></i><b>15.2</b> Calculate Landscape Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html"><i class="fa fa-check"></i><b>16</b> Edge Encroachment</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#set-up-13"><i class="fa fa-check"></i><b>16.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#import-libraries-4"><i class="fa fa-check"></i><b>16.1.1</b> Import Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#lei"><i class="fa fa-check"></i><b>16.2</b> LEI</a></li>
+<li class="chapter" data-level="16.3" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#distances"><i class="fa fa-check"></i><b>16.3</b> Distances</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#of-all-growth"><i class="fa fa-check"></i><b>16.3.1</b> Of All Growth</a></li>
+<li class="chapter" data-level="16.3.2" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#of-new-growth"><i class="fa fa-check"></i><b>16.3.2</b> Of New Growth</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="edge-encroachment-1.html"><a href="edge-encroachment-1.html#landscape-metrics"><i class="fa fa-check"></i><b>16.4</b> Landscape Metrics</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>

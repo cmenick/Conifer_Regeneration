@@ -1,0 +1,186 @@
+# Landscape Expansion
+
+## Set Up
+
+### Import Libraries
+
+```{r libraries 10, message=FALSE, warning=FALSE}
+library(sf)
+library(terra)
+library(mapview)
+library(raster)
+library(tidyverse)
+library(ggplot2) 
+library(exactextractr)
+```
+
+### Import Patch Polygons
+
+```{r import patch4, message=FALSE, warning=FALSE}
+# fire list
+fire_list <- c("Fire_54_1991","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_1_1988","Fire_2_1988","Fire_3_1988")
+
+fire_list <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988")
+
+# import high-severity patches
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n())) %>% 
+  st_transform(crs = "EPSG:4326") 
+
+# set crs 
+crs <- crs(patches)
+
+# import fire polygons
+fires_export <- st_read("data/fire_boundaries/fires_export.shp") %>% 
+  st_transform(crs = crs)
+```
+
+## Calculate Landscape Patterns
+
+```{r message=TRUE, warning=FALSE}
+fire_name<-"Fire_2_1988"
+get_lei <- function(fire_name,fires_export){
+  # print patch ID 
+  print(fire_name)
+  
+  # filter to this specific patch
+  patches_fire <- patches %>% 
+    filter(Fire_ID == fire_name)
+
+  # import and name rasters for that fire
+  rast_list <- list.files(path = "data/prediction_rasters", pattern = str_c(fire_name,"_rf"), all.files=TRUE, full.names=TRUE)
+  rast_names <- str_sub(rast_list,start = -6, end = -5)  
+  rast_fire <- rast(rast_list)
+  names(rast_fire) <- rast_names
+    
+  loop_names <- rast_names[6:10]
+  
+  lei_fullset <- lapply(loop_names,
+                        get_timesteps,
+                        rast_fire=rast_fire,patches_fire=patches_fire)
+
+}
+```
+
+```{r message=FALSE, warning=FALSE}
+rast_name <- "t5"
+
+# function to create LEI dataset for each fire's time steps
+get_timesteps <- function(rast_name,rast_fire,patches_fire){
+  print(rast_name)
+  
+  fire_name <- patches_fire$Fire_ID[1]
+  
+  # select the timepoint and corresponding raster
+  timepoint2 <- rast_name
+  timepoint2_raster <- rast_fire[[timepoint2]]  %>% 
+      as.factor() 
+  
+  ### LEI ###
+  # set up raster for the previous timepoint
+  timepoint1 <- str_c("t",as.numeric(str_sub(timepoint2,2,2))-1)
+  timepoint1_raster <- rast_fire[[timepoint1]]  %>% 
+    as.factor() 
+
+  # set area outside of patches to presence
+  timepoint1_raster[is.na(timepoint1_raster)] <- 2
+  
+  # difference the two time points to identify areas of change
+  timepoint_difference_raster <- timepoint2_raster - timepoint1_raster 
+
+  # convert areas of new presence to polgyons
+  timepoint_difference_polys <- as.polygons(timepoint_difference_raster) %>%
+    st_as_sf() %>%
+    st_cast("POLYGON") %>% 
+    filter(.[[1]] == 1) 
+  
+  if(nrow(timepoint_difference_polys)==0){
+    print("no polys")
+    columns <- c("newgrowth_id", "value",  "frac", "timepoint", "lei", "lei_category", "Fire_ID", "Patch_ID", "ecoregn", "ptch_fr", "newgrowth_area_ha", "geometry")
+    lei_df <- data.frame(matrix(nrow=0,ncol=length(columns)))
+    colnames(lei_df) = columns
+    return(lei_df)
+  }else{
+    timepoint_difference_polys<- timepoint_difference_polys%>% 
+      st_transform(crs=crs) %>%
+      st_join(.,patches_fire) %>% 
+      mutate(newgrowth_area_ha = round(as.numeric(st_area(geometry))/10000,3),
+             newgrowth_id = str_c(Patch_ID,"_" ,rast_name,"_polygon",c(1:nrow(.))))
+  
+    lei_df <- data.frame()
+    for(i in 1:22221){
+      pairpoly <- timepoint_difference_polys[i,]
+      pairbuff <- st_as_sf(buffer(vect(pairpoly),100))
+      pairring <- st_difference(pairbuff, pairpoly)
+      lei_full <- do.call(rbind,exact_extract(timepoint1_raster,pairring,include_cols = TRUE)) 
+      lei <- lei_full[1:length(lei_full$Fire_ID),] %>% 
+        group_by(newgrowth_id,value) %>%
+        summarize(frac=sum(coverage_fraction)) %>%
+        mutate(timepoint = rast_name,
+               lei = frac/sum(frac),
+               lei_category = case_when(lei > 0.5 ~ "infill",
+                                        lei < .01 ~ "leapfrog",
+                                        TRUE ~ "expansion")) %>%
+        filter(value == 2) %>%
+        left_join(.,timepoint_difference_polys,by = "newgrowth_id")%>% 
+        select(newgrowth_id,value,frac,timepoint,lei,lei_category,Fire_ID,Patch_ID, ecoregn,ptch_fr,newgrowth_area_ha,geometry)
+      
+      lei_df <- rbind(lei_df,lei)
+
+      print(str_c(round(i/nrow(timepoint_difference_polys),4)*100,"%"))
+    }
+    
+    write_csv(lei_df,str_c("data/lei/",fire_name,"-",rast_name,"pt1.csv"))
+    
+    lei_df2 <- data.frame()
+      for(i in 22222:nrow(timepoint_difference_polys)){
+      pairpoly <- timepoint_difference_polys[i,]
+      pairbuff <- st_as_sf(buffer(vect(pairpoly),100))
+      pairring <- st_difference(pairbuff, pairpoly)
+      lei_full <- do.call(rbind,exact_extract(timepoint1_raster,pairring,include_cols = TRUE)) 
+      lei <- lei_full[1:length(lei_full$Fire_ID),] %>% 
+        group_by(newgrowth_id,value) %>%
+        summarize(frac=sum(coverage_fraction)) %>%
+        mutate(timepoint = rast_name,
+               lei = frac/sum(frac),
+               lei_category = case_when(lei > 0.5 ~ "infill",
+                                        lei < .01 ~ "leapfrog",
+                                        TRUE ~ "expansion")) %>%
+        filter(value == 2) %>%
+        left_join(.,timepoint_difference_polys,by = "newgrowth_id")%>% 
+        select(newgrowth_id,value,frac,timepoint,lei,lei_category,Fire_ID,Patch_ID, ecoregn,ptch_fr,newgrowth_area_ha,geometry)
+      
+      lei_df2 <- rbind(lei_df2,lei)
+
+      print(str_c(round(i/nrow(timepoint_difference_polys),4)*100,"%"))
+    }
+    
+    write_csv(lei_df2,str_c("data/lei/",fire_name,"-",rast_name,"pt2.csv"))
+  }
+} 
+```
+
+```{r message=FALSE, warning=FALSE}
+done <- c("Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988")
+
+fire_list <- c("Fire_2_1988","Fire_3_1988")
+
+for(i in fire_list){
+  get_lei(i,fires_export)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
