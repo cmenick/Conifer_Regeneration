@@ -90,7 +90,7 @@ Criteria:
 
   ->25% of selected forest types
   
-```{r import mtbs, message=FALSE, warning=FALSE, results='hide'}
+```{r import mtbs, message=FALSE, warning=FALSE, results='hide',cache = TRUE}
 # mtbs fire perimeters
 mtbs_full <- st_read('data/mtbs/mtbs_perims_DD.shp') %>% 
   st_transform(., crs=crs)

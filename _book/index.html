@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Post-Fire Conifer Regeneration</title>
   <meta name="description" content="Post-Fire Conifer Regeneration" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Post-Fire Conifer Regeneration" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-12-08" />
+<meta name="date" content="2023-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -68,9 +68,10 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_5a268d-1/data_stars_forestgroup_ecofd0a86.txt"></script>
+<script src="libs/forestgroup_eco_68749f-1/data_stars_forestgroup_eco3a256d.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
 
 
 <style type="text/css">
@@ -181,6 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
 <li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+<li class="chapter" data-level="2.4.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.4.3</b> Final Fires</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
 <ul>
@@ -241,7 +243,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a></li>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="training-data.html"><a href="training-data.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
 <li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
 <ul>
@@ -278,23 +283,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat for 2020-2021 Winter</a></li>
-<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="8.1.4" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Training Points</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-imagery"><i class="fa fa-check"></i><b>8.2</b> Prepare Imagery</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
-<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#merge-large-rasters"><i class="fa fa-check"></i><b>8.2.2</b> Merge Large Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#extract-landsat-data"><i class="fa fa-check"></i><b>8.3</b> Extract Landsat Data</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#prepare-dataset"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.4</b> Model</a>
+<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.4</b> Examine Data</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
-<li class="chapter" data-level="8.4.2" data-path="model-development.html"><a href="model-development.html#random-forest"><i class="fa fa-check"></i><b>8.4.2</b> Random Forest</a></li>
+<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="model-development.html"><a href="model-development.html#create-random-forest"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest</a></li>
+<li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
@@ -303,29 +311,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
 <li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
-<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#merge-rasters"><i class="fa fa-check"></i><b>9.2.1</b> Merge Rasters</a></li>
-<li class="chapter" data-level="9.2.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.2</b> Extract Landsat Data for Each Patch</a></li>
+<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.1</b> Extract Landsat Data for Each Patch</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
+<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
 <ul>
 <li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
-<li class="chapter" data-level="9.3.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#regroup-data"><i class="fa fa-check"></i><b>9.3.2</b> Regroup Data</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#plot"><i class="fa fa-check"></i><b>9.4</b> Plot</a>
+<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>9.4</b> Modeling</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type</a></li>
-<li class="chapter" data-level="9.4.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#patch-area"><i class="fa fa-check"></i><b>9.4.2</b> Patch Area</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregion"><i class="fa fa-check"></i><b>9.4.3</b> Ecoregion</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#recovery"><i class="fa fa-check"></i><b>9.5</b> Recovery</a>
-<ul>
-<li class="chapter" data-level="9.5.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-1"><i class="fa fa-check"></i><b>9.5.1</b> Forest Type</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregion-1"><i class="fa fa-check"></i><b>9.5.2</b> Ecoregion</a></li>
-<li class="chapter" data-level="9.5.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregion-and-forest-type"><i class="fa fa-check"></i><b>9.5.3</b> Ecoregion and Forest Type</a></li>
+<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type Groups</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> Prediction</a>
@@ -341,6 +339,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a></li>
+<li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="patch-fate.html"><a href="patch-fate.html#set-up-9"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="patch-fate.html"><a href="patch-fate.html#libraries-7"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-10"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -365,12 +380,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Post-Fire Conifer Regeneration</h1>
 <p class="author"><em>Casey Menick</em></p>
-<p class="date"><em>2022-12-08</em></p>
+<p class="date"><em>2023-02-14</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Part 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Code in progress!</p>
-<p>The project seeks to analyze the trajectory and patterning of conifer regeneration following high-severity wildfire</p>
+<p>There has been an increasing number of large, high-severity wildfires across the Western United States. It is not fully understood how this intensification may impact conifer forests of the West, whose resilience is dependent on successful seedling regeneration. It is important to understand how these forests are able to recolonize high-severity burn patches and subsequently respond to these shifting disturbance regimes. The goal of this research is to characterize the 30-year recovery trajectory and spatial pattern of conifer regeneration within high-severity burn patches. We investigated 35 high-severity wildfire complexes that occurred between 1988 and 1991 in conifer-dominated ecosystems of the northern Rocky Mountains. Composite snow-cover Landsat imagery was utilized to isolate conifer-specific vegetation and diminish spectral contributions from deciduous vegetation. Conifer regeneration was determined to be initially detectable by Landsat approximately 10-years post-fire using these methods. The presence of conifer regeneration was then modeled at 3-year intervals post-fire to characterize the progression of recolonization. The trajectory of snow-cover Landsat NDVI was utilized to estimate recovery time to pre-fire vegetation conditions for Douglas-fir, Fir-Spruce, and lodgepole pine forests. Ongoing analysis will determine the level of regeneration cover in a Landsat pixel for detection and characterize how spatial patterns of colonization vary across burn patch size and species. This work will provide insights into the ecological processes of conifer regeneration and may be applied to support forest restoration decision making following high-severity wildfire.</p>
 
 </div>
             </section>

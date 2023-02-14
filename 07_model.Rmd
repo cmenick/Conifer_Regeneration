@@ -39,7 +39,7 @@ points <- st_read("data/points/points_export.shp") %>%
 ### Prepare Data for Bands and Fire Names
 
 #### Bands
-```{r band names, message=FALSE, warning=FALSE}
+```{r band names1, message=FALSE, warning=FALSE}
 # list band names and years
 bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
 years <- c(1984:2020)
@@ -54,7 +54,7 @@ bandlist <- do.call(rbind,bandnames)
 
 #### Fire Names
 
-```{r fire names, message=FALSE, warning=FALSE}
+```{r fire names2, message=FALSE, warning=FALSE}
 # get list of fire names
 fire_names_all <- unique(fires_export$Fire_ID)
 fire_names_points <- unique(points$Fire_ID,na.rm=TRUE)
@@ -83,7 +83,7 @@ export_rasters <- function(fire_name){
 ```
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
-# map(fire_names_all,export_rasters)
+map(fire_names_all,export_rasters)
 ```
 
 ## Extract Landsat Data 
@@ -116,7 +116,7 @@ extract_landsat <- function(fire_name){
 }
 ```
 
-```{r extract, message=FALSE, warning=FALSE,results = 'hide',cache=TRUE}
+```{r extract, message=FALSE, warning=FALSE,results = 'hide'}
 # extract landsat values to each training point
 extracted_df <- map(fire_names_points, extract_landsat)
 ```
@@ -138,22 +138,9 @@ training_dataset <- do.call(rbind,extracted_df) %>%
                            class == "presence60plus" ~ ">60%",
                            TRUE ~ "absence"),
          class = fct_relevel(as.factor(class),c("absence","<1%","1-10%","10-20%","20-60%",">60%"))) %>% 
-  rename(f_type = ptch_fr,
-         area_ha = ptch_r_) %>% 
   st_drop_geometry() %>% 
   dplyr::select(-qd_vnt_,-qd_fr_d) %>% 
   drop_na(ndvi)
-```
-
-### Training Data by Forest Type
-
-```{r data by ftype}
-pres_abs_type <- training_dataset %>% 
-  group_by(f_type,absence) %>% 
-  summarize(n=n()) %>% 
-  mutate(percent= 100*n/sum(n)) %>% 
-  filter(absence=="presence")
-pres_abs_type
 ```
 
 ## Examine Data 
@@ -197,5 +184,5 @@ summary(rf_conifer)
 
 ```{r rf model export, eval = FALSE}
 # export 
-# saveRDS(rf_conifer,"data/models/rf_conifer.rds")
+saveRDS(rf_conifer,"data/models/rf_conifer.rds")
 ```

@@ -22,12 +22,12 @@ highsev_patches <- st_read("data/patches/highsev_patches.shp") %>%
   st_transform(crs="EPSG:4326") 
 ```
 
-```{r list rast, message=FALSE, warning=FALSE}
+```{r list rast, message=FALSE, warning=FALSE,eval=FALSE}
 # get all rasters from final timepoint
 rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
 ```
 
-```{r get props, message=FALSE, warning=FALSE}
+```{r get props, message=FALSE, warning=FALSE,eval=FALSE}
 # create and map function to determine areal proportion of presence/absence for each fire
 get_percentages <- function(rast_file){
   fire_rast <- rast(rast_file)
@@ -49,16 +49,14 @@ get_polygons <- function(rast_file){
   fire_rast <- rast(rast_file)
   fire_poly <- as.polygons(fire_rast)
   fire_poly_sf <- st_as_sf(fire_poly) %>% 
-  mutate(class = case_when(lyr1 == 1 ~ "absence",
-                           lyr1 == 2 ~ "presence"),
-         Fire_ID = sub( ".*rasters/", "", sub( "_rf_t.*", "", rast_file)))
+  mutate(Fire_ID = sub( ".*rasters/", "", sub( "_rf_t.*", "", rast_file)))
   return(fire_poly_sf)
 }
 
 class_polys <- do.call(rbind,map(rast_list,get_polygons))
 ```
 
-```{r inform sample polys, message=FALSE, warning=FALSE}
+```{r inform sample polys, message=FALSE, warning=FALSE,eval=FALSE}
 sample_polys <- left_join(class_polys,valid_points_df,by=c("Fire_ID","class")) %>% 
   st_transform(., crs="EPSG:4326")
 ```

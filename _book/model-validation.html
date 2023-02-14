@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 11 Model Validation | Post-Fire Conifer Regeneration</title>
+  <meta name="description" content="Part 11 Model Validation | Post-Fire Conifer Regeneration" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 11 Model Validation | Post-Fire Conifer Regeneration" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 11 Model Validation | Post-Fire Conifer Regeneration" />
+  
+  
+  
+
+<meta name="author" content="Casey Menick" />
+
+
+<meta name="date" content="2023-02-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="prediction.html"/>
+<link rel="next" href="patch-fate.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/forestgroup_eco_68749f-1/data_stars_forestgroup_eco3a256d.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Northern Rockies Conifer Regeneration</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="fire-selection.html"><a href="fire-selection.html"><i class="fa fa-check"></i><b>2</b> Fire Selection</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="fire-selection.html"><a href="fire-selection.html#set-up"><i class="fa fa-check"></i><b>2.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="fire-selection.html"><a href="fire-selection.html#libraries"><i class="fa fa-check"></i><b>2.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="2.1.2" data-path="fire-selection.html"><a href="fire-selection.html#usda-national-forest-type-group-dataset"><i class="fa fa-check"></i><b>2.1.2</b> USDA National Forest Type Group Dataset</a></li>
+<li class="chapter" data-level="2.1.3" data-path="fire-selection.html"><a href="fire-selection.html#epa-level-3-ecoregions"><i class="fa fa-check"></i><b>2.1.3</b> EPA level-3 Ecoregions</a></li>
+<li class="chapter" data-level="2.1.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping"><i class="fa fa-check"></i><b>2.1.4</b> Mapping</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="fire-selection.html"><a href="fire-selection.html#define-fire-parameters"><i class="fa fa-check"></i><b>2.2</b> Define Fire Parameters</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="fire-selection.html"><a href="fire-selection.html#monitoring-trends-in-burn-severity-mtbs-dataset"><i class="fa fa-check"></i><b>2.2.1</b> Monitoring Trends in Burn Severity (MTBS) Dataset</a></li>
+<li class="chapter" data-level="2.2.2" data-path="fire-selection.html"><a href="fire-selection.html#group-adjacent-fires"><i class="fa fa-check"></i><b>2.2.2</b> Group Adjacent Fires</a></li>
+<li class="chapter" data-level="2.2.3" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-ecoregion-and-forest-type"><i class="fa fa-check"></i><b>2.2.3</b> Select Fires by Ecoregion and Forest Type</a></li>
+<li class="chapter" data-level="2.2.4" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-burn-severity"><i class="fa fa-check"></i><b>2.2.4</b> Select Fires by Burn Severity</a></li>
+<li class="chapter" data-level="2.2.5" data-path="fire-selection.html"><a href="fire-selection.html#clean-up-dataset"><i class="fa fa-check"></i><b>2.2.5</b> Clean Up Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Final Fire Dataset</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#dataset-overview"><i class="fa fa-check"></i><b>2.3.1</b> Dataset Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping-1"><i class="fa fa-check"></i><b>2.4</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+<li class="chapter" data-level="2.4.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.4.3</b> Final Fires</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.5.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.5.2</b> Export</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#set-up-1"><i class="fa fa-check"></i><b>3.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-fire-boundaries"><i class="fa fa-check"></i><b>3.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="3.1.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#clean-fire-boundaries"><i class="fa fa-check"></i><b>3.1.2</b> Clean Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#imagery"><i class="fa fa-check"></i><b>3.2</b> Imagery</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-landsat-5"><i class="fa fa-check"></i><b>3.2.1</b> Import Landsat 5</a></li>
+<li class="chapter" data-level="3.2.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#prepare-landsat-data"><i class="fa fa-check"></i><b>3.2.2</b> Prepare Landsat Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#burn-indices"><i class="fa fa-check"></i><b>3.3</b> Burn Indices</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-rdnbr"><i class="fa fa-check"></i><b>3.3.1</b> Calculate RdNBR</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-1"><i class="fa fa-check"></i><b>3.4</b> Export</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-each-fire-rdnbr-to-drive"><i class="fa fa-check"></i><b>3.4.1</b> Export Each Fire RdNBR to Drive</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="patch-formation.html"><a href="patch-formation.html"><i class="fa fa-check"></i><b>4</b> Patch Formation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="patch-formation.html"><a href="patch-formation.html#set-up-2"><i class="fa fa-check"></i><b>4.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="patch-formation.html"><a href="patch-formation.html#libraries-1"><i class="fa fa-check"></i><b>4.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="4.1.2" data-path="patch-formation.html"><a href="patch-formation.html#import-rdnbr-rasters"><i class="fa fa-check"></i><b>4.1.2</b> Import RdNBR Rasters</a></li>
+<li class="chapter" data-level="4.1.3" data-path="patch-formation.html"><a href="patch-formation.html#import-fire-boundaries-1"><i class="fa fa-check"></i><b>4.1.3</b> Import Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="patch-formation.html"><a href="patch-formation.html#create-high-severity-patches"><i class="fa fa-check"></i><b>4.2</b> Create High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-2"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>5.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="5.1.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>5.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>5.2</b> Create Sampling Quadrants</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
+<li class="chapter" data-level="5.2.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="training-data.html"><a href="training-data.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
+<li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
+<li class="chapter" data-level="6.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-data-3"><i class="fa fa-check"></i><b>6.4</b> Export Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow Cover Imagery</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#set-up-5"><i class="fa fa-check"></i><b>7.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-snow-cover-landsat-collection"><i class="fa fa-check"></i><b>7.2</b> Create Snow-Cover Landsat Collection</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images"><i class="fa fa-check"></i><b>7.2.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.2.2</b> Map Functions Across Image Collection</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-annual-image-composites"><i class="fa fa-check"></i><b>7.3</b> Create Annual Image Composites</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-create-annual-image-composites"><i class="fa fa-check"></i><b>7.3.1</b> Functions to Create Annual Image Composites</a></li>
+<li class="chapter" data-level="7.3.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#apply-functions-to-each-image"><i class="fa fa-check"></i><b>7.3.2</b> Apply Functions to Each Image</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#prepare-and-export-images"><i class="fa fa-check"></i><b>7.4</b> Prepare and Export Images</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images-1"><i class="fa fa-check"></i><b>7.4.1</b> Functions to Prepare Images</a></li>
+<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-2"><i class="fa fa-check"></i><b>7.4.2</b> Export</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="model-development.html"><a href="model-development.html"><i class="fa fa-check"></i><b>8</b> Model Development</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Training Points</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-imagery"><i class="fa fa-check"></i><b>8.2</b> Prepare Imagery</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#merge-large-rasters"><i class="fa fa-check"></i><b>8.2.2</b> Merge Large Rasters</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#extract-landsat-data"><i class="fa fa-check"></i><b>8.3</b> Extract Landsat Data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#prepare-dataset"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.4</b> Examine Data</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="model-development.html"><a href="model-development.html#create-random-forest"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest</a></li>
+<li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.1</b> Extract Landsat Data for Each Patch</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>9.4</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type Groups</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="prediction.html"><a href="prediction.html#set-up-8"><i class="fa fa-check"></i><b>10.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="prediction.html"><a href="prediction.html#libraries-6"><i class="fa fa-check"></i><b>10.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="10.1.2" data-path="prediction.html"><a href="prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>10.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="10.1.3" data-path="prediction.html"><a href="prediction.html#import-models"><i class="fa fa-check"></i><b>10.1.3</b> Import Models</a></li>
+<li class="chapter" data-level="10.1.4" data-path="prediction.html"><a href="prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>10.1.4</b> Prepare Raster Naming</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="prediction.html"><a href="prediction.html#prediction-rasters"><i class="fa fa-check"></i><b>10.2</b> Prediction Rasters</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a></li>
+<li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="patch-fate.html"><a href="patch-fate.html#set-up-9"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="patch-fate.html"><a href="patch-fate.html#libraries-7"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-10"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Post-Fire Conifer Regeneration</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-validation" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Part 11</span> Model Validation<a href="model-validation.html#model-validation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="model-validation.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb115-2"><a href="model-validation.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb115-3"><a href="model-validation.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb115-4"><a href="model-validation.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb115-5"><a href="model-validation.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="model-validation.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># final fire list</span></span>
+<span id="cb116-2"><a href="model-validation.html#cb116-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>)</span>
+<span id="cb116-3"><a href="model-validation.html#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="model-validation.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import fire and patch boundaries</span></span>
+<span id="cb116-5"><a href="model-validation.html#cb116-5" aria-hidden="true" tabindex="-1"></a>mtbs_fires <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/mtbs_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-6"><a href="model-validation.html#cb116-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_names)<span class="sc">%&gt;%</span> </span>
+<span id="cb116-7"><a href="model-validation.html#cb116-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `mtbs_export&#39; from data source 
+##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\fire_boundaries\mtbs_export.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 69 features and 8 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -118.6259 ymin: 42.57259 xmax: -106.9485 ymax: 48.9346
+## Geodetic CRS:  WGS 84</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="model-validation.html#cb118-1" aria-hidden="true" tabindex="-1"></a>highsev_patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="model-validation.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_names)<span class="sc">%&gt;%</span> </span>
+<span id="cb118-3"><a href="model-validation.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>) </span></code></pre></div>
+<pre><code>## Reading layer `highsev_patches&#39; from data source 
+##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\patches\highsev_patches.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 5904 features and 10 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -118.6156 ymin: 42.57637 xmax: -106.96 ymax: 48.92836
+## Geodetic CRS:  WGS 84</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="model-validation.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get all rasters from final timepoint</span></span>
+<span id="cb120-2"><a href="model-validation.html#cb120-2" aria-hidden="true" tabindex="-1"></a>rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/prediction_rasters&quot;</span>, <span class="at">pattern=</span><span class="st">&quot;t9.tif&quot;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="model-validation.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create and map function to determine areal proportion of presence/absence for each fire</span></span>
+<span id="cb121-2"><a href="model-validation.html#cb121-2" aria-hidden="true" tabindex="-1"></a>get_percentages <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_file){</span>
+<span id="cb121-3"><a href="model-validation.html#cb121-3" aria-hidden="true" tabindex="-1"></a>  fire_rast <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_file)</span>
+<span id="cb121-4"><a href="model-validation.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  perc <span class="ot">&lt;-</span> <span class="fu">freq</span>(fire_rast) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-5"><a href="model-validation.html#cb121-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">sub</span>( <span class="st">&quot;.*rasters/&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">sub</span>( <span class="st">&quot;_rf_t.*&quot;</span>, <span class="st">&quot;&quot;</span>, rast_file)),</span>
+<span id="cb121-6"><a href="model-validation.html#cb121-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">class =</span> <span class="fu">case_when</span>(value <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>,</span>
+<span id="cb121-7"><a href="model-validation.html#cb121-7" aria-hidden="true" tabindex="-1"></a>                             value <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;presence&quot;</span>),</span>
+<span id="cb121-8"><a href="model-validation.html#cb121-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">percent_area =</span> <span class="fu">round</span>(count<span class="sc">/</span><span class="fu">sum</span>(count),<span class="dv">3</span>),</span>
+<span id="cb121-9"><a href="model-validation.html#cb121-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">val_points =</span> <span class="fu">round</span>(<span class="dv">5</span><span class="sc">+</span><span class="dv">10</span><span class="sc">*</span>percent_area,<span class="dv">0</span>))</span>
+<span id="cb121-10"><a href="model-validation.html#cb121-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(perc)</span>
+<span id="cb121-11"><a href="model-validation.html#cb121-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb121-12"><a href="model-validation.html#cb121-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-13"><a href="model-validation.html#cb121-13" aria-hidden="true" tabindex="-1"></a>valid_points_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,<span class="fu">map</span>(rast_list,get_percentages))</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="model-validation.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create and map function to create presence/absence polygons from prediction raster</span></span>
+<span id="cb122-2"><a href="model-validation.html#cb122-2" aria-hidden="true" tabindex="-1"></a>get_polygons <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_file){</span>
+<span id="cb122-3"><a href="model-validation.html#cb122-3" aria-hidden="true" tabindex="-1"></a>  fire_rast <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_file)</span>
+<span id="cb122-4"><a href="model-validation.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  fire_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(fire_rast)</span>
+<span id="cb122-5"><a href="model-validation.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  fire_poly_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(fire_poly) <span class="sc">%&gt;%</span> </span>
+<span id="cb122-6"><a href="model-validation.html#cb122-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">sub</span>( <span class="st">&quot;.*rasters/&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">sub</span>( <span class="st">&quot;_rf_t.*&quot;</span>, <span class="st">&quot;&quot;</span>, rast_file)))</span>
+<span id="cb122-7"><a href="model-validation.html#cb122-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fire_poly_sf)</span>
+<span id="cb122-8"><a href="model-validation.html#cb122-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb122-9"><a href="model-validation.html#cb122-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-10"><a href="model-validation.html#cb122-10" aria-hidden="true" tabindex="-1"></a>class_polys <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,<span class="fu">map</span>(rast_list,get_polygons))</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="model-validation.html#cb123-1" aria-hidden="true" tabindex="-1"></a>sample_polys <span class="ot">&lt;-</span> <span class="fu">left_join</span>(class_polys,valid_points_df,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Fire_ID&quot;</span>,<span class="st">&quot;class&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb123-2"><a href="model-validation.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="model-validation.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(sample_polys,&quot;data/validation/validation_polygons.shp&quot;)</span></span></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="prediction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="patch-fate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/10_validation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

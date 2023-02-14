@@ -45,7 +45,7 @@ rf_conifer <- readRDS("data/models/rf_conifer.rds")
 ### Prepare Raster Naming
 
 #### Bands
-```{r band names2, message=FALSE, warning=FALSE}
+```{r band names3, message=FALSE, warning=FALSE}
 # list band names and years
 bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
 years <- c(1984:2020)
@@ -60,7 +60,7 @@ bandlist <- do.call(rbind,bandnames)
 
 #### Fire Names
 
-```{r fire names2, message=FALSE, warning=FALSE}
+```{r fire names3, message=FALSE, warning=FALSE}
 # get list of fire names
 fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 ```

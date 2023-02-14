@@ -1,0 +1,276 @@
+# NDVI Trajectory
+
+## Set Up
+
+### Libraries 
+
+```{r libraries6, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(ggthemes)
+library(tidyverse)
+library(sf)
+library(terra)
+library(raster)
+library(exactextractr)
+library(forcats)
+library(broom)
+library(knitr)
+library(sjPlot)
+library(lwgeom)
+library(lme4)
+library(nlme)
+library(segmented)
+```
+
+### Import Fires
+
+```{r patch and fire import, message=FALSE, warning=FALSE, results='hide'}
+# import high-severity patches
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  st_transform(crs="EPSG: 4326") %>% 
+  mutate(perim = st_cast(geometry,"MULTILINESTRING") %>% st_length(),
+         perim_ratio = perim/ptch_r_)
+
+# set crs
+crs <- crs(patches)
+
+# import fire boundaries
+fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
+  st_transform(., crs=crs)
+
+# import mask of plantings and fires
+mask <- st_read("data/patches/points_dataset_MASK.shp") %>% 
+  st_transform(crs=crs) %>% 
+  st_join(.,fires_export)
+
+# final fire list
+fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
+```
+
+### Prepare Data for Bands and Fire Names
+
+#### Bands
+```{r band names2, message=FALSE, warning=FALSE}
+# list band names and years
+bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr", "nbr2", "ndsi", "ndfsi", "evi")
+years <- c(1984:2020)
+
+# create list of all combinations of bands, in the appropriate order
+bandnames <- list(bands,years) %>%
+  cross() %>%
+  map(lift(paste0))
+
+bandlist <- do.call(rbind,bandnames)
+```
+
+#### Fire Names
+
+```{r fire names1, message=FALSE, warning=FALSE}
+# get list of fire names
+fire_names <- unique(fires_export$Fire_ID)
+```
+
+## Connect Landsat and High-Severity Patches
+
+### Extract Landsat Data for Each Patch
+
+```{r extract function2, message=FALSE,warning=FALSE}
+extract_landsat <- function(fire_name){
+  
+  print(paste0("Starting Fire ",fire_name))
+  
+  # get list of this fire's tif files
+  rast_list <- list.files(path = "data/landsat/landsat_annual", pattern = str_c(fire_name,".tif"), all.files=TRUE, full.names=TRUE)
+  rast_fire <- rast(rast_list)
+
+  # name the bands
+  names(rast_fire) <- bandlist
+  
+  # verify crs
+  crs(rast_fire) <- "EPSG: 4326"
+  
+  # filter the patches for this fire
+  fire_patches <- patches %>% 
+    filter(Fire_ID==fire_name) %>% 
+    st_transform(crs=crs(rast_fire))
+    
+  fire_mask <- mask %>% 
+    filter(Fire_ID == fire_name)
+  
+
+  rast_fire <- mask(rast_fire,fire_mask,inverse=TRUE)
+  
+  # get the mean landsat values for each patch in this fire
+  extracted_data <- left_join(fire_patches, exact_extract(rast_fire,fire_patches, append_cols = TRUE, max_cells_in_memory = 3e+08, fun = "mean")) %>% 
+    st_drop_geometry()
+
+    # export
+  return(extracted_data)
+}
+```
+
+```{r extract landsat, message=FALSE, results='hide', cache=TRUE}
+# map extraction function across all fires
+extracted_fires <- map(fire_names,extract_landsat)
+
+# combine landsat dataset
+landsat_dataset <- do.call(rbind, extracted_fires) %>% 
+  st_drop_geometry()
+```
+
+## Prepare Dataset 
+
+### Clean Data
+
+```{r clean dataset2}
+# clean dataset, label, select only ndvi, calculate pre-fire ndvi & differenced ndvi
+ndvi_dataset_full <- landsat_dataset %>% 
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n()),
+         prefire_yr = as.integer(year-1),
+         patch_area_class = fct_relevel(as.factor(case_when(ptch_r_ >= 1000 ~ ">1000 acres",
+                                                ptch_r_ < 1000 & ptch_r_ >= 500 ~ "500-1000 acres",
+                                                ptch_r_ < 500 & ptch_r_ >= 100 ~ "100-500 acres",
+                                                ptch_r_ < 100 & ptch_r_ >= 50 ~ "50-100 acres",
+                                                ptch_r_ < 50 & ptch_r_ >= 10 ~ "10-50 acres",
+                                                TRUE ~ "<10 acres")),
+                                        c("<10 acres","10-50 acres","50-100 acres","100-500 acres","500-1000 acres",">1000 acres"))) %>% 
+  dplyr::select(Evnt_ID, Incd_Nm, Fire_ID, Patch_ID, prefire_yr, year, 
+                ecoregn, ptch_fr, ptch_r_, patch_area_class, contains("ndvi")) %>%
+  pivot_longer(.,contains("ndvi"),names_to = "landsat_yr", values_to = "ndvi")%>% 
+  mutate(landsat_yr = as.integer(landsat_yr %>%  stringr::str_remove("mean.ndvi")),
+         years_postfire = landsat_yr - year) %>% 
+  mutate(prefire_ndvi = case_when(years_postfire == -1 ~ ndvi)) %>% 
+  group_by(Patch_ID) %>% 
+  mutate(prefire_ndvi = mean(prefire_ndvi, na.rm=TRUE)) %>%
+  ungroup() %>% 
+  mutate(delta_ndvi = ndvi - prefire_ndvi)%>%  
+  filter(ptch_fr %in% c("Lodegepole Pine","Douglas-Fir","Fir-Spruce"),
+         Fire_ID %in% fire_names) %>% 
+  mutate(ptch_fr = case_when(ptch_fr == "Lodegepole Pine" ~ "Lodgepole Pine",
+                                      TRUE ~ ptch_fr))%>% 
+  drop_na() 
+```
+
+## Modeling
+
+### Forest Type Groups
+
+#### Model 
+```{r}
+ndvi_grouped_type <- ndvi_dataset_full %>% 
+  group_by(ptch_fr,years_postfire) %>% 
+  summarize(ndvi=mean(ndvi,na.rm=TRUE),
+            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
+  drop_na()
+
+# model NDVI difference for each forest type
+data_df <- ndvi_grouped_type%>% filter(ptch_fr == "Douglas-Fir") %>%  filter(years_postfire>=0)
+data_lp <- ndvi_grouped_type%>% filter(ptch_fr == "Lodgepole Pine") %>%  filter(years_postfire>=0)
+data_fs<- ndvi_grouped_type%>% filter(ptch_fr == "Fir-Spruce") %>%  filter(years_postfire>=0)
+
+lm_ndvi_df <- lm(delta_ndvi ~ years_postfire, data = data_df%>%  filter(years_postfire>=0))
+seg_ndvi_df <- segmented(lm_ndvi_df,seg.Z = ~ years_postfire,npsi =1)
+data_df$fit <- seg_ndvi_df$fitted.values
+
+lm_ndvi_lp <-  lm(delta_ndvi ~ years_postfire,  data = data_lp)
+seg_ndvi_lp <- segmented(lm_ndvi_lp,seg.Z = ~ years_postfire,npsi =1)
+data_lp$fit <- seg_ndvi_lp$fitted.values
+
+lm_ndvi_fs <-  lm(delta_ndvi ~ years_postfire, data = data_fs )
+seg_ndvi_fs <- segmented(lm_ndvi_fs,seg.Z = ~ years_postfire,npsi =1)
+data_fs$fit <- seg_ndvi_fs$fitted.values
+```
+
+#### Estimates
+
+```{r}
+model_ndvi_df <- as.data.frame(do.call(rbind,map(list(seg_ndvi_df,seg_ndvi_lp,seg_ndvi_fs), coef))) %>%
+  rename(intercept = "(Intercept)",
+         slope1 = U1.years_postfire,
+         slope2 = years_postfire) %>% 
+  mutate(bp = c(11.45,14.643,19.378),
+         years_recovery = -intercept/slope1 + bp)
+
+rownames(model_ndvi_df) <- c("Douglas-Fir","Lodgepole Pine","Fir-Spruce")
+
+```
+#### Plot
+
+```{r}
+ggplot()+
+  geom_point(data = ndvi_grouped_type, aes(x= years_postfire,y = delta_ndvi,color = ptch_fr)) +
+  geom_line(data= data_df %>% filter(years_postfire > 0 & years_postfire<11.45),aes(x=years_postfire,y=fit),color = "#F8766D") +
+  geom_line(data= data_df%>% filter(years_postfire >= 11.45),aes(x=years_postfire,y=fit),color = "#F8766D") +
+  geom_line(data= data_lp %>% filter(years_postfire > 0 & years_postfire<14.643),aes(x=years_postfire,y=fit),color = "#619CFF") +
+  geom_line(data= data_lp%>% filter(years_postfire >= 14.643),aes(x=years_postfire,y=fit),color = "#619CFF") +
+  geom_line(data= data_fs %>% filter(years_postfire > 0 & years_postfire<19.378),aes(x=years_postfire,y=fit),color = "#00BA38") +
+  geom_line(data= data_fs%>% filter(years_postfire >= 19.378),aes(x=years_postfire,y=fit),color = "#00BA38") +
+  labs(x="Years Post-Fire",y="dNDVI",color = "Forest Type",title= "NDVI Change Overtime 30 Years Post-Fire", subtitle = "Comparing Forest Types") +
+  geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)+
+  annotate("text", x=12, y=0.015, label="Pre-Fire Snow-Cover NDVI")+
+  theme_classic()
+```
+### Ecoregions
+
+#### Model 
+```{r}
+ndvi_grouped_ecoregion <- ndvi_dataset_full %>% 
+  group_by(ecoregn,years_postfire) %>% 
+  summarize(ndvi=mean(ndvi,na.rm=TRUE),
+            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
+  drop_na()
+
+# model NDVI difference for each forest type
+data_mr <- ndvi_grouped_ecoregion%>% filter(ecoregn == "Middle Rockies") %>%  filter(years_postfire>=0)
+data_nr <- ndvi_grouped_ecoregion%>% filter(ecoregn == "Northern Rockies") %>%  filter(years_postfire>=0)
+data_cr <- ndvi_grouped_ecoregion%>% filter(ecoregn == "Canadian Rockies") %>%  filter(years_postfire>=0)
+data_ib<- ndvi_grouped_ecoregion%>% filter(ecoregn == "Idaho Batholith") %>%  filter(years_postfire>=0)
+
+lm_ndvi_mr <- lm(delta_ndvi ~ years_postfire, data = data_mr)
+seg_ndvi_mr <- segmented(lm_ndvi_mr,seg.Z = ~ years_postfire,npsi =1)
+data_mr$fit <- seg_ndvi_mr$fitted.values
+
+lm_ndvi_nr <- lm(delta_ndvi ~ years_postfire, data = data_nr)
+seg_ndvi_nr <- segmented(lm_ndvi_nr,seg.Z = ~ years_postfire,npsi =1)
+data_nr$fit <- seg_ndvi_nr$fitted.values
+
+lm_ndvi_cr <-  lm(delta_ndvi ~ years_postfire,  data = data_cr)
+seg_ndvi_cr <- segmented(lm_ndvi_cr,seg.Z = ~ years_postfire,npsi =1)
+data_cr$fit <- seg_ndvi_cr$fitted.values
+
+lm_ndvi_ib <-  lm(delta_ndvi ~ years_postfire, data = data_ib )
+seg_ndvi_ib <- segmented(lm_ndvi_ib,seg.Z = ~ years_postfire,npsi =1)
+data_ib$fit <- seg_ndvi_ib$fitted.values
+```
+
+#### Estimates
+
+```{r}
+model_ndvi_df <- as.data.frame(do.call(rbind,map(list(seg_ndvi_mr,seg_ndvi_nr,seg_ndvi_cr,seg_ndvi_ib), coef))) %>%
+  rename(intercept = "(Intercept)",
+         slope1 = U1.years_postfire,
+         slope2 = years_postfire) %>% 
+  mutate(bp = c(17,8.964,8,13),
+         years_recovery = -intercept/slope1 + bp)
+
+rownames(model_ndvi_df) <- c("MR","NR","CR","IB")
+
+```
+#### Plot
+
+```{r}
+ggplot()+
+  geom_point(data = ndvi_grouped_ecoregion, aes(x= years_postfire,y = delta_ndvi,color = ecoregn)) +
+  geom_line(data= data_mr %>% filter(years_postfire > 0 & years_postfire<17),aes(x=years_postfire,y=fit),color = "#00BFC4") +
+  geom_line(data= data_mr%>% filter(years_postfire >= 17),aes(x=years_postfire,y=fit),color = "#00BFC4") +
+  geom_line(data= data_nr %>% filter(years_postfire > 0 & years_postfire<8.964),aes(x=years_postfire,y=fit),color = "#C77CFF") +
+  geom_line(data= data_nr%>% filter(years_postfire >= 8.964),aes(x=years_postfire,y=fit),color = "#C77CFF") +
+  geom_line(data= data_cr %>% filter(years_postfire > 0 & years_postfire<8),aes(x=years_postfire,y=fit),color = "#F8766D") +
+  geom_line(data= data_cr%>% filter(years_postfire >= 8),aes(x=years_postfire,y=fit),color = "#F8766D") +
+  geom_line(data= data_ib %>% filter(years_postfire > 0 & years_postfire<13),aes(x=years_postfire,y=fit),color = "#7CAE00") +
+  geom_line(data= data_ib%>% filter(years_postfire >= 13),aes(x=years_postfire,y=fit),color = "#7CAE00") +
+  labs(x="Years Post-Fire",y="dNDVI",color = "Ecoregion",title= "NDVI Change Overtime 30 Years Post-Fire", subtitle = "Comparing Ecoregions") +
+  geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)+
+  annotate("text", x=12, y=0.015, label="Pre-Fire Snow-Cover NDVI")+
+  theme_classic()
+```

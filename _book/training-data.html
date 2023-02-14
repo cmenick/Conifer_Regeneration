@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Part 6 Training Data | Post-Fire Conifer Regeneration</title>
   <meta name="description" content="Part 6 Training Data | Post-Fire Conifer Regeneration" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Part 6 Training Data | Post-Fire Conifer Regeneration" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2022-12-08" />
+<meta name="date" content="2023-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -68,9 +68,10 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_5a268d-1/data_stars_forestgroup_ecofd0a86.txt"></script>
+<script src="libs/forestgroup_eco_68749f-1/data_stars_forestgroup_eco3a256d.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
 
 
 <style type="text/css">
@@ -181,6 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
 <li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
+<li class="chapter" data-level="2.4.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.4.3</b> Final Fires</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
 <ul>
@@ -241,7 +243,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a></li>
+<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="training-data.html"><a href="training-data.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
 <li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
 <ul>
@@ -278,23 +283,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-snow-cover-landsat-for-2020-2021-winter"><i class="fa fa-check"></i><b>8.1.2</b> Import Snow-Cover Landsat for 2020-2021 Winter</a></li>
-<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.3</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="8.1.4" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.4</b> Import Training Points</a></li>
+<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Training Points</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-training-data"><i class="fa fa-check"></i><b>8.2</b> Prepare Training Data</a>
+<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-imagery"><i class="fa fa-check"></i><b>8.2</b> Prepare Imagery</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#extract-landsat-values"><i class="fa fa-check"></i><b>8.2.1</b> Extract Landsat Values</a></li>
-<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#training-data-by-forest-type"><i class="fa fa-check"></i><b>8.2.2</b> Training Data by Forest Type</a></li>
+<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#merge-large-rasters"><i class="fa fa-check"></i><b>8.2.2</b> Merge Large Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.3</b> Examine Data</a>
+<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#extract-landsat-data"><i class="fa fa-check"></i><b>8.3</b> Extract Landsat Data</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.3.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#prepare-dataset"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.4</b> Model</a>
+<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.4</b> Examine Data</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#logistic"><i class="fa fa-check"></i><b>8.4.1</b> Logistic</a></li>
-<li class="chapter" data-level="8.4.2" data-path="model-development.html"><a href="model-development.html#random-forest"><i class="fa fa-check"></i><b>8.4.2</b> Random Forest</a></li>
+<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="model-development.html"><a href="model-development.html#create-random-forest"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest</a></li>
+<li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
@@ -303,29 +311,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
 <li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
-<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#merge-rasters"><i class="fa fa-check"></i><b>9.2.1</b> Merge Rasters</a></li>
-<li class="chapter" data-level="9.2.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.2</b> Extract Landsat Data for Each Patch</a></li>
+<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.1</b> Extract Landsat Data for Each Patch</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
+<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
 <ul>
 <li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
-<li class="chapter" data-level="9.3.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#regroup-data"><i class="fa fa-check"></i><b>9.3.2</b> Regroup Data</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#plot"><i class="fa fa-check"></i><b>9.4</b> Plot</a>
+<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>9.4</b> Modeling</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type</a></li>
-<li class="chapter" data-level="9.4.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#patch-area"><i class="fa fa-check"></i><b>9.4.2</b> Patch Area</a></li>
-<li class="chapter" data-level="9.4.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregion"><i class="fa fa-check"></i><b>9.4.3</b> Ecoregion</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#recovery"><i class="fa fa-check"></i><b>9.5</b> Recovery</a>
-<ul>
-<li class="chapter" data-level="9.5.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-1"><i class="fa fa-check"></i><b>9.5.1</b> Forest Type</a></li>
-<li class="chapter" data-level="9.5.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregion-1"><i class="fa fa-check"></i><b>9.5.2</b> Ecoregion</a></li>
-<li class="chapter" data-level="9.5.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregion-and-forest-type"><i class="fa fa-check"></i><b>9.5.3</b> Ecoregion and Forest Type</a></li>
+<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type Groups</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> Prediction</a>
@@ -341,6 +339,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a></li>
+<li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="patch-fate.html"><a href="patch-fate.html#set-up-9"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="patch-fate.html"><a href="patch-fate.html#libraries-7"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-10"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -368,57 +383,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.1</span> Set Up<a href="training-data.html#set-up-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="libraries-3" class="section level4 hasAnchor" number="6.1.0.1">
 <h4><span class="header-section-number">6.1.0.1</span> Libraries<a href="training-data.html#libraries-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="training-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb45-2"><a href="training-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb45-3"><a href="training-data.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="training-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb47-2"><a href="training-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb47-3"><a href="training-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code></pre></div>
+</div>
+<div id="fire-list" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Fire List<a href="training-data.html#fire-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="training-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="import-data" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Import Data<a href="training-data.html#import-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="training-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-2"><a href="training-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG: 4326&quot;</span>)</span>
-<span id="cb46-3"><a href="training-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="training-data.html#cb46-4" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
-<span id="cb46-5"><a href="training-data.html#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="training-data.html#cb46-6" aria-hidden="true" tabindex="-1"></a>quadrants <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/quadrants_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-7"><a href="training-data.html#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="training-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="training-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG: 4326&quot;</span>)</span>
+<span id="cb49-3"><a href="training-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="training-data.html#cb49-4" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
+<span id="cb49-5"><a href="training-data.html#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="training-data.html#cb49-6" aria-hidden="true" tabindex="-1"></a>quadrants <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/quadrants_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-7"><a href="training-data.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
 <div id="sampling-points" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Sampling Points<a href="training-data.html#sampling-points" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="import-and-combine-training-points" class="section level3 hasAnchor" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> Import and Combine Training Points<a href="training-data.html#import-and-combine-training-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="training-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a>points_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/points/individual_fire_points/&quot;</span>, <span class="at">pattern=</span><span class="st">&#39;.shp&#39;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
-<span id="cb47-2"><a href="training-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>points_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(points_list, st_read)</span>
-<span id="cb47-3"><a href="training-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="training-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,points_all) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-5"><a href="training-data.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="training-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list and combine training data points</span></span>
+<span id="cb50-2"><a href="training-data.html#cb50-2" aria-hidden="true" tabindex="-1"></a>points_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/points/individual_fire_points/&quot;</span>, <span class="at">pattern=</span><span class="st">&#39;.shp&#39;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb50-3"><a href="training-data.html#cb50-3" aria-hidden="true" tabindex="-1"></a>points_all <span class="ot">&lt;-</span> <span class="fu">lapply</span>(points_list, st_read)</span>
+<span id="cb50-4"><a href="training-data.html#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="training-data.html#cb50-5" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,points_all) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-6"><a href="training-data.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
 <div id="assign-points-and-clean-data" class="section level3 hasAnchor" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Assign Points and Clean Data<a href="training-data.html#assign-points-and-clean-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="training-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join points dataset back to fires to fill out dataset</span></span>
-<span id="cb48-2"><a href="training-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>points_joined <span class="ot">&lt;-</span> <span class="fu">st_join</span>(points,patches,<span class="at">left=</span><span class="cn">TRUE</span>,<span class="at">largest=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb48-3"><a href="training-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_join</span>(.,quadrants,<span class="at">left=</span><span class="cn">TRUE</span>,<span class="at">largest=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## Warning: attribute variables are assumed to be spatially constant throughout all
-## geometries
-
-## Warning: attribute variables are assumed to be spatially constant throughout all
-## geometries</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="training-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a>points_cleaned <span class="ot">&lt;-</span> points_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="training-data.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;class&quot;</span>,<span class="st">&quot;ptch_r_&quot;</span>,<span class="st">&quot;Evnt_ID.x&quot;</span>,<span class="st">&quot;Incd_Nm&quot;</span>,<span class="st">&quot;Fire_ID.x&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;ecoregn&quot;</span>,<span class="st">&quot;ptch_fr&quot;</span>,<span class="st">&quot;quadrnt&quot;</span>,<span class="st">&quot;qd_d_vn&quot;</span>,<span class="st">&quot;qd_d_fr&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb50-3"><a href="training-data.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">patch_area_ha =</span> ptch_r_,</span>
-<span id="cb50-4"><a href="training-data.html#cb50-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Event_ID =</span> Evnt_ID.x,</span>
-<span id="cb50-5"><a href="training-data.html#cb50-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Incid_Name =</span> Incd_Nm,</span>
-<span id="cb50-6"><a href="training-data.html#cb50-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Fire_ID =</span> Fire_ID.x,</span>
-<span id="cb50-7"><a href="training-data.html#cb50-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_frtype =</span> ptch_fr,</span>
-<span id="cb50-8"><a href="training-data.html#cb50-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">quad =</span> quadrnt,</span>
-<span id="cb50-9"><a href="training-data.html#cb50-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">quad_event_id=</span> qd_d_vn,</span>
-<span id="cb50-10"><a href="training-data.html#cb50-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">quad_fire_id=</span>qd_d_fr) <span class="sc">%&gt;%</span> </span>
-<span id="cb50-11"><a href="training-data.html#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="training-data.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join points dataset back to fires to fill out dataset</span></span>
+<span id="cb51-2"><a href="training-data.html#cb51-2" aria-hidden="true" tabindex="-1"></a>points_joined <span class="ot">&lt;-</span> <span class="fu">st_join</span>(points,patches,<span class="at">left=</span><span class="cn">TRUE</span>,<span class="at">largest=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="training-data.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_join</span>(.,quadrants,<span class="at">left=</span><span class="cn">TRUE</span>,<span class="at">largest=</span><span class="cn">TRUE</span>)</span>
+<span id="cb51-4"><a href="training-data.html#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="training-data.html#cb51-5" aria-hidden="true" tabindex="-1"></a>points_cleaned <span class="ot">&lt;-</span> points_joined <span class="sc">%&gt;%</span> </span>
+<span id="cb51-6"><a href="training-data.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;class&quot;</span>,<span class="st">&quot;ptch_r_&quot;</span>,<span class="st">&quot;Evnt_ID.x&quot;</span>,<span class="st">&quot;Incd_Nm&quot;</span>,<span class="st">&quot;Fire_ID.x&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;ecoregn&quot;</span>,<span class="st">&quot;ptch_fr&quot;</span>,<span class="st">&quot;quadrnt&quot;</span>,<span class="st">&quot;qd_d_vn&quot;</span>,<span class="st">&quot;qd_d_fr&quot;</span>) <span class="sc">%&gt;%</span>   <span class="fu">rename</span>(<span class="at">patch_area_ha =</span> ptch_r_,</span>
+<span id="cb51-7"><a href="training-data.html#cb51-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">Event_ID =</span> Evnt_ID.x,</span>
+<span id="cb51-8"><a href="training-data.html#cb51-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">Incid_Name =</span> Incd_Nm,</span>
+<span id="cb51-9"><a href="training-data.html#cb51-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">Fire_ID =</span> Fire_ID.x,</span>
+<span id="cb51-10"><a href="training-data.html#cb51-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">patch_frtype =</span> ptch_fr,</span>
+<span id="cb51-11"><a href="training-data.html#cb51-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">quad =</span> quadrnt,</span>
+<span id="cb51-12"><a href="training-data.html#cb51-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">quad_event_id=</span> qd_d_vn,</span>
+<span id="cb51-13"><a href="training-data.html#cb51-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">quad_fire_id=</span>qd_d_fr) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-14"><a href="training-data.html#cb51-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_list) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-15"><a href="training-data.html#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
 </div>
 <div id="export-data-3" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Export Data<a href="training-data.html#export-data-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="training-data.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(points_cleaned, &quot;data/points/&quot;, &quot;points_export.shp&quot;,driver = &#39;ESRI Shapefile&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="training-data.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(points_cleaned, &quot;data/points/&quot;, &quot;points_export.shp&quot;,driver = &#39;ESRI Shapefile&#39;)</span></span></code></pre></div>
 
 </div>
 </div>
