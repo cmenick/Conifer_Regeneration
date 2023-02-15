@@ -68,7 +68,7 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_68749f-1/data_stars_forestgroup_eco3a256d.txt"></script>
+<script src="libs/forestgroup_eco_c46d32-1/data_stars_forestgroup_eco2fcd71.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 <script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
@@ -340,22 +340,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a></li>
+<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="model-validation.html"><a href="model-validation.html#set-up-9"><i class="fa fa-check"></i><b>11.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="model-validation.html"><a href="model-validation.html#libraries-7"><i class="fa fa-check"></i><b>11.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="11.1.2" data-path="model-validation.html"><a href="model-validation.html#import-patch-and-fire-boundaries"><i class="fa fa-check"></i><b>11.1.2</b> Import Patch and Fire Boundaries</a></li>
+<li class="chapter" data-level="11.1.3" data-path="model-validation.html"><a href="model-validation.html#import-prediction-rasters"><i class="fa fa-check"></i><b>11.1.3</b> Import Prediction Rasters</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>11.2</b> Calculate Predicted Proportions</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>11.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
+<li class="chapter" data-level="11.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>11.2.2</b> Create Validation Polygons for Each Fire</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>11.3</b> Prepare Validation Zones</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>11.3.1</b> Assign Required Points to Each Polygon</a></li>
+<li class="chapter" data-level="11.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>11.3.2</b> Export</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="patch-fate.html"><a href="patch-fate.html#set-up-9"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
+<li class="chapter" data-level="12.1" data-path="patch-fate.html"><a href="patch-fate.html#set-up-10"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="patch-fate.html"><a href="patch-fate.html#libraries-7"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="12.1.1" data-path="patch-fate.html"><a href="patch-fate.html#libraries-8"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="12.1.2" data-path="patch-fate.html"><a href="patch-fate.html#import-high-severity-patches"><i class="fa fa-check"></i><b>12.1.2</b> Import High-Severity Patches</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="patch-fate.html"><a href="patch-fate.html#calculate-patch-decomposition"><i class="fa fa-check"></i><b>12.2</b> Calculate Patch Decomposition</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="patch-fate.html"><a href="patch-fate.html#function-to-track-patch-changes"><i class="fa fa-check"></i><b>12.2.1</b> Function to Track Patch Changes</a></li>
+<li class="chapter" data-level="12.2.2" data-path="patch-fate.html"><a href="patch-fate.html#apply-function-to-all-fires"><i class="fa fa-check"></i><b>12.2.2</b> Apply Function to All Fires</a></li>
+<li class="chapter" data-level="12.2.3" data-path="patch-fate.html"><a href="patch-fate.html#create-dataset-for-each-forest-type"><i class="fa fa-check"></i><b>12.2.3</b> Create Dataset for Each Forest Type</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="patch-fate.html"><a href="patch-fate.html#plot-2"><i class="fa fa-check"></i><b>12.3</b> Plot</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="patch-fate.html"><a href="patch-fate.html#develop-plotting"><i class="fa fa-check"></i><b>12.3.1</b> Develop Plotting</a></li>
+<li class="chapter" data-level="12.3.2" data-path="patch-fate.html"><a href="patch-fate.html#all-three-forest-types"><i class="fa fa-check"></i><b>12.3.2</b> All Three Forest Types</a></li>
+<li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.3.3</b> Forest Types Individually</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-10"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
 <ul>
 <li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
 <li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-lei-for-each-patchs-growth"><i class="fa fa-check"></i><b>13.2.1</b> Calculate LEI for Each Patch’s Growth</a></li>
+<li class="chapter" data-level="13.2.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-small-patches"><i class="fa fa-check"></i><b>13.2.2</b> Function to Handle LEI in Small Patches</a></li>
+<li class="chapter" data-level="13.2.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-large-patches"><i class="fa fa-check"></i><b>13.2.3</b> Function to Handle LEI in Large Patches</a></li>
+<li class="chapter" data-level="13.2.4" data-path="landscape-expansion.html"><a href="landscape-expansion.html#apply-functions-across-all-fires"><i class="fa fa-check"></i><b>13.2.4</b> Apply Functions Across All Fires</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#analyze-patch-wise-lei"><i class="fa fa-check"></i><b>13.3</b> Analyze Patch-wise LEI</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#combine-and-clean-data"><i class="fa fa-check"></i><b>13.3.1</b> Combine and Clean Data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#plot-3"><i class="fa fa-check"></i><b>13.3.2</b> Plot</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -379,8 +421,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="landscape-expansion" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">Part 13</span> Landscape Expansion<a href="landscape-expansion.html#landscape-expansion" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="set-up-10" class="section level2 hasAnchor" number="13.1">
-<h2><span class="header-section-number">13.1</span> Set Up<a href="landscape-expansion.html#set-up-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="set-up-11" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Set Up<a href="landscape-expansion.html#set-up-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="import-libraries" class="section level3 hasAnchor" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Import Libraries<a href="landscape-expansion.html#import-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="landscape-expansion.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
@@ -416,6 +458,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="calculate-landscape-patterns" class="section level2 hasAnchor" number="13.2">
 <h2><span class="header-section-number">13.2</span> Calculate Landscape Patterns<a href="landscape-expansion.html#calculate-landscape-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="calculate-lei-for-each-patchs-growth" class="section level3 hasAnchor" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Calculate LEI for Each Patch’s Growth<a href="landscape-expansion.html#calculate-lei-for-each-patchs-growth" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="landscape-expansion.html#cb141-1" aria-hidden="true" tabindex="-1"></a>get_simplelei <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
 <span id="cb141-2"><a href="landscape-expansion.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print patch ID </span></span>
 <span id="cb141-3"><a href="landscape-expansion.html#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(fire_name)</span>
@@ -448,6 +492,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb141-30"><a href="landscape-expansion.html#cb141-30" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb141-31"><a href="landscape-expansion.html#cb141-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lei_df)</span>
 <span id="cb141-32"><a href="landscape-expansion.html#cb141-32" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="function-to-handle-lei-in-small-patches" class="section level3 hasAnchor" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Function to Handle LEI in Small Patches<a href="landscape-expansion.html#function-to-handle-lei-in-small-patches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="landscape-expansion.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to create LEI dataset for each fire&#39;s time steps</span></span>
 <span id="cb142-2"><a href="landscape-expansion.html#cb142-2" aria-hidden="true" tabindex="-1"></a>get_timesteps_small <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_name,rast_fire,patches_fire){</span>
 <span id="cb142-3"><a href="landscape-expansion.html#cb142-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(rast_name)</span>
@@ -523,6 +570,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb142-73"><a href="landscape-expansion.html#cb142-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write_csv</span>(lei_df,<span class="fu">str_c</span>(<span class="st">&quot;data/lei_simple/&quot;</span>,fire_name,<span class="st">&quot;-&quot;</span>,rast_name,<span class="st">&quot;.csv&quot;</span>))</span>
 <span id="cb142-74"><a href="landscape-expansion.html#cb142-74" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb142-75"><a href="landscape-expansion.html#cb142-75" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
+</div>
+<div id="function-to-handle-lei-in-large-patches" class="section level3 hasAnchor" number="13.2.3">
+<h3><span class="header-section-number">13.2.3</span> Function to Handle LEI in Large Patches<a href="landscape-expansion.html#function-to-handle-lei-in-large-patches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="landscape-expansion.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to create LEI dataset for each fire&#39;s time steps</span></span>
 <span id="cb143-2"><a href="landscape-expansion.html#cb143-2" aria-hidden="true" tabindex="-1"></a>get_timesteps_large <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_name,rast_fire,patches_fire){</span>
 <span id="cb143-3"><a href="landscape-expansion.html#cb143-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(rast_name)</span>
@@ -591,9 +641,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb143-66"><a href="landscape-expansion.html#cb143-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write_csv</span>(lei_df,<span class="fu">str_c</span>(<span class="st">&quot;data/lei_simple/&quot;</span>,fire_name,<span class="st">&quot;-&quot;</span>,rast_name,<span class="st">&quot;.csv&quot;</span>))</span>
 <span id="cb143-67"><a href="landscape-expansion.html#cb143-67" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb143-68"><a href="landscape-expansion.html#cb143-68" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
+</div>
+<div id="apply-functions-across-all-fires" class="section level3 hasAnchor" number="13.2.4">
+<h3><span class="header-section-number">13.2.4</span> Apply Functions Across All Fires<a href="landscape-expansion.html#apply-functions-across-all-fires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="landscape-expansion.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map get_lei function to all fires and export simple patchwise lei data </span></span>
 <span id="cb144-2"><a href="landscape-expansion.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(fire_list,get_simplelei)</span></code></pre></div>
+</div>
+</div>
+<div id="analyze-patch-wise-lei" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">13.3</span> Analyze Patch-wise LEI<a href="landscape-expansion.html#analyze-patch-wise-lei" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="combine-and-clean-data" class="section level3 hasAnchor" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> Combine and Clean Data<a href="landscape-expansion.html#combine-and-clean-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="landscape-expansion.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import all patchwise lei csv files</span></span>
+<span id="cb145-2"><a href="landscape-expansion.html#cb145-2" aria-hidden="true" tabindex="-1"></a>lei_simple_df <span class="ot">&lt;-</span><span class="fu">do.call</span>(bind_rows,<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/lei_simple&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;Fire&quot;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>),read_csv))</span>
+<span id="cb145-3"><a href="landscape-expansion.html#cb145-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-4"><a href="landscape-expansion.html#cb145-4" aria-hidden="true" tabindex="-1"></a>patches_df <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb145-5"><a href="landscape-expansion.html#cb145-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perim_m =</span> <span class="fu">as.numeric</span>(<span class="fu">round</span>(<span class="fu">st_length</span>(<span class="fu">st_cast</span>(geometry,<span class="at">to =</span> <span class="st">&quot;MULTILINESTRING&quot;</span>)),<span class="dv">2</span>)),</span>
+<span id="cb145-6"><a href="landscape-expansion.html#cb145-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">edge_perim_rat =</span> ptch_r_<span class="sc">/</span>perim_m,</span>
+<span id="cb145-7"><a href="landscape-expansion.html#cb145-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">perim_rat_cat =</span> <span class="fu">case_when</span>(edge_perim_rat <span class="sc">&gt;</span> .<span class="dv">004</span> <span class="sc">~</span> <span class="st">&quot;high edge&quot;</span>,</span>
+<span id="cb145-8"><a href="landscape-expansion.html#cb145-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;low edge&quot;</span>)) </span>
+<span id="cb145-9"><a href="landscape-expansion.html#cb145-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-10"><a href="landscape-expansion.html#cb145-10" aria-hidden="true" tabindex="-1"></a>lei_simple_summary <span class="ot">&lt;-</span> lei_simple_df <span class="sc">%&gt;%</span> </span>
+<span id="cb145-11"><a href="landscape-expansion.html#cb145-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(patches_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-12"><a href="landscape-expansion.html#cb145-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-13"><a href="landscape-expansion.html#cb145-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time_yr =</span> <span class="fu">case_when</span>(timepoint <span class="sc">==</span> <span class="st">&quot;t0&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb145-14"><a href="landscape-expansion.html#cb145-14" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t1&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb145-15"><a href="landscape-expansion.html#cb145-15" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t2&quot;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
+<span id="cb145-16"><a href="landscape-expansion.html#cb145-16" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t3&quot;</span> <span class="sc">~</span> <span class="dv">11</span>,</span>
+<span id="cb145-17"><a href="landscape-expansion.html#cb145-17" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t4&quot;</span> <span class="sc">~</span> <span class="dv">14</span>,</span>
+<span id="cb145-18"><a href="landscape-expansion.html#cb145-18" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t5&quot;</span> <span class="sc">~</span> <span class="dv">17</span>,</span>
+<span id="cb145-19"><a href="landscape-expansion.html#cb145-19" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t6&quot;</span> <span class="sc">~</span> <span class="dv">20</span>,</span>
+<span id="cb145-20"><a href="landscape-expansion.html#cb145-20" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t7&quot;</span> <span class="sc">~</span> <span class="dv">23</span>,</span>
+<span id="cb145-21"><a href="landscape-expansion.html#cb145-21" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t8&quot;</span> <span class="sc">~</span> <span class="dv">26</span>,</span>
+<span id="cb145-22"><a href="landscape-expansion.html#cb145-22" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t9&quot;</span> <span class="sc">~</span> <span class="dv">29</span>))</span></code></pre></div>
+</div>
+<div id="plot-3" class="section level3 hasAnchor" number="13.3.2">
+<h3><span class="header-section-number">13.3.2</span> Plot<a href="landscape-expansion.html#plot-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="landscape-expansion.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lei_simple_summary,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.factor</span>(time_yr),<span class="at">y=</span>lei,<span class="at">fill=</span>ptch_fr)) <span class="sc">+</span> </span>
+<span id="cb146-2"><a href="landscape-expansion.html#cb146-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb146-3"><a href="landscape-expansion.html#cb146-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Forest Type&quot;</span>,<span class="at">x =</span> <span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">y=</span><span class="st">&quot;LEI&quot;</span>,<span class="at">title =</span> <span class="st">&quot;LEI Over Time for Each Forest Type&quot;</span>)<span class="sc">+</span></span>
+<span id="cb146-4"><a href="landscape-expansion.html#cb146-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
             </section>

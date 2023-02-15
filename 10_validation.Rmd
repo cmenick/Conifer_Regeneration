@@ -1,5 +1,9 @@
 # Model Validation
 
+## Set Up
+
+### Libraries
+
 ```{r libraries 8, message=FALSE, warning=FALSE}
 library(sf)
 library(terra)
@@ -7,6 +11,8 @@ library(raster)
 library(tidyverse)
 library(mapview)
 ```
+
+### Import Patch and Fire Boundaries
 
 ```{r import necessary boundaries, message=FALSE, warning=FALSE}
 # final fire list
@@ -22,11 +28,16 @@ highsev_patches <- st_read("data/patches/highsev_patches.shp") %>%
   st_transform(crs="EPSG:4326") 
 ```
 
+### Import Prediction Rasters
+
 ```{r list rast, message=FALSE, warning=FALSE,eval=FALSE}
 # get all rasters from final timepoint
 rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
 ```
 
+## Calculate Predicted Proportions
+
+### Calculate Areal Proportions for Each Fire
 ```{r get props, message=FALSE, warning=FALSE,eval=FALSE}
 # create and map function to determine areal proportion of presence/absence for each fire
 get_percentages <- function(rast_file){
@@ -43,7 +54,9 @@ get_percentages <- function(rast_file){
 valid_points_df <- do.call(rbind,map(rast_list,get_percentages))
 ```
 
-```{r create pres abs polys, message=FALSE, warning=FALSE}
+### Create Validation Polygons for Each Fire
+
+```{r create pres abs polys, message=FALSE, warning=FALSE,cache=TRUE}
 # create and map function to create presence/absence polygons from prediction raster
 get_polygons <- function(rast_file){
   fire_rast <- rast(rast_file)
@@ -56,10 +69,16 @@ get_polygons <- function(rast_file){
 class_polys <- do.call(rbind,map(rast_list,get_polygons))
 ```
 
+## Prepare Validation Zones
+
+### Assign Required Points to Each Polygon
+
 ```{r inform sample polys, message=FALSE, warning=FALSE,eval=FALSE}
 sample_polys <- left_join(class_polys,valid_points_df,by=c("Fire_ID","class")) %>% 
   st_transform(., crs="EPSG:4326")
 ```
+
+### Export
 
 ```{r expost sample polygons,message=FALSE, warning=FALSE,eval = FALSE}
 # st_write(sample_polys,"data/validation/validation_polygons.shp")

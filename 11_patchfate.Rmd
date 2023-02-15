@@ -9,10 +9,12 @@ library(tidyverse)
 library(terra)
 library(sf)
 library(ggsankey)
+library(gridExtra)
 
 sf_use_s2(FALSE)
 ```
 
+### Import High-Severity Patches
 
 ```{r import patch3, message=FALSE, warning=FALSE}
 # fire list
@@ -26,50 +28,50 @@ patches <- st_read("data/patches/highsev_patches.shp") %>%
 # set crs
 crs <- crs(patches)
 ```
+## Calculate Patch Decomposition
 
+### Function to Track Patch Changes
 ```{r message=FALSE, warning=FALSE}
 get_patches <- function(fire_name){
   print(fire_name)
   
+  # select last timepoint's raster
   rast_fire <- rast(str_c("data/prediction_rasters/",fire_name,"_rf_t9.tif"))
 
+  # use the high severity patches as t0
   t0_patches <- patches %>% 
     filter(Fire_ID == fire_name) %>% 
     dplyr::select(Fire_ID, Patch_ID,ecoregn,ptch_fr) %>% 
     mutate(t0_area = as.numeric(st_area(.))/10000)
   
+  # convert the t9 raster to polygons
   t9_patches <- as.polygons(rast_fire) %>% 
     st_as_sf() %>% 
     st_cast(to = "POLYGON") %>% 
-    mutate(t9_area = as.numeric(st_area(.))/10000) 
+    st_transform(crs = crs)
   
+  # join the t9 polygons to the original t0 patches to track decomposition
   conversion_df <- st_join(t9_patches,t0_patches,left = TRUE,largest = TRUE) %>% 
     st_intersection(.,st_union(t0_patches))%>% 
-    st_drop_geometry()%>% 
-    mutate(t0_group = case_when(t0_area > 1000 ~ "g1000ha+",
-                                t0_area > 500 & t0_area <1000 ~ "f500-1000ha",
-                                t0_area > 100 & t0_area <5000 ~ "e100-500ha",
-                                t0_area > 50 & t0_area <100~ "d50-100ha",
-                                t0_area > 10 & t0_area <50~ "c10-50ha",
-                                t0_area > 5 & t0_area <10~ "b5-10ha",
-                                t0_area < 5 ~ "a0-5ha"),
-           t9_group = case_when(lyr1 == 1 & t9_area > 1000 ~ "g1000ha+",
-                                lyr1 == 1 & t9_area > 500 & t9_area <1000 ~ "f500-1000ha",
-                                lyr1 == 1 & t9_area > 100 & t9_area <5000 ~ "e100-500ha",
-                                lyr1 == 1 & t9_area > 50 & t9_area <100~ "d50-100ha",
-                                lyr1 == 1 & t9_area > 10 & t9_area <50~ "c10-50ha",
-                                lyr1 == 1 & t9_area > 5 & t9_area <10~ "b5-10ha",
-                                lyr1 == 1 & t9_area < 5 ~ "a0-5ha",
-                                lyr1 == 2 ~ "hforested"))
+    mutate(t9_area = as.numeric(st_area(.))/10000) %>% 
+    st_drop_geometry()
+    
+    # export csv
   write_csv(conversion_df,str_c("data/patch_fate/",fire_name,".csv"))
 }
 ```
 
+### Apply Function to All Fires
+
 ```{r message=FALSE, warning=FALSE,eval = FALSE}
-# map(fire_list,get_patches)
+# get the decomposition df for each fire 
+map(fire_list,get_patches)
 ```
 
+### Create Dataset for Each Forest Type
+
 ```{r message=FALSE, warning=FALSE}
+# import and join all decomposiition csvs
 patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate", pattern = "Fire", all.files=TRUE, full.names=TRUE),read_csv))%>% 
   mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
                                 t0_area > 500 & t0_area <1000 ~ "500-1000ha",
@@ -83,6 +85,13 @@ patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate", patt
                                 lyr1 == 1 & t9_area < 50 ~ "0-50ha",
                                 lyr1 == 2 ~ "forested"))
 
+# test  = patch_data %>% 
+#   group_by(Patch_ID) %>% 
+#   summarize(area = mean(t0_area))
+# sum(test$area)
+# sum(patch_data$t9_area)
+
+# filter data to each forest type, and prepare data for alluvial polot
 patches_df <- patch_data %>% 
   filter(ptch_fr == "Douglas-Fir") %>% 
   make_long(t0_group,t9_group,value = t9_area)
@@ -103,47 +112,36 @@ patches_fs <- patch_data %>%
 patches_fs$node <- factor(patches_fs$node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
 patches_fs$next_node <- factor(patches_fs$next_node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
 patches_fs$value <- as.numeric(patches_fs$value)
-
-
-ggplot(patches_df, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node, label = node,value = value)) +
-  geom_alluvial(flow.alpha = .6) +
-  geom_alluvial_text(size = 3, color = "black") +
-  scale_fill_viridis_d() +
-  theme_alluvial(base_size = 18) +
-  labs(x = NULL) +
-  theme(legend.position = "none") 
-ggplot(patches_lp, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node, label = node,value = value)) +
-  geom_alluvial(flow.alpha = .6) +
-  geom_alluvial_text(size = 3, color = "black") +
-  scale_fill_viridis_d() +
-  theme_alluvial(base_size = 18) +
-  labs(x = NULL) +
-  theme(legend.position = "none") 
-ggplot(patches_fs, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
-  geom_alluvial(flow.alpha = .6) +
-  geom_alluvial_text(size = 3, color = "black") +
-  scale_fill_viridis_d() +
-  theme_alluvial(base_size = 18) +
-  labs(x = NULL) +
-  theme(legend.position = "none")
 ```
 
+## Plot
+
+### Develop Plotting
+
 ```{r}
+# prepare alluvial plots for each forest type
+
+# order by the node category
 patches_lp <- patches_lp[order(patches_lp$next_node),]
 
-alphas2 <- c(rep(0,2800),rep(0.8,9200))
-colors <- c(rep("gray",2800),rep("#fc8d59",9200))
-alphas <- c(rep(.4,2800),rep(0,9200))
+# used to block the forested patch flows from color set
+alphas2 <- c(rep(0,2800),rep(0.8,8600))
+
+# used to block unforested patch flows from the null color set
+colors <- c(rep("gray",2800),rep("#fc8d59",8600))
+alphas <- c(rep(.4,2800),rep(0,8600))
                
-ggplot(patches_lp, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
-  geom_alluvial(flow.alpha = alphas2)+
-  geom_alluvial(flow.alpha = alphas,flow.fill=colors) +
-  geom_alluvial_text(size = 3, color = "black") +
-  scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + 
-  theme_alluvial(base_size = 10) +
-  labs(x = NULL, y= "Total Patch Area (ha)",title = "Patch Decomposition for Lodgepole Pine") +
-  theme(legend.position = "none")+
-  scale_x_discrete(labels = c('0 Years Post-Fire','30 Years Post-Fire'))
+plot_lp<- ggplot(patches_lp, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
+  geom_alluvial(flow.alpha = alphas2,width =.2)+# plots colored flows for the unforested patches
+  geom_alluvial(flow.alpha = alphas,flow.fill=colors,width =.2) +# plots null flows for the forested patches
+  geom_alluvial_text(size = 3.2, color = "black") +# adds node label
+  scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + # adds base node colors
+  theme_alluvial(base_size = 12) +# sets font/plot size
+  labs(x = NULL, y= NULL,title = "Lodgepole Pine") +# labels
+  theme(legend.position = "none")+# remove legend title
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5),axis.text.x = element_text(vjust = 6)) + # centers the plot title, adjust x axis labels
+  scale_x_discrete(labels = c('0 Years\nPost-Fire','30 Years\nPost-Fire'),expand = c(0, 0))  +# relabels the x axis names
+  theme(panel.grid = element_blank(),panel.border = element_blank()) # remove excess white space
 
 patches_df <- patches_df[order(patches_df$next_node),]
 
@@ -151,29 +149,51 @@ alphas2 <- c(rep(0,2800),rep(0.8,6200))
 colors <- c(rep("gray",2800),rep("#fc8d59",6200))
 alphas <- c(rep(.4,2800),rep(0,6200))
                
-ggplot(patches_df, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
-  geom_alluvial(flow.alpha = alphas2)+
-  geom_alluvial(flow.alpha = alphas,flow.fill=colors) +
-  geom_alluvial_text(size = 3, color = "black") +
+plot_df<- ggplot(patches_df, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
+  geom_alluvial(flow.alpha = alphas2,width =.2)+
+  geom_alluvial(flow.alpha = alphas,flow.fill=colors,width =.2) +
+  geom_alluvial_text(size = 3.2, color = "black") +
   scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + 
-  theme_alluvial(base_size = 10) +
-  labs(x = NULL, y= "Total Patch Area (ha)",title = "Patch Decomposition for Douglas-Fir") +
+  theme_alluvial(base_size = 12) +
+  labs(x = NULL, y= NULL,title = "Douglas-Fir") +
   theme(legend.position = "none")+
-  scale_x_discrete(labels = c('0 Years Post-Fire','30 Years Post-Fire'))
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5),axis.text.x = element_text(vjust = 6)) + 
+  scale_x_discrete(labels = c('0 Years\nPost-Fire','30 Years\nPost-Fire'), expand = c(0, 0))  +
+   theme(panel.grid = element_blank(),
+        panel.border = element_blank())
 
 patches_fs <- patches_fs[order(patches_fs$next_node),]
 
-colors <- c(rep("gray",2800),rep("#fc8d59",11000))
-alphas <- c(rep(.4,2800),rep(0,11000))
-alphas2 <- c(rep(0,2800),rep(0.8,11000))
+colors <- c(rep("gray",2800),rep("#fc8d59",10400))
+alphas <- c(rep(.4,2800),rep(0,10400))
+alphas2 <- c(rep(0,2800),rep(0.8,10400))
                
-ggplot(patches_fs, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
-  geom_alluvial(flow.alpha = alphas2)+
-  geom_alluvial(flow.alpha = alphas,flow.fill=colors) +
-  geom_alluvial_text(size = 3, color = "black") +
+plot_fs <-ggplot(patches_fs, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
+  geom_alluvial(flow.alpha = alphas2,width =.2)+
+  geom_alluvial(flow.alpha = alphas,flow.fill=colors,width =.2) +
+  geom_alluvial_text(size = 3.2, color = "black") +
   scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + 
-  theme_alluvial(base_size = 10) +
-  labs(x = NULL, y= "Total Patch Area (ha)",title = "Patch Decomposition for Fir-Spruce") +
+  theme_alluvial(base_size = 12) +
+  labs(x = NULL, y= NULL,title = "Fir-Spruce") +
   theme(legend.position = "none") +
-  scale_x_discrete(labels = c('0 Years Post-Fire','30 Years Post-Fire'))
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5), axis.text.x = element_text(vjust = 6)) +
+  scale_x_discrete(labels = c('0 Years\nPost-Fire','30 Years\nPost-Fire'), expand = c(0, 0))  +
+  theme(panel.grid = element_blank(),
+        panel.border = element_blank())
+```
+
+### All Three Forest Types
+
+```{r, fig.width = 14,fig.height = 6}
+# plot the three plots together
+grid.arrange(plot_df,plot_lp,plot_fs,ncol=3,top = "Patch Decomposition 30-Years Post-Fire", left = "Total Patch Area (ha)")
+```
+
+### Forest Types Individually
+
+```{r, fig.align='center',fig.width=6,fig.height=7}
+# plot individually
+plot_df + labs(y= "Total Patch Area (ha)",title = "Decomposition of Unforested Patches",subtitle = "Douglas-Fir")
+plot_lp + labs(y= "Total Patch Area (ha)",title = "Decomposition of Unforested Patches",subtitle = "Lodgepole Pine")
+plot_fs + labs(y= "Total Patch Area (ha)",title = "Decomposition of Unforested Patches",subtitle = "Fir-Spruce")
 ```
