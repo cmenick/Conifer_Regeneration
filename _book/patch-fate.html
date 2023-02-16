@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2023-02-14" />
+<meta name="date" content="2023-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="model-validation.html"/>
-<link rel="next" href="landscape-expansion.html"/>
+<link rel="next" href="patch-fate-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -68,7 +68,7 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_c46d32-1/data_stars_forestgroup_eco2fcd71.txt"></script>
+<script src="libs/forestgroup_eco_e2bd61-1/data_stars_forestgroup_eco4be920.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 <script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
@@ -379,24 +379,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.3.3</b> Forest Types Individually</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
+<li class="chapter" data-level="13" data-path="patch-fate-1.html"><a href="patch-fate-1.html"><i class="fa fa-check"></i><b>13</b> Patch Fate</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<li class="chapter" data-level="13.1" data-path="patch-fate-1.html"><a href="patch-fate-1.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
-<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
+<li class="chapter" data-level="13.1.1" data-path="patch-fate-1.html"><a href="patch-fate-1.html#libraries-9"><i class="fa fa-check"></i><b>13.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="patch-fate-1.html"><a href="patch-fate-1.html#import-high-severity-patches-1"><i class="fa fa-check"></i><b>13.1.2</b> Import High-Severity Patches</a></li>
+<li class="chapter" data-level="13.1.3" data-path="patch-fate-1.html"><a href="patch-fate-1.html#create-dataset-for-each-forest-type-1"><i class="fa fa-check"></i><b>13.1.3</b> Create Dataset for Each Forest Type</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-lei-for-each-patchs-growth"><i class="fa fa-check"></i><b>13.2.1</b> Calculate LEI for Each Patch’s Growth</a></li>
-<li class="chapter" data-level="13.2.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-small-patches"><i class="fa fa-check"></i><b>13.2.2</b> Function to Handle LEI in Small Patches</a></li>
-<li class="chapter" data-level="13.2.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-large-patches"><i class="fa fa-check"></i><b>13.2.3</b> Function to Handle LEI in Large Patches</a></li>
-<li class="chapter" data-level="13.2.4" data-path="landscape-expansion.html"><a href="landscape-expansion.html#apply-functions-across-all-fires"><i class="fa fa-check"></i><b>13.2.4</b> Apply Functions Across All Fires</a></li>
+<li class="chapter" data-level="13.2" data-path="patch-fate-1.html"><a href="patch-fate-1.html#plot-3"><i class="fa fa-check"></i><b>13.2</b> Plot</a></li>
+<li class="chapter" data-level="13.3" data-path="patch-fate-1.html"><a href="patch-fate-1.html#identify-patches-with-remaining-unforested-areas"><i class="fa fa-check"></i><b>13.3</b> Identify Patches with Remaining Unforested Areas</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#analyze-patch-wise-lei"><i class="fa fa-check"></i><b>13.3</b> Analyze Patch-wise LEI</a>
+<li class="chapter" data-level="14" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
 <ul>
-<li class="chapter" data-level="13.3.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#combine-and-clean-data"><i class="fa fa-check"></i><b>13.3.1</b> Combine and Clean Data</a></li>
-<li class="chapter" data-level="13.3.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#plot-3"><i class="fa fa-check"></i><b>13.3.2</b> Plot</a></li>
+<li class="chapter" data-level="14.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="14.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-lei-for-each-patchs-growth"><i class="fa fa-check"></i><b>14.2.1</b> Calculate LEI for Each Patch’s Growth</a></li>
+<li class="chapter" data-level="14.2.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-small-patches"><i class="fa fa-check"></i><b>14.2.2</b> Function to Handle LEI in Small Patches</a></li>
+<li class="chapter" data-level="14.2.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-large-patches"><i class="fa fa-check"></i><b>14.2.3</b> Function to Handle LEI in Large Patches</a></li>
+<li class="chapter" data-level="14.2.4" data-path="landscape-expansion.html"><a href="landscape-expansion.html#apply-functions-across-all-fires"><i class="fa fa-check"></i><b>14.2.4</b> Apply Functions Across All Fires</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#analyze-patch-wise-lei"><i class="fa fa-check"></i><b>14.3</b> Analyze Patch-wise LEI</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#combine-and-clean-data"><i class="fa fa-check"></i><b>14.3.1</b> Combine and Clean Data</a></li>
+<li class="chapter" data-level="14.3.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#plot-4"><i class="fa fa-check"></i><b>14.3.2</b> Plot</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -474,31 +485,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb129-14"><a href="patch-fate.html#cb129-14" aria-hidden="true" tabindex="-1"></a>  t9_patches <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(rast_fire) <span class="sc">%&gt;%</span> </span>
 <span id="cb129-15"><a href="patch-fate.html#cb129-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb129-16"><a href="patch-fate.html#cb129-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_cast</span>(<span class="at">to =</span> <span class="st">&quot;POLYGON&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb129-17"><a href="patch-fate.html#cb129-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t9_area =</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">10000</span>) </span>
+<span id="cb129-17"><a href="patch-fate.html#cb129-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs =</span> crs)</span>
 <span id="cb129-18"><a href="patch-fate.html#cb129-18" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb129-19"><a href="patch-fate.html#cb129-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># join the t9 polygons to the original t0 patches to track decomposition</span></span>
 <span id="cb129-20"><a href="patch-fate.html#cb129-20" aria-hidden="true" tabindex="-1"></a>  conversion_df <span class="ot">&lt;-</span> <span class="fu">st_join</span>(t9_patches,t0_patches,<span class="at">left =</span> <span class="cn">TRUE</span>,<span class="at">largest =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb129-21"><a href="patch-fate.html#cb129-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_intersection</span>(.,<span class="fu">st_union</span>(t0_patches))<span class="sc">%&gt;%</span> </span>
-<span id="cb129-22"><a href="patch-fate.html#cb129-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb129-23"><a href="patch-fate.html#cb129-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t0_group =</span> <span class="fu">case_when</span>(t0_area <span class="sc">&gt;</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;g1000ha+&quot;</span>,</span>
-<span id="cb129-24"><a href="patch-fate.html#cb129-24" aria-hidden="true" tabindex="-1"></a>                                t0_area <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> t0_area <span class="sc">&lt;</span><span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;f500-1000ha&quot;</span>,</span>
-<span id="cb129-25"><a href="patch-fate.html#cb129-25" aria-hidden="true" tabindex="-1"></a>                                t0_area <span class="sc">&gt;</span> <span class="dv">100</span> <span class="sc">&amp;</span> t0_area <span class="sc">&lt;</span><span class="dv">5000</span> <span class="sc">~</span> <span class="st">&quot;e100-500ha&quot;</span>,</span>
-<span id="cb129-26"><a href="patch-fate.html#cb129-26" aria-hidden="true" tabindex="-1"></a>                                t0_area <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> t0_area <span class="sc">&lt;</span><span class="dv">100</span><span class="sc">~</span> <span class="st">&quot;d50-100ha&quot;</span>,</span>
-<span id="cb129-27"><a href="patch-fate.html#cb129-27" aria-hidden="true" tabindex="-1"></a>                                t0_area <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> t0_area <span class="sc">&lt;</span><span class="dv">50</span><span class="sc">~</span> <span class="st">&quot;c10-50ha&quot;</span>,</span>
-<span id="cb129-28"><a href="patch-fate.html#cb129-28" aria-hidden="true" tabindex="-1"></a>                                t0_area <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">&amp;</span> t0_area <span class="sc">&lt;</span><span class="dv">10</span><span class="sc">~</span> <span class="st">&quot;b5-10ha&quot;</span>,</span>
-<span id="cb129-29"><a href="patch-fate.html#cb129-29" aria-hidden="true" tabindex="-1"></a>                                t0_area <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;a0-5ha&quot;</span>),</span>
-<span id="cb129-30"><a href="patch-fate.html#cb129-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">t9_group =</span> <span class="fu">case_when</span>(lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&gt;</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;g1000ha+&quot;</span>,</span>
-<span id="cb129-31"><a href="patch-fate.html#cb129-31" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span><span class="dv">1000</span> <span class="sc">~</span> <span class="st">&quot;f500-1000ha&quot;</span>,</span>
-<span id="cb129-32"><a href="patch-fate.html#cb129-32" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&gt;</span> <span class="dv">100</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span><span class="dv">5000</span> <span class="sc">~</span> <span class="st">&quot;e100-500ha&quot;</span>,</span>
-<span id="cb129-33"><a href="patch-fate.html#cb129-33" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span><span class="dv">100</span><span class="sc">~</span> <span class="st">&quot;d50-100ha&quot;</span>,</span>
-<span id="cb129-34"><a href="patch-fate.html#cb129-34" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span><span class="dv">50</span><span class="sc">~</span> <span class="st">&quot;c10-50ha&quot;</span>,</span>
-<span id="cb129-35"><a href="patch-fate.html#cb129-35" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span><span class="dv">10</span><span class="sc">~</span> <span class="st">&quot;b5-10ha&quot;</span>,</span>
-<span id="cb129-36"><a href="patch-fate.html#cb129-36" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;a0-5ha&quot;</span>,</span>
-<span id="cb129-37"><a href="patch-fate.html#cb129-37" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;hforested&quot;</span>))</span>
-<span id="cb129-38"><a href="patch-fate.html#cb129-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-39"><a href="patch-fate.html#cb129-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export csv</span></span>
-<span id="cb129-40"><a href="patch-fate.html#cb129-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(conversion_df,<span class="fu">str_c</span>(<span class="st">&quot;data/patch_fate/&quot;</span>,fire_name,<span class="st">&quot;.csv&quot;</span>))</span>
-<span id="cb129-41"><a href="patch-fate.html#cb129-41" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb129-22"><a href="patch-fate.html#cb129-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t9_area =</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">10000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb129-23"><a href="patch-fate.html#cb129-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>()</span>
+<span id="cb129-24"><a href="patch-fate.html#cb129-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb129-25"><a href="patch-fate.html#cb129-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># export csv</span></span>
+<span id="cb129-26"><a href="patch-fate.html#cb129-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(conversion_df,<span class="fu">str_c</span>(<span class="st">&quot;data/patch_fate/&quot;</span>,fire_name,<span class="st">&quot;.csv&quot;</span>))</span>
+<span id="cb129-27"><a href="patch-fate.html#cb129-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="apply-function-to-all-fires" class="section level3 hasAnchor" number="12.2.2">
 <h3><span class="header-section-number">12.2.2</span> Apply Function to All Fires<a href="patch-fate.html#apply-function-to-all-fires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -521,27 +518,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb131-12"><a href="patch-fate.html#cb131-12" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> t9_area <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">&quot;0-50ha&quot;</span>,</span>
 <span id="cb131-13"><a href="patch-fate.html#cb131-13" aria-hidden="true" tabindex="-1"></a>                                lyr1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;forested&quot;</span>))</span>
 <span id="cb131-14"><a href="patch-fate.html#cb131-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb131-15"><a href="patch-fate.html#cb131-15" aria-hidden="true" tabindex="-1"></a><span class="co"># filter data to each forest type, and prepare data for alluvial polot</span></span>
-<span id="cb131-16"><a href="patch-fate.html#cb131-16" aria-hidden="true" tabindex="-1"></a>patches_df <span class="ot">&lt;-</span> patch_data <span class="sc">%&gt;%</span> </span>
-<span id="cb131-17"><a href="patch-fate.html#cb131-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">==</span> <span class="st">&quot;Douglas-Fir&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb131-18"><a href="patch-fate.html#cb131-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_long</span>(t0_group,t9_group,<span class="at">value =</span> t9_area)</span>
-<span id="cb131-19"><a href="patch-fate.html#cb131-19" aria-hidden="true" tabindex="-1"></a>patches_df<span class="sc">$</span>node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_df<span class="sc">$</span>node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
-<span id="cb131-20"><a href="patch-fate.html#cb131-20" aria-hidden="true" tabindex="-1"></a>patches_df<span class="sc">$</span>next_node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_df<span class="sc">$</span>next_node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
-<span id="cb131-21"><a href="patch-fate.html#cb131-21" aria-hidden="true" tabindex="-1"></a>patches_df<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(patches_df<span class="sc">$</span>value)</span>
-<span id="cb131-22"><a href="patch-fate.html#cb131-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb131-23"><a href="patch-fate.html#cb131-23" aria-hidden="true" tabindex="-1"></a>patches_lp <span class="ot">&lt;-</span> patch_data <span class="sc">%&gt;%</span> </span>
-<span id="cb131-24"><a href="patch-fate.html#cb131-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">==</span> <span class="st">&quot;Lodegepole Pine&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb131-25"><a href="patch-fate.html#cb131-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_long</span>(t0_group,t9_group,<span class="at">value =</span> t9_area)</span>
-<span id="cb131-26"><a href="patch-fate.html#cb131-26" aria-hidden="true" tabindex="-1"></a>patches_lp<span class="sc">$</span>node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_lp<span class="sc">$</span>node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
-<span id="cb131-27"><a href="patch-fate.html#cb131-27" aria-hidden="true" tabindex="-1"></a>patches_lp<span class="sc">$</span>next_node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_lp<span class="sc">$</span>next_node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
-<span id="cb131-28"><a href="patch-fate.html#cb131-28" aria-hidden="true" tabindex="-1"></a>patches_lp<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(patches_lp<span class="sc">$</span>value)</span>
-<span id="cb131-29"><a href="patch-fate.html#cb131-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb131-30"><a href="patch-fate.html#cb131-30" aria-hidden="true" tabindex="-1"></a>patches_fs <span class="ot">&lt;-</span> patch_data <span class="sc">%&gt;%</span> </span>
-<span id="cb131-31"><a href="patch-fate.html#cb131-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">==</span> <span class="st">&quot;Fir-Spruce&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb131-32"><a href="patch-fate.html#cb131-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_long</span>(t0_group,t9_group,<span class="at">value =</span> t9_area)</span>
-<span id="cb131-33"><a href="patch-fate.html#cb131-33" aria-hidden="true" tabindex="-1"></a>patches_fs<span class="sc">$</span>node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_fs<span class="sc">$</span>node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
-<span id="cb131-34"><a href="patch-fate.html#cb131-34" aria-hidden="true" tabindex="-1"></a>patches_fs<span class="sc">$</span>next_node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_fs<span class="sc">$</span>next_node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
-<span id="cb131-35"><a href="patch-fate.html#cb131-35" aria-hidden="true" tabindex="-1"></a>patches_fs<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(patches_fs<span class="sc">$</span>value)</span></code></pre></div>
+<span id="cb131-15"><a href="patch-fate.html#cb131-15" aria-hidden="true" tabindex="-1"></a><span class="co"># test  = patch_data %&gt;% </span></span>
+<span id="cb131-16"><a href="patch-fate.html#cb131-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(Patch_ID) %&gt;% </span></span>
+<span id="cb131-17"><a href="patch-fate.html#cb131-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarize(area = mean(t0_area))</span></span>
+<span id="cb131-18"><a href="patch-fate.html#cb131-18" aria-hidden="true" tabindex="-1"></a><span class="co"># sum(test$area)</span></span>
+<span id="cb131-19"><a href="patch-fate.html#cb131-19" aria-hidden="true" tabindex="-1"></a><span class="co"># sum(patch_data$t9_area)</span></span>
+<span id="cb131-20"><a href="patch-fate.html#cb131-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-21"><a href="patch-fate.html#cb131-21" aria-hidden="true" tabindex="-1"></a><span class="co"># filter data to each forest type, and prepare data for alluvial polot</span></span>
+<span id="cb131-22"><a href="patch-fate.html#cb131-22" aria-hidden="true" tabindex="-1"></a>patches_df <span class="ot">&lt;-</span> patch_data <span class="sc">%&gt;%</span> </span>
+<span id="cb131-23"><a href="patch-fate.html#cb131-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">==</span> <span class="st">&quot;Douglas-Fir&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb131-24"><a href="patch-fate.html#cb131-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_long</span>(t0_group,t9_group,<span class="at">value =</span> t9_area)</span>
+<span id="cb131-25"><a href="patch-fate.html#cb131-25" aria-hidden="true" tabindex="-1"></a>patches_df<span class="sc">$</span>node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_df<span class="sc">$</span>node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
+<span id="cb131-26"><a href="patch-fate.html#cb131-26" aria-hidden="true" tabindex="-1"></a>patches_df<span class="sc">$</span>next_node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_df<span class="sc">$</span>next_node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
+<span id="cb131-27"><a href="patch-fate.html#cb131-27" aria-hidden="true" tabindex="-1"></a>patches_df<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(patches_df<span class="sc">$</span>value)</span>
+<span id="cb131-28"><a href="patch-fate.html#cb131-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-29"><a href="patch-fate.html#cb131-29" aria-hidden="true" tabindex="-1"></a>patches_lp <span class="ot">&lt;-</span> patch_data <span class="sc">%&gt;%</span> </span>
+<span id="cb131-30"><a href="patch-fate.html#cb131-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">==</span> <span class="st">&quot;Lodegepole Pine&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb131-31"><a href="patch-fate.html#cb131-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_long</span>(t0_group,t9_group,<span class="at">value =</span> t9_area)</span>
+<span id="cb131-32"><a href="patch-fate.html#cb131-32" aria-hidden="true" tabindex="-1"></a>patches_lp<span class="sc">$</span>node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_lp<span class="sc">$</span>node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
+<span id="cb131-33"><a href="patch-fate.html#cb131-33" aria-hidden="true" tabindex="-1"></a>patches_lp<span class="sc">$</span>next_node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_lp<span class="sc">$</span>next_node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
+<span id="cb131-34"><a href="patch-fate.html#cb131-34" aria-hidden="true" tabindex="-1"></a>patches_lp<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(patches_lp<span class="sc">$</span>value)</span>
+<span id="cb131-35"><a href="patch-fate.html#cb131-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-36"><a href="patch-fate.html#cb131-36" aria-hidden="true" tabindex="-1"></a>patches_fs <span class="ot">&lt;-</span> patch_data <span class="sc">%&gt;%</span> </span>
+<span id="cb131-37"><a href="patch-fate.html#cb131-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">==</span> <span class="st">&quot;Fir-Spruce&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb131-38"><a href="patch-fate.html#cb131-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_long</span>(t0_group,t9_group,<span class="at">value =</span> t9_area)</span>
+<span id="cb131-39"><a href="patch-fate.html#cb131-39" aria-hidden="true" tabindex="-1"></a>patches_fs<span class="sc">$</span>node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_fs<span class="sc">$</span>node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
+<span id="cb131-40"><a href="patch-fate.html#cb131-40" aria-hidden="true" tabindex="-1"></a>patches_fs<span class="sc">$</span>next_node <span class="ot">&lt;-</span> <span class="fu">factor</span>(patches_fs<span class="sc">$</span>next_node,<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forested&quot;</span>,<span class="st">&quot;0-50ha&quot;</span>,<span class="st">&quot;50-100ha&quot;</span>,<span class="st">&quot;100-500ha&quot;</span>,<span class="st">&quot;500-1000ha&quot;</span>,<span class="st">&quot;1000ha+&quot;</span>))</span>
+<span id="cb131-41"><a href="patch-fate.html#cb131-41" aria-hidden="true" tabindex="-1"></a>patches_fs<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(patches_fs<span class="sc">$</span>value)</span></code></pre></div>
 </div>
 </div>
 <div id="plot-2" class="section level2 hasAnchor" number="12.3">
@@ -554,11 +557,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-4"><a href="patch-fate.html#cb132-4" aria-hidden="true" tabindex="-1"></a>patches_lp <span class="ot">&lt;-</span> patches_lp[<span class="fu">order</span>(patches_lp<span class="sc">$</span>next_node),]</span>
 <span id="cb132-5"><a href="patch-fate.html#cb132-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb132-6"><a href="patch-fate.html#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="co"># used to block the forested patch flows from color set</span></span>
-<span id="cb132-7"><a href="patch-fate.html#cb132-7" aria-hidden="true" tabindex="-1"></a>alphas2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="fl">0.8</span>,<span class="dv">9200</span>))</span>
+<span id="cb132-7"><a href="patch-fate.html#cb132-7" aria-hidden="true" tabindex="-1"></a>alphas2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="fl">0.8</span>,<span class="dv">8600</span>))</span>
 <span id="cb132-8"><a href="patch-fate.html#cb132-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb132-9"><a href="patch-fate.html#cb132-9" aria-hidden="true" tabindex="-1"></a><span class="co"># used to block unforested patch flows from the null color set</span></span>
-<span id="cb132-10"><a href="patch-fate.html#cb132-10" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;gray&quot;</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="st">&quot;#fc8d59&quot;</span>,<span class="dv">9200</span>))</span>
-<span id="cb132-11"><a href="patch-fate.html#cb132-11" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(.<span class="dv">4</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">9200</span>))</span>
+<span id="cb132-10"><a href="patch-fate.html#cb132-10" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;gray&quot;</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="st">&quot;#fc8d59&quot;</span>,<span class="dv">8600</span>))</span>
+<span id="cb132-11"><a href="patch-fate.html#cb132-11" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(.<span class="dv">4</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">8600</span>))</span>
 <span id="cb132-12"><a href="patch-fate.html#cb132-12" aria-hidden="true" tabindex="-1"></a>               </span>
 <span id="cb132-13"><a href="patch-fate.html#cb132-13" aria-hidden="true" tabindex="-1"></a>plot_lp<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(patches_lp, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">next_x =</span> next_x, <span class="at">node =</span> node, <span class="at">next_node =</span> next_node, <span class="at">fill =</span> <span class="fu">factor</span>(node), <span class="at">label =</span> node,<span class="at">value =</span> value)) <span class="sc">+</span></span>
 <span id="cb132-14"><a href="patch-fate.html#cb132-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvial</span>(<span class="at">flow.alpha =</span> alphas2,<span class="at">width =</span>.<span class="dv">2</span>)<span class="sc">+</span><span class="co"># plots colored flows for the unforested patches</span></span>
@@ -593,9 +596,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-43"><a href="patch-fate.html#cb132-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb132-44"><a href="patch-fate.html#cb132-44" aria-hidden="true" tabindex="-1"></a>patches_fs <span class="ot">&lt;-</span> patches_fs[<span class="fu">order</span>(patches_fs<span class="sc">$</span>next_node),]</span>
 <span id="cb132-45"><a href="patch-fate.html#cb132-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-46"><a href="patch-fate.html#cb132-46" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;gray&quot;</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="st">&quot;#fc8d59&quot;</span>,<span class="dv">11000</span>))</span>
-<span id="cb132-47"><a href="patch-fate.html#cb132-47" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(.<span class="dv">4</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">11000</span>))</span>
-<span id="cb132-48"><a href="patch-fate.html#cb132-48" aria-hidden="true" tabindex="-1"></a>alphas2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="fl">0.8</span>,<span class="dv">11000</span>))</span>
+<span id="cb132-46"><a href="patch-fate.html#cb132-46" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;gray&quot;</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="st">&quot;#fc8d59&quot;</span>,<span class="dv">10400</span>))</span>
+<span id="cb132-47"><a href="patch-fate.html#cb132-47" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(.<span class="dv">4</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10400</span>))</span>
+<span id="cb132-48"><a href="patch-fate.html#cb132-48" aria-hidden="true" tabindex="-1"></a>alphas2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">2800</span>),<span class="fu">rep</span>(<span class="fl">0.8</span>,<span class="dv">10400</span>))</span>
 <span id="cb132-49"><a href="patch-fate.html#cb132-49" aria-hidden="true" tabindex="-1"></a>               </span>
 <span id="cb132-50"><a href="patch-fate.html#cb132-50" aria-hidden="true" tabindex="-1"></a>plot_fs <span class="ot">&lt;-</span><span class="fu">ggplot</span>(patches_fs, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">next_x =</span> next_x, <span class="at">node =</span> node, <span class="at">next_node =</span> next_node, <span class="at">fill =</span> <span class="fu">factor</span>(node), <span class="at">label =</span> node,<span class="at">value =</span> value)) <span class="sc">+</span></span>
 <span id="cb132-51"><a href="patch-fate.html#cb132-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvial</span>(<span class="at">flow.alpha =</span> alphas2,<span class="at">width =</span>.<span class="dv">2</span>)<span class="sc">+</span></span>
@@ -635,7 +638,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="model-validation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="landscape-expansion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="patch-fate-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

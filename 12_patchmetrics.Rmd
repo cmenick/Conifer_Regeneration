@@ -1,5 +1,5 @@
 
-# Patch Fate
+# Patch Metrics
 
 ## Set Up
 
@@ -81,24 +81,42 @@ patch_metrics <- patches %>%
 
 ```{r}
 patch_recovery <- left_join(patch_list,patch_metrics,by = "Patch_ID") %>% 
-  mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
-                                t0_area > 500 & t0_area <1000 ~ "500-1000ha",
-                                t0_area > 100 & t0_area <5000 ~ "100-500ha",
-                                t0_area > 50 & t0_area <100~ "50-100ha",
-                                t0_area < 50 ~ "0-50ha"))
+  # mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
+  #                               t0_area > 500 & t0_area <1000 ~ "500-1000ha",
+  #                               t0_area > 100 & t0_area <5000 ~ "100-500ha",
+  #                               t0_area > 50 & t0_area <100~ "50-100ha",
+  #                               t0_area < 50 ~ "0-50ha"))
+  drop_na()%>% 
+  filter(ptch_fr %in% c("Douglas-Fir","Lodegepole Pine","Fir-Spruce")) %>% 
+  mutate(core_type = case_when (perc_core > 0.25 ~ "high",
+                                TRUE ~ "low"))
+# core area on regeneration
+core_df <- patch_recovery %>% 
+  group_by (ptch_fr,core_type,recovered) %>% 
+  summarize (n = n()) %>% 
+  mutate(perc_recovered = n/sum(n)*100) %>% 
+  filter(recovered == "yes")
+ggplot(core_df,aes(ptch_fr,perc_recovered,fill = core_type))+
+  geom_col(position = "dodge")
 
-patch_recovery <- patch_recovery %>% drop_na()%>% 
-  filter(ptch_fr %in% c("Douglas-Fir","Lodegepole Pine","Fir-Spruce"))
-# 
-# lm_recovery <- lm(perc_forested ~ patch_area + perc_core + edge_perim_rat  , data = patch_recovery)
-# 
-# + ptch_fr + ecoregn
-# summary(lm_recovery)
-# 
-# anova(lm_recovery)
-# 
-# ggplot(patch_recovery ,aes(edge_perim_rat,perc_forested,color=ptch_fr)) +
-#   geom_point() +
-#   geom_smooth()
+# model checks
+# core area on regeneration
+lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat  + ptch_fr + ecoregn, data = patch_recovery)
+summary(lm_recovery)
+
+lm_recovery <- lm(perc_forested ~ perc_core, data = patch_recovery)
+summary(lm_recovery)
+cor(patch_recovery$perc_forested,patch_recovery$perc_core)
+  
+# histogram of core area % for all patches
+ggplot(patch_recovery %>% filter(perc_core > 0),aes(perc_core)) +
+  geom_histogram() + 
+  facet_wrap(~ptch_fr)
+
+# histogram of patch recovery % for all patches
+ggplot(patch_recovery ,aes(perc_forested)) +
+  geom_histogram() + 
+  facet_wrap(~ptch_fr)
+
 ```
 
