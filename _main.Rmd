@@ -1,0 +1,665 @@
+--- 
+title: "Post-Fire Conifer Regeneration"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+description: 
+output: html_document
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+always_allow_html: true
+---
+--- 
+title: "Post-Fire Conifer Regeneration"
+author: "Casey Menick"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+description: 
+output: html_document
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+always_allow_html: true
+---
+
+# About
+
+There has been an increasing number of large, high-severity wildfires across the Western United States. It is not fully understood how this intensification may impact conifer forests of the West, whose resilience is dependent on successful seedling regeneration. It is important to understand how these forests are able to recolonize high-severity burn patches and subsequently respond to these shifting disturbance regimes. The goal of this research is to characterize the 30-year recovery trajectory and spatial pattern of conifer regeneration within high-severity burn patches. We investigated 35 high-severity wildfire complexes that occurred between 1988 and 1991 in conifer-dominated ecosystems of the northern Rocky Mountains. Composite snow-cover Landsat imagery was utilized to isolate conifer-specific vegetation and diminish spectral contributions from deciduous vegetation. Conifer regeneration was determined to be initially detectable by Landsat approximately 10-years post-fire using these methods. The presence of conifer regeneration was then modeled at 3-year intervals post-fire to characterize the progression of recolonization. The trajectory of snow-cover Landsat NDVI was utilized to estimate recovery time to pre-fire vegetation conditions for Douglas-fir, Fir-Spruce, and lodgepole pine forests. Ongoing analysis will determine the level of regeneration cover in a Landsat pixel for detection and characterize how spatial patterns of colonization vary across burn patch size and species. This work will provide insights into the ecological processes of conifer regeneration and may be applied to support forest restoration decision making following high-severity wildfire.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+
+# Fire Selection
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### USDA National Forest Type Group Dataset
+### EPA level-3 Ecoregions
+### Mapping
+#### Ecoregions
+#### Forest Type Groups
+## Define Fire Parameters
+### Monitoring Trends in Burn Severity (MTBS) Dataset
+### Group Adjacent Fires
+### Select Fires by Ecoregion and Forest Type 
+### Select Fires by Burn Severity
+### Clean Up Dataset
+## Final Fire Dataset
+### Dataset Overview
+## Mapping
+### Selected fires by year
+### Selected fires by majority forest type
+### Final Fires
+## Export Data 
+### Final Cleanup for Export
+### Export
+
+<!--chapter:end:01_fireselection.Rmd-->
+
+
+# Calculation of High-Severity
+
+Placeholder
+
+
+## Set Up
+### Import Fire Boundaries
+### Clean Fire Boundaries
+## Imagery 
+### Import Landsat 5
+### Prepare Landsat Data
+## Burn Indices
+### Calculate RdNBR
+## Export
+### Export Each Fire RdNBR to Drive
+
+<!--chapter:end:02_rdnbr.Rmd-->
+
+
+# Patch Formation
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import RdNBR Rasters
+### Import Fire Boundaries
+## Create High-Severity Patches
+### PatchMorph
+## Refine Patches
+## Mapping
+## Export Data 
+
+<!--chapter:end:03_patchformation.Rmd-->
+
+
+# Sampling Quadrants
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import High-Severity Patches and Fire Boundaries
+## Create Sampling Quadrants
+### Split Patches by North/South Aspects and Interior/Exterior
+### Clean Quadrants
+## Export Data
+
+<!--chapter:end:04_samplingquadrants.Rmd-->
+
+
+# Training Data
+
+Placeholder
+
+
+## Set Up
+#### Libraries
+### Fire List
+## Import Data
+## Sampling Points
+### Import and Combine Training Points
+### Assign Points and Clean Data
+## Export Data
+
+<!--chapter:end:05_trainingdata.Rmd-->
+
+
+# Snow Cover Imagery
+
+Placeholder
+
+
+## Set Up
+### Import Fire Boundaries
+### Import Landsat Imagery
+## Create Snow-Cover Landsat Collection
+### Functions to Prepare Images
+#### Get Spectral Indices
+#### Get Clear Images
+#### Get snow-Covered Pixels
+### Map Functions Across Image Collection
+## Create Annual Image Composites
+### Functions to Create Annual Image Composites
+#### Get Yearly Winter Image Composite
+#### Get the Annual Imagery for Each Fire
+### Apply Functions to Each Image
+## Prepare and Export Images
+### Functions to Prepare Images
+#### Get Year-Wavelength Band Names
+#### Get Cleaned Band Name Strings
+### Export
+
+<!--chapter:end:06_imagery.Rmd-->
+
+
+# Model Development
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import Fire Boundaries
+### Import Training Points
+## Prepare Imagery
+### Prepare Data for Bands and Fire Names
+#### Bands
+#### Fire Names
+### Merge Large Rasters
+## Extract Landsat Data 
+### Prepare Dataset
+## Examine Data 
+### Plot NDVI by Density Class
+## Model
+### Create Random Forest
+### Evaluate
+
+<!--chapter:end:07_model.Rmd-->
+
+
+# NDVI Trajectory
+
+Placeholder
+
+
+## Set Up
+### Libraries 
+### Import Fires
+### Prepare Data for Bands and Fire Names
+#### Bands
+#### Fire Names
+## Connect Landsat and High-Severity Patches
+### Extract Landsat Data for Each Patch
+## Prepare Dataset 
+### Clean Data
+## Modeling
+### Forest Type Groups
+#### Model 
+#### Estimates
+#### Plot
+### Ecoregions
+#### Model 
+#### Estimates
+#### Plot
+
+<!--chapter:end:08_NDVItrajectory_piecewise.Rmd-->
+
+
+# Prediction
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import Fire Boundaries
+### Import Models
+### Prepare Raster Naming
+#### Bands
+#### Fire Names
+## Prediction Rasters
+### Predict Across Rasters
+
+<!--chapter:end:09_prediction.Rmd-->
+
+
+# Model Validation
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import Patch and Fire Boundaries
+### Import Prediction Rasters
+## Calculate Predicted Proportions
+### Calculate Areal Proportions for Each Fire
+### Create Validation Polygons for Each Fire
+## Prepare Validation Zones
+### Assign Required Points to Each Polygon
+### Export
+
+<!--chapter:end:10_validation.Rmd-->
+
+
+# Patch Fate
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import High-Severity Patches
+## Calculate Patch Decomposition
+### Function to Track Patch Changes
+### Apply Function to All Fires
+### Create Dataset for Each Forest Type
+## Plot
+### Develop Plotting
+### All Three Forest Types
+### Forest Types Individually
+
+<!--chapter:end:11_patchfate.Rmd-->
+
+
+# Patch Fate
+
+## Set Up
+
+### Libraries
+```{r libraries10, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(terra)
+library(sf)
+library(ggsankey)
+library(gridExtra)
+library(mapview)
+# sf_use_s2(FALSE)
+```
+
+### Import High-Severity Patches
+
+```{r import patch3, message=FALSE, warning=FALSE}
+# fire list
+fire_list <- c("Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991","Fire_7_1988","Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988")
+
+# import high-severity patches
+mask <- st_read("data/patches/points_dataset_MASK.shp") %>% 
+  st_transform(3488) %>% 
+  st_union()
+
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n())) %>% 
+  st_transform(3488) %>% 
+  st_difference(.,mask)
+
+# set crs
+crs <- crs(patches)
+```
+
+## Calculate Patch Decomposition
+
+### Function to Track Patch Changes
+```{r message=FALSE, warning=FALSE}
+
+fire_name <- "Fire_18_1988"
+get_patchfate <- function(fire_name){
+  print(fire_name)
+  
+  # select three raster timepoints
+  rast_fire_t3 <- rast(str_c("data/prediction_rasters/",fire_name,"_rf_t3.tif"))
+  rast_fire_t6 <- rast(str_c("data/prediction_rasters/",fire_name,"_rf_t6.tif"))
+  rast_fire_t9 <- rast(str_c("data/prediction_rasters/",fire_name,"_rf_t9.tif"))
+
+  # use the high severity patches as t0
+  t0_patches <- patches %>% 
+    filter(Fire_ID == fire_name) %>% 
+    dplyr::select(Patch_ID,ptch_fr) %>% 
+    st_transform(3488) 
+    
+  # convert the timepoint rasters to polygons
+  t3_patches <- as.polygons(rast_fire_t3) %>% 
+    st_as_sf()  %>% 
+    st_cast(to = "POLYGON")  %>% 
+    st_transform(crs = 3488) %>% 
+    st_intersection(.,st_union(t0_patches)) %>% 
+    rename(t3_status = lyr1)
+
+  t6_patches <- as.polygons(rast_fire_t6) %>% 
+    st_as_sf()  %>% 
+    st_cast(to = "POLYGON")  %>% 
+    st_transform(crs = 3488) %>% 
+    st_intersection(.,st_union(t0_patches)) %>% 
+    rename(t6_status = lyr1)
+  
+  t9_patches <- as.polygons(rast_fire_t9) %>% 
+    st_as_sf()  %>% 
+    st_cast(to = "POLYGON")  %>% 
+    st_transform(crs = 3488) %>% 
+    st_intersection(.,st_union(t0_patches)) %>% 
+    rename(t9_status = lyr1)
+  
+  t0_patches <- st_intersection(t0_patches,st_union(t3_patches)) %>% 
+    mutate(t0_area = round(as.numeric(st_area(.))/10000,4))
+    
+  conversion_t0t3 <- t3_patches %>% 
+    st_join(.,t0_patches,left = TRUE,largest = TRUE)%>% 
+    mutate(t3_area = round(as.numeric(st_area(.))/10000,4)) %>% 
+    mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
+                                t0_area > 500 & t0_area <1000 ~ "500-1000ha",
+                                t0_area > 100 & t0_area <5000 ~ "100-500ha",
+                                t0_area > 50 & t0_area <100~ "50-100ha",
+                                t0_area < 50 ~ "0-50ha"),
+           t3_group = case_when(t3_status == 1 & t3_area > 1000 ~ "1000ha+",
+                                t3_status == 1 & t3_area > 500 & t3_area <1000 ~ "500-1000ha",
+                                t3_status == 1 & t3_area > 100 & t3_area <5000 ~ "100-500ha",
+                                t3_status == 1 & t3_area > 50 & t3_area <100~ "50-100ha",
+                                t3_status == 1 & t3_area < 50 ~ "0-50ha",
+                                t3_status == 2 ~ "forested"))
+
+    conversion_t3t6 <- st_intersection(t6_patches,conversion_t0t3) %>% 
+      mutate(t6_area = round(as.numeric(st_area(.))/10000,4),
+             t6_group = case_when(t6_status == 1 & t6_area > 1000 ~ "1000ha+",
+                                  t6_status == 1 & t6_area > 500 & t6_area <1000 ~ "500-1000ha",
+                                  t6_status == 1 & t6_area > 100 & t6_area <5000 ~ "100-500ha",
+                                  t6_status == 1 & t6_area > 50 & t6_area <100~ "50-100ha",
+                                  t6_status == 1 & t6_area < 50 ~ "0-50ha",
+                                  t6_status == 2 ~ "forested"))
+    
+    t6_patches <- t6_patches %>% 
+      mutate(t6_area = round(as.numeric(st_area(.))/10000,4))
+    
+    conversion_t6t9 <- st_intersection(t9_patches,t6_patches)%>% 
+      mutate(t9_area = round(as.numeric(st_area(.))/10000,4),
+             t6_group = case_when(t6_status == 1 & t6_area > 1000 ~ "1000ha+",
+                                  t6_status == 1 & t6_area > 500 & t6_area <1000 ~ "500-1000ha",
+                                  t6_status == 1 & t6_area > 100 & t6_area <5000 ~ "100-500ha",
+                                  t6_status == 1 & t6_area > 50 & t6_area <100~ "50-100ha",
+                                  t6_status == 1 & t6_area < 50 ~ "0-50ha",
+                                  t6_status == 2 ~ "forested"),
+             t9_group = case_when(t9_status == 1 & t9_area > 1000 ~ "1000ha+",
+                                  t9_status == 1 & t9_area > 500 & t9_area <1000 ~ "500-1000ha",
+                                  t9_status == 1 & t9_area > 100 & t9_area <5000 ~ "100-500ha",
+                                  t9_status == 1 & t9_area > 50 & t9_area <100~ "50-100ha",
+                                  t9_status == 1 & t9_area < 50 ~ "0-50ha",
+                                  t9_status == 2 ~ "forested"))
+    
+    conversion_t0t3 <- conversion_t0t3 %>% 
+      st_drop_geometry()%>% 
+      make_long(t0_group,t3_group,value = t3_area)
+
+    conversion_t3t6 <- conversion_t3t6 %>% 
+      st_drop_geometry()%>% 
+      make_long(t3_group,t6_group,value = t6_area)
+
+    conversion_t6t9 <- conversion_t6t9 %>% 
+      st_drop_geometry()%>% 
+      make_long(t6_group,t9_group,value = t9_area)
+
+    t0t9 <- rbind(conversion_t0t3 %>% drop_na(),conversion_t3t6%>% drop_na(), conversion_t6t9)
+  
+    write_csv(t0t9,str_c("data/patch_fate/",fire_name,".csv"))
+}
+```
+
+### Apply Function to All Fires
+
+```{r message=FALSE, warning=FALSE,eval = FALSE}
+# get the decomposition df for each fire 
+map(fire_list,get_patchfate)
+```
+
+```{r}
+patchfate_df <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate", pattern = "Fire_18_1988", all.files=TRUE, full.names=TRUE),read_csv))
+
+patchfate_df <- patchfate_df %>% 
+  as_tibble()
+
+# patchfate_df$node <- as.factor(patchfate_df$node)  
+# patchfate_df$next_node <- as.factor(patchfate_df$next_node)  
+# patchfate_df$node <- fct_relevel(patchfate_df$node,c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+# patchfate_df$next_node <- fct_relevel(patchfate_df$next_node,c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+
+patchfate_df$x <- as.factor(patchfate_df$x)  
+patchfate_df$next_x <- as.factor(patchfate_df$next_x)  
+patchfate_df$x <- fct_relevel(patchfate_df$x,c("t0_group","t3_group","t6_group","t9_group"))
+patchfate_df$next_x <- fct_relevel(patchfate_df$next_x,c("t3_group","t6_group","t9_group"))
+unique(patchfate_df$next_x)
+str(patchfate_df)
+str(patchfate_df2)
+ggplot(t0t9, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node, label = node,value = value)) +
+  geom_alluvial() + 
+  geom_alluvial_text(size = 3.2, color = "black") 
+
+```
+
+```{r message=FALSE, warning=FALSE}
+
+
+patchfate_df2 <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate/Single Time Point", pattern = "Fire", all.files=TRUE, full.names=TRUE),read_csv))
+
+patchfate_df2 <- patchfate_df2 %>% 
+  mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
+                                t0_area > 500 & t0_area <1000 ~ "500-1000ha",
+                                t0_area > 100 & t0_area <5000 ~ "100-500ha",
+                                t0_area > 50 & t0_area <100~ "50-100ha",
+                                t0_area < 50 ~ "0-50ha"),
+           t9_group = case_when(lyr1 == 1 & t9_area > 1000 ~ "1000ha+",
+                                lyr1 == 1 & t9_area > 500 & t9_area <1000 ~ "500-1000ha",
+                                lyr1 == 1 & t9_area > 100 & t9_area <5000 ~ "100-500ha",
+                                lyr1 == 1 & t9_area > 50 & t9_area <100~ "50-100ha",
+                                lyr1 == 1 & t9_area < 50 ~ "0-50ha",
+                                lyr1 == 2 ~ "forested"))
+
+patchfate_df2 <- patchfate_df2 %>% 
+  make_long(t0_group,t9_group,value = t9_area)
+  
+  
+patchfate_df$node <- as.factor(patchfate_df$node)  
+patchfate_df$next_node <- as.factor(patchfate_df$next_node)  
+patchfate_df$node <- fct_relevel(patchfate_df$node,c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patchfate_df$next_node <- fct_relevel(patchfate_df$next_node,c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+
+ggplot(patchfate_df2, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node, label = node,value = value)) +
+  geom_alluvial() + 
+  geom_alluvial_text(size = 3.2, color = "black") 
+
+```
+
+
+### Create Dataset for Each Forest Type
+
+```{r message=FALSE, warning=FALSE}
+# import and join all decomposiition csvs
+patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate", pattern = "Fire", all.files=TRUE, full.names=TRUE),read_csv))%>% 
+  mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
+                                t0_area > 500 & t0_area <1000 ~ "500-1000ha",
+                                t0_area > 100 & t0_area <5000 ~ "100-500ha",
+                                t0_area > 50 & t0_area <100~ "50-100ha",
+                                t0_area < 50 ~ "0-50ha"),
+           t9_group = case_when(lyr1 == 1 & t9_area > 1000 ~ "1000ha+",
+                                lyr1 == 1 & t9_area > 500 & t9_area <1000 ~ "500-1000ha",
+                                lyr1 == 1 & t9_area > 100 & t9_area <5000 ~ "100-500ha",
+                                lyr1 == 1 & t9_area > 50 & t9_area <100~ "50-100ha",
+                                lyr1 == 1 & t9_area < 50 ~ "0-50ha",
+                                lyr1 == 2 ~ "forested"))
+
+# test  = patch_data %>% 
+#   group_by(Patch_ID) %>% 
+#   summarize(area = mean(t0_area))
+# sum(test$area)
+# sum(patch_data$t9_area)
+
+# filter data to each forest type, and prepare data for alluvial polot
+patches_df <- patch_data %>% 
+  filter(ptch_fr == "Douglas-Fir") %>% 
+  make_long(t0_group,t9_group,value = t9_area)
+patches_df$node <- factor(patches_df$node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patches_df$next_node <- factor(patches_df$next_node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patches_df$value <- as.numeric(patches_df$value)
+
+patches_lp <- patch_data %>% 
+  filter(ptch_fr == "Lodegepole Pine")%>% 
+  make_long(t0_group,t9_group,value = t9_area)
+patches_lp$node <- factor(patches_lp$node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patches_lp$next_node <- factor(patches_lp$next_node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patches_lp$value <- as.numeric(patches_lp$value)
+
+patches_fs <- patch_data %>% 
+  filter(ptch_fr == "Fir-Spruce")%>% 
+  make_long(t0_group,t9_group,value = t9_area)
+patches_fs$node <- factor(patches_fs$node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patches_fs$next_node <- factor(patches_fs$next_node,levels = c("forested","0-50ha","50-100ha","100-500ha","500-1000ha","1000ha+"))
+patches_fs$value <- as.numeric(patches_fs$value)
+```
+
+## Plot
+
+### Develop Plotting
+
+```{r}
+# prepare alluvial plots for each forest type
+
+# order by the node category
+patches_lp <- patches_lp[order(patches_lp$next_node),]
+
+# used to block the forested patch flows from color set
+alphas2 <- c(rep(0,2800),rep(0.8,8600))
+
+# used to block unforested patch flows from the null color set
+colors <- c(rep("gray",2800),rep("#fc8d59",8600))
+alphas <- c(rep(.4,2800),rep(0,8600))
+               
+plot_lp<- ggplot(patches_lp, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
+  geom_alluvial(flow.alpha = alphas2,width =.2)+# plots colored flows for the unforested patches
+  geom_alluvial(flow.alpha = alphas,flow.fill=colors,width =.2) +# plots null flows for the forested patches
+  geom_alluvial_text(size = 3.2, color = "black") +# adds node label
+  scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + # adds base node colors
+  theme_alluvial(base_size = 12) +# sets font/plot size
+  labs(x = NULL, y= NULL,title = "Lodgepole Pine") +# labels
+  theme(legend.position = "none")+# remove legend title
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5),axis.text.x = element_text(vjust = 6)) + # centers the plot title, adjust x axis labels
+  scale_x_discrete(labels = c('0 Years\nPost-Fire','30 Years\nPost-Fire'),expand = c(0, 0))  +# relabels the x axis names
+  theme(panel.grid = element_blank(),panel.border = element_blank()) # remove excess white space
+
+patches_df <- patches_df[order(patches_df$next_node),]
+
+alphas2 <- c(rep(0,2800),rep(0.8,6200))
+colors <- c(rep("gray",2800),rep("#fc8d59",6200))
+alphas <- c(rep(.4,2800),rep(0,6200))
+               
+plot_df<- ggplot(patches_df, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
+  geom_alluvial(flow.alpha = alphas2,width =.2)+
+  geom_alluvial(flow.alpha = alphas,flow.fill=colors,width =.2) +
+  geom_alluvial_text(size = 3.2, color = "black") +
+  scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + 
+  theme_alluvial(base_size = 12) +
+  labs(x = NULL, y= NULL,title = "Douglas-Fir") +
+  theme(legend.position = "none")+
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5),axis.text.x = element_text(vjust = 6)) + 
+  scale_x_discrete(labels = c('0 Years\nPost-Fire','30 Years\nPost-Fire'), expand = c(0, 0))  +
+   theme(panel.grid = element_blank(),
+        panel.border = element_blank())
+
+patches_fs <- patches_fs[order(patches_fs$next_node),]
+
+colors <- c(rep("gray",2800),rep("#fc8d59",10400))
+alphas <- c(rep(.4,2800),rep(0,10400))
+alphas2 <- c(rep(0,2800),rep(0.8,10400))
+               
+plot_fs <-ggplot(patches_fs, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
+  geom_alluvial(flow.alpha = alphas2,width =.2)+
+  geom_alluvial(flow.alpha = alphas,flow.fill=colors,width =.2) +
+  geom_alluvial_text(size = 3.2, color = "black") +
+  scale_fill_manual(values = c('#fef0d9','#fc8d59','#b30000','#fdcc8a','#e34a33',"gray")) + 
+  theme_alluvial(base_size = 12) +
+  labs(x = NULL, y= NULL,title = "Fir-Spruce") +
+  theme(legend.position = "none") +
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5), axis.text.x = element_text(vjust = 6)) +
+  scale_x_discrete(labels = c('0 Years\nPost-Fire','30 Years\nPost-Fire'), expand = c(0, 0))  +
+  theme(panel.grid = element_blank(),
+        panel.border = element_blank())
+```
+
+### All Three Forest Types
+
+```{r, fig.width = 14,fig.height = 6}
+# plot the three plots together
+grid.arrange(plot_df,plot_lp,plot_fs,ncol=3,top = "Patch Decomposition 30-Years Post-Fire", left = "Total Patch Area (ha)")
+```
+
+### Forest Types Individually
+
+```{r, fig.align='center',fig.width=6,fig.height=7}
+# plot individually
+plot_df + labs(y= "Total Patch Area (ha)",title = "Decomposition of Unforested Patches",subtitle = "Douglas-Fir")
+plot_lp + labs(y= "Total Patch Area (ha)",title = "Decomposition of Unforested Patches",subtitle = "Lodgepole Pine")
+plot_fs + labs(y= "Total Patch Area (ha)",title = "Decomposition of Unforested Patches",subtitle = "Fir-Spruce")
+```
+
+<!--chapter:end:11_patchfate_timepoints.Rmd-->
+
+
+# Patch Metrics
+
+Placeholder
+
+
+## Set Up
+### Libraries
+### Import High-Severity Patches
+### Create Dataset for Each Forest Type
+## Plot
+## Identify Patches with Remaining Unforested Areas
+
+<!--chapter:end:12_patchmetrics.Rmd-->
+
+
+# Landscape Expansion
+
+Placeholder
+
+
+## Set Up
+### Import Libraries
+### Import Patch Polygons
+## Calculate Landscape Patterns
+### Calculate LEI for Each Patch's Growth
+### Function to Handle LEI in Small Patches
+### Function to Handle LEI in Large Patches
+### Apply Functions Across All Fires
+## Analyze Patch-wise LEI
+### Combine and Clean Data
+### Plot
+
+<!--chapter:end:13_lei_simplepatchwise.Rmd-->
+
+
+# Landscape Expansion
+
+Placeholder
+
+
+## Set Up
+### Import Libraries
+### Import Patch Polygons
+## Calculate Landscape Patterns
+
+<!--chapter:end:14_lei_growthwise.Rmd-->
+
