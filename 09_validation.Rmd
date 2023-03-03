@@ -4,7 +4,7 @@
 
 ### Libraries
 
-```{r libraries 8, message=FALSE, warning=FALSE}
+```{r libraries7, message=FALSE, warning=FALSE}
 library(sf)
 library(terra)
 library(raster)

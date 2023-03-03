@@ -15,12 +15,10 @@ library(rgeos)
 library(lubridate)
 library(ggplot2)
 library(exactextractr)
-library(patchwoRk)
 library(gridExtra)
 library(knitr)
 library(rasterVis)
 library(RColorBrewer)
-
 ```
 
 ### USDA National Forest Type Group Dataset

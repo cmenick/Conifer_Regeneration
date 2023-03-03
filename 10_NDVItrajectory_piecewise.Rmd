@@ -4,7 +4,7 @@
 
 ### Libraries 
 
-```{r libraries6, message=FALSE, warning=FALSE}
+```{r libraries8, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(ggthemes)
 library(tidyverse)
@@ -65,7 +65,7 @@ bandlist <- do.call(rbind,bandnames)
 
 #### Fire Names
 
-```{r fire names1, message=FALSE, warning=FALSE}
+```{r fire names list, message=FALSE, warning=FALSE}
 # get list of fire names
 fire_names <- unique(fires_export$Fire_ID)
 ```
@@ -109,7 +109,7 @@ extract_landsat <- function(fire_name){
 }
 ```
 
-```{r extract landsat, message=FALSE, results='hide', cache=TRUE}
+```{r extract landsat2, message=FALSE, results='hide', cache=TRUE}
 # map extraction function across all fires
 extracted_fires <- map(fire_names,extract_landsat)
 
@@ -194,6 +194,7 @@ model_ndvi_df <- as.data.frame(do.call(rbind,map(list(seg_ndvi_df,seg_ndvi_lp,se
 rownames(model_ndvi_df) <- c("Douglas-Fir","Lodgepole Pine","Fir-Spruce")
 
 ```
+
 #### Plot
 
 ```{r}
@@ -210,6 +211,7 @@ ggplot()+
   annotate("text", x=12, y=0.015, label="Pre-Fire Snow-Cover NDVI")+
   theme_classic()
 ```
+
 ### Ecoregions
 
 #### Model 
@@ -256,6 +258,7 @@ model_ndvi_df <- as.data.frame(do.call(rbind,map(list(seg_ndvi_mr,seg_ndvi_nr,se
 rownames(model_ndvi_df) <- c("MR","NR","CR","IB")
 
 ```
+
 #### Plot
 
 ```{r}

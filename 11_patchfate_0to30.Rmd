@@ -4,7 +4,8 @@
 ## Set Up
 
 ### Libraries
-```{r libraries10, message=FALSE, warning=FALSE}
+
+```{r libraries9, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(terra)
 library(sf)
@@ -31,7 +32,7 @@ crs <- crs(patches)
 ## Calculate Patch Decomposition
 
 ### Function to Track Patch Changes
-```{r message=FALSE, warning=FALSE}
+```{r get_patches, message=FALSE, warning=FALSE}
 get_patches <- function(fire_name){
   print(fire_name)
   
@@ -63,33 +64,16 @@ get_patches <- function(fire_name){
 
 ### Apply Function to All Fires
 
-```{r message=FALSE, warning=FALSE,eval = FALSE}
+```{r map get_patches, message=FALSE, warning=FALSE,eval = FALSE}
 # get the decomposition df for each fire 
 map(fire_list,get_patches)
 ```
 
 ### Create Dataset for Each Forest Type
 
-```{r message=FALSE, warning=FALSE}
+```{r get patch dfs, message=FALSE, warning=FALSE,cache = TRUE}
 # import and join all decomposiition csvs
-patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate", pattern = "Fire", all.files=TRUE, full.names=TRUE),read_csv))%>% 
-  mutate(t0_group = case_when(t0_area > 1000 ~ "1000ha+",
-                                t0_area > 500 & t0_area <1000 ~ "500-1000ha",
-                                t0_area > 100 & t0_area <5000 ~ "100-500ha",
-                                t0_area > 50 & t0_area <100~ "50-100ha",
-                                t0_area < 50 ~ "0-50ha"),
-           t9_group = case_when(lyr1 == 1 & t9_area > 1000 ~ "1000ha+",
-                                lyr1 == 1 & t9_area > 500 & t9_area <1000 ~ "500-1000ha",
-                                lyr1 == 1 & t9_area > 100 & t9_area <5000 ~ "100-500ha",
-                                lyr1 == 1 & t9_area > 50 & t9_area <100~ "50-100ha",
-                                lyr1 == 1 & t9_area < 50 ~ "0-50ha",
-                                lyr1 == 2 ~ "forested"))
-
-# test  = patch_data %>% 
-#   group_by(Patch_ID) %>% 
-#   summarize(area = mean(t0_area))
-# sum(test$area)
-# sum(patch_data$t9_area)
+patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate", pattern = "_t0t9", all.files=TRUE, full.names=TRUE),read_csv))
 
 # filter data to each forest type, and prepare data for alluvial polot
 patches_df <- patch_data %>% 
@@ -118,7 +102,7 @@ patches_fs$value <- as.numeric(patches_fs$value)
 
 ### Develop Plotting
 
-```{r}
+```{r alluvial, message=FALSE, warning=FALSE}
 # prepare alluvial plots for each forest type
 
 # order by the node category
@@ -164,9 +148,9 @@ plot_df<- ggplot(patches_df, aes(x = x, next_x = next_x, node = node, next_node 
 
 patches_fs <- patches_fs[order(patches_fs$next_node),]
 
-colors <- c(rep("gray",2800),rep("#fc8d59",10400))
-alphas <- c(rep(.4,2800),rep(0,10400))
-alphas2 <- c(rep(0,2800),rep(0.8,10400))
+colors <- c(rep("gray",2800),rep("#fc8d59",9200))
+alphas <- c(rep(.4,2800),rep(0,9200))
+alphas2 <- c(rep(0,2800),rep(0.8,9200))
                
 plot_fs <-ggplot(patches_fs, aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = factor(node), label = node,value = value)) +
   geom_alluvial(flow.alpha = alphas2,width =.2)+
