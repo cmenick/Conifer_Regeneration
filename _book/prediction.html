@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 10 Prediction | Post-Fire Conifer Regeneration</title>
-  <meta name="description" content="Part 10 Prediction | Post-Fire Conifer Regeneration" />
+  <title>Part 9 Prediction | Post-Fire Conifer Regeneration</title>
+  <meta name="description" content="Part 9 Prediction | Post-Fire Conifer Regeneration" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 10 Prediction | Post-Fire Conifer Regeneration" />
+  <meta property="og:title" content="Part 9 Prediction | Post-Fire Conifer Regeneration" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 10 Prediction | Post-Fire Conifer Regeneration" />
+  <meta name="twitter:title" content="Part 9 Prediction | Post-Fire Conifer Regeneration" />
   
   
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2023-02-15" />
+<meta name="date" content="2023-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ndvi-trajectory.html"/>
+<link rel="prev" href="model-development.html"/>
 <link rel="next" href="model-validation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -68,7 +68,7 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_e2bd61-1/data_stars_forestgroup_eco4be920.txt"></script>
+<script src="libs/forestgroup_eco_0bcef9-1/data_stars_forestgroup_ecoa6b0f5.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 <script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
@@ -305,58 +305,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
+<li class="chapter" data-level="9" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>9</b> Prediction</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<li class="chapter" data-level="9.1" data-path="prediction.html"><a href="prediction.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
-<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="9.1.1" data-path="prediction.html"><a href="prediction.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="9.1.2" data-path="prediction.html"><a href="prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>9.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="9.1.3" data-path="prediction.html"><a href="prediction.html#import-models"><i class="fa fa-check"></i><b>9.1.3</b> Import Models</a></li>
+<li class="chapter" data-level="9.1.4" data-path="prediction.html"><a href="prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>9.1.4</b> Prepare Raster Naming</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
+<li class="chapter" data-level="9.2" data-path="prediction.html"><a href="prediction.html#prediction-rasters"><i class="fa fa-check"></i><b>9.2</b> Prediction Rasters</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.1</b> Extract Landsat Data for Each Patch</a></li>
-</ul></li>
-<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>9.4</b> Modeling</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type Groups</a></li>
+<li class="chapter" data-level="9.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>9.2.1</b> Predict Across Rasters</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> Prediction</a>
+<li class="chapter" data-level="10" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>10</b> Model Validation</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="prediction.html"><a href="prediction.html#set-up-8"><i class="fa fa-check"></i><b>10.1</b> Set Up</a>
+<li class="chapter" data-level="10.1" data-path="model-validation.html"><a href="model-validation.html#set-up-8"><i class="fa fa-check"></i><b>10.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="prediction.html"><a href="prediction.html#libraries-6"><i class="fa fa-check"></i><b>10.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="10.1.2" data-path="prediction.html"><a href="prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>10.1.2</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="10.1.3" data-path="prediction.html"><a href="prediction.html#import-models"><i class="fa fa-check"></i><b>10.1.3</b> Import Models</a></li>
-<li class="chapter" data-level="10.1.4" data-path="prediction.html"><a href="prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>10.1.4</b> Prepare Raster Naming</a></li>
+<li class="chapter" data-level="10.1.1" data-path="model-validation.html"><a href="model-validation.html#libraries-6"><i class="fa fa-check"></i><b>10.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="10.1.2" data-path="model-validation.html"><a href="model-validation.html#import-patch-and-fire-boundaries"><i class="fa fa-check"></i><b>10.1.2</b> Import Patch and Fire Boundaries</a></li>
+<li class="chapter" data-level="10.1.3" data-path="model-validation.html"><a href="model-validation.html#import-prediction-rasters"><i class="fa fa-check"></i><b>10.1.3</b> Import Prediction Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="prediction.html"><a href="prediction.html#prediction-rasters"><i class="fa fa-check"></i><b>10.2</b> Prediction Rasters</a>
+<li class="chapter" data-level="10.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>10.2</b> Calculate Predicted Proportions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
+<li class="chapter" data-level="10.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>10.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
+<li class="chapter" data-level="10.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>10.2.2</b> Create Validation Polygons for Each Fire</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>10.3</b> Prepare Validation Zones</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>10.3.1</b> Assign Required Points to Each Polygon</a></li>
+<li class="chapter" data-level="10.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>10.3.2</b> Export</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a>
+<li class="chapter" data-level="11" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>11</b> NDVI Trajectory</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="model-validation.html"><a href="model-validation.html#set-up-9"><i class="fa fa-check"></i><b>11.1</b> Set Up</a>
+<li class="chapter" data-level="11.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-9"><i class="fa fa-check"></i><b>11.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="model-validation.html"><a href="model-validation.html#libraries-7"><i class="fa fa-check"></i><b>11.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="11.1.2" data-path="model-validation.html"><a href="model-validation.html#import-patch-and-fire-boundaries"><i class="fa fa-check"></i><b>11.1.2</b> Import Patch and Fire Boundaries</a></li>
-<li class="chapter" data-level="11.1.3" data-path="model-validation.html"><a href="model-validation.html#import-prediction-rasters"><i class="fa fa-check"></i><b>11.1.3</b> Import Prediction Rasters</a></li>
+<li class="chapter" data-level="11.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-7"><i class="fa fa-check"></i><b>11.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>11.1.2</b> Import Fires</a></li>
+<li class="chapter" data-level="11.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>11.1.3</b> Prepare Data for Bands and Fire Names</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>11.2</b> Calculate Predicted Proportions</a>
+<li class="chapter" data-level="11.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>11.2</b> Connect Landsat and High-Severity Patches</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>11.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
-<li class="chapter" data-level="11.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>11.2.2</b> Create Validation Polygons for Each Fire</a></li>
+<li class="chapter" data-level="11.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>11.2.1</b> Extract Landsat Data for Each Patch</a></li>
 </ul></li>
-<li class="chapter" data-level="11.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>11.3</b> Prepare Validation Zones</a>
+<li class="chapter" data-level="11.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>11.3</b> Prepare Dataset</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>11.3.1</b> Assign Required Points to Each Polygon</a></li>
-<li class="chapter" data-level="11.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>11.3.2</b> Export</a></li>
+<li class="chapter" data-level="11.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>11.3.1</b> Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>11.4</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>11.4.1</b> Forest Type Groups</a></li>
+<li class="chapter" data-level="11.4.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregions-1"><i class="fa fa-check"></i><b>11.4.2</b> Ecoregions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
@@ -379,35 +380,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.3.3</b> Forest Types Individually</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="patch-fate-1.html"><a href="patch-fate-1.html"><i class="fa fa-check"></i><b>13</b> Patch Fate</a>
+<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="patch-fate-1.html"><a href="patch-fate-1.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="patch-fate-1.html"><a href="patch-fate-1.html#libraries-9"><i class="fa fa-check"></i><b>13.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="13.1.2" data-path="patch-fate-1.html"><a href="patch-fate-1.html#import-high-severity-patches-1"><i class="fa fa-check"></i><b>13.1.2</b> Import High-Severity Patches</a></li>
-<li class="chapter" data-level="13.1.3" data-path="patch-fate-1.html"><a href="patch-fate-1.html#create-dataset-for-each-forest-type-1"><i class="fa fa-check"></i><b>13.1.3</b> Create Dataset for Each Forest Type</a></li>
+<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="patch-fate-1.html"><a href="patch-fate-1.html#plot-3"><i class="fa fa-check"></i><b>13.2</b> Plot</a></li>
-<li class="chapter" data-level="13.3" data-path="patch-fate-1.html"><a href="patch-fate-1.html#identify-patches-with-remaining-unforested-areas"><i class="fa fa-check"></i><b>13.3</b> Identify Patches with Remaining Unforested Areas</a></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
+<li class="chapter" data-level="13.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#assess-lei-patterns"><i class="fa fa-check"></i><b>13.3</b> Assess LEI Patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
+<li class="chapter" data-level="14" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
+<li class="chapter" data-level="14.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
-<li class="chapter" data-level="14.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
+<li class="chapter" data-level="14.1.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-libraries-1"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="14.1.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-patch-polygons-1"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a>
+<li class="chapter" data-level="14.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a>
 <ul>
-<li class="chapter" data-level="14.2.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-lei-for-each-patchs-growth"><i class="fa fa-check"></i><b>14.2.1</b> Calculate LEI for Each Patch’s Growth</a></li>
-<li class="chapter" data-level="14.2.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-small-patches"><i class="fa fa-check"></i><b>14.2.2</b> Function to Handle LEI in Small Patches</a></li>
-<li class="chapter" data-level="14.2.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-large-patches"><i class="fa fa-check"></i><b>14.2.3</b> Function to Handle LEI in Large Patches</a></li>
-<li class="chapter" data-level="14.2.4" data-path="landscape-expansion.html"><a href="landscape-expansion.html#apply-functions-across-all-fires"><i class="fa fa-check"></i><b>14.2.4</b> Apply Functions Across All Fires</a></li>
+<li class="chapter" data-level="14.2.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#create-functions"><i class="fa fa-check"></i><b>14.2.1</b> Create Functions</a></li>
+<li class="chapter" data-level="14.2.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#map-across-all-fires"><i class="fa fa-check"></i><b>14.2.2</b> Map Across All Fires</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#analyze-patch-wise-lei"><i class="fa fa-check"></i><b>14.3</b> Analyze Patch-wise LEI</a>
+<li class="chapter" data-level="14.3" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#assess-lsm-patterns"><i class="fa fa-check"></i><b>14.3</b> Assess LSM Patterns</a>
 <ul>
-<li class="chapter" data-level="14.3.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#combine-and-clean-data"><i class="fa fa-check"></i><b>14.3.1</b> Combine and Clean Data</a></li>
-<li class="chapter" data-level="14.3.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#plot-4"><i class="fa fa-check"></i><b>14.3.2</b> Plot</a></li>
+<li class="chapter" data-level="14.3.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#prepare-data"><i class="fa fa-check"></i><b>14.3.1</b> Prepare Data</a></li>
+<li class="chapter" data-level="14.3.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#percent-of-land-area"><i class="fa fa-check"></i><b>14.3.2</b> Percent of Land Area</a></li>
+<li class="chapter" data-level="14.3.3" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#percent-alike-adjacencies"><i class="fa fa-check"></i><b>14.3.3</b> Percent Alike Adjacencies</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -430,131 +429,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="prediction" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Part 10</span> Prediction<a href="prediction.html#prediction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="set-up-8" class="section level2 hasAnchor" number="10.1">
-<h2><span class="header-section-number">10.1</span> Set Up<a href="prediction.html#set-up-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="libraries-6" class="section level3 hasAnchor" number="10.1.1">
-<h3><span class="header-section-number">10.1.1</span> Libraries<a href="prediction.html#libraries-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="prediction.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb108-2"><a href="prediction.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb108-3"><a href="prediction.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb108-4"><a href="prediction.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb108-5"><a href="prediction.html#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
-<span id="cb108-6"><a href="prediction.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb108-7"><a href="prediction.html#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
+<div id="prediction" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Part 9</span> Prediction<a href="prediction.html#prediction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="set-up-7" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Set Up<a href="prediction.html#set-up-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-5" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Libraries<a href="prediction.html#libraries-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="prediction.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb88-2"><a href="prediction.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb88-3"><a href="prediction.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb88-4"><a href="prediction.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb88-5"><a href="prediction.html#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb88-6"><a href="prediction.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb88-7"><a href="prediction.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
 </div>
-<div id="import-fire-boundaries-4" class="section level3 hasAnchor" number="10.1.2">
-<h3><span class="header-section-number">10.1.2</span> Import Fire Boundaries<a href="prediction.html#import-fire-boundaries-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="prediction.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
-<span id="cb109-2"><a href="prediction.html#cb109-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb109-3"><a href="prediction.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG: 4326&quot;</span>)</span>
-<span id="cb109-4"><a href="prediction.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-5"><a href="prediction.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set crs</span></span>
-<span id="cb109-6"><a href="prediction.html#cb109-6" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
-<span id="cb109-7"><a href="prediction.html#cb109-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-8"><a href="prediction.html#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="co"># import fire boundaries</span></span>
-<span id="cb109-9"><a href="prediction.html#cb109-9" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb109-10"><a href="prediction.html#cb109-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span>
-<span id="cb109-11"><a href="prediction.html#cb109-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-12"><a href="prediction.html#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="co"># import mask of plantings and fires</span></span>
-<span id="cb109-13"><a href="prediction.html#cb109-13" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/points_dataset_MASK.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb109-14"><a href="prediction.html#cb109-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs) <span class="sc">%&gt;%</span> </span>
-<span id="cb109-15"><a href="prediction.html#cb109-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_join</span>(.,fires_export)</span></code></pre></div>
+<div id="import-fire-boundaries-4" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Import Fire Boundaries<a href="prediction.html#import-fire-boundaries-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="prediction.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
+<span id="cb89-2"><a href="prediction.html#cb89-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-3"><a href="prediction.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG: 4326&quot;</span>)</span>
+<span id="cb89-4"><a href="prediction.html#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="prediction.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set crs</span></span>
+<span id="cb89-6"><a href="prediction.html#cb89-6" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
+<span id="cb89-7"><a href="prediction.html#cb89-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-8"><a href="prediction.html#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="co"># import fire boundaries</span></span>
+<span id="cb89-9"><a href="prediction.html#cb89-9" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb89-10"><a href="prediction.html#cb89-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span>crs)</span>
+<span id="cb89-11"><a href="prediction.html#cb89-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-12"><a href="prediction.html#cb89-12" aria-hidden="true" tabindex="-1"></a><span class="co"># import mask of plantings and fires</span></span>
+<span id="cb89-13"><a href="prediction.html#cb89-13" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/points_dataset_MASK.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-14"><a href="prediction.html#cb89-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-15"><a href="prediction.html#cb89-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_join</span>(.,fires_export)</span></code></pre></div>
 </div>
-<div id="import-models" class="section level3 hasAnchor" number="10.1.3">
-<h3><span class="header-section-number">10.1.3</span> Import Models<a href="prediction.html#import-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="prediction.html#cb110-1" aria-hidden="true" tabindex="-1"></a>rf_conifer <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/models/rf_conifer.rds&quot;</span>)</span>
-<span id="cb110-2"><a href="prediction.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lm_conifer &lt;- readRDS(&quot;data/models/lm_conifer.rds&quot;)</span></span></code></pre></div>
+<div id="import-models" class="section level3 hasAnchor" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Import Models<a href="prediction.html#import-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="prediction.html#cb90-1" aria-hidden="true" tabindex="-1"></a>rf_conifer <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/models/rf_conifer.rds&quot;</span>)</span>
+<span id="cb90-2"><a href="prediction.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lm_conifer &lt;- readRDS(&quot;data/models/lm_conifer.rds&quot;)</span></span></code></pre></div>
 </div>
-<div id="prepare-raster-naming" class="section level3 hasAnchor" number="10.1.4">
-<h3><span class="header-section-number">10.1.4</span> Prepare Raster Naming<a href="prediction.html#prepare-raster-naming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="bands-2" class="section level4 hasAnchor" number="10.1.4.1">
-<h4><span class="header-section-number">10.1.4.1</span> Bands<a href="prediction.html#bands-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="prediction.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list band names and years</span></span>
-<span id="cb111-2"><a href="prediction.html#cb111-2" aria-hidden="true" tabindex="-1"></a>bands <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
-<span id="cb111-3"><a href="prediction.html#cb111-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1984</span><span class="sc">:</span><span class="dv">2020</span>)</span>
-<span id="cb111-4"><a href="prediction.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-5"><a href="prediction.html#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of all combinations of bands, in the appropriate order</span></span>
-<span id="cb111-6"><a href="prediction.html#cb111-6" aria-hidden="true" tabindex="-1"></a>bandnames <span class="ot">&lt;-</span> <span class="fu">list</span>(bands,years) <span class="sc">%&gt;%</span></span>
-<span id="cb111-7"><a href="prediction.html#cb111-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cross</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb111-8"><a href="prediction.html#cb111-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">lift</span>(paste0))</span>
-<span id="cb111-9"><a href="prediction.html#cb111-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-10"><a href="prediction.html#cb111-10" aria-hidden="true" tabindex="-1"></a>bandlist <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,bandnames)</span></code></pre></div>
+<div id="prepare-raster-naming" class="section level3 hasAnchor" number="9.1.4">
+<h3><span class="header-section-number">9.1.4</span> Prepare Raster Naming<a href="prediction.html#prepare-raster-naming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="bands-1" class="section level4 hasAnchor" number="9.1.4.1">
+<h4><span class="header-section-number">9.1.4.1</span> Bands<a href="prediction.html#bands-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="prediction.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list band names and years</span></span>
+<span id="cb91-2"><a href="prediction.html#cb91-2" aria-hidden="true" tabindex="-1"></a>bands <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
+<span id="cb91-3"><a href="prediction.html#cb91-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1984</span><span class="sc">:</span><span class="dv">2020</span>)</span>
+<span id="cb91-4"><a href="prediction.html#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="prediction.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of all combinations of bands, in the appropriate order</span></span>
+<span id="cb91-6"><a href="prediction.html#cb91-6" aria-hidden="true" tabindex="-1"></a>bandnames <span class="ot">&lt;-</span> <span class="fu">list</span>(bands,years) <span class="sc">%&gt;%</span></span>
+<span id="cb91-7"><a href="prediction.html#cb91-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cross</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb91-8"><a href="prediction.html#cb91-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="fu">lift</span>(paste0))</span>
+<span id="cb91-9"><a href="prediction.html#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-10"><a href="prediction.html#cb91-10" aria-hidden="true" tabindex="-1"></a>bandlist <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,bandnames)</span></code></pre></div>
 </div>
-<div id="fire-names-2" class="section level4 hasAnchor" number="10.1.4.2">
-<h4><span class="header-section-number">10.1.4.2</span> Fire Names<a href="prediction.html#fire-names-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="prediction.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of fire names</span></span>
-<span id="cb112-2"><a href="prediction.html#cb112-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>)</span></code></pre></div>
+<div id="fire-names-1" class="section level4 hasAnchor" number="9.1.4.2">
+<h4><span class="header-section-number">9.1.4.2</span> Fire Names<a href="prediction.html#fire-names-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="prediction.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get list of fire names</span></span>
+<span id="cb92-2"><a href="prediction.html#cb92-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="prediction-rasters" class="section level2 hasAnchor" number="10.2">
-<h2><span class="header-section-number">10.2</span> Prediction Rasters<a href="prediction.html#prediction-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="predict-across-rasters" class="section level3 hasAnchor" number="10.2.1">
-<h3><span class="header-section-number">10.2.1</span> Predict Across Rasters<a href="prediction.html#predict-across-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="prediction.html#cb113-1" aria-hidden="true" tabindex="-1"></a>predict_landsat <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
-<span id="cb113-2"><a href="prediction.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Starting Fire &quot;</span>,fire_name))</span>
-<span id="cb113-3"><a href="prediction.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-4"><a href="prediction.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># import fire raster</span></span>
-<span id="cb113-5"><a href="prediction.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_annual&quot;</span>, <span class="at">pattern=</span><span class="fu">str_c</span>(fire_name,<span class="st">&quot;.tif&quot;</span>), <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
-<span id="cb113-6"><a href="prediction.html#cb113-6" aria-hidden="true" tabindex="-1"></a>  fire_raster <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list)  </span>
-<span id="cb113-7"><a href="prediction.html#cb113-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-8"><a href="prediction.html#cb113-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># name the bands, verify crs</span></span>
-<span id="cb113-9"><a href="prediction.html#cb113-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(fire_raster) <span class="ot">&lt;-</span> bandlist</span>
-<span id="cb113-10"><a href="prediction.html#cb113-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crs</span>(fire_raster) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG: 4326&quot;</span></span>
-<span id="cb113-11"><a href="prediction.html#cb113-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-12"><a href="prediction.html#cb113-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
-<span id="cb113-13"><a href="prediction.html#cb113-13" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb113-14"><a href="prediction.html#cb113-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb113-15"><a href="prediction.html#cb113-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="fu">crs</span>(fire_raster))</span>
-<span id="cb113-16"><a href="prediction.html#cb113-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-17"><a href="prediction.html#cb113-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter mask for this fir</span></span>
-<span id="cb113-18"><a href="prediction.html#cb113-18" aria-hidden="true" tabindex="-1"></a>  fire_mask <span class="ot">&lt;-</span> mask <span class="sc">%&gt;%</span> </span>
-<span id="cb113-19"><a href="prediction.html#cb113-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID <span class="sc">==</span> fire_name)</span>
-<span id="cb113-20"><a href="prediction.html#cb113-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-21"><a href="prediction.html#cb113-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clip raster to outside of any masked areas</span></span>
-<span id="cb113-22"><a href="prediction.html#cb113-22" aria-hidden="true" tabindex="-1"></a>  fire_raster_mask <span class="ot">&lt;-</span> <span class="fu">mask</span>(fire_raster,fire_mask,<span class="at">inverse=</span><span class="cn">TRUE</span>)</span>
-<span id="cb113-23"><a href="prediction.html#cb113-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-24"><a href="prediction.html#cb113-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clip raster to patches</span></span>
-<span id="cb113-25"><a href="prediction.html#cb113-25" aria-hidden="true" tabindex="-1"></a>  raster_clip <span class="ot">&lt;-</span> <span class="fu">mask</span>(fire_raster_mask,fire_patches)</span>
-<span id="cb113-26"><a href="prediction.html#cb113-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-27"><a href="prediction.html#cb113-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set fire year</span></span>
-<span id="cb113-28"><a href="prediction.html#cb113-28" aria-hidden="true" tabindex="-1"></a>  fire_year_start <span class="ot">&lt;-</span> <span class="fu">mean</span>(fire_patches<span class="sc">$</span>year)</span>
-<span id="cb113-29"><a href="prediction.html#cb113-29" aria-hidden="true" tabindex="-1"></a>  fire_year_end <span class="ot">&lt;-</span> fire_year_start <span class="sc">+</span> <span class="dv">30</span></span>
-<span id="cb113-30"><a href="prediction.html#cb113-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-31"><a href="prediction.html#cb113-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># string of start years for 3-year image composites</span></span>
-<span id="cb113-32"><a href="prediction.html#cb113-32" aria-hidden="true" tabindex="-1"></a>  fire_year_seq <span class="ot">&lt;-</span> <span class="fu">sequence</span>(<span class="dv">10</span>,<span class="at">from=</span>fire_year_start, <span class="at">by =</span> <span class="dv">3</span>)</span>
-<span id="cb113-33"><a href="prediction.html#cb113-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-34"><a href="prediction.html#cb113-34" aria-hidden="true" tabindex="-1"></a>  pred_rasters <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb113-35"><a href="prediction.html#cb113-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
-<span id="cb113-36"><a href="prediction.html#cb113-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(i)</span>
-<span id="cb113-37"><a href="prediction.html#cb113-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb113-38"><a href="prediction.html#cb113-38" aria-hidden="true" tabindex="-1"></a>    raster_yr1 <span class="ot">&lt;-</span> raster_clip[<span class="fu">as.character</span>(fire_year_seq[i])]</span>
-<span id="cb113-39"><a href="prediction.html#cb113-39" aria-hidden="true" tabindex="-1"></a>    raster_yr2 <span class="ot">&lt;-</span> raster_clip[<span class="fu">as.character</span>(fire_year_seq[i]<span class="sc">+</span><span class="dv">1</span>)]</span>
-<span id="cb113-40"><a href="prediction.html#cb113-40" aria-hidden="true" tabindex="-1"></a>    raster_yr3 <span class="ot">&lt;-</span> raster_clip[<span class="fu">as.character</span>(fire_year_seq[i]<span class="sc">+</span><span class="dv">2</span>)]</span>
-<span id="cb113-41"><a href="prediction.html#cb113-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb113-42"><a href="prediction.html#cb113-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(raster_yr1) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
-<span id="cb113-43"><a href="prediction.html#cb113-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(raster_yr2) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
-<span id="cb113-44"><a href="prediction.html#cb113-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(raster_yr3) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
-<span id="cb113-45"><a href="prediction.html#cb113-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb113-46"><a href="prediction.html#cb113-46" aria-hidden="true" tabindex="-1"></a>    raster_set <span class="ot">&lt;-</span> <span class="fu">mean</span>(raster_yr1,raster_yr2,raster_yr3,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb113-47"><a href="prediction.html#cb113-47" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb113-48"><a href="prediction.html#cb113-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rast_predicted_lm &lt;- terra::predict(raster_set,lm_conifer, type=&quot;response&quot;, se.fit=TRUE, na.rm = TRUE,filename = str_c(&quot;data/prediction_rasters/&quot;,fire_name,&quot;_lm_year&quot;,1+((i-1)*3),&quot;to&quot;,i*3,&quot;.tif&quot;))</span></span>
-<span id="cb113-49"><a href="prediction.html#cb113-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb113-50"><a href="prediction.html#cb113-50" aria-hidden="true" tabindex="-1"></a>    rast_predicted_rf <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">predict</span>(raster_set,rf_conifer, <span class="at">type=</span><span class="st">&quot;response&quot;</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>,<span class="at">filename =</span> <span class="fu">str_c</span>(<span class="st">&quot;data/prediction_rasters/&quot;</span>,fire_name,<span class="st">&quot;_rf_year&quot;</span>,<span class="dv">1</span><span class="sc">+</span>((i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">3</span>),<span class="st">&quot;to&quot;</span>,i<span class="sc">*</span><span class="dv">3</span>,<span class="st">&quot;.tif&quot;</span>))</span>
-<span id="cb113-51"><a href="prediction.html#cb113-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb113-52"><a href="prediction.html#cb113-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pred_rasters[str_c(&quot;lm_year&quot;,1+((i-1)*3),&quot;to&quot;,i*3)] &lt;- rast_predicted_lm</span></span>
-<span id="cb113-53"><a href="prediction.html#cb113-53" aria-hidden="true" tabindex="-1"></a>    pred_rasters[<span class="fu">str_c</span>(<span class="st">&quot;rf_year&quot;</span>,<span class="dv">1</span><span class="sc">+</span>((i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">3</span>),<span class="st">&quot;to&quot;</span>,i<span class="sc">*</span><span class="dv">3</span>)] <span class="ot">&lt;-</span> rast_predicted_rf</span>
-<span id="cb113-54"><a href="prediction.html#cb113-54" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb113-55"><a href="prediction.html#cb113-55" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb113-56"><a href="prediction.html#cb113-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
-<span id="cb113-57"><a href="prediction.html#cb113-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pred_rasters)</span>
-<span id="cb113-58"><a href="prediction.html#cb113-58" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="prediction.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create dataset of prediction rasters for each model in 3 year increments</span></span>
-<span id="cb114-2"><a href="prediction.html#cb114-2" aria-hidden="true" tabindex="-1"></a>prediction_dataset <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_names,predict_landsat)</span>
-<span id="cb114-3"><a href="prediction.html#cb114-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-4"><a href="prediction.html#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(prediction_dataset) <span class="ot">&lt;-</span> fire_names</span></code></pre></div>
+<div id="prediction-rasters" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Prediction Rasters<a href="prediction.html#prediction-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="predict-across-rasters" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Predict Across Rasters<a href="prediction.html#predict-across-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="prediction.html#cb93-1" aria-hidden="true" tabindex="-1"></a>predict_landsat <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
+<span id="cb93-2"><a href="prediction.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Starting Fire &quot;</span>,fire_name))</span>
+<span id="cb93-3"><a href="prediction.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-4"><a href="prediction.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># import fire raster</span></span>
+<span id="cb93-5"><a href="prediction.html#cb93-5" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/landsat/landsat_annual&quot;</span>, <span class="at">pattern=</span><span class="fu">str_c</span>(fire_name,<span class="st">&quot;.tif&quot;</span>), <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb93-6"><a href="prediction.html#cb93-6" aria-hidden="true" tabindex="-1"></a>  fire_raster <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list)  </span>
+<span id="cb93-7"><a href="prediction.html#cb93-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-8"><a href="prediction.html#cb93-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># name the bands, verify crs</span></span>
+<span id="cb93-9"><a href="prediction.html#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(fire_raster) <span class="ot">&lt;-</span> bandlist</span>
+<span id="cb93-10"><a href="prediction.html#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crs</span>(fire_raster) <span class="ot">&lt;-</span> <span class="st">&quot;EPSG: 4326&quot;</span></span>
+<span id="cb93-11"><a href="prediction.html#cb93-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-12"><a href="prediction.html#cb93-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
+<span id="cb93-13"><a href="prediction.html#cb93-13" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb93-14"><a href="prediction.html#cb93-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-15"><a href="prediction.html#cb93-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="fu">crs</span>(fire_raster))</span>
+<span id="cb93-16"><a href="prediction.html#cb93-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-17"><a href="prediction.html#cb93-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter mask for this fir</span></span>
+<span id="cb93-18"><a href="prediction.html#cb93-18" aria-hidden="true" tabindex="-1"></a>  fire_mask <span class="ot">&lt;-</span> mask <span class="sc">%&gt;%</span> </span>
+<span id="cb93-19"><a href="prediction.html#cb93-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID <span class="sc">==</span> fire_name)</span>
+<span id="cb93-20"><a href="prediction.html#cb93-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-21"><a href="prediction.html#cb93-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clip raster to outside of any masked areas</span></span>
+<span id="cb93-22"><a href="prediction.html#cb93-22" aria-hidden="true" tabindex="-1"></a>  fire_raster_mask <span class="ot">&lt;-</span> <span class="fu">mask</span>(fire_raster,fire_mask,<span class="at">inverse=</span><span class="cn">TRUE</span>)</span>
+<span id="cb93-23"><a href="prediction.html#cb93-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-24"><a href="prediction.html#cb93-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clip raster to patches</span></span>
+<span id="cb93-25"><a href="prediction.html#cb93-25" aria-hidden="true" tabindex="-1"></a>  raster_clip <span class="ot">&lt;-</span> <span class="fu">mask</span>(fire_raster_mask,fire_patches)</span>
+<span id="cb93-26"><a href="prediction.html#cb93-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-27"><a href="prediction.html#cb93-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set fire year</span></span>
+<span id="cb93-28"><a href="prediction.html#cb93-28" aria-hidden="true" tabindex="-1"></a>  fire_year_start <span class="ot">&lt;-</span> <span class="fu">mean</span>(fire_patches<span class="sc">$</span>year)</span>
+<span id="cb93-29"><a href="prediction.html#cb93-29" aria-hidden="true" tabindex="-1"></a>  fire_year_end <span class="ot">&lt;-</span> fire_year_start <span class="sc">+</span> <span class="dv">30</span></span>
+<span id="cb93-30"><a href="prediction.html#cb93-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-31"><a href="prediction.html#cb93-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># string of start years for 3-year image composites</span></span>
+<span id="cb93-32"><a href="prediction.html#cb93-32" aria-hidden="true" tabindex="-1"></a>  fire_year_seq <span class="ot">&lt;-</span> <span class="fu">sequence</span>(<span class="dv">10</span>,<span class="at">from=</span>fire_year_start, <span class="at">by =</span> <span class="dv">3</span>)</span>
+<span id="cb93-33"><a href="prediction.html#cb93-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-34"><a href="prediction.html#cb93-34" aria-hidden="true" tabindex="-1"></a>  pred_rasters <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb93-35"><a href="prediction.html#cb93-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb93-36"><a href="prediction.html#cb93-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(i)</span>
+<span id="cb93-37"><a href="prediction.html#cb93-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-38"><a href="prediction.html#cb93-38" aria-hidden="true" tabindex="-1"></a>    raster_yr1 <span class="ot">&lt;-</span> raster_clip[<span class="fu">as.character</span>(fire_year_seq[i])]</span>
+<span id="cb93-39"><a href="prediction.html#cb93-39" aria-hidden="true" tabindex="-1"></a>    raster_yr2 <span class="ot">&lt;-</span> raster_clip[<span class="fu">as.character</span>(fire_year_seq[i]<span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb93-40"><a href="prediction.html#cb93-40" aria-hidden="true" tabindex="-1"></a>    raster_yr3 <span class="ot">&lt;-</span> raster_clip[<span class="fu">as.character</span>(fire_year_seq[i]<span class="sc">+</span><span class="dv">2</span>)]</span>
+<span id="cb93-41"><a href="prediction.html#cb93-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-42"><a href="prediction.html#cb93-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(raster_yr1) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
+<span id="cb93-43"><a href="prediction.html#cb93-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(raster_yr2) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
+<span id="cb93-44"><a href="prediction.html#cb93-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(raster_yr3) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;nir&quot;</span>, <span class="st">&quot;swir1&quot;</span>, <span class="st">&quot;swir2&quot;</span>, <span class="st">&quot;ndvi&quot;</span>, <span class="st">&quot;ndwi&quot;</span>, <span class="st">&quot;nbr&quot;</span>, <span class="st">&quot;nbr2&quot;</span>, <span class="st">&quot;ndsi&quot;</span>, <span class="st">&quot;ndfsi&quot;</span>, <span class="st">&quot;evi&quot;</span>)</span>
+<span id="cb93-45"><a href="prediction.html#cb93-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-46"><a href="prediction.html#cb93-46" aria-hidden="true" tabindex="-1"></a>    raster_set <span class="ot">&lt;-</span> <span class="fu">mean</span>(raster_yr1,raster_yr2,raster_yr3,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb93-47"><a href="prediction.html#cb93-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-48"><a href="prediction.html#cb93-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rast_predicted_lm &lt;- terra::predict(raster_set,lm_conifer, type=&quot;response&quot;, se.fit=TRUE, na.rm = TRUE,filename = str_c(&quot;data/prediction_rasters/&quot;,fire_name,&quot;_lm_year&quot;,1+((i-1)*3),&quot;to&quot;,i*3,&quot;.tif&quot;))</span></span>
+<span id="cb93-49"><a href="prediction.html#cb93-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-50"><a href="prediction.html#cb93-50" aria-hidden="true" tabindex="-1"></a>    rast_predicted_rf <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">predict</span>(raster_set,rf_conifer, <span class="at">type=</span><span class="st">&quot;response&quot;</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>,<span class="at">filename =</span> <span class="fu">str_c</span>(<span class="st">&quot;data/prediction_rasters/&quot;</span>,fire_name,<span class="st">&quot;_rf_year&quot;</span>,<span class="dv">1</span><span class="sc">+</span>((i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">3</span>),<span class="st">&quot;to&quot;</span>,i<span class="sc">*</span><span class="dv">3</span>,<span class="st">&quot;.tif&quot;</span>))</span>
+<span id="cb93-51"><a href="prediction.html#cb93-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-52"><a href="prediction.html#cb93-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pred_rasters[str_c(&quot;lm_year&quot;,1+((i-1)*3),&quot;to&quot;,i*3)] &lt;- rast_predicted_lm</span></span>
+<span id="cb93-53"><a href="prediction.html#cb93-53" aria-hidden="true" tabindex="-1"></a>    pred_rasters[<span class="fu">str_c</span>(<span class="st">&quot;rf_year&quot;</span>,<span class="dv">1</span><span class="sc">+</span>((i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">3</span>),<span class="st">&quot;to&quot;</span>,i<span class="sc">*</span><span class="dv">3</span>)] <span class="ot">&lt;-</span> rast_predicted_rf</span>
+<span id="cb93-54"><a href="prediction.html#cb93-54" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb93-55"><a href="prediction.html#cb93-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb93-56"><a href="prediction.html#cb93-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
+<span id="cb93-57"><a href="prediction.html#cb93-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pred_rasters)</span>
+<span id="cb93-58"><a href="prediction.html#cb93-58" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="prediction.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create dataset of prediction rasters for each model in 3 year increments</span></span>
+<span id="cb94-2"><a href="prediction.html#cb94-2" aria-hidden="true" tabindex="-1"></a>prediction_dataset <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_names,predict_landsat)</span>
+<span id="cb94-3"><a href="prediction.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="prediction.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(prediction_dataset) <span class="ot">&lt;-</span> fire_names</span></code></pre></div>
 
 </div>
 </div>
@@ -564,7 +563,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="ndvi-trajectory.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-development.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="model-validation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -596,7 +595,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/09_prediction.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08_prediction.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 11 Model Validation | Post-Fire Conifer Regeneration</title>
-  <meta name="description" content="Part 11 Model Validation | Post-Fire Conifer Regeneration" />
+  <title>Part 10 Model Validation | Post-Fire Conifer Regeneration</title>
+  <meta name="description" content="Part 10 Model Validation | Post-Fire Conifer Regeneration" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 11 Model Validation | Post-Fire Conifer Regeneration" />
+  <meta property="og:title" content="Part 10 Model Validation | Post-Fire Conifer Regeneration" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 11 Model Validation | Post-Fire Conifer Regeneration" />
+  <meta name="twitter:title" content="Part 10 Model Validation | Post-Fire Conifer Regeneration" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2023-02-15" />
+<meta name="date" content="2023-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="prediction.html"/>
-<link rel="next" href="patch-fate.html"/>
+<link rel="next" href="ndvi-trajectory.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -68,7 +68,7 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_e2bd61-1/data_stars_forestgroup_eco4be920.txt"></script>
+<script src="libs/forestgroup_eco_0bcef9-1/data_stars_forestgroup_ecoa6b0f5.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 <script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
@@ -305,58 +305,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>9</b> NDVI Trajectory</a>
+<li class="chapter" data-level="9" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>9</b> Prediction</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<li class="chapter" data-level="9.1" data-path="prediction.html"><a href="prediction.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="9.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>9.1.2</b> Import Fires</a></li>
-<li class="chapter" data-level="9.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>9.1.3</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="9.1.1" data-path="prediction.html"><a href="prediction.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="9.1.2" data-path="prediction.html"><a href="prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>9.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="9.1.3" data-path="prediction.html"><a href="prediction.html#import-models"><i class="fa fa-check"></i><b>9.1.3</b> Import Models</a></li>
+<li class="chapter" data-level="9.1.4" data-path="prediction.html"><a href="prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>9.1.4</b> Prepare Raster Naming</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>9.2</b> Connect Landsat and High-Severity Patches</a>
+<li class="chapter" data-level="9.2" data-path="prediction.html"><a href="prediction.html#prediction-rasters"><i class="fa fa-check"></i><b>9.2</b> Prediction Rasters</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>9.2.1</b> Extract Landsat Data for Each Patch</a></li>
-</ul></li>
-<li class="chapter" data-level="9.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>9.3</b> Prepare Dataset</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>9.3.1</b> Clean Data</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>9.4</b> Modeling</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>9.4.1</b> Forest Type Groups</a></li>
+<li class="chapter" data-level="9.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>9.2.1</b> Predict Across Rasters</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>10</b> Prediction</a>
+<li class="chapter" data-level="10" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>10</b> Model Validation</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="prediction.html"><a href="prediction.html#set-up-8"><i class="fa fa-check"></i><b>10.1</b> Set Up</a>
+<li class="chapter" data-level="10.1" data-path="model-validation.html"><a href="model-validation.html#set-up-8"><i class="fa fa-check"></i><b>10.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="prediction.html"><a href="prediction.html#libraries-6"><i class="fa fa-check"></i><b>10.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="10.1.2" data-path="prediction.html"><a href="prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>10.1.2</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="10.1.3" data-path="prediction.html"><a href="prediction.html#import-models"><i class="fa fa-check"></i><b>10.1.3</b> Import Models</a></li>
-<li class="chapter" data-level="10.1.4" data-path="prediction.html"><a href="prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>10.1.4</b> Prepare Raster Naming</a></li>
+<li class="chapter" data-level="10.1.1" data-path="model-validation.html"><a href="model-validation.html#libraries-6"><i class="fa fa-check"></i><b>10.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="10.1.2" data-path="model-validation.html"><a href="model-validation.html#import-patch-and-fire-boundaries"><i class="fa fa-check"></i><b>10.1.2</b> Import Patch and Fire Boundaries</a></li>
+<li class="chapter" data-level="10.1.3" data-path="model-validation.html"><a href="model-validation.html#import-prediction-rasters"><i class="fa fa-check"></i><b>10.1.3</b> Import Prediction Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="prediction.html"><a href="prediction.html#prediction-rasters"><i class="fa fa-check"></i><b>10.2</b> Prediction Rasters</a>
+<li class="chapter" data-level="10.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>10.2</b> Calculate Predicted Proportions</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>10.2.1</b> Predict Across Rasters</a></li>
+<li class="chapter" data-level="10.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>10.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
+<li class="chapter" data-level="10.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>10.2.2</b> Create Validation Polygons for Each Fire</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>10.3</b> Prepare Validation Zones</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>10.3.1</b> Assign Required Points to Each Polygon</a></li>
+<li class="chapter" data-level="10.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>10.3.2</b> Export</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>11</b> Model Validation</a>
+<li class="chapter" data-level="11" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>11</b> NDVI Trajectory</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="model-validation.html"><a href="model-validation.html#set-up-9"><i class="fa fa-check"></i><b>11.1</b> Set Up</a>
+<li class="chapter" data-level="11.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#set-up-9"><i class="fa fa-check"></i><b>11.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="model-validation.html"><a href="model-validation.html#libraries-7"><i class="fa fa-check"></i><b>11.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="11.1.2" data-path="model-validation.html"><a href="model-validation.html#import-patch-and-fire-boundaries"><i class="fa fa-check"></i><b>11.1.2</b> Import Patch and Fire Boundaries</a></li>
-<li class="chapter" data-level="11.1.3" data-path="model-validation.html"><a href="model-validation.html#import-prediction-rasters"><i class="fa fa-check"></i><b>11.1.3</b> Import Prediction Rasters</a></li>
+<li class="chapter" data-level="11.1.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#libraries-7"><i class="fa fa-check"></i><b>11.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>11.1.2</b> Import Fires</a></li>
+<li class="chapter" data-level="11.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>11.1.3</b> Prepare Data for Bands and Fire Names</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>11.2</b> Calculate Predicted Proportions</a>
+<li class="chapter" data-level="11.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>11.2</b> Connect Landsat and High-Severity Patches</a>
 <ul>
-<li class="chapter" data-level="11.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>11.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
-<li class="chapter" data-level="11.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>11.2.2</b> Create Validation Polygons for Each Fire</a></li>
+<li class="chapter" data-level="11.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>11.2.1</b> Extract Landsat Data for Each Patch</a></li>
 </ul></li>
-<li class="chapter" data-level="11.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>11.3</b> Prepare Validation Zones</a>
+<li class="chapter" data-level="11.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-dataset-1"><i class="fa fa-check"></i><b>11.3</b> Prepare Dataset</a>
 <ul>
-<li class="chapter" data-level="11.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>11.3.1</b> Assign Required Points to Each Polygon</a></li>
-<li class="chapter" data-level="11.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>11.3.2</b> Export</a></li>
+<li class="chapter" data-level="11.3.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#clean-data"><i class="fa fa-check"></i><b>11.3.1</b> Clean Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#modeling"><i class="fa fa-check"></i><b>11.4</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>11.4.1</b> Forest Type Groups</a></li>
+<li class="chapter" data-level="11.4.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#ecoregions-1"><i class="fa fa-check"></i><b>11.4.2</b> Ecoregions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
@@ -379,35 +380,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.3.3</b> Forest Types Individually</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="patch-fate-1.html"><a href="patch-fate-1.html"><i class="fa fa-check"></i><b>13</b> Patch Fate</a>
+<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="patch-fate-1.html"><a href="patch-fate-1.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="patch-fate-1.html"><a href="patch-fate-1.html#libraries-9"><i class="fa fa-check"></i><b>13.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="13.1.2" data-path="patch-fate-1.html"><a href="patch-fate-1.html#import-high-severity-patches-1"><i class="fa fa-check"></i><b>13.1.2</b> Import High-Severity Patches</a></li>
-<li class="chapter" data-level="13.1.3" data-path="patch-fate-1.html"><a href="patch-fate-1.html#create-dataset-for-each-forest-type-1"><i class="fa fa-check"></i><b>13.1.3</b> Create Dataset for Each Forest Type</a></li>
+<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="patch-fate-1.html"><a href="patch-fate-1.html#plot-3"><i class="fa fa-check"></i><b>13.2</b> Plot</a></li>
-<li class="chapter" data-level="13.3" data-path="patch-fate-1.html"><a href="patch-fate-1.html#identify-patches-with-remaining-unforested-areas"><i class="fa fa-check"></i><b>13.3</b> Identify Patches with Remaining Unforested Areas</a></li>
+<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
+<li class="chapter" data-level="13.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#assess-lei-patterns"><i class="fa fa-check"></i><b>13.3</b> Assess LEI Patterns</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
+<li class="chapter" data-level="14" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
+<li class="chapter" data-level="14.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
-<li class="chapter" data-level="14.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
+<li class="chapter" data-level="14.1.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-libraries-1"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="14.1.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-patch-polygons-1"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a>
+<li class="chapter" data-level="14.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a>
 <ul>
-<li class="chapter" data-level="14.2.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-lei-for-each-patchs-growth"><i class="fa fa-check"></i><b>14.2.1</b> Calculate LEI for Each Patch’s Growth</a></li>
-<li class="chapter" data-level="14.2.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-small-patches"><i class="fa fa-check"></i><b>14.2.2</b> Function to Handle LEI in Small Patches</a></li>
-<li class="chapter" data-level="14.2.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#function-to-handle-lei-in-large-patches"><i class="fa fa-check"></i><b>14.2.3</b> Function to Handle LEI in Large Patches</a></li>
-<li class="chapter" data-level="14.2.4" data-path="landscape-expansion.html"><a href="landscape-expansion.html#apply-functions-across-all-fires"><i class="fa fa-check"></i><b>14.2.4</b> Apply Functions Across All Fires</a></li>
+<li class="chapter" data-level="14.2.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#create-functions"><i class="fa fa-check"></i><b>14.2.1</b> Create Functions</a></li>
+<li class="chapter" data-level="14.2.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#map-across-all-fires"><i class="fa fa-check"></i><b>14.2.2</b> Map Across All Fires</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#analyze-patch-wise-lei"><i class="fa fa-check"></i><b>14.3</b> Analyze Patch-wise LEI</a>
+<li class="chapter" data-level="14.3" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#assess-lsm-patterns"><i class="fa fa-check"></i><b>14.3</b> Assess LSM Patterns</a>
 <ul>
-<li class="chapter" data-level="14.3.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#combine-and-clean-data"><i class="fa fa-check"></i><b>14.3.1</b> Combine and Clean Data</a></li>
-<li class="chapter" data-level="14.3.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#plot-4"><i class="fa fa-check"></i><b>14.3.2</b> Plot</a></li>
+<li class="chapter" data-level="14.3.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#prepare-data"><i class="fa fa-check"></i><b>14.3.1</b> Prepare Data</a></li>
+<li class="chapter" data-level="14.3.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#percent-of-land-area"><i class="fa fa-check"></i><b>14.3.2</b> Percent of Land Area</a></li>
+<li class="chapter" data-level="14.3.3" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#percent-alike-adjacencies"><i class="fa fa-check"></i><b>14.3.3</b> Percent Alike Adjacencies</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -430,27 +429,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-validation" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Part 11</span> Model Validation<a href="model-validation.html#model-validation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="set-up-9" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> Set Up<a href="model-validation.html#set-up-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="libraries-7" class="section level3 hasAnchor" number="11.1.1">
-<h3><span class="header-section-number">11.1.1</span> Libraries<a href="model-validation.html#libraries-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="model-validation.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb115-2"><a href="model-validation.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb115-3"><a href="model-validation.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb115-4"><a href="model-validation.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb115-5"><a href="model-validation.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
+<div id="model-validation" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Part 10</span> Model Validation<a href="model-validation.html#model-validation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="set-up-8" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Set Up<a href="model-validation.html#set-up-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="libraries-6" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Libraries<a href="model-validation.html#libraries-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="model-validation.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb95-2"><a href="model-validation.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb95-3"><a href="model-validation.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb95-4"><a href="model-validation.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb95-5"><a href="model-validation.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
 </div>
-<div id="import-patch-and-fire-boundaries" class="section level3 hasAnchor" number="11.1.2">
-<h3><span class="header-section-number">11.1.2</span> Import Patch and Fire Boundaries<a href="model-validation.html#import-patch-and-fire-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="model-validation.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># final fire list</span></span>
-<span id="cb116-2"><a href="model-validation.html#cb116-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>)</span>
-<span id="cb116-3"><a href="model-validation.html#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-4"><a href="model-validation.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import fire and patch boundaries</span></span>
-<span id="cb116-5"><a href="model-validation.html#cb116-5" aria-hidden="true" tabindex="-1"></a>mtbs_fires <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/mtbs_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb116-6"><a href="model-validation.html#cb116-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_names)<span class="sc">%&gt;%</span> </span>
-<span id="cb116-7"><a href="model-validation.html#cb116-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
+<div id="import-patch-and-fire-boundaries" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Import Patch and Fire Boundaries<a href="model-validation.html#import-patch-and-fire-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="model-validation.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># final fire list</span></span>
+<span id="cb96-2"><a href="model-validation.html#cb96-2" aria-hidden="true" tabindex="-1"></a>fire_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>)</span>
+<span id="cb96-3"><a href="model-validation.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="model-validation.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import fire and patch boundaries</span></span>
+<span id="cb96-5"><a href="model-validation.html#cb96-5" aria-hidden="true" tabindex="-1"></a>mtbs_fires <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/mtbs_export.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-6"><a href="model-validation.html#cb96-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_names)<span class="sc">%&gt;%</span> </span>
+<span id="cb96-7"><a href="model-validation.html#cb96-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
 <pre><code>## Reading layer `mtbs_export&#39; from data source 
 ##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\fire_boundaries\mtbs_export.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -459,9 +458,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Dimension:     XY
 ## Bounding box:  xmin: -118.6259 ymin: 42.57259 xmax: -106.9485 ymax: 48.9346
 ## Geodetic CRS:  WGS 84</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="model-validation.html#cb118-1" aria-hidden="true" tabindex="-1"></a>highsev_patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb118-2"><a href="model-validation.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_names)<span class="sc">%&gt;%</span> </span>
-<span id="cb118-3"><a href="model-validation.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="model-validation.html#cb98-1" aria-hidden="true" tabindex="-1"></a>highsev_patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="model-validation.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fire_ID <span class="sc">%in%</span> fire_names)<span class="sc">%&gt;%</span> </span>
+<span id="cb98-3"><a href="model-validation.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>) </span></code></pre></div>
 <pre><code>## Reading layer `highsev_patches&#39; from data source 
 ##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\patches\highsev_patches.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -471,54 +470,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Bounding box:  xmin: -118.6156 ymin: 42.57637 xmax: -106.96 ymax: 48.92836
 ## Geodetic CRS:  WGS 84</code></pre>
 </div>
-<div id="import-prediction-rasters" class="section level3 hasAnchor" number="11.1.3">
-<h3><span class="header-section-number">11.1.3</span> Import Prediction Rasters<a href="model-validation.html#import-prediction-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="model-validation.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get all rasters from final timepoint</span></span>
-<span id="cb120-2"><a href="model-validation.html#cb120-2" aria-hidden="true" tabindex="-1"></a>rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/prediction_rasters&quot;</span>, <span class="at">pattern=</span><span class="st">&quot;t9.tif&quot;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="import-prediction-rasters" class="section level3 hasAnchor" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> Import Prediction Rasters<a href="model-validation.html#import-prediction-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="model-validation.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get all rasters from final timepoint</span></span>
+<span id="cb100-2"><a href="model-validation.html#cb100-2" aria-hidden="true" tabindex="-1"></a>rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/prediction_rasters&quot;</span>, <span class="at">pattern=</span><span class="st">&quot;t9.tif&quot;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
-<div id="calculate-predicted-proportions" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> Calculate Predicted Proportions<a href="model-validation.html#calculate-predicted-proportions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="calculate-areal-proportions-for-each-fire" class="section level3 hasAnchor" number="11.2.1">
-<h3><span class="header-section-number">11.2.1</span> Calculate Areal Proportions for Each Fire<a href="model-validation.html#calculate-areal-proportions-for-each-fire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="model-validation.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create and map function to determine areal proportion of presence/absence for each fire</span></span>
-<span id="cb121-2"><a href="model-validation.html#cb121-2" aria-hidden="true" tabindex="-1"></a>get_percentages <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_file){</span>
-<span id="cb121-3"><a href="model-validation.html#cb121-3" aria-hidden="true" tabindex="-1"></a>  fire_rast <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_file)</span>
-<span id="cb121-4"><a href="model-validation.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  perc <span class="ot">&lt;-</span> <span class="fu">freq</span>(fire_rast) <span class="sc">%&gt;%</span> </span>
-<span id="cb121-5"><a href="model-validation.html#cb121-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">sub</span>( <span class="st">&quot;.*rasters/&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">sub</span>( <span class="st">&quot;_rf_t.*&quot;</span>, <span class="st">&quot;&quot;</span>, rast_file)),</span>
-<span id="cb121-6"><a href="model-validation.html#cb121-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">class =</span> <span class="fu">case_when</span>(value <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>,</span>
-<span id="cb121-7"><a href="model-validation.html#cb121-7" aria-hidden="true" tabindex="-1"></a>                             value <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;presence&quot;</span>),</span>
-<span id="cb121-8"><a href="model-validation.html#cb121-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">percent_area =</span> <span class="fu">round</span>(count<span class="sc">/</span><span class="fu">sum</span>(count),<span class="dv">3</span>),</span>
-<span id="cb121-9"><a href="model-validation.html#cb121-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">val_points =</span> <span class="fu">round</span>(<span class="dv">5</span><span class="sc">+</span><span class="dv">10</span><span class="sc">*</span>percent_area,<span class="dv">0</span>))</span>
-<span id="cb121-10"><a href="model-validation.html#cb121-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(perc)</span>
-<span id="cb121-11"><a href="model-validation.html#cb121-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb121-12"><a href="model-validation.html#cb121-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-13"><a href="model-validation.html#cb121-13" aria-hidden="true" tabindex="-1"></a>valid_points_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,<span class="fu">map</span>(rast_list,get_percentages))</span></code></pre></div>
+<div id="calculate-predicted-proportions" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Calculate Predicted Proportions<a href="model-validation.html#calculate-predicted-proportions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="calculate-areal-proportions-for-each-fire" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Calculate Areal Proportions for Each Fire<a href="model-validation.html#calculate-areal-proportions-for-each-fire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="model-validation.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create and map function to determine areal proportion of presence/absence for each fire</span></span>
+<span id="cb101-2"><a href="model-validation.html#cb101-2" aria-hidden="true" tabindex="-1"></a>get_percentages <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_file){</span>
+<span id="cb101-3"><a href="model-validation.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  fire_rast <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_file)</span>
+<span id="cb101-4"><a href="model-validation.html#cb101-4" aria-hidden="true" tabindex="-1"></a>  perc <span class="ot">&lt;-</span> <span class="fu">freq</span>(fire_rast) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-5"><a href="model-validation.html#cb101-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">sub</span>( <span class="st">&quot;.*rasters/&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">sub</span>( <span class="st">&quot;_rf_t.*&quot;</span>, <span class="st">&quot;&quot;</span>, rast_file)),</span>
+<span id="cb101-6"><a href="model-validation.html#cb101-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">class =</span> <span class="fu">case_when</span>(value <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;absence&quot;</span>,</span>
+<span id="cb101-7"><a href="model-validation.html#cb101-7" aria-hidden="true" tabindex="-1"></a>                             value <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;presence&quot;</span>),</span>
+<span id="cb101-8"><a href="model-validation.html#cb101-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">percent_area =</span> <span class="fu">round</span>(count<span class="sc">/</span><span class="fu">sum</span>(count),<span class="dv">3</span>),</span>
+<span id="cb101-9"><a href="model-validation.html#cb101-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">val_points =</span> <span class="fu">round</span>(<span class="dv">5</span><span class="sc">+</span><span class="dv">10</span><span class="sc">*</span>percent_area,<span class="dv">0</span>))</span>
+<span id="cb101-10"><a href="model-validation.html#cb101-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(perc)</span>
+<span id="cb101-11"><a href="model-validation.html#cb101-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb101-12"><a href="model-validation.html#cb101-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-13"><a href="model-validation.html#cb101-13" aria-hidden="true" tabindex="-1"></a>valid_points_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,<span class="fu">map</span>(rast_list,get_percentages))</span></code></pre></div>
 </div>
-<div id="create-validation-polygons-for-each-fire" class="section level3 hasAnchor" number="11.2.2">
-<h3><span class="header-section-number">11.2.2</span> Create Validation Polygons for Each Fire<a href="model-validation.html#create-validation-polygons-for-each-fire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="model-validation.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create and map function to create presence/absence polygons from prediction raster</span></span>
-<span id="cb122-2"><a href="model-validation.html#cb122-2" aria-hidden="true" tabindex="-1"></a>get_polygons <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_file){</span>
-<span id="cb122-3"><a href="model-validation.html#cb122-3" aria-hidden="true" tabindex="-1"></a>  fire_rast <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_file)</span>
-<span id="cb122-4"><a href="model-validation.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  fire_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(fire_rast)</span>
-<span id="cb122-5"><a href="model-validation.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  fire_poly_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(fire_poly) <span class="sc">%&gt;%</span> </span>
-<span id="cb122-6"><a href="model-validation.html#cb122-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">sub</span>( <span class="st">&quot;.*rasters/&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">sub</span>( <span class="st">&quot;_rf_t.*&quot;</span>, <span class="st">&quot;&quot;</span>, rast_file)))</span>
-<span id="cb122-7"><a href="model-validation.html#cb122-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fire_poly_sf)</span>
-<span id="cb122-8"><a href="model-validation.html#cb122-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb122-9"><a href="model-validation.html#cb122-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb122-10"><a href="model-validation.html#cb122-10" aria-hidden="true" tabindex="-1"></a>class_polys <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,<span class="fu">map</span>(rast_list,get_polygons))</span></code></pre></div>
+<div id="create-validation-polygons-for-each-fire" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Create Validation Polygons for Each Fire<a href="model-validation.html#create-validation-polygons-for-each-fire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="model-validation.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create and map function to create presence/absence polygons from prediction raster</span></span>
+<span id="cb102-2"><a href="model-validation.html#cb102-2" aria-hidden="true" tabindex="-1"></a>get_polygons <span class="ot">&lt;-</span> <span class="cf">function</span>(rast_file){</span>
+<span id="cb102-3"><a href="model-validation.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  fire_rast <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_file)</span>
+<span id="cb102-4"><a href="model-validation.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  fire_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(fire_rast)</span>
+<span id="cb102-5"><a href="model-validation.html#cb102-5" aria-hidden="true" tabindex="-1"></a>  fire_poly_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(fire_poly) <span class="sc">%&gt;%</span> </span>
+<span id="cb102-6"><a href="model-validation.html#cb102-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fire_ID =</span> <span class="fu">sub</span>( <span class="st">&quot;.*rasters/&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">sub</span>( <span class="st">&quot;_rf_t.*&quot;</span>, <span class="st">&quot;&quot;</span>, rast_file)))</span>
+<span id="cb102-7"><a href="model-validation.html#cb102-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fire_poly_sf)</span>
+<span id="cb102-8"><a href="model-validation.html#cb102-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb102-9"><a href="model-validation.html#cb102-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-10"><a href="model-validation.html#cb102-10" aria-hidden="true" tabindex="-1"></a>class_polys <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,<span class="fu">map</span>(rast_list,get_polygons))</span></code></pre></div>
 </div>
 </div>
-<div id="prepare-validation-zones" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Prepare Validation Zones<a href="model-validation.html#prepare-validation-zones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="assign-required-points-to-each-polygon" class="section level3 hasAnchor" number="11.3.1">
-<h3><span class="header-section-number">11.3.1</span> Assign Required Points to Each Polygon<a href="model-validation.html#assign-required-points-to-each-polygon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="model-validation.html#cb123-1" aria-hidden="true" tabindex="-1"></a>sample_polys <span class="ot">&lt;-</span> <span class="fu">left_join</span>(class_polys,valid_points_df,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Fire_ID&quot;</span>,<span class="st">&quot;class&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb123-2"><a href="model-validation.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
+<div id="prepare-validation-zones" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Prepare Validation Zones<a href="model-validation.html#prepare-validation-zones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="assign-required-points-to-each-polygon" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Assign Required Points to Each Polygon<a href="model-validation.html#assign-required-points-to-each-polygon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="model-validation.html#cb103-1" aria-hidden="true" tabindex="-1"></a>sample_polys <span class="ot">&lt;-</span> <span class="fu">left_join</span>(class_polys,valid_points_df,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Fire_ID&quot;</span>,<span class="st">&quot;class&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-2"><a href="model-validation.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
 </div>
-<div id="export-3" class="section level3 hasAnchor" number="11.3.2">
-<h3><span class="header-section-number">11.3.2</span> Export<a href="model-validation.html#export-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="model-validation.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(sample_polys,&quot;data/validation/validation_polygons.shp&quot;)</span></span></code></pre></div>
+<div id="export-3" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Export<a href="model-validation.html#export-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="model-validation.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(sample_polys,&quot;data/validation/validation_polygons.shp&quot;)</span></span></code></pre></div>
 
 </div>
 </div>
@@ -529,7 +528,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="prediction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="patch-fate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ndvi-trajectory.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -560,7 +559,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/10_validation.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/09_validation.Rmd",
 "text": "Edit"
 },
 "history": {
