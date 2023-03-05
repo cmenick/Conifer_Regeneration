@@ -175,20 +175,33 @@ data_lp$fit <- seg_ndvi_lp$fitted.values
 lm_ndvi_fs <-  lm(delta_ndvi ~ years_postfire, data = data_fs )
 seg_ndvi_fs <- segmented(lm_ndvi_fs,seg.Z = ~ years_postfire,npsi =1)
 data_fs$fit <- seg_ndvi_fs$fitted.values
+
+summary(seg_ndvi_df)
+summary(seg_ndvi_lp)
+summary(seg_ndvi_fs)
+
 ```
 
 #### Estimates
 
 ```{r create df}
-model_ndvi_df <- as.data.frame(do.call(rbind,map(list(seg_ndvi_df,seg_ndvi_lp,seg_ndvi_fs), coef))) %>%
+estimate_yrs_recovery <- function(model){
+  new_intercept <- model$coefficients[1] + model$coefficients[2]*as.numeric(model$indexU)
+  -new_intercept/model$coefficients[3] + as.numeric(model$indexU)
+}
+
+t<-summary(seg_ndvi_df)
+t$adj.r.squared
+
+as.data.frame(do.call(rbind,map(list(seg_ndvi_df,seg_ndvi_lp,seg_ndvi_fs), coef))) %>%
   rename(intercept = "(Intercept)",
-         slope1 = U1.years_postfire,
-         slope2 = years_postfire) %>% 
-  mutate(bp = c(15.713,14.708,19.247),
-         years_recovery = -intercept/slope1 + bp)
-
-rownames(model_ndvi_df) <- c("Douglas-Fir","Lodgepole Pine","Fir-Spruce")
-
+         slope_postdetect = U1.years_postfire,
+         slope_predetect = years_postfire) %>% 
+  mutate(detection_pt = c(as.numeric(seg_ndvi_df$indexU),as.numeric(seg_ndvi_lp$indexU),as.numeric(seg_ndvi_fs$indexU)),
+         forest_type = c("Douglas-Fir","Lodgepole Pine","Fir-Spruce"),
+         adj_R2 = c(summary(seg_ndvi_df)$adj.r.squared,summary(seg_ndvi_lp)$adj.r.squared,summary(seg_ndvi_fs)$adj.r.squared),
+         years_recovery = c(estimate_yrs_recovery(seg_ndvi_df),estimate_yrs_recovery(seg_ndvi_lp),estimate_yrs_recovery(seg_ndvi_fs)))%>% 
+  dplyr::select(forest_type, slope_predetect,slope_postdetect,adj_R2,detection_pt,years_recovery)
 ```
 
 #### Plot
@@ -196,80 +209,12 @@ rownames(model_ndvi_df) <- c("Douglas-Fir","Lodgepole Pine","Fir-Spruce")
 ```{r}
 ggplot()+
   geom_point(data = ndvi_grouped_type, aes(x= years_postfire,y = delta_ndvi,color = ptch_fr)) +
-  geom_line(data= data_df %>% filter(years_postfire > 0 & years_postfire<15.713),aes(x=years_postfire,y=fit),color = "#F8766D") +
-  geom_line(data= data_df%>% filter(years_postfire >= 15.713),aes(x=years_postfire,y=fit),color = "#F8766D") +
-  geom_line(data= data_lp %>% filter(years_postfire > 0 & years_postfire<14.708),aes(x=years_postfire,y=fit),color = "#619CFF") +
-  geom_line(data= data_lp%>% filter(years_postfire >= 14.708),aes(x=years_postfire,y=fit),color = "#619CFF") +
-  geom_line(data= data_fs %>% filter(years_postfire > 0 & years_postfire<19.247),aes(x=years_postfire,y=fit),color = "#00BA38") +
-  geom_line(data= data_fs%>% filter(years_postfire >= 19.247),aes(x=years_postfire,y=fit),color = "#00BA38") +
+  geom_line(data= data_df,aes(x=years_postfire,y=fit),color = "#F8766D") +
+  geom_line(data= data_lp,aes(x=years_postfire,y=fit),color = "#619CFF") +
+  geom_line(data= data_fs,aes(x=years_postfire,y=fit),color = "#00BA38") +
   labs(x="Years Post-Fire",y="dNDVI",color = "Forest Type",title= "NDVI Change Overtime 30 Years Post-Fire", subtitle = "Comparing Forest Types") +
   geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)+
   annotate("text", x=12, y=0.015, label="Pre-Fire Snow-Cover NDVI")+
   theme_classic()
 ```
 
-### Ecoregions
-
-#### Model 
-```{r}
-ndvi_grouped_ecoregion <- ndvi_dataset_full %>% 
-  group_by(ecoregn,years_postfire) %>% 
-  summarize(ndvi=mean(ndvi,na.rm=TRUE),
-            delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
-  drop_na()
-
-# model NDVI difference for each forest type
-data_mr <- ndvi_grouped_ecoregion%>% filter(ecoregn == "Middle Rockies") %>%  filter(years_postfire>=0)
-data_nr <- ndvi_grouped_ecoregion%>% filter(ecoregn == "Northern Rockies") %>%  filter(years_postfire>=0)
-data_cr <- ndvi_grouped_ecoregion%>% filter(ecoregn == "Canadian Rockies") %>%  filter(years_postfire>=0)
-data_ib<- ndvi_grouped_ecoregion%>% filter(ecoregn == "Idaho Batholith") %>%  filter(years_postfire>=0)
-
-lm_ndvi_mr <- lm(delta_ndvi ~ years_postfire, data = data_mr)
-seg_ndvi_mr <- segmented(lm_ndvi_mr,seg.Z = ~ years_postfire,npsi =1)
-data_mr$fit <- seg_ndvi_mr$fitted.values
-
-lm_ndvi_nr <- lm(delta_ndvi ~ years_postfire, data = data_nr)
-seg_ndvi_nr <- segmented(lm_ndvi_nr,seg.Z = ~ years_postfire,npsi =1)
-data_nr$fit <- seg_ndvi_nr$fitted.values
-
-lm_ndvi_cr <-  lm(delta_ndvi ~ years_postfire,  data = data_cr)
-seg_ndvi_cr <- segmented(lm_ndvi_cr,seg.Z = ~ years_postfire,npsi =1)
-data_cr$fit <- seg_ndvi_cr$fitted.values
-
-lm_ndvi_ib <-  lm(delta_ndvi ~ years_postfire, data = data_ib )
-seg_ndvi_ib <- segmented(lm_ndvi_ib,seg.Z = ~ years_postfire,npsi =1)
-data_ib$fit <- seg_ndvi_ib$fitted.values
-```
-
-#### Estimates
-
-```{r}
-model_ndvi_df <- as.data.frame(do.call(rbind,map(list(seg_ndvi_mr,seg_ndvi_nr,seg_ndvi_cr,seg_ndvi_ib), coef))) %>%
-  rename(intercept = "(Intercept)",
-         slope1 = U1.years_postfire,
-         slope2 = years_postfire) %>% 
-  mutate(bp = c(17,8.964,8,13),
-         years_recovery = -intercept/slope1 + bp)
-
-rownames(model_ndvi_df) <- c("MR","NR","CR","IB")
-
-```
-
-#### Plot
-
-```{r}
-ggplot()+
-  geom_point(data = ndvi_grouped_ecoregion, aes(x= years_postfire,y = delta_ndvi,color = ecoregn)) +
-  geom_line(data= data_mr %>% filter(years_postfire > 0 & years_postfire<17),aes(x=years_postfire,y=fit),color = "#00BFC4") +
-  geom_line(data= data_mr%>% filter(years_postfire >= 17),aes(x=years_postfire,y=fit),color = "#00BFC4") +
-  geom_line(data= data_nr %>% filter(years_postfire > 0 & years_postfire<8.964),aes(x=years_postfire,y=fit),color = "#C77CFF") +
-  geom_line(data= data_nr%>% filter(years_postfire >= 8.964),aes(x=years_postfire,y=fit),color = "#C77CFF") +
-  geom_line(data= data_cr %>% filter(years_postfire > 0 & years_postfire<8),aes(x=years_postfire,y=fit),color = "#F8766D") +
-  geom_line(data= data_cr%>% filter(years_postfire >= 8),aes(x=years_postfire,y=fit),color = "#F8766D") +
-  geom_line(data= data_ib %>% filter(years_postfire > 0 & years_postfire<13),aes(x=years_postfire,y=fit),color = "#7CAE00") +
-  geom_line(data= data_ib%>% filter(years_postfire >= 13),aes(x=years_postfire,y=fit),color = "#7CAE00") +
-  labs(x="Years Post-Fire",y="dNDVI",color = "Ecoregion",title= "NDVI Change Overtime 30 Years Post-Fire", subtitle = "Comparing Ecoregions") +
-  geom_hline(yintercept= 0,linetype="dashed",color="black",size=1)+
-  annotate("text", x=12, y=0.015, label="Pre-Fire Snow-Cover NDVI")+
-  theme_classic()
-```
