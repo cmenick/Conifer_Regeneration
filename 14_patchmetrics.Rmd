@@ -1,0 +1,202 @@
+
+# Patch Metrics
+
+## Set Up
+
+### Libraries
+```{r libraries11, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(terra)
+library(sf)
+library(ggsankey)
+library(gridExtra)
+library(car)
+sf_use_s2(FALSE)
+```
+
+### Import High-Severity Patches
+
+```{r import patch4, message=FALSE, warning=FALSE}
+# fire list
+fire_list <- c("Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991","Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988")
+
+# import high-severity patches
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n())) %>% 
+  st_transform(crs = "EPSG:4326")
+
+# set crs
+crs <- crs(patches)
+```
+## Prepare Patch Data
+
+### Create Dataset for Each Forest Type
+
+```{r message=FALSE, warning=FALSE}
+# import and join all decomposiition csvs
+patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate/t0t9_OLD", pattern = "t0t9", all.files=TRUE, full.names=TRUE),read_csv))
+```
+
+### Calculate Percent of Patches Forested at t9
+
+```{r}
+patch_df <- patch_data %>%  
+  group_by(Patch_ID,lyr1) %>% 
+  summarize(t0_area = mean(t0_area),
+            t9_area = round(sum(t9_area),5))%>% 
+  pivot_wider(values_from = t9_area,names_from=lyr1) %>% 
+  rename(t9_area_unforested = 4,
+         t9_area_forested = 3)%>% 
+  replace(is.na(.), 0) %>% 
+  mutate(perc_forested = t9_area_forested/(t0_area),
+         recovered = case_when(perc_forested <= .9 ~ "no",
+                               TRUE ~ "yes"))
+```
+
+### Calculate Patch Metrics of Interest
+
+```{r}
+patch_metrics <- patches %>% 
+  dplyr::select(Fire_ID,Patch_ID,ptch_fr,ecoregn) %>% 
+  st_transform(3488) %>% 
+  mutate(patch_area = round(as.numeric(st_area(.))/10000,4),
+         perim_m = as.numeric(round(st_length(st_cast(geometry,to = "MULTILINESTRING")),4)),
+         edge_perim_rat = patch_area/perim_m) %>% 
+  st_buffer(-100) %>% 
+  mutate(core_area = round(as.numeric(st_area(.))/10000,4),
+         perc_core = round(core_area / patch_area,5))%>% 
+  st_drop_geometry()
+```
+
+### Calculate Patch Climate
+
+```{r}
+def = list.files(path = "data/terraclim/", pattern = "def", all.files=TRUE, full.names=TRUE) %>% 
+  rast() %>% 
+  mean()
+
+pdsi = list.files(path = "data/terraclim/", pattern = "PDSI", all.files=TRUE, full.names=TRUE) %>% 
+  rast() %>% 
+  mean()
+
+swe = list.files(path = "data/terraclim/", pattern = "swe", all.files=TRUE, full.names=TRUE) %>% 
+  rast() %>% 
+  mean()
+
+ppt = list.files(path = "data/terraclim/", pattern = "ppt", all.files=TRUE, full.names=TRUE) %>% 
+  rast() %>% 
+  mean()
+
+pet = list.files(path = "data/terraclim/", pattern = "pet", all.files=TRUE, full.names=TRUE) %>% 
+  rast() %>% 
+  mean()
+
+def_patch <- extract(def,patches %>% st_transform(crs= crs(def)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(def = mean) %>% dplyr::select(def)
+pdsi_patch <- extract(pdsi,patches %>% st_transform(crs= crs(pdsi)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(pdsi = mean) %>% dplyr::select(pdsi)
+swe_patch <- extract(swe,patches %>% st_transform(crs= crs(swe)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(swe = mean) %>% dplyr::select(swe)
+ppt_patch <- extract(ppt,patches %>% st_transform(crs= crs(ppt)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(ppt = mean) %>% dplyr::select(ppt)
+pet_patch <- extract(pet,patches %>% st_transform(crs= crs(pet)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(pet = mean) %>% dplyr::select(pet)
+
+
+patch_climate <- cbind(patches,def_patch,pdsi_patch,swe_patch, ppt_patch,pet_patch)
+
+```
+
+
+### Join Patch Metrics and Recovery Data
+
+```{r}
+patch_join <- left_join(patch_df,patch_climate,by = "Patch_ID")
+
+patch_recovery <- left_join(patch_join,patch_metrics,by = c("Patch_ID","Fire_ID","ecoregn","ptch_fr")) %>% 
+  filter(ptch_fr %in% c("Douglas-Fir","Lodegepole Pine","Fir-Spruce")) %>% 
+  mutate(type_core = case_when (perc_core > 0.25 ~ "high",
+                                perc_core > 0 ~ "med",
+                                TRUE ~ "low"))
+
+recovery_df <- patch_recovery %>% 
+  ungroup() %>% 
+  mutate(type_core = as.factor(type_core),
+         ecoregn = as.factor(ecoregn),
+         ptch_fr= as.factor(ptch_fr),
+         recovered = as.factor(recovered),
+         recovered = forcats::fct_relevel(c("no","yes")),
+         patch_size_group = case_when(t0_area > 1000 ~ "1000ha+",
+                                t0_area > 500 & t0_area <1000 ~ "500-1000ha",
+                                t0_area > 100 & t0_area <5000 ~ "100-500ha",
+                                t0_area > 50 & t0_area <100~ "50-100ha",
+                                t0_area < 50 ~ "0-50ha"))
+```
+
+## Model Patch Recovery
+
+```{r}
+# def: climatic water deficit
+# pdsi: palmer drought severity
+# swe: snow water equiv
+# pt: accumulated precip
+# pet: potential evapotranspiration
+
+# pet is the most highly correlated climate variable
+cor(recovery_df %>% select(perc_forested, def,pdsi,swe,ppt,pet))
+
+# reasonable model
+lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat + patch_area + ptch_fr + pet + pet:ptch_fr + ecoregn,
+                  data = recovery_df)
+summary(lm_recovery)
+anova(lm_recovery)
+
+em_recovery <- emmeans::emmeans(lm_recovery,~type_core)
+pairs(em_recovery)
+```
+
+
+```{r}
+# lm_recovery <- lm(perc_forested ~ patch_area + ecoregn + type_core + ptch_fr, data = patch_recovery)
+# summary(lm_recovery)
+# anova(lm_recovery)
+# 
+# lm_recovery <- lm(perc_forested ~ perc_core, data = patch_recovery)
+# summary(lm_recovery)
+# cor(patch_recovery$perc_forested,patch_recovery$perc_core)
+
+
+
+
+
+# # full model
+# lm_recovery <- lm(perc_forested ~ 
+#                     edge_perim_rat + core_area + type_core + # heterogeneity
+#                     patch_area + patch_size_group +# patch size
+#                     ptch_fr + # forest type
+#                     ecoregn + # ecoregion
+#                     def + pdsi + swe + ppt + pet, # climate
+#                   data = recovery_df)
+# summary(lm_recovery)
+# anova(lm_recovery)
+```
+
+## Plot
+
+```{r}
+# histogram of core area % for all patches
+ggplot(patch_recovery %>% filter(perc_core > 0),aes(perc_core)) +
+  geom_histogram() + 
+  facet_wrap(~ptch_fr)
+
+# histogram of patch recovery % for all patches
+ggplot(patch_recovery ,aes(perc_forested)) +
+  geom_histogram() + 
+  facet_wrap(~ptch_fr, scales = "free_y")
+
+# core area on regeneration
+core_df <- patch_recovery %>% 
+  group_by (ptch_fr,core_type,recovered) %>% 
+  summarize (n = n()) %>% 
+  mutate(perc_recovered = n/sum(n)*100) %>% 
+  filter(recovered == "yes")
+
+ggplot(core_df,aes(ptch_fr,perc_recovered,fill = core_type))+
+  geom_col(position = "dodge")
+```
+
