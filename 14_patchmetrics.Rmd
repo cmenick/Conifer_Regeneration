@@ -141,7 +141,7 @@ recovery_df <- patch_recovery %>%
 cor(recovery_df %>% select(perc_forested, def,pdsi,swe,ppt,pet))
 
 # reasonable model
-lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat + patch_area + ptch_fr + pet + pet:ptch_fr + ecoregn,
+lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat + patch_area + ptch_fr + pet,
                   data = recovery_df)
 summary(lm_recovery)
 anova(lm_recovery)
