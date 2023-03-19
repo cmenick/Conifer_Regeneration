@@ -74,19 +74,15 @@ patch_metrics <- patches %>%
 def = list.files(path = "data/terraclim/", pattern = "def", all.files=TRUE, full.names=TRUE) %>% 
   rast() %>% 
   mean()
-
 pdsi = list.files(path = "data/terraclim/", pattern = "PDSI", all.files=TRUE, full.names=TRUE) %>% 
   rast() %>% 
   mean()
-
 swe = list.files(path = "data/terraclim/", pattern = "swe", all.files=TRUE, full.names=TRUE) %>% 
   rast() %>% 
   mean()
-
 ppt = list.files(path = "data/terraclim/", pattern = "ppt", all.files=TRUE, full.names=TRUE) %>% 
   rast() %>% 
   mean()
-
 pet = list.files(path = "data/terraclim/", pattern = "pet", all.files=TRUE, full.names=TRUE) %>% 
   rast() %>% 
   mean()
@@ -97,11 +93,8 @@ swe_patch <- extract(swe,patches %>% st_transform(crs= crs(swe)),fun = mean,weig
 ppt_patch <- extract(ppt,patches %>% st_transform(crs= crs(ppt)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(ppt = mean) %>% dplyr::select(ppt)
 pet_patch <- extract(pet,patches %>% st_transform(crs= crs(pet)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(pet = mean) %>% dplyr::select(pet)
 
-
 patch_climate <- cbind(patches,def_patch,pdsi_patch,swe_patch, ppt_patch,pet_patch)
-
 ```
-
 
 ### Join Patch Metrics and Recovery Data
 
@@ -128,29 +121,45 @@ recovery_df <- patch_recovery %>%
                                 t0_area < 50 ~ "0-50ha"))
 ```
 
-## Model Patch Recovery
+## Identify Highest Correlated Climate Measure
 
 ```{r}
+### 1985-1987 average monthly values
 # def: climatic water deficit
 # pdsi: palmer drought severity
 # swe: snow water equiv
-# pt: accumulated precip
+# pt: accumulated precipitation
 # pet: potential evapotranspiration
 
 # pet is the most highly correlated climate variable
 cor(recovery_df %>% select(perc_forested, def,pdsi,swe,ppt,pet))
+```
+## Model Patch Recovery
 
+```{r}
 # reasonable model
-lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat + patch_area + ptch_fr + pet,
+lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat + patch_area + ptch_fr + pet + ecoregn,
                   data = recovery_df)
 summary(lm_recovery)
 anova(lm_recovery)
+```
 
-em_recovery <- emmeans::emmeans(lm_recovery,~type_core)
+```{r}
+em_recovery <- emmeans::emmeans(lm_recovery,~ptch_fr)
+pairs(em_recovery)
+
+em_recovery <- emmeans::emmeans(lm_recovery,~ecoregn)
 pairs(em_recovery)
 ```
 
 
+
+
+
+
+
+
+## old
 ```{r}
 # lm_recovery <- lm(perc_forested ~ patch_area + ecoregn + type_core + ptch_fr, data = patch_recovery)
 # summary(lm_recovery)

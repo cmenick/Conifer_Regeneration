@@ -35,6 +35,34 @@ highsev_patches <- st_read("data/patches/highsev_patches.shp") %>%
 rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
 ```
 
+
+```{r}
+# rast_list <- list.files(path = "data/prediction_rasters", pattern="Fire_20", all.files=TRUE, full.names=TRUE)
+# 
+# colnames(data) <- c("x","y","t1","t2","t3","t4","t5","t6","t7","t8","t9")
+#   
+#   # import fire and patch boundaries
+# fire <- st_read("data/fire_boundaries/fires_export.shp") %>% 
+#   filter(Fire_ID %in% "Fire_20_1988")%>% 
+#   st_transform(crs="EPSG:4326")
+# 
+# 
+# plot_list <- list()
+# for(i in 2:10){
+#   rasts <- rast(rast_list[i])
+#   data = as.data.frame(rasts,xy=TRUE)
+#   plot <- ggplot() + 
+#     geom_sf(data = fire, color = "black",fill ="white")+
+#     geom_raster(data = data %>% drop_na(), aes(x=x,y=y,fill =as.factor(lyr1))) +
+#     theme_classic() +
+#     scale_fill_manual(values = c ("lightgray", "darkgreen"))
+#   print(plot)
+# }
+# 
+# plot_list[[4]]
+```
+
+
 ## Calculate Predicted Proportions
 
 ### Calculate Areal Proportions for Each Fire
