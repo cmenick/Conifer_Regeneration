@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Part 14 Landscape Expansion | Post-Fire Conifer Regeneration</title>
   <meta name="description" content="Part 14 Landscape Expansion | Post-Fire Conifer Regeneration" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Part 14 Landscape Expansion | Post-Fire Conifer Regeneration" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2023-03-05" />
+<meta name="date" content="2023-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,23 +52,23 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_14ea5c-1/data_stars_forestgroup_eco07cf12.txt"></script>
+<script src="libs/forestgroup_eco_083179-1/data_stars_forestgroup_ecofe9580.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 <script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
@@ -330,12 +330,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>10.2</b> Calculate Predicted Proportions</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>10.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
-<li class="chapter" data-level="10.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>10.2.2</b> Create Validation Polygons for Each Fire</a></li>
+<li class="chapter" data-level="10.2.2" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-mtbs-event"><i class="fa fa-check"></i><b>10.2.2</b> Calculate Areal Proportions for Each MTBS Event</a></li>
+<li class="chapter" data-level="10.2.3" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>10.2.3</b> Create Validation Polygons for Each Fire</a></li>
+<li class="chapter" data-level="10.2.4" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-mtbs-event"><i class="fa fa-check"></i><b>10.2.4</b> Create Validation Polygons for Each MTBS Event</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>10.3</b> Prepare Validation Zones</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>10.3.1</b> Assign Required Points to Each Polygon</a></li>
 <li class="chapter" data-level="10.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>10.3.2</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="model-validation.html"><a href="model-validation.html#independent-validation"><i class="fa fa-check"></i><b>10.4</b> Independent Validation</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="model-validation.html"><a href="model-validation.html#confusion"><i class="fa fa-check"></i><b>10.4.1</b> Confusion</a></li>
+<li class="chapter" data-level="10.4.2" data-path="model-validation.html"><a href="model-validation.html#percent-cover-of-misclassifications"><i class="fa fa-check"></i><b>10.4.2</b> Percent Cover of Misclassifications</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>11</b> NDVI Trajectory</a>
@@ -372,11 +379,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.2" data-path="patch-fate.html"><a href="patch-fate.html#apply-function-to-all-fires"><i class="fa fa-check"></i><b>12.2.2</b> Apply Function to All Fires</a></li>
 <li class="chapter" data-level="12.2.3" data-path="patch-fate.html"><a href="patch-fate.html#create-dataset-for-each-forest-type"><i class="fa fa-check"></i><b>12.2.3</b> Create Dataset for Each Forest Type</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="patch-fate.html"><a href="patch-fate.html#plot-1"><i class="fa fa-check"></i><b>12.3</b> Plot</a>
+<li class="chapter" data-level="12.3" data-path="patch-fate.html"><a href="patch-fate.html#assess-forested-proportions"><i class="fa fa-check"></i><b>12.3</b> Assess Forested Proportions</a>
 <ul>
-<li class="chapter" data-level="12.3.1" data-path="patch-fate.html"><a href="patch-fate.html#develop-plotting"><i class="fa fa-check"></i><b>12.3.1</b> Develop Plotting</a></li>
-<li class="chapter" data-level="12.3.2" data-path="patch-fate.html"><a href="patch-fate.html#all-three-forest-types"><i class="fa fa-check"></i><b>12.3.2</b> All Three Forest Types</a></li>
-<li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.3.3</b> Forest Types Individually</a></li>
+<li class="chapter" data-level="12.3.1" data-path="patch-fate.html"><a href="patch-fate.html#by-forest-type"><i class="fa fa-check"></i><b>12.3.1</b> By Forest Type</a></li>
+<li class="chapter" data-level="12.3.2" data-path="patch-fate.html"><a href="patch-fate.html#by-patch-size"><i class="fa fa-check"></i><b>12.3.2</b> By Patch Size</a></li>
+<li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#by-forest-type-and-patch-size"><i class="fa fa-check"></i><b>12.3.3</b> By Forest Type and Patch Size</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="patch-fate.html"><a href="patch-fate.html#plot-1"><i class="fa fa-check"></i><b>12.4</b> Plot</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="patch-fate.html"><a href="patch-fate.html#develop-plotting"><i class="fa fa-check"></i><b>12.4.1</b> Develop Plotting</a></li>
+<li class="chapter" data-level="12.4.2" data-path="patch-fate.html"><a href="patch-fate.html#all-three-forest-types"><i class="fa fa-check"></i><b>12.4.2</b> All Three Forest Types</a></li>
+<li class="chapter" data-level="12.4.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.4.3</b> Forest Types Individually</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
@@ -434,24 +447,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">14.1</span> Set Up<a href="landscape-expansion-1.html#set-up-12" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="import-libraries-1" class="section level3 hasAnchor" number="14.1.1">
 <h3><span class="header-section-number">14.1.1</span> Import Libraries<a href="landscape-expansion-1.html#import-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="landscape-expansion-1.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb139-2"><a href="landscape-expansion-1.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb139-3"><a href="landscape-expansion-1.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
-<span id="cb139-4"><a href="landscape-expansion-1.html#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb139-5"><a href="landscape-expansion-1.html#cb139-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb139-6"><a href="landscape-expansion-1.html#cb139-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb139-7"><a href="landscape-expansion-1.html#cb139-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(landscapemetrics)</span>
-<span id="cb139-8"><a href="landscape-expansion-1.html#cb139-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="landscape-expansion-1.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb165-2"><a href="landscape-expansion-1.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb165-3"><a href="landscape-expansion-1.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb165-4"><a href="landscape-expansion-1.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb165-5"><a href="landscape-expansion-1.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb165-6"><a href="landscape-expansion-1.html#cb165-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb165-7"><a href="landscape-expansion-1.html#cb165-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(landscapemetrics)</span>
+<span id="cb165-8"><a href="landscape-expansion-1.html#cb165-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
 </div>
 <div id="import-patch-polygons-1" class="section level3 hasAnchor" number="14.1.2">
 <h3><span class="header-section-number">14.1.2</span> Import Patch Polygons<a href="landscape-expansion-1.html#import-patch-polygons-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="landscape-expansion-1.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fire list</span></span>
-<span id="cb140-2"><a href="landscape-expansion-1.html#cb140-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_54_1991&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>)</span>
-<span id="cb140-3"><a href="landscape-expansion-1.html#cb140-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-4"><a href="landscape-expansion-1.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
-<span id="cb140-5"><a href="landscape-expansion-1.html#cb140-5" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb140-6"><a href="landscape-expansion-1.html#cb140-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span> </span>
-<span id="cb140-7"><a href="landscape-expansion-1.html#cb140-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="landscape-expansion-1.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fire list</span></span>
+<span id="cb166-2"><a href="landscape-expansion-1.html#cb166-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_54_1991&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>,<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>)</span>
+<span id="cb166-3"><a href="landscape-expansion-1.html#cb166-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-4"><a href="landscape-expansion-1.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
+<span id="cb166-5"><a href="landscape-expansion-1.html#cb166-5" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-6"><a href="landscape-expansion-1.html#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-7"><a href="landscape-expansion-1.html#cb166-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span></code></pre></div>
 <pre><code>## Reading layer `highsev_patches&#39; from data source 
 ##   `G:\Other computers\My Laptop\Documents\Grad School\Research\ConiferRegeneration\data\patches\highsev_patches.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -460,154 +473,320 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Dimension:     XY
 ## Bounding box:  xmin: -118.6156 ymin: 42.57637 xmax: -106.96 ymax: 48.92836
 ## Geodetic CRS:  WGS 84</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="landscape-expansion-1.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># patch metrics</span></span>
-<span id="cb142-2"><a href="landscape-expansion-1.html#cb142-2" aria-hidden="true" tabindex="-1"></a>patch_metrics <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/patches/patch_metrics.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="landscape-expansion-1.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># patch metrics</span></span>
+<span id="cb168-2"><a href="landscape-expansion-1.html#cb168-2" aria-hidden="true" tabindex="-1"></a>patch_metrics <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/patches/patch_metrics.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="calculate-landscape-patterns-1" class="section level2 hasAnchor" number="14.2">
 <h2><span class="header-section-number">14.2</span> Calculate Landscape Patterns<a href="landscape-expansion-1.html#calculate-landscape-patterns-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="create-functions" class="section level3 hasAnchor" number="14.2.1">
 <h3><span class="header-section-number">14.2.1</span> Create Functions<a href="landscape-expansion-1.html#create-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="landscape-expansion-1.html#cb143-1" aria-hidden="true" tabindex="-1"></a>calc_lsm <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
-<span id="cb143-2"><a href="landscape-expansion-1.html#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print patch ID </span></span>
-<span id="cb143-3"><a href="landscape-expansion-1.html#cb143-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(fire_name)</span>
-<span id="cb143-4"><a href="landscape-expansion-1.html#cb143-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb143-5"><a href="landscape-expansion-1.html#cb143-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter to this specific patch</span></span>
-<span id="cb143-6"><a href="landscape-expansion-1.html#cb143-6" aria-hidden="true" tabindex="-1"></a>  patches_fire <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb143-7"><a href="landscape-expansion-1.html#cb143-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID <span class="sc">==</span> fire_name)</span>
-<span id="cb143-8"><a href="landscape-expansion-1.html#cb143-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb143-9"><a href="landscape-expansion-1.html#cb143-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># import and name rasters for that fire</span></span>
-<span id="cb143-10"><a href="landscape-expansion-1.html#cb143-10" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/prediction_rasters&quot;</span>, <span class="at">pattern =</span> <span class="fu">str_c</span>(fire_name,<span class="st">&quot;_rf&quot;</span>), <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
-<span id="cb143-11"><a href="landscape-expansion-1.html#cb143-11" aria-hidden="true" tabindex="-1"></a>  rast_names <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(rast_list,<span class="at">start =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">end =</span> <span class="sc">-</span><span class="dv">5</span>)  </span>
-<span id="cb143-12"><a href="landscape-expansion-1.html#cb143-12" aria-hidden="true" tabindex="-1"></a>  rast_fire <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list) <span class="sc">%&gt;%</span> </span>
-<span id="cb143-13"><a href="landscape-expansion-1.html#cb143-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.factor</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb143-14"><a href="landscape-expansion-1.html#cb143-14" aria-hidden="true" tabindex="-1"></a>    terra<span class="sc">::</span><span class="fu">project</span>(.,<span class="st">&quot;EPSG: 3857&quot;</span>)</span>
-<span id="cb143-15"><a href="landscape-expansion-1.html#cb143-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(rast_fire) <span class="ot">&lt;-</span> rast_names</span>
-<span id="cb143-16"><a href="landscape-expansion-1.html#cb143-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb143-17"><a href="landscape-expansion-1.html#cb143-17" aria-hidden="true" tabindex="-1"></a>  lsm_patchlist <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">unique</span>(patches_fire<span class="sc">$</span>Patch_ID),get_patchlsm,<span class="at">patches_fire=</span>patches_fire,<span class="at">rast_fire=</span>rast_fire)</span>
-<span id="cb143-18"><a href="landscape-expansion-1.html#cb143-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb143-19"><a href="landscape-expansion-1.html#cb143-19" aria-hidden="true" tabindex="-1"></a>  lsm_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,lsm_patchlist)</span>
-<span id="cb143-20"><a href="landscape-expansion-1.html#cb143-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb143-21"><a href="landscape-expansion-1.html#cb143-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(lsm_df,<span class="fu">str_c</span>(<span class="st">&quot;data/lsm/&quot;</span>,fire_name,<span class="st">&quot;.csv&quot;</span>))</span>
-<span id="cb143-22"><a href="landscape-expansion-1.html#cb143-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="landscape-expansion-1.html#cb144-1" aria-hidden="true" tabindex="-1"></a>get_patchlsm <span class="ot">&lt;-</span> <span class="cf">function</span>(patch_name,patches_fire,rast_fire){</span>
-<span id="cb144-2"><a href="landscape-expansion-1.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb144-3"><a href="landscape-expansion-1.html#cb144-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(patch_name)</span>
-<span id="cb144-4"><a href="landscape-expansion-1.html#cb144-4" aria-hidden="true" tabindex="-1"></a>  patch <span class="ot">&lt;-</span> patches_fire <span class="sc">%&gt;%</span> </span>
-<span id="cb144-5"><a href="landscape-expansion-1.html#cb144-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(Patch_ID<span class="sc">==</span>patch_name)<span class="sc">%&gt;%</span> </span>
-<span id="cb144-6"><a href="landscape-expansion-1.html#cb144-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="st">&quot;EPSG: 3857&quot;</span>)</span>
-<span id="cb144-7"><a href="landscape-expansion-1.html#cb144-7" aria-hidden="true" tabindex="-1"></a>  cropped_rast <span class="ot">&lt;-</span> <span class="fu">crop</span>(rast_fire,patch)</span>
-<span id="cb144-8"><a href="landscape-expansion-1.html#cb144-8" aria-hidden="true" tabindex="-1"></a>  masked_rast <span class="ot">&lt;-</span> <span class="fu">mask</span>(cropped_rast,patch)</span>
-<span id="cb144-9"><a href="landscape-expansion-1.html#cb144-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb144-10"><a href="landscape-expansion-1.html#cb144-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">is.na</span>(<span class="fu">values</span>(masked_rast))) <span class="sc">==</span> <span class="cn">FALSE</span>){</span>
-<span id="cb144-11"><a href="landscape-expansion-1.html#cb144-11" aria-hidden="true" tabindex="-1"></a>      patch_lsm <span class="ot">&lt;-</span> <span class="fu">calculate_lsm</span>(masked_rast, </span>
-<span id="cb144-12"><a href="landscape-expansion-1.html#cb144-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">what =</span> <span class="fu">c</span>(<span class="st">&quot;lsm_c_pland&quot;</span>,<span class="st">&quot;lsm_c_ca&quot;</span>,<span class="st">&quot;lsm_c_tca&quot;</span>,<span class="st">&quot;lsm_c_pladj&quot;</span>,<span class="st">&quot;lsm_c_ed&quot;</span>),</span>
-<span id="cb144-13"><a href="landscape-expansion-1.html#cb144-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">count_boundary=</span><span class="cn">TRUE</span>,</span>
-<span id="cb144-14"><a href="landscape-expansion-1.html#cb144-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">consider_boundary =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb144-15"><a href="landscape-expansion-1.html#cb144-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">edge_depth =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb144-16"><a href="landscape-expansion-1.html#cb144-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> patch_name,</span>
-<span id="cb144-17"><a href="landscape-expansion-1.html#cb144-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">ptch_fr=</span>patch<span class="sc">$</span>ptch_fr,</span>
-<span id="cb144-18"><a href="landscape-expansion-1.html#cb144-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">value =</span> <span class="fu">round</span>(value,<span class="dv">3</span>)) </span>
-<span id="cb144-19"><a href="landscape-expansion-1.html#cb144-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(patch_lsm)</span>
-<span id="cb144-20"><a href="landscape-expansion-1.html#cb144-20" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {masked_rast</span>
-<span id="cb144-21"><a href="landscape-expansion-1.html#cb144-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">&quot;empty&quot;</span>)</span>
-<span id="cb144-22"><a href="landscape-expansion-1.html#cb144-22" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb144-23"><a href="landscape-expansion-1.html#cb144-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="landscape-expansion-1.html#cb169-1" aria-hidden="true" tabindex="-1"></a>calc_lsm <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
+<span id="cb169-2"><a href="landscape-expansion-1.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print patch ID </span></span>
+<span id="cb169-3"><a href="landscape-expansion-1.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(fire_name)</span>
+<span id="cb169-4"><a href="landscape-expansion-1.html#cb169-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb169-5"><a href="landscape-expansion-1.html#cb169-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter to this specific patch</span></span>
+<span id="cb169-6"><a href="landscape-expansion-1.html#cb169-6" aria-hidden="true" tabindex="-1"></a>  patches_fire <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb169-7"><a href="landscape-expansion-1.html#cb169-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID <span class="sc">==</span> fire_name)</span>
+<span id="cb169-8"><a href="landscape-expansion-1.html#cb169-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-9"><a href="landscape-expansion-1.html#cb169-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># import and name rasters for that fire</span></span>
+<span id="cb169-10"><a href="landscape-expansion-1.html#cb169-10" aria-hidden="true" tabindex="-1"></a>  rast_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/prediction_rasters&quot;</span>, <span class="at">pattern =</span> <span class="fu">str_c</span>(fire_name,<span class="st">&quot;_rf&quot;</span>), <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb169-11"><a href="landscape-expansion-1.html#cb169-11" aria-hidden="true" tabindex="-1"></a>  rast_names <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(rast_list,<span class="at">start =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">end =</span> <span class="sc">-</span><span class="dv">5</span>)  </span>
+<span id="cb169-12"><a href="landscape-expansion-1.html#cb169-12" aria-hidden="true" tabindex="-1"></a>  rast_fire <span class="ot">&lt;-</span> <span class="fu">rast</span>(rast_list) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-13"><a href="landscape-expansion-1.html#cb169-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.factor</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb169-14"><a href="landscape-expansion-1.html#cb169-14" aria-hidden="true" tabindex="-1"></a>    terra<span class="sc">::</span><span class="fu">project</span>(.,<span class="st">&quot;EPSG: 3857&quot;</span>)</span>
+<span id="cb169-15"><a href="landscape-expansion-1.html#cb169-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(rast_fire) <span class="ot">&lt;-</span> rast_names</span>
+<span id="cb169-16"><a href="landscape-expansion-1.html#cb169-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb169-17"><a href="landscape-expansion-1.html#cb169-17" aria-hidden="true" tabindex="-1"></a>  lsm_patchlist <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">unique</span>(patches_fire<span class="sc">$</span>Patch_ID),get_patchlsm,<span class="at">patches_fire=</span>patches_fire,<span class="at">rast_fire=</span>rast_fire)</span>
+<span id="cb169-18"><a href="landscape-expansion-1.html#cb169-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb169-19"><a href="landscape-expansion-1.html#cb169-19" aria-hidden="true" tabindex="-1"></a>  lsm_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,lsm_patchlist)</span>
+<span id="cb169-20"><a href="landscape-expansion-1.html#cb169-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-21"><a href="landscape-expansion-1.html#cb169-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(lsm_df,<span class="fu">str_c</span>(<span class="st">&quot;data/lsm/&quot;</span>,fire_name,<span class="st">&quot;.csv&quot;</span>))</span>
+<span id="cb169-22"><a href="landscape-expansion-1.html#cb169-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="landscape-expansion-1.html#cb170-1" aria-hidden="true" tabindex="-1"></a>get_patchlsm <span class="ot">&lt;-</span> <span class="cf">function</span>(patch_name,patches_fire,rast_fire){</span>
+<span id="cb170-2"><a href="landscape-expansion-1.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb170-3"><a href="landscape-expansion-1.html#cb170-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(patch_name)</span>
+<span id="cb170-4"><a href="landscape-expansion-1.html#cb170-4" aria-hidden="true" tabindex="-1"></a>  patch <span class="ot">&lt;-</span> patches_fire <span class="sc">%&gt;%</span> </span>
+<span id="cb170-5"><a href="landscape-expansion-1.html#cb170-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(Patch_ID<span class="sc">==</span>patch_name)<span class="sc">%&gt;%</span> </span>
+<span id="cb170-6"><a href="landscape-expansion-1.html#cb170-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="st">&quot;EPSG: 3857&quot;</span>)</span>
+<span id="cb170-7"><a href="landscape-expansion-1.html#cb170-7" aria-hidden="true" tabindex="-1"></a>  cropped_rast <span class="ot">&lt;-</span> <span class="fu">crop</span>(rast_fire,patch)</span>
+<span id="cb170-8"><a href="landscape-expansion-1.html#cb170-8" aria-hidden="true" tabindex="-1"></a>  masked_rast <span class="ot">&lt;-</span> <span class="fu">mask</span>(cropped_rast,patch)</span>
+<span id="cb170-9"><a href="landscape-expansion-1.html#cb170-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb170-10"><a href="landscape-expansion-1.html#cb170-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">is.na</span>(<span class="fu">values</span>(masked_rast))) <span class="sc">==</span> <span class="cn">FALSE</span>){</span>
+<span id="cb170-11"><a href="landscape-expansion-1.html#cb170-11" aria-hidden="true" tabindex="-1"></a>      patch_lsm <span class="ot">&lt;-</span> <span class="fu">calculate_lsm</span>(masked_rast, </span>
+<span id="cb170-12"><a href="landscape-expansion-1.html#cb170-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">what =</span> <span class="fu">c</span>(<span class="st">&quot;lsm_c_pland&quot;</span>,<span class="st">&quot;lsm_c_ca&quot;</span>,<span class="st">&quot;lsm_c_tca&quot;</span>,<span class="st">&quot;lsm_c_pladj&quot;</span>,<span class="st">&quot;lsm_c_ed&quot;</span>),</span>
+<span id="cb170-13"><a href="landscape-expansion-1.html#cb170-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">count_boundary=</span><span class="cn">TRUE</span>,</span>
+<span id="cb170-14"><a href="landscape-expansion-1.html#cb170-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">consider_boundary =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb170-15"><a href="landscape-expansion-1.html#cb170-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">edge_depth =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-16"><a href="landscape-expansion-1.html#cb170-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> patch_name,</span>
+<span id="cb170-17"><a href="landscape-expansion-1.html#cb170-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">ptch_fr=</span>patch<span class="sc">$</span>ptch_fr,</span>
+<span id="cb170-18"><a href="landscape-expansion-1.html#cb170-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">value =</span> <span class="fu">round</span>(value,<span class="dv">3</span>)) </span>
+<span id="cb170-19"><a href="landscape-expansion-1.html#cb170-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(patch_lsm)</span>
+<span id="cb170-20"><a href="landscape-expansion-1.html#cb170-20" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {masked_rast</span>
+<span id="cb170-21"><a href="landscape-expansion-1.html#cb170-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">&quot;empty&quot;</span>)</span>
+<span id="cb170-22"><a href="landscape-expansion-1.html#cb170-22" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb170-23"><a href="landscape-expansion-1.html#cb170-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="map-across-all-fires" class="section level3 hasAnchor" number="14.2.2">
 <h3><span class="header-section-number">14.2.2</span> Map Across All Fires<a href="landscape-expansion-1.html#map-across-all-fires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="landscape-expansion-1.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map functions across all fires</span></span>
-<span id="cb145-2"><a href="landscape-expansion-1.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(fire_list,calc_lsm)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="landscape-expansion-1.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map functions across all fires</span></span>
+<span id="cb171-2"><a href="landscape-expansion-1.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(fire_list,calc_lsm)</span></code></pre></div>
 </div>
 </div>
 <div id="assess-lsm-patterns" class="section level2 hasAnchor" number="14.3">
 <h2><span class="header-section-number">14.3</span> Assess LSM Patterns<a href="landscape-expansion-1.html#assess-lsm-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="prepare-data" class="section level3 hasAnchor" number="14.3.1">
 <h3><span class="header-section-number">14.3.1</span> Prepare Data<a href="landscape-expansion-1.html#prepare-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="landscape-expansion-1.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine lsm csvs</span></span>
-<span id="cb146-2"><a href="landscape-expansion-1.html#cb146-2" aria-hidden="true" tabindex="-1"></a>lsm_big <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/lsm&quot;</span>, <span class="at">pattern =</span> <span class="fu">str_c</span>(<span class="st">&quot;Fire&quot;</span>), <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>),read_csv) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-3"><a href="landscape-expansion-1.html#cb146-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind,.) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-4"><a href="landscape-expansion-1.html#cb146-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timepoint =</span> <span class="fu">str_c</span>(<span class="st">&quot;t&quot;</span>,layer),</span>
-<span id="cb146-5"><a href="landscape-expansion-1.html#cb146-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">condition =</span> <span class="fu">case_when</span>(class <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;unforested&quot;</span>,</span>
-<span id="cb146-6"><a href="landscape-expansion-1.html#cb146-6" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;forested&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-7"><a href="landscape-expansion-1.html#cb146-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Patch_ID, ptch_fr,timepoint,condition,metric,value) </span>
-<span id="cb146-8"><a href="landscape-expansion-1.html#cb146-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-9"><a href="landscape-expansion-1.html#cb146-9" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up dataframe</span></span>
-<span id="cb146-10"><a href="landscape-expansion-1.html#cb146-10" aria-hidden="true" tabindex="-1"></a>lsm_df <span class="ot">&lt;-</span> lsm_big <span class="sc">%&gt;%</span> </span>
-<span id="cb146-11"><a href="landscape-expansion-1.html#cb146-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Patch_ID <span class="sc">!=</span> <span class="st">&quot;empty&quot;</span>,</span>
-<span id="cb146-12"><a href="landscape-expansion-1.html#cb146-12" aria-hidden="true" tabindex="-1"></a>         timepoint <span class="sc">!=</span> <span class="st">&quot;t1&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-13"><a href="landscape-expansion-1.html#cb146-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> metric,<span class="at">values_from =</span> value,<span class="at">values_fn =</span> as.numeric) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-14"><a href="landscape-expansion-1.html#cb146-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">core_area =</span> tca,</span>
-<span id="cb146-15"><a href="landscape-expansion-1.html#cb146-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">total_area =</span> ca,</span>
-<span id="cb146-16"><a href="landscape-expansion-1.html#cb146-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">edge_area_ratio =</span> ed, </span>
-<span id="cb146-17"><a href="landscape-expansion-1.html#cb146-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">perc_like_adj =</span> pladj, </span>
-<span id="cb146-18"><a href="landscape-expansion-1.html#cb146-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">perc_area =</span> pland) <span class="sc">%&gt;%</span> </span>
-<span id="cb146-19"><a href="landscape-expansion-1.html#cb146-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_core =</span> <span class="fu">round</span>(core_area<span class="sc">/</span>total_area,<span class="dv">4</span>)<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb146-20"><a href="landscape-expansion-1.html#cb146-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">time_yr =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>( timepoint <span class="sc">==</span> <span class="st">&quot;t2&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
-<span id="cb146-21"><a href="landscape-expansion-1.html#cb146-21" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t3&quot;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
-<span id="cb146-22"><a href="landscape-expansion-1.html#cb146-22" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t4&quot;</span> <span class="sc">~</span> <span class="dv">11</span>,</span>
-<span id="cb146-23"><a href="landscape-expansion-1.html#cb146-23" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t5&quot;</span> <span class="sc">~</span> <span class="dv">14</span>,</span>
-<span id="cb146-24"><a href="landscape-expansion-1.html#cb146-24" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t6&quot;</span> <span class="sc">~</span> <span class="dv">17</span>,</span>
-<span id="cb146-25"><a href="landscape-expansion-1.html#cb146-25" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t7&quot;</span> <span class="sc">~</span> <span class="dv">20</span>,</span>
-<span id="cb146-26"><a href="landscape-expansion-1.html#cb146-26" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t8&quot;</span> <span class="sc">~</span> <span class="dv">23</span>,</span>
-<span id="cb146-27"><a href="landscape-expansion-1.html#cb146-27" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t9&quot;</span> <span class="sc">~</span> <span class="dv">26</span>,</span>
-<span id="cb146-28"><a href="landscape-expansion-1.html#cb146-28" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t10&quot;</span> <span class="sc">~</span> <span class="dv">29</span>)))</span>
-<span id="cb146-29"><a href="landscape-expansion-1.html#cb146-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-30"><a href="landscape-expansion-1.html#cb146-30" aria-hidden="true" tabindex="-1"></a>forested_df <span class="ot">&lt;-</span> lsm_df <span class="sc">%&gt;%</span> </span>
-<span id="cb146-31"><a href="landscape-expansion-1.html#cb146-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">&quot;forested&quot;</span>)</span>
-<span id="cb146-32"><a href="landscape-expansion-1.html#cb146-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-33"><a href="landscape-expansion-1.html#cb146-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-34"><a href="landscape-expansion-1.html#cb146-34" aria-hidden="true" tabindex="-1"></a>unforested_df <span class="ot">&lt;-</span> lsm_df <span class="sc">%&gt;%</span> </span>
-<span id="cb146-35"><a href="landscape-expansion-1.html#cb146-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">&quot;unforested&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="landscape-expansion-1.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine lsm csvs</span></span>
+<span id="cb172-2"><a href="landscape-expansion-1.html#cb172-2" aria-hidden="true" tabindex="-1"></a>lsm_big <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/lsm&quot;</span>, <span class="at">pattern =</span> <span class="fu">str_c</span>(<span class="st">&quot;Fire&quot;</span>), <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>),read_csv) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-3"><a href="landscape-expansion-1.html#cb172-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind,.) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-4"><a href="landscape-expansion-1.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timepoint =</span> <span class="fu">str_c</span>(<span class="st">&quot;t&quot;</span>,layer),</span>
+<span id="cb172-5"><a href="landscape-expansion-1.html#cb172-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">condition =</span> <span class="fu">case_when</span>(class <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;unforested&quot;</span>,</span>
+<span id="cb172-6"><a href="landscape-expansion-1.html#cb172-6" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;forested&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-7"><a href="landscape-expansion-1.html#cb172-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Patch_ID, ptch_fr,timepoint,condition,metric,value) </span>
+<span id="cb172-8"><a href="landscape-expansion-1.html#cb172-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-9"><a href="landscape-expansion-1.html#cb172-9" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up dataframe</span></span>
+<span id="cb172-10"><a href="landscape-expansion-1.html#cb172-10" aria-hidden="true" tabindex="-1"></a>lsm_df <span class="ot">&lt;-</span> lsm_big <span class="sc">%&gt;%</span> </span>
+<span id="cb172-11"><a href="landscape-expansion-1.html#cb172-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Patch_ID <span class="sc">!=</span> <span class="st">&quot;empty&quot;</span>,</span>
+<span id="cb172-12"><a href="landscape-expansion-1.html#cb172-12" aria-hidden="true" tabindex="-1"></a>         timepoint <span class="sc">!=</span> <span class="st">&quot;t1&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-13"><a href="landscape-expansion-1.html#cb172-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> metric,<span class="at">values_from =</span> value,<span class="at">values_fn =</span> as.numeric) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-14"><a href="landscape-expansion-1.html#cb172-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">core_area =</span> tca,</span>
+<span id="cb172-15"><a href="landscape-expansion-1.html#cb172-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">total_area =</span> ca,</span>
+<span id="cb172-16"><a href="landscape-expansion-1.html#cb172-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">edge_area_ratio =</span> ed, </span>
+<span id="cb172-17"><a href="landscape-expansion-1.html#cb172-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">perc_like_adj =</span> pladj, </span>
+<span id="cb172-18"><a href="landscape-expansion-1.html#cb172-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">perc_area =</span> pland) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-19"><a href="landscape-expansion-1.html#cb172-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_core =</span> <span class="fu">round</span>(core_area<span class="sc">/</span>total_area,<span class="dv">4</span>)<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb172-20"><a href="landscape-expansion-1.html#cb172-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">time_yr =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>( timepoint <span class="sc">==</span> <span class="st">&quot;t2&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb172-21"><a href="landscape-expansion-1.html#cb172-21" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t3&quot;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
+<span id="cb172-22"><a href="landscape-expansion-1.html#cb172-22" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t4&quot;</span> <span class="sc">~</span> <span class="dv">11</span>,</span>
+<span id="cb172-23"><a href="landscape-expansion-1.html#cb172-23" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t5&quot;</span> <span class="sc">~</span> <span class="dv">14</span>,</span>
+<span id="cb172-24"><a href="landscape-expansion-1.html#cb172-24" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t6&quot;</span> <span class="sc">~</span> <span class="dv">17</span>,</span>
+<span id="cb172-25"><a href="landscape-expansion-1.html#cb172-25" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t7&quot;</span> <span class="sc">~</span> <span class="dv">20</span>,</span>
+<span id="cb172-26"><a href="landscape-expansion-1.html#cb172-26" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t8&quot;</span> <span class="sc">~</span> <span class="dv">23</span>,</span>
+<span id="cb172-27"><a href="landscape-expansion-1.html#cb172-27" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t9&quot;</span> <span class="sc">~</span> <span class="dv">26</span>,</span>
+<span id="cb172-28"><a href="landscape-expansion-1.html#cb172-28" aria-hidden="true" tabindex="-1"></a>                              timepoint <span class="sc">==</span> <span class="st">&quot;t10&quot;</span> <span class="sc">~</span> <span class="dv">29</span>)))</span>
+<span id="cb172-29"><a href="landscape-expansion-1.html#cb172-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-30"><a href="landscape-expansion-1.html#cb172-30" aria-hidden="true" tabindex="-1"></a>forested_df <span class="ot">&lt;-</span> lsm_df <span class="sc">%&gt;%</span> </span>
+<span id="cb172-31"><a href="landscape-expansion-1.html#cb172-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">&quot;forested&quot;</span>)</span>
+<span id="cb172-32"><a href="landscape-expansion-1.html#cb172-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-33"><a href="landscape-expansion-1.html#cb172-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-34"><a href="landscape-expansion-1.html#cb172-34" aria-hidden="true" tabindex="-1"></a>unforested_df <span class="ot">&lt;-</span> lsm_df <span class="sc">%&gt;%</span> </span>
+<span id="cb172-35"><a href="landscape-expansion-1.html#cb172-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">&quot;unforested&quot;</span>)</span></code></pre></div>
 </div>
 <div id="percent-of-land-area" class="section level3 hasAnchor" number="14.3.2">
 <h3><span class="header-section-number">14.3.2</span> Percent of Land Area<a href="landscape-expansion-1.html#percent-of-land-area" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="landscape-expansion-1.html#cb147-1" aria-hidden="true" tabindex="-1"></a>forested_df_sum <span class="ot">&lt;-</span> forested_df <span class="sc">%&gt;%</span> </span>
-<span id="cb147-2"><a href="landscape-expansion-1.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ptch_fr,time_yr) <span class="sc">%&gt;%</span> </span>
-<span id="cb147-3"><a href="landscape-expansion-1.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">perc_area =</span> <span class="fu">median</span>(perc_area,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb147-4"><a href="landscape-expansion-1.html#cb147-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-5"><a href="landscape-expansion-1.html#cb147-5" aria-hidden="true" tabindex="-1"></a>pland_df <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(forested_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Douglas-Fir&quot;</span>),<span class="fu">aes</span>(time_yr,perc_area)) <span class="sc">+</span></span>
-<span id="cb147-6"><a href="landscape-expansion-1.html#cb147-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>,<span class="at">fill =</span> <span class="st">&quot;#F8766D&quot;</span>) <span class="sc">+</span></span>
-<span id="cb147-7"><a href="landscape-expansion-1.html#cb147-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>forested_df_sum<span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Douglas-Fir&quot;</span>), <span class="fu">aes</span>(<span class="fu">as.numeric</span>(time_yr),perc_area), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
-<span id="cb147-8"><a href="landscape-expansion-1.html#cb147-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">fill=</span><span class="st">&quot;Forest Type&quot;</span>,<span class="at">y=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb147-9"><a href="landscape-expansion-1.html#cb147-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb147-10"><a href="landscape-expansion-1.html#cb147-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))</span>
-<span id="cb147-11"><a href="landscape-expansion-1.html#cb147-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb147-12"><a href="landscape-expansion-1.html#cb147-12" aria-hidden="true" tabindex="-1"></a>pland_lp <span class="ot">&lt;-</span><span class="fu">ggplot</span>(forested_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Lodegepole Pine&quot;</span>),<span class="fu">aes</span>(time_yr,perc_area)) <span class="sc">+</span></span>
-<span id="cb147-13"><a href="landscape-expansion-1.html#cb147-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>,<span class="at">fill =</span><span class="st">&quot;#619CFF&quot;</span>) <span class="sc">+</span></span>
-<span id="cb147-14"><a href="landscape-expansion-1.html#cb147-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>forested_df_sum<span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Lodegepole Pine&quot;</span>), <span class="fu">aes</span>(<span class="fu">as.numeric</span>(time_yr),perc_area,<span class="at">ymin =</span><span class="dv">0</span>,<span class="at">ymax=</span><span class="dv">100</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb147-15"><a href="landscape-expansion-1.html#cb147-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">fill=</span><span class="st">&quot;Forest Type&quot;</span>,<span class="at">y=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb147-16"><a href="landscape-expansion-1.html#cb147-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()  <span class="sc">+</span></span>
-<span id="cb147-17"><a href="landscape-expansion-1.html#cb147-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))</span>
-<span id="cb147-18"><a href="landscape-expansion-1.html#cb147-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-19"><a href="landscape-expansion-1.html#cb147-19" aria-hidden="true" tabindex="-1"></a>pland_fs <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(forested_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Fir-Spruce&quot;</span>),<span class="fu">aes</span>(time_yr,perc_area)) <span class="sc">+</span></span>
-<span id="cb147-20"><a href="landscape-expansion-1.html#cb147-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>,<span class="at">fill =</span> <span class="st">&quot;#00BA38&quot;</span>) <span class="sc">+</span></span>
-<span id="cb147-21"><a href="landscape-expansion-1.html#cb147-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>forested_df_sum<span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Fir-Spruce&quot;</span>), <span class="fu">aes</span>(<span class="fu">as.numeric</span>(time_yr),perc_area), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
-<span id="cb147-22"><a href="landscape-expansion-1.html#cb147-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">fill=</span><span class="st">&quot;Forest Type&quot;</span>,<span class="at">y=</span><span class="cn">NULL</span>) <span class="sc">+</span> <span class="co">#title = &quot;Fir-Spruce&quot;,y = &quot;Percent of Patch Occupied by Conifers&quot;,</span></span>
-<span id="cb147-23"><a href="landscape-expansion-1.html#cb147-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()  <span class="sc">+</span></span>
-<span id="cb147-24"><a href="landscape-expansion-1.html#cb147-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))</span>
-<span id="cb147-25"><a href="landscape-expansion-1.html#cb147-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-26"><a href="landscape-expansion-1.html#cb147-26" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(pland_df,pland_lp,pland_fs,<span class="at">ncol=</span><span class="dv">3</span>, <span class="at">left =</span> <span class="st">&quot;Percent of Patch Occupied by Conifers&quot;</span>,<span class="at">top =</span> <span class="st">&quot;Conifer Patch Occupancy 30-Years Post-Fire&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="landscape-expansion-1.html#cb173-1" aria-hidden="true" tabindex="-1"></a>forested_df_sum <span class="ot">&lt;-</span> forested_df <span class="sc">%&gt;%</span> </span>
+<span id="cb173-2"><a href="landscape-expansion-1.html#cb173-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ptch_fr,time_yr) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-3"><a href="landscape-expansion-1.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">perc_area =</span> <span class="fu">median</span>(perc_area,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb173-4"><a href="landscape-expansion-1.html#cb173-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-5"><a href="landscape-expansion-1.html#cb173-5" aria-hidden="true" tabindex="-1"></a>pland_df <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(forested_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Douglas-Fir&quot;</span>),<span class="fu">aes</span>(time_yr,perc_area)) <span class="sc">+</span></span>
+<span id="cb173-6"><a href="landscape-expansion-1.html#cb173-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>,<span class="at">fill =</span> <span class="st">&quot;#F8766D&quot;</span>) <span class="sc">+</span></span>
+<span id="cb173-7"><a href="landscape-expansion-1.html#cb173-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>forested_df_sum<span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Douglas-Fir&quot;</span>), <span class="fu">aes</span>(<span class="fu">as.numeric</span>(time_yr),perc_area), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb173-8"><a href="landscape-expansion-1.html#cb173-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">fill=</span><span class="st">&quot;Forest Type&quot;</span>,<span class="at">y=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb173-9"><a href="landscape-expansion-1.html#cb173-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb173-10"><a href="landscape-expansion-1.html#cb173-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))</span>
+<span id="cb173-11"><a href="landscape-expansion-1.html#cb173-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb173-12"><a href="landscape-expansion-1.html#cb173-12" aria-hidden="true" tabindex="-1"></a>pland_lp <span class="ot">&lt;-</span><span class="fu">ggplot</span>(forested_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Lodegepole Pine&quot;</span>),<span class="fu">aes</span>(time_yr,perc_area)) <span class="sc">+</span></span>
+<span id="cb173-13"><a href="landscape-expansion-1.html#cb173-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>,<span class="at">fill =</span><span class="st">&quot;#619CFF&quot;</span>) <span class="sc">+</span></span>
+<span id="cb173-14"><a href="landscape-expansion-1.html#cb173-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>forested_df_sum<span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Lodegepole Pine&quot;</span>), <span class="fu">aes</span>(<span class="fu">as.numeric</span>(time_yr),perc_area,<span class="at">ymin =</span><span class="dv">0</span>,<span class="at">ymax=</span><span class="dv">100</span>), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb173-15"><a href="landscape-expansion-1.html#cb173-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">fill=</span><span class="st">&quot;Forest Type&quot;</span>,<span class="at">y=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb173-16"><a href="landscape-expansion-1.html#cb173-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()  <span class="sc">+</span></span>
+<span id="cb173-17"><a href="landscape-expansion-1.html#cb173-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))</span>
+<span id="cb173-18"><a href="landscape-expansion-1.html#cb173-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-19"><a href="landscape-expansion-1.html#cb173-19" aria-hidden="true" tabindex="-1"></a>pland_fs <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(forested_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Fir-Spruce&quot;</span>),<span class="fu">aes</span>(time_yr,perc_area)) <span class="sc">+</span></span>
+<span id="cb173-20"><a href="landscape-expansion-1.html#cb173-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>,<span class="at">fill =</span> <span class="st">&quot;#00BA38&quot;</span>) <span class="sc">+</span></span>
+<span id="cb173-21"><a href="landscape-expansion-1.html#cb173-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data=</span>forested_df_sum<span class="sc">%&gt;%</span> <span class="fu">filter</span>(ptch_fr<span class="sc">==</span><span class="st">&quot;Fir-Spruce&quot;</span>), <span class="fu">aes</span>(<span class="fu">as.numeric</span>(time_yr),perc_area), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb173-22"><a href="landscape-expansion-1.html#cb173-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">fill=</span><span class="st">&quot;Forest Type&quot;</span>,<span class="at">y=</span><span class="cn">NULL</span>) <span class="sc">+</span> <span class="co">#title = &quot;Fir-Spruce&quot;,y = &quot;Percent of Patch Occupied by Conifers&quot;,</span></span>
+<span id="cb173-23"><a href="landscape-expansion-1.html#cb173-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()  <span class="sc">+</span></span>
+<span id="cb173-24"><a href="landscape-expansion-1.html#cb173-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">80</span>,<span class="dv">100</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">110</span>))</span>
+<span id="cb173-25"><a href="landscape-expansion-1.html#cb173-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-26"><a href="landscape-expansion-1.html#cb173-26" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(pland_df,pland_lp,pland_fs,<span class="at">ncol=</span><span class="dv">3</span>, <span class="at">left =</span> <span class="st">&quot;Percent of Patch Occupied by Conifers&quot;</span>,<span class="at">top =</span> <span class="st">&quot;Conifer Patch Occupancy 30-Years Post-Fire&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/pland-1.png" width="1344" /></p>
 </div>
 <div id="percent-alike-adjacencies" class="section level3 hasAnchor" number="14.3.3">
 <h3><span class="header-section-number">14.3.3</span> Percent Alike Adjacencies<a href="landscape-expansion-1.html#percent-alike-adjacencies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="landscape-expansion-1.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unfor_metric &lt;- unforested_df %&gt;% </span></span>
-<span id="cb148-2"><a href="landscape-expansion-1.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   left_join(.,patch_metrics,by = c(&quot;Patch_ID&quot;,&quot;ptch_fr&quot;))%&gt;% </span></span>
-<span id="cb148-3"><a href="landscape-expansion-1.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(core_type = case_when (perc_core.y &gt; 0.25 ~ &quot;high core (&gt;25%)&quot;,</span></span>
-<span id="cb148-4"><a href="landscape-expansion-1.html#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 perc_core.y &gt; 0.0 &amp; perc_core.y &lt;0.25 ~ &quot;medium core (&lt;25%)&quot;,</span></span>
-<span id="cb148-5"><a href="landscape-expansion-1.html#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 TRUE ~ &quot;no core (0%)&quot;)) %&gt;% </span></span>
-<span id="cb148-6"><a href="landscape-expansion-1.html#cb148-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(ptch_fr,time_yr) %&gt;% </span></span>
-<span id="cb148-7"><a href="landscape-expansion-1.html#cb148-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarize(metric = mean(perc_core.y,na.rm=FALSE)) %&gt;% </span></span>
-<span id="cb148-8"><a href="landscape-expansion-1.html#cb148-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(ptch_fr %in% c(&quot;Douglas-Fir&quot;,&quot;Fir-Spruce&quot;,&quot;Lodegepole Pine&quot;))</span></span>
-<span id="cb148-9"><a href="landscape-expansion-1.html#cb148-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb148-10"><a href="landscape-expansion-1.html#cb148-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(unforested_df <span class="sc">%&gt;%</span> </span>
-<span id="cb148-11"><a href="landscape-expansion-1.html#cb148-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>)),<span class="fu">aes</span>(<span class="fu">as.factor</span>(time_yr),perc_like_adj,<span class="at">fill =</span> ptch_fr)) <span class="sc">+</span></span>
-<span id="cb148-12"><a href="landscape-expansion-1.html#cb148-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb148-13"><a href="landscape-expansion-1.html#cb148-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>ptch_fr) <span class="sc">+</span> </span>
-<span id="cb148-14"><a href="landscape-expansion-1.html#cb148-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb148-15"><a href="landscape-expansion-1.html#cb148-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Forest Type&quot;</span>,<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">y =</span> <span class="st">&quot;Percent Like Adjacencies&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Percent of Like-Adjacencies within Unforested Patches&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="landscape-expansion-1.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unfor_metric &lt;- unforested_df %&gt;% </span></span>
+<span id="cb174-2"><a href="landscape-expansion-1.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   left_join(.,patch_metrics,by = c(&quot;Patch_ID&quot;,&quot;ptch_fr&quot;))%&gt;% </span></span>
+<span id="cb174-3"><a href="landscape-expansion-1.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(core_type = case_when (perc_core.y &gt; 0.25 ~ &quot;high core (&gt;25%)&quot;,</span></span>
+<span id="cb174-4"><a href="landscape-expansion-1.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 perc_core.y &gt; 0.0 &amp; perc_core.y &lt;0.25 ~ &quot;medium core (&lt;25%)&quot;,</span></span>
+<span id="cb174-5"><a href="landscape-expansion-1.html#cb174-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 TRUE ~ &quot;no core (0%)&quot;)) %&gt;% </span></span>
+<span id="cb174-6"><a href="landscape-expansion-1.html#cb174-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(ptch_fr,time_yr) %&gt;% </span></span>
+<span id="cb174-7"><a href="landscape-expansion-1.html#cb174-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarize(metric = mean(perc_core.y,na.rm=FALSE)) %&gt;% </span></span>
+<span id="cb174-8"><a href="landscape-expansion-1.html#cb174-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(ptch_fr %in% c(&quot;Douglas-Fir&quot;,&quot;Fir-Spruce&quot;,&quot;Lodegepole Pine&quot;))</span></span>
+<span id="cb174-9"><a href="landscape-expansion-1.html#cb174-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-10"><a href="landscape-expansion-1.html#cb174-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(unforested_df <span class="sc">%&gt;%</span> </span>
+<span id="cb174-11"><a href="landscape-expansion-1.html#cb174-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>)),<span class="fu">aes</span>(<span class="fu">as.factor</span>(time_yr),perc_like_adj,<span class="at">fill =</span> ptch_fr)) <span class="sc">+</span></span>
+<span id="cb174-12"><a href="landscape-expansion-1.html#cb174-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb174-13"><a href="landscape-expansion-1.html#cb174-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>ptch_fr) <span class="sc">+</span> </span>
+<span id="cb174-14"><a href="landscape-expansion-1.html#cb174-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb174-15"><a href="landscape-expansion-1.html#cb174-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Forest Type&quot;</span>,<span class="at">x=</span><span class="st">&quot;Years Post-Fire&quot;</span>,<span class="at">y =</span> <span class="st">&quot;Percent Like Adjacencies&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Percent of Like-Adjacencies within Unforested Patches&quot;</span>) </span></code></pre></div>
 <p><img src="_main_files/figure-html/pladj-1.png" width="1344" /></p>
+
+<!-- # Patch Metrics -->
+<!-- ## Set Up -->
+<!-- ### Libraries -->
+<!-- ```{r libraries12, message=FALSE, warning=FALSE} -->
+<!-- library(tidyverse) -->
+<!-- library(terra) -->
+<!-- library(sf) -->
+<!-- library(ggsankey) -->
+<!-- library(gridExtra) -->
+<!-- library(car) -->
+<!-- sf_use_s2(FALSE) -->
+<!-- ``` -->
+<!-- ### Import High-Severity Patches -->
+<!-- ```{r import patch6, message=FALSE, warning=FALSE} -->
+<!-- # fire list -->
+<!-- fire_list <- c("Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991","Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988") -->
+<!-- # import high-severity patches -->
+<!-- patches <- st_read("data/patches/highsev_patches.shp") %>%  -->
+<!--   mutate(Patch_ID = str_c(Fire_ID,"-",1:n())) %>%  -->
+<!--   st_transform(crs = "EPSG:4326") -->
+<!-- # set crs -->
+<!-- crs <- crs(patches) -->
+<!-- ``` -->
+<!-- ## Prepare Patch Data -->
+<!-- ### Create Dataset for Each Forest Type -->
+<!-- ```{r message=FALSE, warning=FALSE} -->
+<!-- # import and join all decomposiition csvs -->
+<!-- patch_data <- do.call(bind_rows,lapply(list.files(path = "data/patch_fate/t0t9_OLD", pattern = "t0t9", all.files=TRUE, full.names=TRUE),read_csv)) -->
+<!-- ``` -->
+<!-- ### Calculate Percent of Patches Forested at t9 -->
+<!-- ```{r} -->
+<!-- patch_df <- patch_data %>%   -->
+<!--   group_by(Patch_ID,lyr1) %>%  -->
+<!--   summarize(t0_area = mean(t0_area), -->
+<!--             t9_area = round(sum(t9_area),5))%>%  -->
+<!--   pivot_wider(values_from = t9_area,names_from=lyr1) %>%  -->
+<!--   rename(t9_area_unforested = 4, -->
+<!--          t9_area_forested = 3)%>%  -->
+<!--   replace(is.na(.), 0) %>%  -->
+<!--   mutate(perc_forested = t9_area_forested/(t0_area), -->
+<!--          recovered = case_when(perc_forested <= .9 ~ "no", -->
+<!--                                TRUE ~ "yes")) -->
+<!-- ``` -->
+<!-- ### Calculate Patch Metrics of Interest -->
+<!-- ```{r} -->
+<!-- patch_metrics <- patches %>%  -->
+<!--   dplyr::select(Fire_ID,Patch_ID,ptch_fr,ecoregn) %>%  -->
+<!--   st_transform(3488) %>%  -->
+<!--   mutate(patch_area = round(as.numeric(st_area(.))/10000,4), -->
+<!--          perim_m = as.numeric(round(st_length(st_cast(geometry,to = "MULTILINESTRING")),4)), -->
+<!--          edge_perim_rat = patch_area/perim_m) %>%  -->
+<!--   st_buffer(-100) %>%  -->
+<!--   mutate(core_area = round(as.numeric(st_area(.))/10000,4), -->
+<!--          perc_core = round(core_area / patch_area,5))%>%  -->
+<!--   st_drop_geometry() -->
+<!-- ``` -->
+<!-- ### Calculate Patch Climate -->
+<!-- ```{r} -->
+<!-- def = list.files(path = "data/terraclim/", pattern = "def", all.files=TRUE, full.names=TRUE) %>%  -->
+<!--   rast() %>%  -->
+<!--   mean() -->
+<!-- pdsi = list.files(path = "data/terraclim/", pattern = "PDSI", all.files=TRUE, full.names=TRUE) %>%  -->
+<!--   rast() %>%  -->
+<!--   mean() -->
+<!-- swe = list.files(path = "data/terraclim/", pattern = "swe", all.files=TRUE, full.names=TRUE) %>%  -->
+<!--   rast() %>%  -->
+<!--   mean() -->
+<!-- ppt = list.files(path = "data/terraclim/", pattern = "ppt", all.files=TRUE, full.names=TRUE) %>%  -->
+<!--   rast() %>%  -->
+<!--   mean() -->
+<!-- pet = list.files(path = "data/terraclim/", pattern = "pet", all.files=TRUE, full.names=TRUE) %>%  -->
+<!--   rast() %>%  -->
+<!--   mean() -->
+<!-- def_patch <- extract(def,patches %>% st_transform(crs= crs(def)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(def = mean) %>% dplyr::select(def) -->
+<!-- pdsi_patch <- extract(pdsi,patches %>% st_transform(crs= crs(pdsi)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(pdsi = mean) %>% dplyr::select(pdsi) -->
+<!-- swe_patch <- extract(swe,patches %>% st_transform(crs= crs(swe)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(swe = mean) %>% dplyr::select(swe) -->
+<!-- ppt_patch <- extract(ppt,patches %>% st_transform(crs= crs(ppt)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(ppt = mean) %>% dplyr::select(ppt) -->
+<!-- pet_patch <- extract(pet,patches %>% st_transform(crs= crs(pet)),fun = mean,weights = TRUE, exact = TRUE)%>% rename(pet = mean) %>% dplyr::select(pet) -->
+<!-- patch_climate <- cbind(patches,def_patch,pdsi_patch,swe_patch, ppt_patch,pet_patch) -->
+<!-- ``` -->
+<!-- ### Join Patch Metrics and Recovery Data -->
+<!-- ```{r} -->
+<!-- patch_join <- left_join(patch_df,patch_climate,by = "Patch_ID") -->
+<!-- patch_recovery <- left_join(patch_join,patch_metrics,by = c("Patch_ID","Fire_ID","ecoregn","ptch_fr")) %>%  -->
+<!--   filter(ptch_fr %in% c("Douglas-Fir","Lodegepole Pine","Fir-Spruce")) %>%  -->
+<!--   mutate(type_core = case_when (perc_core > 0.25 ~ "high", -->
+<!--                                 perc_core > 0 ~ "med", -->
+<!--                                 TRUE ~ "low")) -->
+<!-- recovery_df <- patch_recovery %>%  -->
+<!--   ungroup() %>%  -->
+<!--   mutate(type_core = as.factor(type_core), -->
+<!--          ecoregn = as.factor(ecoregn), -->
+<!--          ptch_fr= as.factor(ptch_fr), -->
+<!--          recovered = as.factor(recovered), -->
+<!--          recovered = forcats::fct_relevel(c("no","yes")), -->
+<!--          patch_size_group = case_when(t0_area > 1000 ~ "1000ha+", -->
+<!--                                 t0_area > 500 & t0_area <1000 ~ "500-1000ha", -->
+<!--                                 t0_area > 100 & t0_area <5000 ~ "100-500ha", -->
+<!--                                 t0_area > 50 & t0_area <100~ "50-100ha", -->
+<!--                                 t0_area < 50 ~ "0-50ha")) -->
+<!-- ``` -->
+<!-- ## Identify Highest Correlated Climate Measure -->
+<!-- ```{r} -->
+<!-- ### 1985-1987 average monthly values -->
+<!-- # def: climatic water deficit -->
+<!-- # pdsi: palmer drought severity -->
+<!-- # swe: snow water equiv -->
+<!-- # pt: accumulated precipitation -->
+<!-- # pet: potential evapotranspiration -->
+<!-- # pet is the most highly correlated climate variable -->
+<!-- cor(recovery_df %>% select(perc_forested, def,pdsi,swe,ppt,pet)) -->
+<!-- ``` -->
+<!-- ## Model Patch Recovery -->
+<!-- ```{r} -->
+<!-- # reasonable model -->
+<!-- lm_recovery <- lm(perc_forested ~ perc_core + edge_perim_rat + patch_area + ptch_fr + pet + ecoregn, -->
+<!--                   data = recovery_df) -->
+<!-- summary(lm_recovery) -->
+<!-- anova(lm_recovery) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- em_recovery <- emmeans::emmeans(lm_recovery,~ptch_fr) -->
+<!-- pairs(em_recovery) -->
+<!-- em_recovery <- emmeans::emmeans(lm_recovery,~ecoregn) -->
+<!-- pairs(em_recovery) -->
+<!-- ``` -->
+<!-- ## old -->
+<!-- ```{r} -->
+<!-- # lm_recovery <- lm(perc_forested ~ patch_area + ecoregn + type_core + ptch_fr, data = patch_recovery) -->
+<!-- # summary(lm_recovery) -->
+<!-- # anova(lm_recovery) -->
+<!-- #  -->
+<!-- # lm_recovery <- lm(perc_forested ~ perc_core, data = patch_recovery) -->
+<!-- # summary(lm_recovery) -->
+<!-- # cor(patch_recovery$perc_forested,patch_recovery$perc_core) -->
+<!-- # # full model -->
+<!-- # lm_recovery <- lm(perc_forested ~  -->
+<!-- #                     edge_perim_rat + core_area + type_core + # heterogeneity -->
+<!-- #                     patch_area + patch_size_group +# patch size -->
+<!-- #                     ptch_fr + # forest type -->
+<!-- #                     ecoregn + # ecoregion -->
+<!-- #                     def + pdsi + swe + ppt + pet, # climate -->
+<!-- #                   data = recovery_df) -->
+<!-- # summary(lm_recovery) -->
+<!-- # anova(lm_recovery) -->
+<!-- ``` -->
+<!-- ## Plot -->
+<!-- ```{r} -->
+<!-- # histogram of core area % for all patches -->
+<!-- ggplot(patch_recovery %>% filter(perc_core > 0),aes(perc_core)) + -->
+<!--   geom_histogram() +  -->
+<!--   facet_wrap(~ptch_fr) -->
+<!-- # histogram of patch recovery % for all patches -->
+<!-- ggplot(patch_recovery ,aes(perc_forested)) + -->
+<!--   geom_histogram() +  -->
+<!--   facet_wrap(~ptch_fr, scales = "free_y") -->
+<!-- # core area on regeneration -->
+<!-- core_df <- patch_recovery %>%  -->
+<!--   group_by (ptch_fr,core_type,recovered) %>%  -->
+<!--   summarize (n = n()) %>%  -->
+<!--   mutate(perc_recovered = n/sum(n)*100) %>%  -->
+<!--   filter(recovered == "yes") -->
+<!-- ggplot(core_df,aes(ptch_fr,perc_recovered,fill = core_type))+ -->
+<!--   geom_col(position = "dodge") -->
+<!-- ``` -->
 
 </div>
 </div>

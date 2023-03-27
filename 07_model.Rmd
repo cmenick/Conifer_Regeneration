@@ -167,13 +167,17 @@ ggplot(training_dataset,aes(absence,ndvi)) +
 ### Create Random Forest
 
 ```{r rf model}
-rf_conifer <- randomForest(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, data= training_dataset %>% drop_na())
+rf_conifer <- randomForest(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset %>% drop_na())
 ```
 
 ### Evaluate
 
 ```{r rf model importance}
+rf_conifer
+
 randomForest::importance(rf_conifer)
+
+rf_conifer$confusion
 ```
 
 ```{r rf model summary}
@@ -184,5 +188,5 @@ summary(rf_conifer)
 
 ```{r rf model export, eval = FALSE}
 # export 
-saveRDS(rf_conifer,"data/models/rf_conifer.rds")
+# saveRDS(rf_conifer,"data/models/rf_conifer.rds")
 ```

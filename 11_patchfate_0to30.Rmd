@@ -98,6 +98,70 @@ patches_fs$next_node <- factor(patches_fs$next_node,levels = c("forested","0-50h
 patches_fs$value <- as.numeric(patches_fs$value)
 ```
 
+## Assess Forested Proportions
+
+### By Forest Type
+
+```{r}
+patch_data_type <- patch_data %>% 
+  filter(ptch_fr %in% c("Fir-Spruce","Douglas-Fir","Lodegepole Pine")) %>% 
+  dplyr::select(1:7) %>% 
+  group_by(Patch_ID,t9_status,ptch_fr) %>% 
+  summarize(t0_area = mean(t0_area),
+            t9_area = sum(t9_area)) %>% 
+  mutate(t9_status = case_when(t9_status == 1 ~ "unforested",
+                               t9_status == 2 ~ "forested")) %>% 
+  filter(t9_status == "forested")%>% 
+  ungroup() %>% 
+  group_by(ptch_fr) %>% 
+  summarize(t9_area =sum(t9_area),
+            t0_area = sum(t0_area),
+            prop_area = round(t9_area/t0_area,2))
+
+patch_data_type
+```
+### By Patch Size
+
+```{r}
+patch_data_size <- patch_data %>% 
+  filter(ptch_fr %in% c("Fir-Spruce","Douglas-Fir","Lodegepole Pine")) %>% 
+  dplyr::select(1:7) %>% 
+  group_by(Patch_ID,t9_status,t0_group) %>% 
+  summarize(t0_area = mean(t0_area),
+            t9_area = sum(t9_area)) %>% 
+  mutate(t9_status = case_when(t9_status == 1 ~ "unforested",
+                               t9_status == 2 ~ "forested")) %>% 
+  filter(t9_status == "forested")%>% 
+  ungroup() %>% 
+  group_by(t0_group) %>% 
+  summarize(t9_area =sum(t9_area),
+            t0_area = sum(t0_area),
+            prop_area = round(t9_area/t0_area,2))
+
+patch_data_size
+```
+
+### By Forest Type and Patch Size
+
+```{r}
+patch_data_both <- patch_data %>% 
+  filter(ptch_fr %in% c("Fir-Spruce","Douglas-Fir","Lodegepole Pine")) %>% 
+  dplyr::select(1:7) %>% 
+  group_by(Patch_ID,t9_status,ptch_fr,t0_group) %>% 
+  summarize(t0_area = mean(t0_area),
+            t9_area = sum(t9_area)) %>% 
+  mutate(t9_status = case_when(t9_status == 1 ~ "unforested",
+                               t9_status == 2 ~ "forested")) %>% 
+  filter(t9_status == "forested")%>% 
+  ungroup() %>% 
+  group_by(ptch_fr,t0_group) %>% 
+  summarize(t9_area =sum(t9_area),
+            t0_area = sum(t0_area),
+            prop_area = round(t9_area/t0_area,2))
+
+patch_data_both
+```
+
 ## Plot
 
 ### Develop Plotting

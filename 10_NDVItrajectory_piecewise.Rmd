@@ -56,11 +56,10 @@ bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr
 years <- c(1984:2020)
 
 # create list of all combinations of bands, in the appropriate order
-bandnames <- list(bands,years) %>%
-  cross() %>%
-  map(lift(paste0))
+bandnames <- expand_grid(years,bands) %>% 
+  mutate(V1 = str_c(bands,years)) 
 
-bandlist <- do.call(rbind,bandnames)
+bandlist <- bandnames$V1
 ```
 
 ## Connect Landsat and High-Severity Patches
@@ -181,19 +180,35 @@ data_fs$fit <- seg_ndvi_fs$fitted.values
 
 ```{r create df}
 estimate_yrs_recovery <- function(model){
-  new_intercept <- model$coefficients[1] + model$coefficients[2]*as.numeric(model$indexU)
-  -new_intercept/model$coefficients[3] + as.numeric(model$indexU)
+  bp <- as.numeric(model$indexU)
+  slopes <- slope(model) %>% as.data.frame()
+  slope1 <- slopes$years_postfire.Est.[1]
+  slope2 <- slopes$years_postfire.Est.[2]
+  intercept <- model$coefficients[1]
+  
+  new_intercept <- intercept + slope1 * bp
+  est_rec <- -new_intercept/slope2 + bp
+  
+  r2 <- summary(model)$adj.r.squared
+  
+  df <- data.frame(forest_type = NA,
+                   intercept = intercept,
+                   slope_pre = slope1,
+                   slope_post = slope2, 
+                   years_detect = bp,
+                   years_recover = est_rec,
+                   adj_R2 = r2)
+  return(df)
 }
 
-as.data.frame(do.call(rbind,map(list(seg_ndvi_df,seg_ndvi_lp,seg_ndvi_fs), coef))) %>%
-  rename(intercept = "(Intercept)",
-         slope_post = U1.years_postfire,
-         slope_pre = years_postfire) %>% 
-  mutate(years_detect = c(as.numeric(seg_ndvi_df$indexU),as.numeric(seg_ndvi_lp$indexU),as.numeric(seg_ndvi_fs$indexU)),
-         forest_type = c("Douglas-Fir","Lodgepole Pine","Fir-Spruce"),
-         adj_R2 = c(summary(seg_ndvi_df)$adj.r.squared,summary(seg_ndvi_lp)$adj.r.squared,summary(seg_ndvi_fs)$adj.r.squared),
-         years_recover = c(estimate_yrs_recovery(seg_ndvi_df),estimate_yrs_recovery(seg_ndvi_lp),estimate_yrs_recovery(seg_ndvi_fs)))%>% 
-  dplyr::select(forest_type, slope_pre,slope_post,adj_R2,years_detect,years_recover)
+seg_models <- rbind(estimate_yrs_recovery(seg_ndvi_df),
+                    estimate_yrs_recovery(seg_ndvi_lp),
+                    estimate_yrs_recovery(seg_ndvi_fs)) %>% 
+  mutate(forest_type = c("Douglas-Fir","Lodgepole Pine","Fir-Spruce"))
+
+rownames(seg_models) <- NULL
+
+seg_models
 ```
 
 #### Plot
