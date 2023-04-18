@@ -11,6 +11,7 @@ library(raster)
 library(tidyverse)
 library(mapview)
 library(caret)
+library(rempsyc)
 ```
 
 ### Import Patch and Fire Boundaries
@@ -31,43 +32,29 @@ highsev_patches <- st_read("data/patches/highsev_patches.shp") %>%
 
 ### Import Prediction Rasters
 
-```{r list rast, message=FALSE, warning=FALSE,eval=FALSE}
-# get all rasters from final timepoint
+```{r list rast, message=FALSE, warning=FALSE}
+# get all presence-absence rasters from final timepoint
 rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
 ```
 
-## Calculate Predicted Proportions
-
-### Calculate Areal Proportions for Each Fire
-```{r get props fire, message=FALSE, warning=FALSE,eval=FALSE}
-# create and map function to determine areal proportion of presence/absence for each fire
-get_percentages <- function(rast_file){
-  fire_rast <- rast(rast_file)
-  perc <- freq(fire_rast) %>% 
-    mutate(Fire_ID = sub( ".*rasters/", "", sub( "_rf_t.*", "", rast_file)),
-           class = case_when(value == 1 ~ "absence",
-                             value == 2 ~ "presence"),
-           percent_area = round(count/sum(count),3),
-           val_points = round(5+10*percent_area,0))
-  return(perc)
-}
-
-valid_points_df <- do.call(rbind,map(rast_list,get_percentages))
-```
+## Create Validation Polygons
 
 ### Calculate Areal Proportions for Each MTBS Event
-```{r get props mtbs, message=FALSE, warning=FALSE,eval=FALSE}
-# create and map function to determine areal proportion of presence/absence for each fire
+```{r get props mtbs, message=FALSE, warning=FALSE}
+# create and map function to determine areal proportion of presence/absence for each mtbs event
 get_percentages <- function(mtbs_event){
+  
+  # filter to mtbs event
   mtbs_fire <- mtbs_fires %>% 
     filter(Event_ID == mtbs_event)
-  
   fire_name <- mtbs_fire$Fire_ID
   
+  # import and mask final timepoint prediction raster to the MTBS event
   fire_rast <- list.files(path = "data/prediction_rasters", pattern=str_c(fire_name,"_rf_t9"), all.files=TRUE, full.names=TRUE) %>% 
     rast() %>% 
     mask(.,mtbs_fire)
   
+  # calculate the proportion of each class and assign the appropriate number of validation points
   perc <- freq(fire_rast) %>% 
     mutate(Fire_ID = fire_name,
            MTBS_ID = mtbs_event,
@@ -78,29 +65,13 @@ get_percentages <- function(mtbs_event){
   return(perc)
 }
 
-mtbs_list <- mtbs_fires %>% filter(Fire_ID %in% c("Fire_32_1989","Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988"))
-
-valid_points_df <- do.call(rbind,map(mtbs_list$Event_ID,get_percentages))
-```
-
-### Create Validation Polygons for Each Fire
-
-```{r create pres abs polys fire, message=FALSE, warning=FALSE,cache=TRUE,eval=FALSE}
-# create and map function to create presence/absence polygons from prediction raster
-get_polygons <- function(rast_file){
-  fire_rast <- rast(rast_file)
-  fire_poly <- as.polygons(fire_rast)
-  fire_poly_sf <- st_as_sf(fire_poly) %>% 
-  mutate(Fire_ID = sub( ".*rasters/", "", sub( "_rf_t.*", "", rast_file)))
-  return(fire_poly_sf)
-}
-
-class_polys <- do.call(rbind,map(rast_list,get_polygons))
+# combine
+valid_points_df <- do.call(rbind,map(mtbs_fires$Event_ID,get_percentages))
 ```
 
 ### Create Validation Polygons for Each MTBS Event
 
-```{r create pres abs polys mtbs, message=FALSE, warning=FALSE,cache=TRUE,eval=FALSE}
+```{r create pres abs polys mtbs, message=FALSE, warning=FALSE,cache=TRUE}
 # create and map function to create presence/absence polygons from prediction raster
 get_polygons <- function(mtbs_event){
   
@@ -120,27 +91,23 @@ get_polygons <- function(mtbs_event){
   return(fire_poly_sf)
 }
 
-class_polys <- do.call(rbind,map(mtbs_list$Event_ID,get_polygons))
-```
-
-## Prepare Validation Zones
-
-### Assign Required Points to Each Polygon
-
-```{r inform sample polys, message=FALSE, warning=FALSE,eval=FALSE}
+# combine and reformat
+class_polys <- do.call(rbind,map(mtbs_fires$Event_ID,get_polygons))
 class_polys$value <- (class_polys$lyr1)
 valid_points_df$class <- as.integer(valid_points_df$class)
+```
 
+```{r create sample polys, message=FALSE, warning=FALSE,cache=TRUE}
+# add the required number of validation points to each class polygon
 sample_polys <- left_join(class_polys,valid_points_df,by=c("Fire_ID","value","MTBS_ID")) %>% 
   st_transform(., crs="EPSG:4326") %>% 
   st_drop_geometry()
-
-test <- class_polys %>% st_drop_geometry()
 ```
 
 ### Export
 
 ```{r expost sample polygons,message=FALSE, warning=FALSE,eval = FALSE}
+# export polygons to have validation points generated in ArcGIS Pro
 # st_write(sample_polys,"data/validation/validation_polygons.shp")
 ```
 
@@ -149,9 +116,10 @@ test <- class_polys %>% st_drop_geometry()
 ```{r import validation data, message=FALSE, warning=FALSE}
 validation_dataset <- read_csv("data/validation/pixel_counting_val_dataset.csv")
 ```
-### Confusion
 
-```{r confusion, message=FALSE, warning=FALSE}
+### Confusion Matrix by Proportion of Points
+```{r confusion points, message=FALSE, warning=FALSE}
+# create validation matrix based on independent validation
 validation_matrix <- validation_dataset %>% 
   group_by(classified_as, is_actually) %>% 
   summarize(n=n()) %>% 
@@ -160,21 +128,72 @@ validation_matrix <- validation_dataset %>%
   dplyr::select(-classified_as)%>% 
   as.matrix()
 
+# reformat
 rownames(validation_matrix) <- c("absence","presence")
 
+# create confusion matrix from presence-absence matrix
 confusion <- confusionMatrix(validation_matrix,positive="presence")
 
 confusion
 ```
 
-### Percent Cover of Misclassifications
+### Confusion Matrix by Areal Proportion
+
+```{r confusion area, message=FALSE, warning=FALSE}
+# for each class, multiple proportion of total area by the proportion of validation points
+presence_presence <- 0.6577376	* 561/(561+7)
+presence_absence <- 0.6577376 * 7/(561+7)
+absence_absence <- 0.3422624 * 214/(214+149)
+absence_presence <- 0.3422624 * 149/(214+149)
+
+# assign rown and column names for matrix
+colnames <- c("presence","absence")
+rownames<- c("presence","absence")
+
+# create matrix of these areal validation proportions
+validation_matrix <- matrix(data = c(presence_presence,absence_presence,presence_absence,absence_absence),nrow =2,dimnames = list(rownames,colnames))
+```
+
+```{r confusion df final, message=FALSE, warning=FALSE}
+# create and format data of areal validation proportions
+validation_df <- validation_matrix %>% 
+  as.data.frame() %>% 
+  mutate(`Map Classification` = c("presence","absence"))%>% 
+  group_by(`Map Classification`) %>% 
+  mutate(`Reference.Total (Wi)` = sum(presence+absence)) %>% 
+  ungroup() %>% 
+  mutate(Reference.Ui = c(0.6496317/0.6577376,0.201774528/0.3422624))%>% 
+  rename(`Reference.Conifer Presence` = presence,
+         `Reference.Conifer Absence` = absence)%>% 
+  dplyr::select(`Map Classification`,`Reference.Conifer Presence`,`Reference.Conifer Absence`,`Reference.Total (Wi)`,Reference.Ui)
+```
+
+```{r valid table, message=FALSE, warning=FALSE }
+# function to format table to correct digits
+fun <- function(x) {formatC(x, format = "f", digits = 3)}
+
+# format validation matrix into table for paper
+validation_table <- nice_table(
+  validation_df, separate.header = TRUE, col.format.custom = 1:5,format.custom = "fun",width =1)
+
+table
+```
+
+```{r export table,eval=FALSE, message=FALSE, warning=FALSE}
+# export table as word document
+# flextable::save_as_docx(table, path = "data/validation/val_matrix_report.docx")
+```
+
+## Percent Cover of Misclassifications
 
 ```{r misclassifications, message=FALSE, warning=FALSE}
+# filter to presence misclassified as absence
 misclass <- validation_dataset %>% 
   filter(class_group == "absence-presence")
 
+# create histogram of the proportion of pixels containing conifers for these points
 ggplot(misclass,aes(pixel_perc)) +
-  geom_histogram(bins = 25) +
+  geom_histogram(bins = 50) +
   theme_classic() + 
   labs(y = "Count",x = "Percent of Pixels Containing Conifers",
        title = "Percent Conifer Cover of Pixels Misclassified as Absent",

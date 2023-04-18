@@ -20,6 +20,9 @@ library(knitr)
 library(rasterVis)
 library(RColorBrewer)
 library(spData)
+library(forcats)
+library(cowplot)
+library(rgeos)
 ```
 
 ### USDA National Forest Type Group Dataset
@@ -38,7 +41,7 @@ crs = crs(conus_forestgroup)
 Canadian Rockies, Idaho Batholith, Middle Rockies, Columbian Mountains - Northern Rockies
 ```{r ecoregions, message=FALSE, warning=FALSE, results='hide'}
 # level 3 ecoregions
-l3eco <- st_read('data/ecoregion/us_eco_l3.shp') %>% 
+l3eco <- st_read('data/ecoregion/us_eco_l3.shp') %>%
   st_transform(., crs=crs)
 
 # select northern rocky mountains from level3 ecoregions
@@ -54,7 +57,7 @@ eco_select <- l3eco %>%
 # mapview
 palette <- brewer.pal(18,"YlGn")
 palette[1] <- rgb(255, 255, 255, maxColorValue=255, alpha=1)
-mapview(eco_select,na.color=palette[1],legend=TRUE)
+mapview(eco_select,na.color=palette[1],zcol = "US_L3NAME",layer.name = "Level-3 Ecoregion", legend=TRUE)
 ```
 
 #### Forest Type Groups
@@ -62,48 +65,42 @@ mapview(eco_select,na.color=palette[1],legend=TRUE)
 ```{r mapping ftype, message=FALSE, warning=FALSE}
 # convert raster values to factors
 forestgroup_eco <- crop(conus_forestgroup,eco_select) %>% 
-  mask(.,eco_select) %>% 
-  as.factor()
+  mask(.,eco_select) 
+
+forestgroup_eco[forestgroup_eco %in% c(120,180,240,300,320, 360, 370, 400, 500,700,900,920,950)] <- 1
 
 # add a labels for forest type code 
-group_levels <- levels(forestgroup_eco)[[1]]
-group_levels[["forest_type"]] <- c("0: Unforested","120: Spruce/Fir","180: Pinyon/Juniper","200: Douglas-fir","220: Ponderosa Pine","240: Western White Pine","260: Fir/Spruce/Mountain Hemlock","280: Lodgepole Pine","300: Hemlock/Sitka Spruce","320: Western Larch","360: Other Western Softwood","370: California Mixed Conifer","400: Oak/Pine","500: Oak/Hickory","700: Elm/Ash/Cottonwood","900: Aspen/Birch","920: Western Oak","950: Other Western Hardwoods")
+group_levels <- levels(forestgroup_eco %>% as.factor())[[1]]
+group_levels[["Forest Type"]] <- c("Unforested","Other","200: Douglas-fir","220: Ponderosa Pine","260: Fir/Spruce/Mountain Hemlock","280: Lodgepole Pine")
+# group_levels[["forest_type"]] <- c("Unforested","120: Spruce/Fir","180: Pinyon/Juniper","200: Douglas-fir","220: Ponderosa Pine","240: Western White Pine","260: Fir/Spruce/Mountain Hemlock","280: Lodgepole Pine","300: Hemlock/Sitka Spruce","320: Western Larch","360: Other Western Softwood","370: California Mixed Conifer","400: Oak/Pine","500: Oak/Hickory","700: Elm/Ash/Cottonwood","900: Aspen/Birch","920: Western Oak")
 
 levels(forestgroup_eco) <- group_levels
 
 # mapview
-mapview(forestgroup_eco, col.regions=palette,na.color=palette[1],legend=TRUE)
+mapview(forestgroup_eco, col.regions=palette,na.color=palette[1],legend=TRUE,layer.name = "Forest Type")
 ```
 
 ## Define Fire Parameters
 
 ### Monitoring Trends in Burn Severity (MTBS) Dataset
-
-Criteria: 
-
-  -1988-1991
-
-  -500+ acres of high-severity
-
-  -Within selected ecoregions
-
-  ->25% of selected forest types
   
 ```{r import mtbs, message=FALSE, warning=FALSE, results='hide',cache = TRUE}
-# mtbs fire perimeters
+# import mtbs fire perimeters
 mtbs_full <- st_read('data/mtbs/mtbs_perims_DD.shp') %>% 
   st_transform(., crs=crs)
 
+# filter mtbs data to area and timepoints of interest
 mtbs_select <- mtbs_full %>% 
   mutate(state = str_sub(Event_ID,0,2),
          year = year(as.Date(Ig_Date))) %>% 
   filter(state %in% c("WA","ID","MT","WY","SD"),
          between(Ig_Date, as.Date('1988-01-1'), as.Date('1991-12-31'))) 
 ```
+
 ### Group Adjacent Fires
 
 ```{r create polygon grouping function}
-# function to group adjoining fire polygons to ensure contiguous high-severity patches
+# function to group adjoining fire polygons to ensure contiguous high-severity patches across MTBS events
 group_fires <- function(mtbs_year) {
 
   # join the polygons with themselves, and remove those that do not join with any besides themselves
@@ -173,7 +170,7 @@ fires_89 <- group_fires(mtbs_select %>%  filter(year == 1989))
 fires_90 <- group_fires(mtbs_select %>%  filter(year == 1990))
 fires_91 <- group_fires(mtbs_select %>%  filter(year == 1991))
 
-# join each fire year, filter by area
+# join each fire year
 mtbs_grouped <- rbind(fires_88,fires_89,fires_90,fires_91)%>%
   mutate(area_ha = as.numeric(st_area(geometry))/10000,
          area_acres = area_ha*2.471)
@@ -246,7 +243,6 @@ for (i in names(allrasters)){
 severity_df <- do.call(rbind, severity_list) 
 
 # join burn severity % to fires polygons
-# fix naming
 # filter dataset for 500 acres high severity
 fires_severity <- left_join(fires,severity_df,by="Fire_ID")%>% 
   rename(noburn= "1",lowsev = "2", medsev = "3", highsev = "4",regrowth = "5", error = "6") %>% 
@@ -254,6 +250,7 @@ fires_severity <- left_join(fires,severity_df,by="Fire_ID")%>%
   mutate(highsev_acres = area_acres*highsev)%>% 
   filter(highsev_acres > 500)
 ```
+
 ### Clean Up Dataset
 ```{r extract majority forest type, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
 # get the most common forest type within each polygon
@@ -297,34 +294,6 @@ kable(full_dataset,
       caption = "High-Severity Conifer-Dominated Fires 1988-1991")
 ```
 
-
-## Mapping
-
-### Selected fires by year
-```{r plot year}
-# plot
-mapview(fires_select, zcol = "year")
-```
-
-### Selected fires by majority forest type
-```{r plot forest type}
-# plot
-mapview(fires_select, zcol = "fire_foresttype")
-```
-
-### Final Fires
-
-```{r}
-fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
-
-states49 <- (us_states["NAME"])%>% st_transform(3488)
-
-mapview(forestgroup_eco, col.regions=palette,na.color="transparent",legend=FALSE) +
-  mapview(fires_select %>% filter(Fire_ID %in% fire_names),col.regions="black",alpha.regions=100) +
-  mapview(st_union(eco_select), col.regions = "black", color = "black", alpha.regions = 0,lwd=2.5) +
-  mapview(states49,alpha.regions=0,legend=FALSE, color = "black")
-```
-
 ## Export Data 
 
 ### Final Cleanup for Export
@@ -340,9 +309,91 @@ mtbs_export <- fires_mtbs %>%
 ```
 
 ### Export
-```{r export fire boundaries}
+```{r export fire boundaries, eval=FALSE}
 # st_write(fires_export, "data/fire_boundaries/", "fires_export.shp", driver = 'ESRI Shapefile')
 # st_write(mtbs_export, "data/fire_boundaries/", "mbts_export.shp", driver = 'ESRI Shapefile')
 ```
 
 
+## Mapping Potential High-Severity Fires
+
+### Selected fires by year
+```{r plot year}
+# plot selected fire events by year
+mapview(fires_select %>% mutate(year = as.factor(year)), zcol = "year",layer.name = "Fire Year") + mapview(st_union(eco_select),color = 'black', lwd = 1, alpha.regions = 0)
+```
+
+### Selected fires by majority forest type
+```{r plot forest type}
+# plot selected fire events by majority forest type
+mapview(fires_select %>% mutate(fire_foresttype = as.factor(fire_foresttype)), zcol = "fire_foresttype",layer.name = "Majority Forest Type") + mapview(st_union(eco_select),color = 'black', lwd = 1, alpha.regions = 0)
+```
+
+## Mapping Final High-Severity Fires
+
+### Final Fires
+
+```{r list of final fire events, message=FALSE,warning=FALSE}
+# list of final fire events, after filtering to remove reburnt and managed areas
+fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
+```
+
+### Final Map
+
+```{r final fire map, message=FALSE,warning=FALSE}
+crs = 4388
+states49 <- (us_states["NAME"])%>% st_transform(3488)
+borders <- rnaturalearth::ne_states(c("united states of america", "canada")) %>% st_as_sf()
+eco_border <- st_union(eco_select) %>% st_transform(crs = crs) 
+conus_forestgroup <- rast('data/forest_type/conus_forestgroup.tif')
+
+forestgroup_map <- crop(conus_forestgroup,st_buffer(eco_select,290000))%>% 
+  as.factor() %>% 
+  aggregate(fact=3,fun = "modal") %>% 
+  project(.,eco_border)
+
+forestgroup_df <- as.data.frame(forestgroup_map,xy = T) %>% 
+  mutate(ftype = case_when(Red == 0 ~ "Unforested",
+                           Red == 200 ~ "Douglas-Fir",
+                           Red == 220 ~ "Ponderosa Pine",
+                           Red == 280 ~ "Lodgepole Pine",
+                           Red == 260 ~ "Fir-Spruce",
+                           TRUE ~ "Other"))
+
+forestgroup_df$ftype <- fct_relevel(forestgroup_df$ftype , c("Douglas-Fir","Lodgepole Pine","Fir-Spruce","Ponderosa Pine", "Other", "Unforested"))
+
+palette <- brewer.pal(4,"YlGn")
+
+inset <-ggplot() +
+  geom_sf(data = states49 %>% st_transform(crs = crs), fill = NA,color=alpha("#525258"),lwd=.4) +
+  geom_sf(data = st_union(eco_select) %>% st_transform(crs = crs),color = "black",fill="black",lwd=.4) +
+  theme_bw() +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+
+mainplot <- ggplot() +
+  geom_raster(data = forestgroup_df,aes(x,y,fill=as.factor(ftype)),alpha = .8)+
+  scale_fill_manual(values = c("#C3E699","#68CE66","#238443","#8BB62F","#D8E895","white"))+ 
+  geom_sf(data = borders %>% st_transform(crs = crs), fill = NA,color=alpha("black",0.14),lwd=.05) +
+  geom_sf(data = fires_select %>% filter(Fire_ID %in% fire_names) %>% st_transform(crs = crs),fill = "black", color = "black") +
+  geom_sf(data = st_union(eco_select) %>% st_transform(crs = crs), fill = NA, color=alpha("black",0.7),lwd=.4,linetype = "F1") +
+  scale_x_continuous(limits = c(-119.4952-.5,-103.21640-1.68), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(41.89902-.5,49.00152+.5), expand = c(0, 0)) +
+  labs(fill = "Forest Type", x = "Longitude", y = "Latitude") +
+   theme_bw() +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+
+ggdraw() +
+  draw_plot(mainplot) +
+  draw_plot(inset,
+    height = 0.2,
+    x = .39,
+    y = 0.15
+  )
+
+```

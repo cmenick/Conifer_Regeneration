@@ -1,0 +1,234 @@
+# Conifer Expansion Patterns
+
+## Set Up
+
+### Import Libraries
+
+```{r libraries10, message=FALSE, warning=FALSE}
+library(sf)
+library(terra)
+library(raster)
+library(tidyverse)
+library(ggplot2) 
+library(exactextractr)
+library(gridExtra)
+library(grid)
+```
+
+### Import Patch Polygons
+
+```{r import patch4, message=FALSE, warning=FALSE}
+# fire list
+fire_list <- c("Fire_54_1991","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_1_1988","Fire_3_1988","Fire_2_1988")
+
+# import high-severity patches
+patches <- st_read("data/patches/highsev_patches.shp") %>% 
+  mutate(Patch_ID = str_c(Fire_ID,"-",1:n())) %>% 
+  st_transform(crs = "EPSG:4326") 
+
+# set crs 
+crs <- crs(patches)
+```
+
+## Calculate Landscape Patterns
+
+```{r get_lei, message=FALSE, warning=FALSE}
+# function to set up rasters to calculate for each fire event
+get_growthlei <- function(fire_name){
+  # print fire ID 
+  print(fire_name)
+  
+  # filter to this specific fire
+  patches_fire <- patches %>% 
+    dplyr::filter(Fire_ID == fire_name)%>% 
+    st_transform(3488)
+
+  # import and name rasters for that fire
+  rast_list <- list.files(path = "data/prediction_rasters", pattern = str_c(fire_name,"_rf"), all.files=TRUE, full.names=TRUE)
+  rast_names <- str_sub(rast_list,start = -6, end = -5)  
+  rast_fire <- rast(rast_list) 
+  names(rast_fire) <- rast_names
+  
+  loop_names <- rast_names[2:10]
+
+  lapply(loop_names,
+         get_leitimesteps,
+         rast_fire=rast_fire,patches_fire=patches_fire,fire_name = fire_name)
+}
+```
+
+```{r message=FALSE, warning=FALSE}
+# function to create LEI dataset for each fire's time steps
+get_leitimesteps <- function(rast_name,rast_fire,patches_fire,fire_name){
+  print(rast_name)
+  
+  # select the timepoint and corresponding raster
+  timepoint2 <- rast_name
+  timepoint2_raster <- rast_fire[[timepoint2]]  %>% 
+      as.factor() 
+
+  # set up raster for the previous timepoint
+  timepoint1 <- str_c("t",as.numeric(str_sub(timepoint2,2,2))-1)
+  timepoint1_raster <- rast_fire[[timepoint1]]  %>% 
+    as.factor() 
+
+  # set area outside of patches to presence
+  timepoint1_raster[is.na(timepoint1_raster)] <- 2
+  
+  # difference the two time points to identify areas of change
+  timepoint_difference_raster <- timepoint2_raster - timepoint1_raster 
+
+  # convert areas of new presence to polgyons
+  timepoint_difference_polys <- as.polygons(timepoint_difference_raster) %>%
+    st_as_sf() %>%
+    st_cast("POLYGON") %>% 
+    filter(.[[1]] == 1) %>% 
+    st_transform(3488)%>%
+    st_join(.,st_make_valid(patches_fire),largest=TRUE)
+  
+  # in case there is no growth for this time period...
+  if(nrow(timepoint_difference_polys)==0){ 
+    print("no polys")
+  }else{
+    print(length(unique(timepoint_difference_polys$newgrowth_id)))
+    
+    # prepare the differenced polygon dataset
+    timepoint_difference_polys <- timepoint_difference_polys %>% 
+      mutate(newgrowth_area_ha = round(as.numeric(st_area(geometry))/10000,3),
+             newgrowth_id = str_c(Patch_ID,"_" ,rast_name,"_polygon",c(1:nrow(.))))
+    
+    # apply function calculate lei for each new growth polygon
+    lei_list <- lapply(unique(timepoint_difference_polys$newgrowth_id),
+                     get_timepointpolys,
+                     timepoint_difference_polys=timepoint_difference_polys,timepoint1_raster=timepoint1_raster,rast_name=rast_name)
+    
+    # combine data
+    lei_df <- do.call(rbind,lei_list)
+    
+    # export to csv
+    write_csv(lei_df,str_c("data/lei/",fire_name,"-",rast_name,".csv"))
+  }
+}
+```
+
+```{r get_timepointpolys, message=FALSE, warning=FALSE}
+# function to calculate lei for each new growth polygon
+get_timepointpolys <- function(newgrowth_name,timepoint_difference_polys,timepoint1_raster,rast_name) {
+  print(newgrowth_name)
+  
+  # select the polygon of interest
+  newgrowth <- timepoint_difference_polys %>% 
+    filter(newgrowth_id == newgrowth_name)
+  
+  # create 100m ring around each polygon (dispersal distance)
+  newgrowth_buffer <- st_buffer(newgrowth,100)
+  newgrowth_ring <- st_difference(newgrowth_buffer, newgrowth)
+  
+  # extract the previous raster presence/absence values from the ring area
+  lei_full <- do.call(rbind,exact_extract(timepoint1_raster,newgrowth_ring %>% st_transform(4326),include_cols = TRUE))
+  
+  # create dataset for each new growth polygon, calculate and categorize lei values
+  lei <- lei_full[1:length(lei_full$Fire_ID),] %>%
+    group_by(newgrowth_id,value) %>%
+    summarize(frac=sum(coverage_fraction)) %>%
+    mutate(timepoint = rast_name,
+           lei = frac/sum(frac),
+           lei_category = case_when(lei > 0.5 ~ "infill",
+                                    lei < .01 ~ "leapfrog",
+                                    TRUE ~ "expansion")) %>%
+    filter(value == 2) %>%
+    left_join(.,timepoint_difference_polys,by = "newgrowth_id")%>%
+    dplyr::select(newgrowth_id,timepoint,lei,lei_category,Fire_ID,Patch_ID,ptch_fr,newgrowth_area_ha)
+
+  return(lei)
+}
+```
+
+```{r message=FALSE, warning=FALSE,eval = FALSE}
+# apply to all fires
+map(fire_list,get_growthlei)
+```
+
+## Assess LEI Patterns
+
+### Arrange Data
+
+```{r assemble lei, message=FALSE, warning=FALSE}
+# assemble all lei csv files
+lei_patch <- lapply(list.files(path = "data/lei", pattern = str_c("Fire"), all.files=TRUE, full.names=TRUE),read_csv) %>% 
+  do.call(rbind,.) 
+```
+
+### LEI and AMWEI Datasets
+
+```{r amwei dataset, message=FALSE, warning=FALSE}
+# calculate the AMWEI for each forest type through time
+patchwise_lei <- lei_patch %>% 
+  mutate(scaled_lei = lei * newgrowth_area_ha) %>% 
+  group_by(ptch_fr,timepoint) %>% 
+  summarize(lei = 100*sum(scaled_lei)/sum(newgrowth_area_ha))  %>% 
+  filter(ptch_fr %in% c("Douglas-Fir","Fir-Spruce","Lodegepole Pine")) %>% 
+  mutate(timepoint = as.numeric(str_sub(timepoint,2,2))) %>% 
+  ungroup() %>% 
+  mutate(tp = timepoint*3+2,
+         ptch_fr= case_when(ptch_fr == "Lodegepole Pine" ~ "Lodgepole Pine",
+                            TRUE~ ptch_fr))
+```
+
+```{r lei area dataset, message=FALSE, warning=FALSE}
+# calculate the area of growth for each forest type through time
+lei_totalarea <- lei_patch %>% 
+  group_by(timepoint,ptch_fr) %>% 
+  summarize(area = sum(newgrowth_area_ha),
+            n=n()) %>% 
+  filter(ptch_fr %in% c("Douglas-Fir","Fir-Spruce","Lodegepole Pine"))
+```
+
+```{r lei scaled area dataset, message=FALSE, warning=FALSE}
+# scale the area at each timepoint by the total reforested area
+lei_totalarea_scaled <- lei_totalarea %>% 
+  mutate(scaled_area= case_when(ptch_fr == "Lodegepole Pine" ~ area/195158.96,
+                                ptch_fr == "Fir-Spruce" ~ area/57385.80,
+                                ptch_fr == "Douglas-Fir" ~ area/19321.15),
+         timepoint = as.numeric(str_sub(timepoint,2,2)),
+         tp = timepoint*3+2,
+         ptch_fr= case_when(ptch_fr == "Lodegepole Pine" ~ "Lodgepole Pine",
+                            TRUE~ ptch_fr))
+```
+
+```{r lei growth dataset, message=FALSE, warning=FALSE}
+# calculate the area of each LEI growth pattern for each forest type
+lei_growth <- lei_patch %>% 
+  group_by(ptch_fr, timepoint, lei_category) %>% 
+  summarize(n = n(),
+            area = sum(newgrowth_area_ha))%>% 
+  mutate(n_perc = round(n/sum(n),2),
+         area_perc = round(area/sum(area),2),
+         growth_size = area/n) %>% 
+  filter(ptch_fr %in% c("Douglas-Fir","Fir-Spruce","Lodegepole Pine")) 
+```
+
+## Plot LEI and AWMEI
+
+```{r}
+ggplot(lei_totalarea_scaled,aes(tp,scaled_area*100,color= ptch_fr,group=ptch_fr))+
+  geom_point()+
+  geom_smooth(se = FALSE,method = "loess")+
+  labs(color = "Forest Type",y = "Percent of Reoccupied Area (%)",x="Years Post-Fire",title="Timeline of New Growth Identification by Forest Type")+
+  theme_bw() +
+  scale_x_continuous(breaks=seq(0,30,5))+
+  scale_y_continuous(breaks=seq(0,30,5))+
+  coord_fixed(ratio = 1)
+
+ggplot(patchwise_lei,aes(tp,lei,color = ptch_fr,group = ptch_fr))+
+  geom_point() + 
+  geom_smooth(se = FALSE, method = "lm") +
+  theme_bw() + 
+  labs(y = "AMWEI",x = "Years Post-Fire", color = "Forest Type",title="Area Weighted Mean Expansion Index by Forest Type")+
+  scale_x_continuous(breaks=seq(0,30,5))+
+  scale_y_continuous(breaks=seq(30,70,5))+
+  geom_hline(yintercept = 50,linetype = "dashed")+
+  coord_fixed(ratio = .66)+
+  scale_fill_discrete(labels=c("Douglas-Fir", "Fir-Spruce","Lodgepole Pine" ))
+```
+

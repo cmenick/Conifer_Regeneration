@@ -152,17 +152,19 @@ ndvi_dataset_full <- landsat_dataset %>%
 
 #### Model 
 ```{r message=FALSE, warning=FALSE}
+# group ndvi values by forest type and years post-fire
 ndvi_grouped_type <- ndvi_dataset_full %>% 
   group_by(ptch_fr,years_postfire) %>% 
   summarize(ndvi=mean(ndvi,na.rm=TRUE),
             delta_ndvi = mean(delta_ndvi,na.rm=TRUE)) %>% 
   drop_na()
 
-# model NDVI difference for each forest type
-data_df <- ndvi_grouped_type%>% filter(ptch_fr == "Douglas-Fir") %>%  filter(years_postfire>=0)
-data_lp <- ndvi_grouped_type%>% filter(ptch_fr == "Lodgepole Pine") %>%  filter(years_postfire>=0)
-data_fs<- ndvi_grouped_type%>% filter(ptch_fr == "Fir-Spruce") %>%  filter(years_postfire>=0)
+# prepare datasets for each forest type
+data_df <- ndvi_grouped_type%>% filter(ptch_fr == "Douglas-Fir",years_postfire>=0)
+data_lp <- ndvi_grouped_type%>% filter(ptch_fr == "Lodgepole Pine",years_postfire>=0)
+data_fs<- ndvi_grouped_type%>% filter(ptch_fr == "Fir-Spruce",years_postfire>=0)
 
+# model dNDVI for each forest type through time
 lm_ndvi_df <- lm(delta_ndvi ~ years_postfire, data = data_df%>%  filter(years_postfire>=0))
 seg_ndvi_df <- segmented(lm_ndvi_df,seg.Z = ~ years_postfire,npsi =1)
 data_df$fit <- seg_ndvi_df$fitted.values
@@ -214,14 +216,19 @@ seg_models
 #### Plot
 
 ```{r message=FALSE, warning=FALSE}
+ndvi_grouped_type <- ndvi_grouped_type %>% 
+  mutate(ptch_fr= case_when(ptch_fr == "Lodegepole Pine" ~ "Lodgepole Pine",
+                            TRUE~ ptch_fr))
+
 ggplot()+
   geom_point(data = ndvi_grouped_type, aes(x= years_postfire,y = delta_ndvi,color = ptch_fr)) +
   geom_line(data= data_df,aes(x=years_postfire,y=fit),color = "#F8766D") +
   geom_line(data= data_lp,aes(x=years_postfire,y=fit),color = "#619CFF") +
   geom_line(data= data_fs,aes(x=years_postfire,y=fit),color = "#00BA38") +
-  labs(x="Years Post-Fire",y="dNDVI",color = "Forest Type",title= "NDVI Change Overtime 30 Years Post-Fire", subtitle = "Comparing Forest Types") +
+  labs(x="Years Post-Fire",y="dNDVI",color = "Forest Type",title= "NDVI Change Over Time 30 Years Post-Fire") +
   geom_hline(yintercept= 0,linetype="dashed",color="black",linewidth=1)+
   annotate("text", x=12, y=0.015, label="Pre-Fire Snow-Cover NDVI")+
-  theme_classic()
+  theme_bw()+
+  scale_x_continuous(breaks=seq(-5,30,5))+
+  scale_y_continuous(breaks=seq(-1,1,.05))
 ```
-

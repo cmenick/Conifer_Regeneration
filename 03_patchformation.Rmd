@@ -48,7 +48,6 @@ forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
 # utilize patchmorph to act as 3x3 cell majority filter
 patch_df <- list()
 for (i in 1:length(rast_all)){
-  # print(i)
   rast_fire <- raster(rast_collection[i])
   rast_fire[rast_fire < 640] <- 0
   rast_fire[rast_fire >= 640] <- 1
@@ -88,10 +87,10 @@ patches_joined <- st_join(patches_full,mtbs_export,join = st_intersects,left= FA
 
 ## Mapping
 
-```{r map}
-mapview(patches_joined,col.regions = "red") + mapview(fires_export, alpha.regions = 0, lwd = 2)
+```{r map high severity patches}
+mapview(patches_joined,col.regions = "red",layer.name = "High-severity Burn Patches") + 
+  mapview(fires_export, alpha.regions = 0, lwd = 2,color = "black",col.regions = "black", layer.name = "Fire Boundaries")
 ```
-
 
 ## Export Data 
 

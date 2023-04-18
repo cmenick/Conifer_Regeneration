@@ -1,4 +1,4 @@
-# Snow Cover Imagery
+# Snow-Cover Imagery
 
 ## Set Up
 

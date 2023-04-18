@@ -1,4 +1,4 @@
-# Model Development
+# Random Forest Model Development
 
 ## Set Up
 
@@ -18,7 +18,7 @@ library(raster)
 
 ### Import Fire Boundaries
 
-```{r fire boundary import}
+```{r fire boundary import, message=FALSE, warning=FALSE}
 fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
   st_transform(., crs="EPSG: 4326")
 
@@ -27,7 +27,7 @@ crs <- crs(fires_export)
 
 ### Import Training Points
 
-```{r import points}
+```{r import points, message=FALSE, warning=FALSE}
 # bring in training points
 points <- st_read("data/points/points_export.shp") %>% 
   st_transform(crs=crs)%>% 
@@ -45,11 +45,7 @@ bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr
 years <- c(1984:2020)
 
 # create list of all combinations of bands, in the appropriate order
-bandnames <- list(bands,years) %>%
-  cross() %>%
-  map(lift(paste0))
-
-bandlist <- do.call(rbind,bandnames)
+bandlist <- outer(bands, years, paste, sep="")
 ```
 
 #### Fire Names
@@ -83,12 +79,14 @@ export_rasters <- function(fire_name){
 ```
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
+# map across all fire events, merging rasters where there are multiple
 map(fire_names_all,export_rasters)
 ```
 
 ## Extract Landsat Data 
 
 ```{r extract function, message=FALSE,warning=FALSE}
+# function to extract the snow-cover landsat values for the training data points
 extract_landsat <- function(fire_name){
   
   print(paste0("Starting Fire ",fire_name))
@@ -148,44 +146,49 @@ training_dataset <- do.call(rbind,extracted_df) %>%
 ### Plot NDVI by Density Class
 
 ```{r ggplotting, message=FALSE, warning=FALSE}
+# plot the NDVI of the training data points by visually estimated conifer cover
 ggplot(training_dataset,aes(class,ndvi)) +
   geom_boxplot() + 
-  labs(title = "NDVI by Percent Conifer Cover Class: All Classes",x = "Visually Estimated Conifer Percent Cover",y = "NDVI")
+  labs(title = "Training Data NDVI by Percent Conifer Cover Class",x = "Visually Estimated Conifer Percent Cover",y = "NDVI") +
+  theme_classic()
 
 ggplot(training_dataset %>% filter(class %in% c("absence","<1%")),aes(class,ndvi)) +
   geom_boxplot()+
   ylim(-.1,.1) + 
-  labs(title = "NDVI by Percent Conifer Cover Class: Trace Conifer Class vs. Absence",x = "Visually Estimated Conifer Percent Cover",y = "NDVI")
+  labs(title = "Training Data NDVI by Percent Conifer Cover Class", subtitle = "Comparing Trace Conifer Cover Class vs. Absence",x = "Visually Estimated Conifer Percent Cover",y = "NDVI") +
+  theme_classic()
 
 ggplot(training_dataset,aes(absence,ndvi)) +
   geom_boxplot() + 
-  labs(title = "NDVI by Percent Conifer Cover Class: Presence vs. Absence ",x = "Visually Estimated Conifer Percent Cover",y = "NDVI")
+  labs(title = "Training Data NDVI by Percent Conifer Cover Class ", subtitle = "Comparing Conifer Presence vs. Absence",x = "Conifer Status",y = "NDVI")+
+  theme_classic()
 ```
 
 ## Model
 
-### Create Random Forest
+### Create Random Forest Model
 
 ```{r rf model}
+# create RF model of conifer presence-absence based on snow-cover landsat image bands
 rf_conifer <- randomForest(binom ~ red + green + blue + nir + swir1 + swir2 + ndsi + ndfsi + ndvi + evi + nbr + nbr2 + ndwi, data = training_dataset %>% drop_na())
 ```
 
-### Evaluate
+### Evaluate Parameters
 
 ```{r rf model importance}
+# model object
 rf_conifer
 
+# variable importance
 randomForest::importance(rf_conifer)
 
+# confusion matrix
 rf_conifer$confusion
-```
 
-```{r rf model summary}
 # summary
 summary(rf_conifer)
 ```
-
-
+### Export Model Object
 ```{r rf model export, eval = FALSE}
 # export 
 # saveRDS(rf_conifer,"data/models/rf_conifer.rds")

@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2023-03-26" />
+<meta name="date" content="2023-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,26 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/forestgroup_eco_083179-1/data_stars_forestgroup_ecofe9580.txt"></script>
-<script src="libs/joda-0.0.1/joda.js"></script>
-<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
-<script src="libs/forestgroup_eco_5c30e1-1/data_stars_forestgroup_ecoca08b1.txt"></script>
 
 
 <style type="text/css">
@@ -178,16 +158,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#dataset-overview"><i class="fa fa-check"></i><b>2.3.1</b> Dataset Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping-1"><i class="fa fa-check"></i><b>2.4</b> Mapping</a>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.4</b> Export Data</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
-<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
-<li class="chapter" data-level="2.4.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.4.3</b> Final Fires</a></li>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.4.1</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.4.2</b> Export</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.5</b> Export Data</a>
+<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#mapping-potential-high-severity-fires"><i class="fa fa-check"></i><b>2.5</b> Mapping Potential High-Severity Fires</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.5.1</b> Final Cleanup for Export</a></li>
-<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.5.2</b> Export</a></li>
+<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.5.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.5.2</b> Selected fires by majority forest type</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="fire-selection.html"><a href="fire-selection.html#mapping-final-high-severity-fires"><i class="fa fa-check"></i><b>2.6</b> Mapping Final High-Severity Fires</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.6.1</b> Final Fires</a></li>
+<li class="chapter" data-level="2.6.2" data-path="fire-selection.html"><a href="fire-selection.html#final-map"><i class="fa fa-check"></i><b>2.6.2</b> Final Map</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
@@ -206,7 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-rdnbr"><i class="fa fa-check"></i><b>3.3.1</b> Calculate RdNBR</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-1"><i class="fa fa-check"></i><b>3.4</b> Export</a>
+<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-data-1"><i class="fa fa-check"></i><b>3.4</b> Export Data</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-each-fire-rdnbr-to-drive"><i class="fa fa-check"></i><b>3.4.1</b> Export Each Fire RdNBR to Drive</a></li>
 </ul></li>
@@ -224,38 +208,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
-<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-2"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
-<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
+<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
+<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-2"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html"><i class="fa fa-check"></i><b>5</b> Sampling Quadrants</a>
+<li class="chapter" data-level="5" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html"><i class="fa fa-check"></i><b>5</b> Model Training Quadrants</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a>
+<li class="chapter" data-level="5.1" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#set-up-3"><i class="fa fa-check"></i><b>5.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>5.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="5.1.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>5.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
+<li class="chapter" data-level="5.1.1" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#libraries-2"><i class="fa fa-check"></i><b>5.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="5.1.2" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#import-high-severity-patches-and-fire-boundaries"><i class="fa fa-check"></i><b>5.1.2</b> Import High-Severity Patches and Fire Boundaries</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>5.2</b> Create Sampling Quadrants</a>
+<li class="chapter" data-level="5.2" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#create-sampling-quadrants"><i class="fa fa-check"></i><b>5.2</b> Create Sampling Quadrants</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
-<li class="chapter" data-level="5.2.2" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
+<li class="chapter" data-level="5.2.1" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
+<li class="chapter" data-level="5.2.2" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="sampling-quadrants.html"><a href="sampling-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
+<li class="chapter" data-level="5.3" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#export-data-3"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="training-data.html"><a href="training-data.html"><i class="fa fa-check"></i><b>6</b> Training Data</a>
+<li class="chapter" data-level="6" data-path="model-training-points.html"><a href="model-training-points.html"><i class="fa fa-check"></i><b>6</b> Model Training Points</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="training-data.html"><a href="training-data.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a>
+<li class="chapter" data-level="6.1" data-path="model-training-points.html"><a href="model-training-points.html#set-up-4"><i class="fa fa-check"></i><b>6.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="training-data.html"><a href="training-data.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
+<li class="chapter" data-level="6.1.1" data-path="model-training-points.html"><a href="model-training-points.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="training-data.html"><a href="training-data.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
-<li class="chapter" data-level="6.3" data-path="training-data.html"><a href="training-data.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
+<li class="chapter" data-level="6.2" data-path="model-training-points.html"><a href="model-training-points.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
+<li class="chapter" data-level="6.3" data-path="model-training-points.html"><a href="model-training-points.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="training-data.html"><a href="training-data.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
-<li class="chapter" data-level="6.3.2" data-path="training-data.html"><a href="training-data.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
+<li class="chapter" data-level="6.3.1" data-path="model-training-points.html"><a href="model-training-points.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
+<li class="chapter" data-level="6.3.2" data-path="model-training-points.html"><a href="model-training-points.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="training-data.html"><a href="training-data.html#export-data-3"><i class="fa fa-check"></i><b>6.4</b> Export Data</a></li>
+<li class="chapter" data-level="6.4" data-path="model-training-points.html"><a href="model-training-points.html#export-data-4"><i class="fa fa-check"></i><b>6.4</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow Cover Imagery</a>
+<li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow-Cover Imagery</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#set-up-5"><i class="fa fa-check"></i><b>7.1</b> Set Up</a>
 <ul>
@@ -275,48 +259,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#prepare-and-export-images"><i class="fa fa-check"></i><b>7.4</b> Prepare and Export Images</a>
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images-1"><i class="fa fa-check"></i><b>7.4.1</b> Functions to Prepare Images</a></li>
-<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-2"><i class="fa fa-check"></i><b>7.4.2</b> Export</a></li>
+<li class="chapter" data-level="7.4.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#export-1"><i class="fa fa-check"></i><b>7.4.2</b> Export</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="model-development.html"><a href="model-development.html"><i class="fa fa-check"></i><b>8</b> Model Development</a>
+<li class="chapter" data-level="8" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html"><i class="fa fa-check"></i><b>8</b> Random Forest Model Development</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="model-development.html"><a href="model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
+<li class="chapter" data-level="8.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#set-up-6"><i class="fa fa-check"></i><b>8.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="model-development.html"><a href="model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="8.1.2" data-path="model-development.html"><a href="model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.2</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="8.1.3" data-path="model-development.html"><a href="model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Training Points</a></li>
+<li class="chapter" data-level="8.1.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#libraries-4"><i class="fa fa-check"></i><b>8.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="8.1.2" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#import-fire-boundaries-3"><i class="fa fa-check"></i><b>8.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="8.1.3" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#import-training-points"><i class="fa fa-check"></i><b>8.1.3</b> Import Training Points</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="model-development.html"><a href="model-development.html#prepare-imagery"><i class="fa fa-check"></i><b>8.2</b> Prepare Imagery</a>
+<li class="chapter" data-level="8.2" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#prepare-imagery"><i class="fa fa-check"></i><b>8.2</b> Prepare Imagery</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="model-development.html"><a href="model-development.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Bands and Fire Names</a></li>
-<li class="chapter" data-level="8.2.2" data-path="model-development.html"><a href="model-development.html#merge-large-rasters"><i class="fa fa-check"></i><b>8.2.2</b> Merge Large Rasters</a></li>
+<li class="chapter" data-level="8.2.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#prepare-data-for-bands-and-fire-names"><i class="fa fa-check"></i><b>8.2.1</b> Prepare Data for Bands and Fire Names</a></li>
+<li class="chapter" data-level="8.2.2" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#merge-large-rasters"><i class="fa fa-check"></i><b>8.2.2</b> Merge Large Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="model-development.html"><a href="model-development.html#extract-landsat-data"><i class="fa fa-check"></i><b>8.3</b> Extract Landsat Data</a>
+<li class="chapter" data-level="8.3" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#extract-landsat-data"><i class="fa fa-check"></i><b>8.3</b> Extract Landsat Data</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="model-development.html"><a href="model-development.html#prepare-dataset"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Dataset</a></li>
+<li class="chapter" data-level="8.3.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#prepare-dataset"><i class="fa fa-check"></i><b>8.3.1</b> Prepare Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="model-development.html"><a href="model-development.html#examine-data"><i class="fa fa-check"></i><b>8.4</b> Examine Data</a>
+<li class="chapter" data-level="8.4" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#examine-data"><i class="fa fa-check"></i><b>8.4</b> Examine Data</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="model-development.html"><a href="model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
+<li class="chapter" data-level="8.4.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="model-development.html"><a href="model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
+<li class="chapter" data-level="8.5" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
 <ul>
-<li class="chapter" data-level="8.5.1" data-path="model-development.html"><a href="model-development.html#create-random-forest"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest</a></li>
-<li class="chapter" data-level="8.5.2" data-path="model-development.html"><a href="model-development.html#evaluate"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate</a></li>
+<li class="chapter" data-level="8.5.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#create-random-forest-model"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest Model</a></li>
+<li class="chapter" data-level="8.5.2" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#evaluate-parameters"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate Parameters</a></li>
+<li class="chapter" data-level="8.5.3" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#export-model-object"><i class="fa fa-check"></i><b>8.5.3</b> Export Model Object</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>9</b> Prediction</a>
+<li class="chapter" data-level="9" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html"><i class="fa fa-check"></i><b>9</b> Conifer Presence-Absence Prediction</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="prediction.html"><a href="prediction.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<li class="chapter" data-level="9.1" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="prediction.html"><a href="prediction.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="9.1.2" data-path="prediction.html"><a href="prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>9.1.2</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="9.1.3" data-path="prediction.html"><a href="prediction.html#import-models"><i class="fa fa-check"></i><b>9.1.3</b> Import Models</a></li>
-<li class="chapter" data-level="9.1.4" data-path="prediction.html"><a href="prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>9.1.4</b> Prepare Raster Naming</a></li>
+<li class="chapter" data-level="9.1.1" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="9.1.2" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>9.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="9.1.3" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#import-model"><i class="fa fa-check"></i><b>9.1.3</b> Import Model</a></li>
+<li class="chapter" data-level="9.1.4" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>9.1.4</b> Prepare Raster Naming</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="prediction.html"><a href="prediction.html#prediction-rasters"><i class="fa fa-check"></i><b>9.2</b> Prediction Rasters</a>
+<li class="chapter" data-level="9.2" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#presence-absence-rasters"><i class="fa fa-check"></i><b>9.2</b> Presence-Absence Rasters</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="prediction.html"><a href="prediction.html#predict-across-rasters"><i class="fa fa-check"></i><b>9.2.1</b> Predict Across Rasters</a></li>
+<li class="chapter" data-level="9.2.1" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#predict-presence-across-3-year-intervals"><i class="fa fa-check"></i><b>9.2.1</b> Predict Presence Across 3-Year Intervals</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>10</b> Model Validation</a>
@@ -327,23 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.2" data-path="model-validation.html"><a href="model-validation.html#import-patch-and-fire-boundaries"><i class="fa fa-check"></i><b>10.1.2</b> Import Patch and Fire Boundaries</a></li>
 <li class="chapter" data-level="10.1.3" data-path="model-validation.html"><a href="model-validation.html#import-prediction-rasters"><i class="fa fa-check"></i><b>10.1.3</b> Import Prediction Rasters</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="model-validation.html"><a href="model-validation.html#calculate-predicted-proportions"><i class="fa fa-check"></i><b>10.2</b> Calculate Predicted Proportions</a>
+<li class="chapter" data-level="10.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons"><i class="fa fa-check"></i><b>10.2</b> Create Validation Polygons</a>
 <ul>
-<li class="chapter" data-level="10.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-fire"><i class="fa fa-check"></i><b>10.2.1</b> Calculate Areal Proportions for Each Fire</a></li>
-<li class="chapter" data-level="10.2.2" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-mtbs-event"><i class="fa fa-check"></i><b>10.2.2</b> Calculate Areal Proportions for Each MTBS Event</a></li>
-<li class="chapter" data-level="10.2.3" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-fire"><i class="fa fa-check"></i><b>10.2.3</b> Create Validation Polygons for Each Fire</a></li>
-<li class="chapter" data-level="10.2.4" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-mtbs-event"><i class="fa fa-check"></i><b>10.2.4</b> Create Validation Polygons for Each MTBS Event</a></li>
+<li class="chapter" data-level="10.2.1" data-path="model-validation.html"><a href="model-validation.html#calculate-areal-proportions-for-each-mtbs-event"><i class="fa fa-check"></i><b>10.2.1</b> Calculate Areal Proportions for Each MTBS Event</a></li>
+<li class="chapter" data-level="10.2.2" data-path="model-validation.html"><a href="model-validation.html#create-validation-polygons-for-each-mtbs-event"><i class="fa fa-check"></i><b>10.2.2</b> Create Validation Polygons for Each MTBS Event</a></li>
+<li class="chapter" data-level="10.2.3" data-path="model-validation.html"><a href="model-validation.html#export-2"><i class="fa fa-check"></i><b>10.2.3</b> Export</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="model-validation.html"><a href="model-validation.html#prepare-validation-zones"><i class="fa fa-check"></i><b>10.3</b> Prepare Validation Zones</a>
+<li class="chapter" data-level="10.3" data-path="model-validation.html"><a href="model-validation.html#independent-validation"><i class="fa fa-check"></i><b>10.3</b> Independent Validation</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="model-validation.html"><a href="model-validation.html#assign-required-points-to-each-polygon"><i class="fa fa-check"></i><b>10.3.1</b> Assign Required Points to Each Polygon</a></li>
-<li class="chapter" data-level="10.3.2" data-path="model-validation.html"><a href="model-validation.html#export-3"><i class="fa fa-check"></i><b>10.3.2</b> Export</a></li>
+<li class="chapter" data-level="10.3.1" data-path="model-validation.html"><a href="model-validation.html#confusion-matrix-by-proportion-of-points"><i class="fa fa-check"></i><b>10.3.1</b> Confusion Matrix by Proportion of Points</a></li>
+<li class="chapter" data-level="10.3.2" data-path="model-validation.html"><a href="model-validation.html#confusion-matrix-by-areal-proportion"><i class="fa fa-check"></i><b>10.3.2</b> Confusion Matrix by Areal Proportion</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="model-validation.html"><a href="model-validation.html#independent-validation"><i class="fa fa-check"></i><b>10.4</b> Independent Validation</a>
-<ul>
-<li class="chapter" data-level="10.4.1" data-path="model-validation.html"><a href="model-validation.html#confusion"><i class="fa fa-check"></i><b>10.4.1</b> Confusion</a></li>
-<li class="chapter" data-level="10.4.2" data-path="model-validation.html"><a href="model-validation.html#percent-cover-of-misclassifications"><i class="fa fa-check"></i><b>10.4.2</b> Percent Cover of Misclassifications</a></li>
-</ul></li>
+<li class="chapter" data-level="10.4" data-path="model-validation.html"><a href="model-validation.html#percent-cover-of-misclassifications"><i class="fa fa-check"></i><b>10.4</b> Percent Cover of Misclassifications</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html"><i class="fa fa-check"></i><b>11</b> NDVI Trajectory</a>
 <ul>
@@ -366,59 +346,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#forest-type-groups-1"><i class="fa fa-check"></i><b>11.4.1</b> Forest Type Groups</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="patch-fate.html"><a href="patch-fate.html"><i class="fa fa-check"></i><b>12</b> Patch Fate</a>
+<li class="chapter" data-level="12" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html"><i class="fa fa-check"></i><b>12</b> Landscape-Level Conifer Recolonization</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="patch-fate.html"><a href="patch-fate.html#set-up-10"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
+<li class="chapter" data-level="12.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#set-up-10"><i class="fa fa-check"></i><b>12.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="patch-fate.html"><a href="patch-fate.html#libraries-8"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="12.1.2" data-path="patch-fate.html"><a href="patch-fate.html#import-high-severity-patches"><i class="fa fa-check"></i><b>12.1.2</b> Import High-Severity Patches</a></li>
+<li class="chapter" data-level="12.1.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#libraries-8"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="12.1.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#import-high-severity-patches"><i class="fa fa-check"></i><b>12.1.2</b> Import High-Severity Patches</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="patch-fate.html"><a href="patch-fate.html#calculate-patch-decomposition"><i class="fa fa-check"></i><b>12.2</b> Calculate Patch Decomposition</a>
+<li class="chapter" data-level="12.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#calculate-patch-decomposition"><i class="fa fa-check"></i><b>12.2</b> Calculate Patch Decomposition</a>
 <ul>
-<li class="chapter" data-level="12.2.1" data-path="patch-fate.html"><a href="patch-fate.html#function-to-track-patch-changes"><i class="fa fa-check"></i><b>12.2.1</b> Function to Track Patch Changes</a></li>
-<li class="chapter" data-level="12.2.2" data-path="patch-fate.html"><a href="patch-fate.html#apply-function-to-all-fires"><i class="fa fa-check"></i><b>12.2.2</b> Apply Function to All Fires</a></li>
-<li class="chapter" data-level="12.2.3" data-path="patch-fate.html"><a href="patch-fate.html#create-dataset-for-each-forest-type"><i class="fa fa-check"></i><b>12.2.3</b> Create Dataset for Each Forest Type</a></li>
+<li class="chapter" data-level="12.2.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#function-to-track-patch-changes"><i class="fa fa-check"></i><b>12.2.1</b> Function to Track Patch Changes</a></li>
+<li class="chapter" data-level="12.2.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#apply-function-to-all-fires"><i class="fa fa-check"></i><b>12.2.2</b> Apply Function to All Fires</a></li>
+<li class="chapter" data-level="12.2.3" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#create-dataset-for-each-forest-type"><i class="fa fa-check"></i><b>12.2.3</b> Create Dataset for Each Forest Type</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="patch-fate.html"><a href="patch-fate.html#assess-forested-proportions"><i class="fa fa-check"></i><b>12.3</b> Assess Forested Proportions</a>
+<li class="chapter" data-level="12.3" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#assess-proportion-reforested"><i class="fa fa-check"></i><b>12.3</b> Assess Proportion Reforested</a>
 <ul>
-<li class="chapter" data-level="12.3.1" data-path="patch-fate.html"><a href="patch-fate.html#by-forest-type"><i class="fa fa-check"></i><b>12.3.1</b> By Forest Type</a></li>
-<li class="chapter" data-level="12.3.2" data-path="patch-fate.html"><a href="patch-fate.html#by-patch-size"><i class="fa fa-check"></i><b>12.3.2</b> By Patch Size</a></li>
-<li class="chapter" data-level="12.3.3" data-path="patch-fate.html"><a href="patch-fate.html#by-forest-type-and-patch-size"><i class="fa fa-check"></i><b>12.3.3</b> By Forest Type and Patch Size</a></li>
+<li class="chapter" data-level="12.3.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#by-forest-type"><i class="fa fa-check"></i><b>12.3.1</b> By Forest Type</a></li>
+<li class="chapter" data-level="12.3.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#by-patch-size"><i class="fa fa-check"></i><b>12.3.2</b> By Patch Size</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="patch-fate.html"><a href="patch-fate.html#plot-1"><i class="fa fa-check"></i><b>12.4</b> Plot</a>
+<li class="chapter" data-level="12.4" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#fragmentation"><i class="fa fa-check"></i><b>12.4</b> Fragmentation</a></li>
+<li class="chapter" data-level="12.5" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#plot-1"><i class="fa fa-check"></i><b>12.5</b> Plot</a>
 <ul>
-<li class="chapter" data-level="12.4.1" data-path="patch-fate.html"><a href="patch-fate.html#develop-plotting"><i class="fa fa-check"></i><b>12.4.1</b> Develop Plotting</a></li>
-<li class="chapter" data-level="12.4.2" data-path="patch-fate.html"><a href="patch-fate.html#all-three-forest-types"><i class="fa fa-check"></i><b>12.4.2</b> All Three Forest Types</a></li>
-<li class="chapter" data-level="12.4.3" data-path="patch-fate.html"><a href="patch-fate.html#forest-types-individually"><i class="fa fa-check"></i><b>12.4.3</b> Forest Types Individually</a></li>
+<li class="chapter" data-level="12.5.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#alluvial-plot"><i class="fa fa-check"></i><b>12.5.1</b> Alluvial Plot</a></li>
+<li class="chapter" data-level="12.5.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#all-three-forest-types"><i class="fa fa-check"></i><b>12.5.2</b> All Three Forest Types</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="landscape-expansion.html"><a href="landscape-expansion.html"><i class="fa fa-check"></i><b>13</b> Landscape Expansion</a>
+<li class="chapter" data-level="13" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html"><i class="fa fa-check"></i><b>13</b> Patch-Level Conifer Recolonization</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
+<li class="chapter" data-level="13.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#set-up-11"><i class="fa fa-check"></i><b>13.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
-<li class="chapter" data-level="13.1.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
+<li class="chapter" data-level="13.1.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="13.1.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="landscape-expansion.html"><a href="landscape-expansion.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a></li>
-<li class="chapter" data-level="13.3" data-path="landscape-expansion.html"><a href="landscape-expansion.html#assess-lei-patterns"><i class="fa fa-check"></i><b>13.3</b> Assess LEI Patterns</a></li>
+<li class="chapter" data-level="13.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#create-functions"><i class="fa fa-check"></i><b>13.2.1</b> Create Functions</a></li>
+<li class="chapter" data-level="13.2.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#map-across-all-fires"><i class="fa fa-check"></i><b>13.2.2</b> Map Across All Fires</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html"><i class="fa fa-check"></i><b>14</b> Landscape Expansion</a>
+<li class="chapter" data-level="13.3" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#assess-lsm-patterns"><i class="fa fa-check"></i><b>13.3</b> Assess LSM Patterns</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-libraries-1"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
-<li class="chapter" data-level="14.1.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#import-patch-polygons-1"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
+<li class="chapter" data-level="13.3.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#prepare-data"><i class="fa fa-check"></i><b>13.3.1</b> Prepare Data</a></li>
+<li class="chapter" data-level="13.3.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#patch-level-area-reforested"><i class="fa fa-check"></i><b>13.3.2</b> Patch-Level Area Reforested</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#create-functions"><i class="fa fa-check"></i><b>14.2.1</b> Create Functions</a></li>
-<li class="chapter" data-level="14.2.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#map-across-all-fires"><i class="fa fa-check"></i><b>14.2.2</b> Map Across All Fires</a></li>
 </ul></li>
-<li class="chapter" data-level="14.3" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#assess-lsm-patterns"><i class="fa fa-check"></i><b>14.3</b> Assess LSM Patterns</a>
+<li class="chapter" data-level="14" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html"><i class="fa fa-check"></i><b>14</b> Conifer Expansion Patterns</a>
 <ul>
-<li class="chapter" data-level="14.3.1" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#prepare-data"><i class="fa fa-check"></i><b>14.3.1</b> Prepare Data</a></li>
-<li class="chapter" data-level="14.3.2" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#percent-of-land-area"><i class="fa fa-check"></i><b>14.3.2</b> Percent of Land Area</a></li>
-<li class="chapter" data-level="14.3.3" data-path="landscape-expansion-1.html"><a href="landscape-expansion-1.html#percent-alike-adjacencies"><i class="fa fa-check"></i><b>14.3.3</b> Percent Alike Adjacencies</a></li>
+<li class="chapter" data-level="14.1" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#set-up-12"><i class="fa fa-check"></i><b>14.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#import-libraries-1"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
+<li class="chapter" data-level="14.1.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#import-patch-polygons-1"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a></li>
+<li class="chapter" data-level="14.3" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#assess-lei-patterns"><i class="fa fa-check"></i><b>14.3</b> Assess LEI Patterns</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#arrange-data"><i class="fa fa-check"></i><b>14.3.1</b> Arrange Data</a></li>
+<li class="chapter" data-level="14.3.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#lei-and-amwei-datasets"><i class="fa fa-check"></i><b>14.3.2</b> LEI and AMWEI Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#plot-lei-and-awmei"><i class="fa fa-check"></i><b>14.4</b> Plot LEI and AWMEI</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html"><i class="fa fa-check"></i><b>15</b> Recovery Likelihood</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#set-up-13"><i class="fa fa-check"></i><b>15.1</b> Set Up</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#libraries-9"><i class="fa fa-check"></i><b>15.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="15.1.2" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#import-high-severity-patches-1"><i class="fa fa-check"></i><b>15.1.2</b> Import High-Severity Patches</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#prepare-patch-data"><i class="fa fa-check"></i><b>15.2</b> Prepare Patch Data</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#calculate-percent-reforested"><i class="fa fa-check"></i><b>15.2.1</b> Calculate Percent Reforested</a></li>
+<li class="chapter" data-level="15.2.2" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#calculate-patch-area-and-edge"><i class="fa fa-check"></i><b>15.2.2</b> Calculate Patch Area and Edge</a></li>
+<li class="chapter" data-level="15.2.3" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#calculate-patch-climate"><i class="fa fa-check"></i><b>15.2.3</b> Calculate Patch Climate</a></li>
+<li class="chapter" data-level="15.2.4" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#calculate-latitude"><i class="fa fa-check"></i><b>15.2.4</b> Calculate Latitude</a></li>
+<li class="chapter" data-level="15.2.5" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#calculate-topography"><i class="fa fa-check"></i><b>15.2.5</b> Calculate Topography</a></li>
+<li class="chapter" data-level="15.2.6" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#join-patch-metrics-and-recovery-data"><i class="fa fa-check"></i><b>15.2.6</b> Join Patch Metrics and Recovery Data</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#model-patch-recovery"><i class="fa fa-check"></i><b>15.3</b> Model Patch Recovery</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#prepare-model-data"><i class="fa fa-check"></i><b>15.3.1</b> Prepare Model Data</a></li>
+<li class="chapter" data-level="15.3.2" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#create-logistic-model"><i class="fa fa-check"></i><b>15.3.2</b> Create Logistic Model</a></li>
+<li class="chapter" data-level="15.3.3" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#odds-ratios"><i class="fa fa-check"></i><b>15.3.3</b> Odd’s Ratios</a></li>
+<li class="chapter" data-level="15.3.4" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#make-odds-ratio-table"><i class="fa fa-check"></i><b>15.3.4</b> Make Odds Ratio Table</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>

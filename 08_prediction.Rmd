@@ -1,4 +1,4 @@
-# Prediction
+# Conifer Presence-Absence Prediction
 
 ## Set Up
 
@@ -34,13 +34,11 @@ mask <- st_read("data/patches/points_dataset_MASK.shp") %>%
   st_join(.,fires_export)
 ```
 
-### Import Models
+### Import Model
 
 ```{r}
 rf_conifer <- readRDS("data/models/rf_conifer.rds")
-# lm_conifer <- readRDS("data/models/lm_conifer.rds")
 ```
-
 
 ### Prepare Raster Naming
 
@@ -51,11 +49,7 @@ bands <- c("blue", "green", "red", "nir", "swir1", "swir2", "ndvi", "ndwi", "nbr
 years <- c(1984:2020)
 
 # create list of all combinations of bands, in the appropriate order
-bandnames <- list(bands,years) %>%
-  cross() %>%
-  map(lift(paste0))
-
-bandlist <- do.call(rbind,bandnames)
+bandlist <- outer(bands, years, paste, sep="")
 ```
 
 #### Fire Names
@@ -65,12 +59,12 @@ bandlist <- do.call(rbind,bandnames)
 fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 ```
 
+## Presence-Absence Rasters
 
-## Prediction Rasters
-
-### Predict Across Rasters
+### Predict Presence Across 3-Year Intervals
 
 ```{r prediction function, message=FALSE,warning=FALSE}
+# function to apply the RF model to predict conifer presence-absence at 3-year intervals
 predict_landsat <- function(fire_name){
   print(paste0("Starting Fire ",fire_name))
   
@@ -87,7 +81,7 @@ predict_landsat <- function(fire_name){
     filter(Fire_ID==fire_name) %>% 
     st_transform(crs=crs(fire_raster))
   
-  # filter mask for this fir
+  # filter mask for this fire
   fire_mask <- mask %>% 
     filter(Fire_ID == fire_name)
   
