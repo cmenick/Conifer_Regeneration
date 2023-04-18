@@ -194,6 +194,7 @@ summary(log_model)
 ```
 
 ### Make Odds Ratio Table
+
 ```{r odds table, message=FALSE, warning=FALSE, eval = FALSE}
 # bring in odds ratio table
 odds_table <- read_csv("data/recovery/oddsratios_lrm.csv") %>%
