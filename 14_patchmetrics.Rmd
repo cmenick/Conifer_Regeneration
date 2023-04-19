@@ -188,25 +188,27 @@ log_model <- lrm(log_recovered ~ ptch_fr + area_perim_rat + patch_area + elevati
 # lrm model object
 log_model
 ```
-### Odd's Ratios
+```{r model summaries, message=FALSE, warning=FALSE}
+#model summary odds ratio
+summary(log_model,def = c(1,2),swe = c(1,2),area_perim_rat = c(1,2),patch_area = c(1,2),elevation = c(1,2),slope = c(1,2),aspect = c(1,2))
 
-```{r lrm summary, message=FALSE, warning=FALSE}
-# odds ratio table
-kable(summary(log_model))
+# model summary IQR odds ratio
+summary(log_model)
 ```
 
-### Make Odds Ratio Table
+### Odds Ratio Table
 
 ```{r odds table, message=FALSE, warning=FALSE, eval = FALSE}
 # bring in odds ratio table
-odds_table <- read_csv("data/recovery/oddsratios_lrm.csv") %>%
-  dplyr::select(-6,-7,-8,-9,-12)
+odds_table <- read_csv("data/recovery/oddsratios_lrm.csv") %>% 
+  dplyr::select(1:8)
 
 # function to show data to correct number of digits
 fun <- function(x) {formatC(x, format = "f", digits = 3)}
 
 # create table 
-odds <- nice_table(odds_table, separate.header = TRUE,width = 1,col.format.custom = c(4,6),format.custom = "fun")
+odds <- nice_table(odds_table, separate.header = TRUE,width = 1,col.format.custom = c(3,5),format.custom = "fun")
+odds
 
 # export to word 
 flextable::save_as_docx(odds, path = "data/recovery/odds_table.docx")
