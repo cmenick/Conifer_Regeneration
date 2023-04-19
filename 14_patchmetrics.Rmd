@@ -190,10 +190,10 @@ log_model
 ```
 ```{r model summaries, message=FALSE, warning=FALSE}
 #model summary odds ratio
-summary(log_model,def = c(1,2),swe = c(1,2),area_perim_rat = c(1,2),patch_area = c(1,2),elevation = c(1,2),slope = c(1,2),aspect = c(1,2))
+kable(summary(log_model,def = c(1,2),swe = c(1,2),area_perim_rat = c(1,2),patch_area = c(1,2),elevation = c(1,2),slope = c(1,2),aspect = c(1,2)))
 
 # model summary IQR odds ratio
-summary(log_model)
+kable(summary(log_model))
 ```
 
 ### Odds Ratio Table
@@ -208,8 +208,7 @@ fun <- function(x) {formatC(x, format = "f", digits = 3)}
 
 # create table 
 odds <- nice_table(odds_table, separate.header = TRUE,width = 1,col.format.custom = c(3,5),format.custom = "fun")
-odds
 
 # export to word 
-flextable::save_as_docx(odds, path = "data/recovery/odds_table.docx")
+# flextable::save_as_docx(odds, path = "data/recovery/odds_table.docx")
 ```
