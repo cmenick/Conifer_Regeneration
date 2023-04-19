@@ -13,11 +13,12 @@ library(tidyverse)
 library(ggplot2) 
 library(landscapemetrics)
 library(gridExtra)
+library(rempsyc)
 ```
 
 ### Import Patch Polygons
 
-```{r import patch5, message=FALSE, warning=FALSE}
+```{r import patch5, message=FALSE, warning=FALSE,results='hide'}
 # fire list
 fire_list <- c("Fire_54_1991","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_1_1988","Fire_2_1988","Fire_3_1988")
 
@@ -160,7 +161,8 @@ reforested_spread <- forested_df %>%
             median = median(perc_area)) %>% 
   rename(forest_type = ptch_fr)
 
-reforested_spread
+# format validation matrix into table for paper
+nice_table(reforested_spread, separate.header = TRUE, width =1)
 ```
 
 ```{r pland plot, message=FALSE,warning=FALSE, fig.width = 10,fig.height = 4}

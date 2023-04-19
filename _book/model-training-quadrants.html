@@ -68,9 +68,11 @@
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<script src="libs/Forest Type_369dba-1/data_stars_ForestType14d2a8.txt"></script>
+<script src="libs/Forest Type_ac3d4f-1/data_stars_ForestTyped1cef9.txt"></script>
 <script src="libs/joda-0.0.1/joda.js"></script>
 <script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
@@ -473,158 +475,158 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Set Up<a href="model-training-quadrants.html#set-up-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="libraries-2" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Libraries<a href="model-training-quadrants.html#libraries-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="model-training-quadrants.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
-<span id="cb44-2"><a href="model-training-quadrants.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb44-3"><a href="model-training-quadrants.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb44-4"><a href="model-training-quadrants.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb44-5"><a href="model-training-quadrants.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="model-training-quadrants.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
+<span id="cb43-2"><a href="model-training-quadrants.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb43-3"><a href="model-training-quadrants.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb43-4"><a href="model-training-quadrants.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb43-5"><a href="model-training-quadrants.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code></pre></div>
 </div>
 <div id="import-high-severity-patches-and-fire-boundaries" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Import High-Severity Patches and Fire Boundaries<a href="model-training-quadrants.html#import-high-severity-patches-and-fire-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="model-training-quadrants.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data import</span></span>
-<span id="cb45-2"><a href="model-training-quadrants.html#cb45-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-3"><a href="model-training-quadrants.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span>
-<span id="cb45-4"><a href="model-training-quadrants.html#cb45-4" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
-<span id="cb45-5"><a href="model-training-quadrants.html#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="model-training-quadrants.html#cb45-6" aria-hidden="true" tabindex="-1"></a>patch_interiors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_interior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb45-7"><a href="model-training-quadrants.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
-<span id="cb45-8"><a href="model-training-quadrants.html#cb45-8" aria-hidden="true" tabindex="-1"></a>patch_exteriors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_exterior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb45-9"><a href="model-training-quadrants.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
-<span id="cb45-10"><a href="model-training-quadrants.html#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-11"><a href="model-training-quadrants.html#cb45-11" aria-hidden="true" tabindex="-1"></a>mtbs_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&#39;data/fire_boundaries/mtbs_export.shp&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-12"><a href="model-training-quadrants.html#cb45-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs) </span>
-<span id="cb45-13"><a href="model-training-quadrants.html#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-14"><a href="model-training-quadrants.html#cb45-14" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb45-15"><a href="model-training-quadrants.html#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="model-training-quadrants.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data import</span></span>
+<span id="cb44-2"><a href="model-training-quadrants.html#cb44-2" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="model-training-quadrants.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="st">&quot;EPSG:4326&quot;</span>)</span>
+<span id="cb44-4"><a href="model-training-quadrants.html#cb44-4" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span>
+<span id="cb44-5"><a href="model-training-quadrants.html#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="model-training-quadrants.html#cb44-6" aria-hidden="true" tabindex="-1"></a>patch_interiors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_interior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-7"><a href="model-training-quadrants.html#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
+<span id="cb44-8"><a href="model-training-quadrants.html#cb44-8" aria-hidden="true" tabindex="-1"></a>patch_exteriors<span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches_exterior.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-9"><a href="model-training-quadrants.html#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
+<span id="cb44-10"><a href="model-training-quadrants.html#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="model-training-quadrants.html#cb44-11" aria-hidden="true" tabindex="-1"></a>mtbs_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&#39;data/fire_boundaries/mtbs_export.shp&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-12"><a href="model-training-quadrants.html#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs) </span>
+<span id="cb44-13"><a href="model-training-quadrants.html#cb44-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-14"><a href="model-training-quadrants.html#cb44-14" aria-hidden="true" tabindex="-1"></a>fires_export <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/fire_boundaries/fires_export.shp&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb44-15"><a href="model-training-quadrants.html#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
 </div>
 <div id="create-sampling-quadrants" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Create Sampling Quadrants<a href="model-training-quadrants.html#create-sampling-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="split-patches-by-northsouth-aspects-and-interiorexterior" class="section level3 hasAnchor" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Split Patches by North/South Aspects and Interior/Exterior<a href="model-training-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="model-training-quadrants.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of fire IDs</span></span>
-<span id="cb46-2"><a href="model-training-quadrants.html#cb46-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">unique</span>(patches<span class="sc">$</span>Evnt_ID)</span>
-<span id="cb46-3"><a href="model-training-quadrants.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="model-training-quadrants.html#cb46-4" aria-hidden="true" tabindex="-1"></a>quadrants_df <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb46-5"><a href="model-training-quadrants.html#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="model-training-quadrants.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> fire_list){</span>
-<span id="cb46-7"><a href="model-training-quadrants.html#cb46-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-8"><a href="model-training-quadrants.html#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter patch interiors/exteriors to the selected fire</span></span>
-<span id="cb46-9"><a href="model-training-quadrants.html#cb46-9" aria-hidden="true" tabindex="-1"></a>  patch_fire <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb46-10"><a href="model-training-quadrants.html#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)</span>
-<span id="cb46-11"><a href="model-training-quadrants.html#cb46-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-12"><a href="model-training-quadrants.html#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapview</span>(patch_fire)</span>
-<span id="cb46-13"><a href="model-training-quadrants.html#cb46-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-14"><a href="model-training-quadrants.html#cb46-14" aria-hidden="true" tabindex="-1"></a>  patches_interior <span class="ot">&lt;-</span> patch_interiors <span class="sc">%&gt;%</span> </span>
-<span id="cb46-15"><a href="model-training-quadrants.html#cb46-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-16"><a href="model-training-quadrants.html#cb46-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb46-17"><a href="model-training-quadrants.html#cb46-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
-<span id="cb46-18"><a href="model-training-quadrants.html#cb46-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-19"><a href="model-training-quadrants.html#cb46-19" aria-hidden="true" tabindex="-1"></a>  patches_exterior <span class="ot">&lt;-</span> patch_exteriors <span class="sc">%&gt;%</span> </span>
-<span id="cb46-20"><a href="model-training-quadrants.html#cb46-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID_1 <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-21"><a href="model-training-quadrants.html#cb46-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb46-22"><a href="model-training-quadrants.html#cb46-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
-<span id="cb46-23"><a href="model-training-quadrants.html#cb46-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-24"><a href="model-training-quadrants.html#cb46-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set event and fire id to the selected fire</span></span>
-<span id="cb46-25"><a href="model-training-quadrants.html#cb46-25" aria-hidden="true" tabindex="-1"></a>  Evnt_ID <span class="ot">&lt;-</span> i</span>
-<span id="cb46-26"><a href="model-training-quadrants.html#cb46-26" aria-hidden="true" tabindex="-1"></a>  Fire_ID <span class="ot">&lt;-</span><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(patch_fire<span class="sc">$</span>Fire_ID)))</span>
-<span id="cb46-27"><a href="model-training-quadrants.html#cb46-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-28"><a href="model-training-quadrants.html#cb46-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;starting event &quot;</span>,Evnt_ID,<span class="st">&quot; in fire group &quot;</span>, Fire_ID))</span>
-<span id="cb46-29"><a href="model-training-quadrants.html#cb46-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-30"><a href="model-training-quadrants.html#cb46-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get and calculate cosine corrected aspect</span></span>
-<span id="cb46-31"><a href="model-training-quadrants.html#cb46-31" aria-hidden="true" tabindex="-1"></a>  dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(patch_fire,<span class="at">z=</span><span class="dv">11</span>)</span>
-<span id="cb46-32"><a href="model-training-quadrants.html#cb46-32" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem, <span class="at">opt =</span> <span class="st">&quot;aspect&quot;</span>,<span class="at">unit =</span> <span class="st">&quot;radians&quot;</span>)</span>
-<span id="cb46-33"><a href="model-training-quadrants.html#cb46-33" aria-hidden="true" tabindex="-1"></a>  ccaspect <span class="ot">&lt;-</span> <span class="fu">cos</span>(aspect)</span>
-<span id="cb46-34"><a href="model-training-quadrants.html#cb46-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-35"><a href="model-training-quadrants.html#cb46-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># positive aspects are north-facing, negative are south-facing</span></span>
-<span id="cb46-36"><a href="model-training-quadrants.html#cb46-36" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&gt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb46-37"><a href="model-training-quadrants.html#cb46-37" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb46-38"><a href="model-training-quadrants.html#cb46-38" aria-hidden="true" tabindex="-1"></a>  ccaspect_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(<span class="fu">rast</span>(ccaspect)) <span class="sc">%&gt;%</span></span>
-<span id="cb46-39"><a href="model-training-quadrants.html#cb46-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()</span>
-<span id="cb46-40"><a href="model-training-quadrants.html#cb46-40" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-41"><a href="model-training-quadrants.html#cb46-41" aria-hidden="true" tabindex="-1"></a>  pos_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
-<span id="cb46-42"><a href="model-training-quadrants.html#cb46-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==</span><span class="dv">1</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-43"><a href="model-training-quadrants.html#cb46-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
-<span id="cb46-44"><a href="model-training-quadrants.html#cb46-44" aria-hidden="true" tabindex="-1"></a>  neg_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
-<span id="cb46-45"><a href="model-training-quadrants.html#cb46-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-46"><a href="model-training-quadrants.html#cb46-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
-<span id="cb46-47"><a href="model-training-quadrants.html#cb46-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-48"><a href="model-training-quadrants.html#cb46-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get quadrants as the intersection of interior/exterior and pos/neg aspect</span></span>
-<span id="cb46-49"><a href="model-training-quadrants.html#cb46-49" aria-hidden="true" tabindex="-1"></a>  pos_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,pos_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-50"><a href="model-training-quadrants.html#cb46-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb46-51"><a href="model-training-quadrants.html#cb46-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb46-52"><a href="model-training-quadrants.html#cb46-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb46-53"><a href="model-training-quadrants.html#cb46-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_ext&quot;</span>,</span>
-<span id="cb46-54"><a href="model-training-quadrants.html#cb46-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb46-55"><a href="model-training-quadrants.html#cb46-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb46-56"><a href="model-training-quadrants.html#cb46-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb46-57"><a href="model-training-quadrants.html#cb46-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb46-58"><a href="model-training-quadrants.html#cb46-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-59"><a href="model-training-quadrants.html#cb46-59" aria-hidden="true" tabindex="-1"></a>  pos_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior,pos_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-60"><a href="model-training-quadrants.html#cb46-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb46-61"><a href="model-training-quadrants.html#cb46-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb46-62"><a href="model-training-quadrants.html#cb46-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb46-63"><a href="model-training-quadrants.html#cb46-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_int&quot;</span>,</span>
-<span id="cb46-64"><a href="model-training-quadrants.html#cb46-64" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb46-65"><a href="model-training-quadrants.html#cb46-65" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb46-66"><a href="model-training-quadrants.html#cb46-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb46-67"><a href="model-training-quadrants.html#cb46-67" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb46-68"><a href="model-training-quadrants.html#cb46-68" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-69"><a href="model-training-quadrants.html#cb46-69" aria-hidden="true" tabindex="-1"></a>  neg_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,neg_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-70"><a href="model-training-quadrants.html#cb46-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-71"><a href="model-training-quadrants.html#cb46-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb46-72"><a href="model-training-quadrants.html#cb46-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb46-73"><a href="model-training-quadrants.html#cb46-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_ext&quot;</span>,</span>
-<span id="cb46-74"><a href="model-training-quadrants.html#cb46-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb46-75"><a href="model-training-quadrants.html#cb46-75" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb46-76"><a href="model-training-quadrants.html#cb46-76" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb46-77"><a href="model-training-quadrants.html#cb46-77" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb46-78"><a href="model-training-quadrants.html#cb46-78" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-79"><a href="model-training-quadrants.html#cb46-79" aria-hidden="true" tabindex="-1"></a>  neg_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior, neg_aspect)<span class="sc">%&gt;%</span> </span>
-<span id="cb46-80"><a href="model-training-quadrants.html#cb46-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-81"><a href="model-training-quadrants.html#cb46-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb46-82"><a href="model-training-quadrants.html#cb46-82" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
-<span id="cb46-83"><a href="model-training-quadrants.html#cb46-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_int&quot;</span>,</span>
-<span id="cb46-84"><a href="model-training-quadrants.html#cb46-84" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
-<span id="cb46-85"><a href="model-training-quadrants.html#cb46-85" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
-<span id="cb46-86"><a href="model-training-quadrants.html#cb46-86" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
-<span id="cb46-87"><a href="model-training-quadrants.html#cb46-87" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
-<span id="cb46-88"><a href="model-training-quadrants.html#cb46-88" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-89"><a href="model-training-quadrants.html#cb46-89" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine, export quadrants</span></span>
-<span id="cb46-90"><a href="model-training-quadrants.html#cb46-90" aria-hidden="true" tabindex="-1"></a>  all_quadrants <span class="ot">&lt;-</span> <span class="fu">rbind</span>(neg_int,pos_int,neg_ext,pos_ext) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-91"><a href="model-training-quadrants.html#cb46-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
-<span id="cb46-92"><a href="model-training-quadrants.html#cb46-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-93"><a href="model-training-quadrants.html#cb46-93" aria-hidden="true" tabindex="-1"></a>  quadrants_df[[i]] <span class="ot">&lt;-</span> all_quadrants</span>
-<span id="cb46-94"><a href="model-training-quadrants.html#cb46-94" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb46-95"><a href="model-training-quadrants.html#cb46-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;completed&quot;</span>))</span>
-<span id="cb46-96"><a href="model-training-quadrants.html#cb46-96" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb46-97"><a href="model-training-quadrants.html#cb46-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-98"><a href="model-training-quadrants.html#cb46-98" aria-hidden="true" tabindex="-1"></a><span class="co"># bind list together</span></span>
-<span id="cb46-99"><a href="model-training-quadrants.html#cb46-99" aria-hidden="true" tabindex="-1"></a>quadrants_fullset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,quadrants_df) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-100"><a href="model-training-quadrants.html#cb46-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="model-training-quadrants.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create list of fire IDs</span></span>
+<span id="cb45-2"><a href="model-training-quadrants.html#cb45-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">unique</span>(patches<span class="sc">$</span>Evnt_ID)</span>
+<span id="cb45-3"><a href="model-training-quadrants.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="model-training-quadrants.html#cb45-4" aria-hidden="true" tabindex="-1"></a>quadrants_df <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb45-5"><a href="model-training-quadrants.html#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="model-training-quadrants.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> fire_list){</span>
+<span id="cb45-7"><a href="model-training-quadrants.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-8"><a href="model-training-quadrants.html#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter patch interiors/exteriors to the selected fire</span></span>
+<span id="cb45-9"><a href="model-training-quadrants.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  patch_fire <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb45-10"><a href="model-training-quadrants.html#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)</span>
+<span id="cb45-11"><a href="model-training-quadrants.html#cb45-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-12"><a href="model-training-quadrants.html#cb45-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mapview</span>(patch_fire)</span>
+<span id="cb45-13"><a href="model-training-quadrants.html#cb45-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-14"><a href="model-training-quadrants.html#cb45-14" aria-hidden="true" tabindex="-1"></a>  patches_interior <span class="ot">&lt;-</span> patch_interiors <span class="sc">%&gt;%</span> </span>
+<span id="cb45-15"><a href="model-training-quadrants.html#cb45-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-16"><a href="model-training-quadrants.html#cb45-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-17"><a href="model-training-quadrants.html#cb45-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
+<span id="cb45-18"><a href="model-training-quadrants.html#cb45-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-19"><a href="model-training-quadrants.html#cb45-19" aria-hidden="true" tabindex="-1"></a>  patches_exterior <span class="ot">&lt;-</span> patch_exteriors <span class="sc">%&gt;%</span> </span>
+<span id="cb45-20"><a href="model-training-quadrants.html#cb45-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Evnt_ID_1 <span class="sc">==</span> i)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-21"><a href="model-training-quadrants.html#cb45-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb45-22"><a href="model-training-quadrants.html#cb45-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()</span>
+<span id="cb45-23"><a href="model-training-quadrants.html#cb45-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-24"><a href="model-training-quadrants.html#cb45-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set event and fire id to the selected fire</span></span>
+<span id="cb45-25"><a href="model-training-quadrants.html#cb45-25" aria-hidden="true" tabindex="-1"></a>  Evnt_ID <span class="ot">&lt;-</span> i</span>
+<span id="cb45-26"><a href="model-training-quadrants.html#cb45-26" aria-hidden="true" tabindex="-1"></a>  Fire_ID <span class="ot">&lt;-</span><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(patch_fire<span class="sc">$</span>Fire_ID)))</span>
+<span id="cb45-27"><a href="model-training-quadrants.html#cb45-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-28"><a href="model-training-quadrants.html#cb45-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;starting event &quot;</span>,Evnt_ID,<span class="st">&quot; in fire group &quot;</span>, Fire_ID))</span>
+<span id="cb45-29"><a href="model-training-quadrants.html#cb45-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-30"><a href="model-training-quadrants.html#cb45-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get and calculate cosine corrected aspect</span></span>
+<span id="cb45-31"><a href="model-training-quadrants.html#cb45-31" aria-hidden="true" tabindex="-1"></a>  dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(patch_fire,<span class="at">z=</span><span class="dv">11</span>)</span>
+<span id="cb45-32"><a href="model-training-quadrants.html#cb45-32" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem, <span class="at">opt =</span> <span class="st">&quot;aspect&quot;</span>,<span class="at">unit =</span> <span class="st">&quot;radians&quot;</span>)</span>
+<span id="cb45-33"><a href="model-training-quadrants.html#cb45-33" aria-hidden="true" tabindex="-1"></a>  ccaspect <span class="ot">&lt;-</span> <span class="fu">cos</span>(aspect)</span>
+<span id="cb45-34"><a href="model-training-quadrants.html#cb45-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-35"><a href="model-training-quadrants.html#cb45-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># positive aspects are north-facing, negative are south-facing</span></span>
+<span id="cb45-36"><a href="model-training-quadrants.html#cb45-36" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&gt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb45-37"><a href="model-training-quadrants.html#cb45-37" aria-hidden="true" tabindex="-1"></a>  ccaspect[ccaspect<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb45-38"><a href="model-training-quadrants.html#cb45-38" aria-hidden="true" tabindex="-1"></a>  ccaspect_poly <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(<span class="fu">rast</span>(ccaspect)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-39"><a href="model-training-quadrants.html#cb45-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()</span>
+<span id="cb45-40"><a href="model-training-quadrants.html#cb45-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-41"><a href="model-training-quadrants.html#cb45-41" aria-hidden="true" tabindex="-1"></a>  pos_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
+<span id="cb45-42"><a href="model-training-quadrants.html#cb45-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==</span><span class="dv">1</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-43"><a href="model-training-quadrants.html#cb45-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
+<span id="cb45-44"><a href="model-training-quadrants.html#cb45-44" aria-hidden="true" tabindex="-1"></a>  neg_aspect <span class="ot">&lt;-</span> ccaspect_poly <span class="sc">%&gt;%</span></span>
+<span id="cb45-45"><a href="model-training-quadrants.html#cb45-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(layer<span class="sc">==-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-46"><a href="model-training-quadrants.html#cb45-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>()</span>
+<span id="cb45-47"><a href="model-training-quadrants.html#cb45-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-48"><a href="model-training-quadrants.html#cb45-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get quadrants as the intersection of interior/exterior and pos/neg aspect</span></span>
+<span id="cb45-49"><a href="model-training-quadrants.html#cb45-49" aria-hidden="true" tabindex="-1"></a>  pos_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,pos_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-50"><a href="model-training-quadrants.html#cb45-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-51"><a href="model-training-quadrants.html#cb45-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-52"><a href="model-training-quadrants.html#cb45-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb45-53"><a href="model-training-quadrants.html#cb45-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_ext&quot;</span>,</span>
+<span id="cb45-54"><a href="model-training-quadrants.html#cb45-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb45-55"><a href="model-training-quadrants.html#cb45-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb45-56"><a href="model-training-quadrants.html#cb45-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb45-57"><a href="model-training-quadrants.html#cb45-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb45-58"><a href="model-training-quadrants.html#cb45-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-59"><a href="model-training-quadrants.html#cb45-59" aria-hidden="true" tabindex="-1"></a>  pos_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior,pos_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-60"><a href="model-training-quadrants.html#cb45-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-61"><a href="model-training-quadrants.html#cb45-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb45-62"><a href="model-training-quadrants.html#cb45-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb45-63"><a href="model-training-quadrants.html#cb45-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;pos_int&quot;</span>,</span>
+<span id="cb45-64"><a href="model-training-quadrants.html#cb45-64" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb45-65"><a href="model-training-quadrants.html#cb45-65" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb45-66"><a href="model-training-quadrants.html#cb45-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb45-67"><a href="model-training-quadrants.html#cb45-67" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb45-68"><a href="model-training-quadrants.html#cb45-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-69"><a href="model-training-quadrants.html#cb45-69" aria-hidden="true" tabindex="-1"></a>  neg_ext <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_exterior,neg_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-70"><a href="model-training-quadrants.html#cb45-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb45-71"><a href="model-training-quadrants.html#cb45-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-72"><a href="model-training-quadrants.html#cb45-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb45-73"><a href="model-training-quadrants.html#cb45-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_ext&quot;</span>,</span>
+<span id="cb45-74"><a href="model-training-quadrants.html#cb45-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb45-75"><a href="model-training-quadrants.html#cb45-75" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb45-76"><a href="model-training-quadrants.html#cb45-76" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb45-77"><a href="model-training-quadrants.html#cb45-77" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb45-78"><a href="model-training-quadrants.html#cb45-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-79"><a href="model-training-quadrants.html#cb45-79" aria-hidden="true" tabindex="-1"></a>  neg_int <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(patches_interior, neg_aspect)<span class="sc">%&gt;%</span> </span>
+<span id="cb45-80"><a href="model-training-quadrants.html#cb45-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb45-81"><a href="model-training-quadrants.html#cb45-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_union</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb45-82"><a href="model-training-quadrants.html#cb45-82" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb45-83"><a href="model-training-quadrants.html#cb45-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">quadrant =</span> <span class="st">&quot;neg_int&quot;</span>,</span>
+<span id="cb45-84"><a href="model-training-quadrants.html#cb45-84" aria-hidden="true" tabindex="-1"></a>           <span class="at">Evnt_ID =</span> i,</span>
+<span id="cb45-85"><a href="model-training-quadrants.html#cb45-85" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_event =</span> <span class="fu">paste0</span>(Evnt_ID,<span class="st">&quot;-&quot;</span>,quadrant),</span>
+<span id="cb45-86"><a href="model-training-quadrants.html#cb45-86" aria-hidden="true" tabindex="-1"></a>           <span class="at">Fire_ID =</span> Fire_ID,</span>
+<span id="cb45-87"><a href="model-training-quadrants.html#cb45-87" aria-hidden="true" tabindex="-1"></a>           <span class="at">quad_id_fire =</span> <span class="fu">paste0</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,quadrant))</span>
+<span id="cb45-88"><a href="model-training-quadrants.html#cb45-88" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-89"><a href="model-training-quadrants.html#cb45-89" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine, export quadrants</span></span>
+<span id="cb45-90"><a href="model-training-quadrants.html#cb45-90" aria-hidden="true" tabindex="-1"></a>  all_quadrants <span class="ot">&lt;-</span> <span class="fu">rbind</span>(neg_int,pos_int,neg_ext,pos_ext) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-91"><a href="model-training-quadrants.html#cb45-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span>
+<span id="cb45-92"><a href="model-training-quadrants.html#cb45-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-93"><a href="model-training-quadrants.html#cb45-93" aria-hidden="true" tabindex="-1"></a>  quadrants_df[[i]] <span class="ot">&lt;-</span> all_quadrants</span>
+<span id="cb45-94"><a href="model-training-quadrants.html#cb45-94" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-95"><a href="model-training-quadrants.html#cb45-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;completed&quot;</span>))</span>
+<span id="cb45-96"><a href="model-training-quadrants.html#cb45-96" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-97"><a href="model-training-quadrants.html#cb45-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-98"><a href="model-training-quadrants.html#cb45-98" aria-hidden="true" tabindex="-1"></a><span class="co"># bind list together</span></span>
+<span id="cb45-99"><a href="model-training-quadrants.html#cb45-99" aria-hidden="true" tabindex="-1"></a>quadrants_fullset <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,quadrants_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-100"><a href="model-training-quadrants.html#cb45-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() </span></code></pre></div>
 </div>
 <div id="clean-quadrants" class="section level3 hasAnchor" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Clean Quadrants<a href="model-training-quadrants.html#clean-quadrants" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="model-training-quadrants.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes erroneous polygons created from irregular fire boundary shapes</span></span>
-<span id="cb47-2"><a href="model-training-quadrants.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># removes small border mismatched fire</span></span>
-<span id="cb47-3"><a href="model-training-quadrants.html#cb47-3" aria-hidden="true" tabindex="-1"></a>quadrants_clean <span class="ot">&lt;-</span> quadrants_fullset <span class="sc">%&gt;%</span> </span>
-<span id="cb47-4"><a href="model-training-quadrants.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area=</span><span class="fu">as.numeric</span>(<span class="fu">st_area</span>(x))) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-5"><a href="model-training-quadrants.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(area <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-6"><a href="model-training-quadrants.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Evnt_ID) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-7"><a href="model-training-quadrants.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-8"><a href="model-training-quadrants.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">4</span>)</span>
-<span id="cb47-9"><a href="model-training-quadrants.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-10"><a href="model-training-quadrants.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up for export</span></span>
-<span id="cb47-11"><a href="model-training-quadrants.html#cb47-11" aria-hidden="true" tabindex="-1"></a>quadrants_export <span class="ot">&lt;-</span> quadrants_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb47-12"><a href="model-training-quadrants.html#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb47-13"><a href="model-training-quadrants.html#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb47-14"><a href="model-training-quadrants.html#cb47-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;area&quot;</span>)<span class="sc">%&gt;%</span> </span>
-<span id="cb47-15"><a href="model-training-quadrants.html#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="model-training-quadrants.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removes erroneous polygons created from irregular fire boundary shapes</span></span>
+<span id="cb46-2"><a href="model-training-quadrants.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># removes small border mismatched fire</span></span>
+<span id="cb46-3"><a href="model-training-quadrants.html#cb46-3" aria-hidden="true" tabindex="-1"></a>quadrants_clean <span class="ot">&lt;-</span> quadrants_fullset <span class="sc">%&gt;%</span> </span>
+<span id="cb46-4"><a href="model-training-quadrants.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area=</span><span class="fu">as.numeric</span>(<span class="fu">st_area</span>(x))) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-5"><a href="model-training-quadrants.html#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(area <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-6"><a href="model-training-quadrants.html#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Evnt_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-7"><a href="model-training-quadrants.html#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-8"><a href="model-training-quadrants.html#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">4</span>)</span>
+<span id="cb46-9"><a href="model-training-quadrants.html#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="model-training-quadrants.html#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up for export</span></span>
+<span id="cb46-11"><a href="model-training-quadrants.html#cb46-11" aria-hidden="true" tabindex="-1"></a>quadrants_export <span class="ot">&lt;-</span> quadrants_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb46-12"><a href="model-training-quadrants.html#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb46-13"><a href="model-training-quadrants.html#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb46-14"><a href="model-training-quadrants.html#cb46-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="st">&quot;area&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb46-15"><a href="model-training-quadrants.html#cb46-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span>crs)</span></code></pre></div>
 </div>
 </div>
 <div id="export-data-3" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Export Data<a href="model-training-quadrants.html#export-data-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="model-training-quadrants.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(quadrants_export,&quot;data/patches/&quot;,&quot;quadrants_export.shp&quot;,driver = &quot;ESRI Shapefile&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="model-training-quadrants.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_write(quadrants_export,&quot;data/patches/&quot;,&quot;quadrants_export.shp&quot;,driver = &quot;ESRI Shapefile&quot;)</span></span></code></pre></div>
 
 </div>
 </div>

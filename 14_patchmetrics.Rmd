@@ -14,13 +14,14 @@ library(exactextractr)
 library(elevatr)
 library(rms)
 library(rempsyc)
+library(kableExtra)
 
 sf_use_s2(FALSE)
 ```
 
 ### Import High-Severity Patches
 
-```{r import patch6, message=FALSE, warning=FALSE}
+```{r import patch6, message=FALSE, warning=FALSE,results='hide'}
 # fire list
 fire_list <- c("Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991","Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988")
 
@@ -70,7 +71,7 @@ patch_metrics <- patches %>%
 
 ### Calculate Patch Climate
 
-```{r terraclim, message=FALSE, warning=FALSE,cache=TRUE}
+```{r terraclim, message=FALSE, warning=FALSE,cache=TRUE,results='hide'}
 # import terraclim climate data, 3 year means before fire event
 # for each patch, extract the mean value for each climate variable
 get_climate <- function(var){
@@ -184,13 +185,14 @@ log_model <- lrm(log_recovered ~ ptch_fr + area_perim_rat + patch_area + elevati
 ```
 
 ```{r lrm object, message=FALSE, warning=FALSE}
+# lrm model object
 log_model
 ```
 ### Odd's Ratios
 
 ```{r lrm summary, message=FALSE, warning=FALSE}
-# odds ratio
-summary(log_model)
+# odds ratio table
+kable(summary(log_model))
 ```
 
 ### Make Odds Ratio Table

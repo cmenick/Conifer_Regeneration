@@ -16,7 +16,7 @@ library(rempsyc)
 
 ### Import Patch and Fire Boundaries
 
-```{r import necessary boundaries, message=FALSE, warning=FALSE}
+```{r import necessary boundaries, message=FALSE, warning=FALSE,results='hide'}
 # final fire list
 fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 
@@ -32,7 +32,7 @@ highsev_patches <- st_read("data/patches/highsev_patches.shp") %>%
 
 ### Import Prediction Rasters
 
-```{r list rast, message=FALSE, warning=FALSE}
+```{r list rast, message=FALSE, warning=FALSE,results='hide'}
 # get all presence-absence rasters from final timepoint
 rast_list <- list.files(path = "data/prediction_rasters", pattern="t9.tif", all.files=TRUE, full.names=TRUE)
 ```
@@ -168,7 +168,7 @@ validation_df <- validation_matrix %>%
   dplyr::select(`Map Classification`,`Reference.Conifer Presence`,`Reference.Conifer Absence`,`Reference.Total (Wi)`,Reference.Ui)
 ```
 
-```{r valid table, message=FALSE, warning=FALSE }
+```{r valid table, message=FALSE, warning=FALSE}
 # function to format table to correct digits
 fun <- function(x) {formatC(x, format = "f", digits = 3)}
 
@@ -176,12 +176,12 @@ fun <- function(x) {formatC(x, format = "f", digits = 3)}
 validation_table <- nice_table(
   validation_df, separate.header = TRUE, col.format.custom = 1:5,format.custom = "fun",width =1)
 
-table
+validation_table
 ```
 
 ```{r export table,eval=FALSE, message=FALSE, warning=FALSE}
 # export table as word document
-# flextable::save_as_docx(table, path = "data/validation/val_matrix_report.docx")
+# flextable::save_as_docx(validation_table, path = "data/validation/val_matrix_report.docx")
 ```
 
 ## Percent Cover of Misclassifications

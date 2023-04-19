@@ -18,7 +18,7 @@ library(raster)
 
 ### Import Fire Boundaries
 
-```{r fire boundary import, message=FALSE, warning=FALSE}
+```{r fire boundary import, message=FALSE, warning=FALSE,results='hide'}
 fires_export <- st_read("data/fire_boundaries/fires_export.shp")%>% 
   st_transform(., crs="EPSG: 4326")
 
@@ -27,7 +27,7 @@ crs <- crs(fires_export)
 
 ### Import Training Points
 
-```{r import points, message=FALSE, warning=FALSE}
+```{r import points, message=FALSE, warning=FALSE,results='hide'}
 # bring in training points
 points <- st_read("data/points/points_export.shp") %>% 
   st_transform(crs=crs)%>% 

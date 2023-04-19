@@ -340,7 +340,8 @@ fire_names <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_
 
 ### Final Map
 
-```{r final fire map, message=FALSE,warning=FALSE}
+```{r final fire map data, message=FALSE,warning=FALSE,results='hide'}
+# prepare datasets for mapping
 crs = 4388
 states49 <- (us_states["NAME"])%>% st_transform(3488)
 borders <- rnaturalearth::ne_states(c("united states of america", "canada")) %>% st_as_sf()
@@ -361,7 +362,11 @@ forestgroup_df <- as.data.frame(forestgroup_map,xy = T) %>%
                            TRUE ~ "Other"))
 
 forestgroup_df$ftype <- fct_relevel(forestgroup_df$ftype , c("Douglas-Fir","Lodgepole Pine","Fir-Spruce","Ponderosa Pine", "Other", "Unforested"))
+```
 
+
+```{r final fire map, message=FALSE,warning=FALSE}
+# map the final fire data
 palette <- brewer.pal(4,"YlGn")
 
 inset <-ggplot() +
@@ -392,7 +397,7 @@ ggdraw() +
   draw_plot(mainplot) +
   draw_plot(inset,
     height = 0.2,
-    x = .39,
+    x = .41,
     y = 0.15
   )
 

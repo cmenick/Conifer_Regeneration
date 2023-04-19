@@ -20,6 +20,7 @@ library(lwgeom)
 library(lme4)
 library(nlme)
 library(segmented)
+library(rempsyc)
 ```
 
 ### Import Fires
@@ -209,8 +210,14 @@ seg_models <- rbind(estimate_yrs_recovery(seg_ndvi_df),
   mutate(forest_type = c("Douglas-Fir","Lodgepole Pine","Fir-Spruce"))
 
 rownames(seg_models) <- NULL
+```
 
-seg_models
+```{r ndvi model table}
+# function to format table to correct digits
+fun <- function(x) {formatC(x, format = "f", digits = 4)}
+
+# table of NDVI model estimaates
+nice_table(seg_models, separate.header = TRUE, col.format.custom = 1:4,format.custom = "fun",width =1)
 ```
 
 #### Plot
