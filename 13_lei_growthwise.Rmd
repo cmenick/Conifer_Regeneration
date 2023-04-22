@@ -31,7 +31,7 @@ patches <- st_read("data/patches/highsev_patches.shp") %>%
 crs <- crs(patches)
 ```
 
-## Calculate Landscape Patterns
+## Calculate Conifer Expansion
 
 ```{r get_lei, message=FALSE, warning=FALSE}
 # function to set up rasters to calculate for each fire event
@@ -150,7 +150,7 @@ get_timepointpolys <- function(newgrowth_name,timepoint_difference_polys,timepoi
 map(fire_list,get_growthlei)
 ```
 
-## Assess LEI Patterns
+## Assess LEI and AMWEI Patterns
 
 ### Arrange Data
 
@@ -209,7 +209,7 @@ lei_growth <- lei_patch %>%
   filter(ptch_fr %in% c("Douglas-Fir","Fir-Spruce","Lodegepole Pine")) 
 ```
 
-## Plot LEI and AWMEI
+### Plot LEI and AWMEI
 
 ```{r plot lei, message=FALSE, warning=FALSE}
 ggplot(lei_totalarea_scaled,aes(tp,scaled_area*100,color= ptch_fr,group=ptch_fr))+

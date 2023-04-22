@@ -16,7 +16,7 @@ library(terra)
 fire_list <- c("Fire_1_1988","Fire_2_1988","Fire_3_1988","Fire_4_1988","Fire_7_1988","Fire_9_1988","Fire_10_1988","Fire_11_1988","Fire_12_1988","Fire_13_1988","Fire_14_1988","Fire_15_1988","Fire_16_1988","Fire_18_1988","Fire_19_1988","Fire_20_1988","Fire_22_1988","Fire_23_1988","Fire_25_1988","Fire_26_1988","Fire_28_1988","Fire_29_1988","Fire_31_1988","Fire_32_1989","Fire_33_1989","Fire_35_1989","Fire_38_1989","Fire_41_1989","Fire_42_1989","Fire_48_1990","Fire_49_1991","Fire_50_1991","Fire_51_1991","Fire_54_1991")
 ```
 
-## Import Data
+## Import Patches and Sampling Quadrants
 
 ```{r patch import, message=FALSE, warning=FALSE, results='hide',cache = TRUE}
 patches <- st_read("data/patches/highsev_patches.shp") %>% 
@@ -28,7 +28,7 @@ quadrants <- st_read("data/patches/quadrants_export.shp") %>%
   st_transform(crs=crs)
 ```
 
-## Sampling Points
+## Training Data Points
 
 ### Import and Combine Training Points
 
@@ -61,7 +61,7 @@ points_cleaned <- points_joined %>%
   st_transform(crs=crs)
 ```
 
-## Export Data
+### Export Data
 
 ```{r export points, message=FALSE, warning=FALSE}
 # st_write(points_cleaned, "data/points/", "points_export.shp",driver = 'ESRI Shapefile')

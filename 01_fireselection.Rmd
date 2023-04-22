@@ -276,7 +276,7 @@ fires_mtbs <- st_join(mtbs_select,fires_select,left=FALSE,largest=TRUE) %>%
   rename(year= year.y)
 ```
 
-## Final Fire Dataset
+## Fire Dataset
 
 ### Dataset Overview
 
@@ -293,8 +293,6 @@ kable(full_dataset,
       col.names = c("Fire ID", "Year", "Ecoregion", "Majority Forest Type","Area (acres)", "High Severity %"),
       caption = "High-Severity Conifer-Dominated Fires 1988-1991")
 ```
-
-## Export Data 
 
 ### Final Cleanup for Export
 ```{r cleanup, message=FALSE, warning=FALSE}

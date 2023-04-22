@@ -1,4 +1,4 @@
-# Conifer Presence-Absence Prediction
+# Conifer Presence Prediction
 
 ## Set Up
 

@@ -22,7 +22,7 @@ var fireID = ee.List(fires.aggregate_array('Fire_ID')).getInfo();
 var nFires = fireID.length;
 ```
 
-## Imagery 
+## Assemble Imagery
 
 ### Import Landsat 5
 
@@ -67,7 +67,7 @@ var ls5 = ls5_SR.map(ls5_getbands)
                .map(ls5_project);
 ```
 
-## Burn Indices
+## Calculate Burn Indices
 
 ### Calculate RdNBR
 

@@ -34,7 +34,7 @@ var ls8 = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').map(function(image) {
 var ls4_8 = ee.ImageCollection(ls8.merge(ls4_7));
 ```
 
-## Create Snow-Cover Landsat Collection
+## Assemble Snow-Cover Landsat Imagery
 
 ### Functions to Prepare Images
 
@@ -80,7 +80,6 @@ var ndsi_mask = function(image){
   return image.updateMask(ndsi_snow);
 };
 ```
-
 
 ### Map Functions Across Image Collection
 

@@ -40,7 +40,7 @@ conus_forestgroup <- raster('data/forest_type/conus_forestgroup.tif')
 forest_codes <- read_csv('data/forest_type/forestgroupcodes.csv')
 ```
 
-## Create High-Severity Patches
+## Delineate High-Severity Patches
 
 ### PatchMorph
 ```{r patchmorph, message=FALSE, warning=FALSE, results='hide', cache=TRUE}
@@ -63,7 +63,7 @@ for (i in 1:length(rast_all)){
 patch_poly_all <- do.call(rbind,patch_df)
 ```
 
-## Refine Patches
+### Filter Patch Dataset
 
 ```{r patch filter, message=FALSE, warning=FALSE}
 # filter small patches
@@ -85,14 +85,7 @@ patches_joined <- st_join(patches_full,mtbs_export,join = st_intersects,left= FA
                                      TRUE ~ "Other"))
 ```
 
-## Mapping
-
-```{r map high severity patches}
-mapview(patches_joined,col.regions = "red",layer.name = "High-severity Burn Patches") + 
-  mapview(fires_export, alpha.regions = 0, lwd = 2,color = "black",col.regions = "black", layer.name = "Fire Boundaries")
-```
-
-## Export Data 
+### Export Data 
 
 ```{r export patches, message=FALSE, warning=FALSE}
 patches <- patches_joined %>%
@@ -100,3 +93,11 @@ patches <- patches_joined %>%
 
 # st_write(patches, "data/patches/", "highsev_patches.shp",driver = 'ESRI Shapefile')
 ```
+
+## Mapping
+
+```{r map high severity patches}
+mapview(patches_joined,col.regions = "red",layer.name = "High-severity Burn Patches") + 
+  mapview(fires_export, alpha.regions = 0, lwd = 2,color = "black",col.regions = "black", layer.name = "Fire Boundaries")
+```
+

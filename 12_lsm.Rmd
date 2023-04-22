@@ -100,7 +100,7 @@ get_patchlsm <- function(patch_name,patches_fire,rast_fire){
 map(fire_list,calc_lsm)
 ```
 
-## Assess LSM Patterns
+## Assess Patch-Level Recovery
 
 ### Prepare Data
 ```{r lsm df, message=FALSE, warning=FALSE}

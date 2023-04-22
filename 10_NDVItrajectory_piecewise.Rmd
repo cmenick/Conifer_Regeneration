@@ -63,7 +63,7 @@ bandnames <- expand_grid(years,bands) %>%
 bandlist <- bandnames$V1
 ```
 
-## Connect Landsat and High-Severity Patches
+## Extract NDVI Data
 
 ### Extract Landsat Data for Each Patch
 

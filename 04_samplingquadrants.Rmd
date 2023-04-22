@@ -160,7 +160,7 @@ quadrants_export <- quadrants_clean %>%
   st_transform(crs=crs)
 ```
 
-## Export Data
+### Export Data
 
 ```{r export quadrants, message=FALSE, warning=FALSE}
 # st_write(quadrants_export,"data/patches/","quadrants_export.shp",driver = "ESRI Shapefile")

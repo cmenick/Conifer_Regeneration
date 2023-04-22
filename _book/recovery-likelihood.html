@@ -23,7 +23,7 @@
 <meta name="author" content="Casey Menick" />
 
 
-<meta name="date" content="2023-04-19" />
+<meta name="date" content="2023-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,27 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/Forest Type_d01597-1/data_stars_ForestType4835ce.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
@@ -154,24 +175,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.4" data-path="fire-selection.html"><a href="fire-selection.html#select-fires-by-burn-severity"><i class="fa fa-check"></i><b>2.2.4</b> Select Fires by Burn Severity</a></li>
 <li class="chapter" data-level="2.2.5" data-path="fire-selection.html"><a href="fire-selection.html#clean-up-dataset"><i class="fa fa-check"></i><b>2.2.5</b> Clean Up Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#final-fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Final Fire Dataset</a>
+<li class="chapter" data-level="2.3" data-path="fire-selection.html"><a href="fire-selection.html#fire-dataset"><i class="fa fa-check"></i><b>2.3</b> Fire Dataset</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="fire-selection.html"><a href="fire-selection.html#dataset-overview"><i class="fa fa-check"></i><b>2.3.1</b> Dataset Overview</a></li>
+<li class="chapter" data-level="2.3.2" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.3.2</b> Final Cleanup for Export</a></li>
+<li class="chapter" data-level="2.3.3" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.3.3</b> Export</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#export-data"><i class="fa fa-check"></i><b>2.4</b> Export Data</a>
+<li class="chapter" data-level="2.4" data-path="fire-selection.html"><a href="fire-selection.html#mapping-potential-high-severity-fires"><i class="fa fa-check"></i><b>2.4</b> Mapping Potential High-Severity Fires</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#final-cleanup-for-export"><i class="fa fa-check"></i><b>2.4.1</b> Final Cleanup for Export</a></li>
-<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#export"><i class="fa fa-check"></i><b>2.4.2</b> Export</a></li>
+<li class="chapter" data-level="2.4.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.4.1</b> Selected fires by year</a></li>
+<li class="chapter" data-level="2.4.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.4.2</b> Selected fires by majority forest type</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#mapping-potential-high-severity-fires"><i class="fa fa-check"></i><b>2.5</b> Mapping Potential High-Severity Fires</a>
+<li class="chapter" data-level="2.5" data-path="fire-selection.html"><a href="fire-selection.html#mapping-final-high-severity-fires"><i class="fa fa-check"></i><b>2.5</b> Mapping Final High-Severity Fires</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-year"><i class="fa fa-check"></i><b>2.5.1</b> Selected fires by year</a></li>
-<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#selected-fires-by-majority-forest-type"><i class="fa fa-check"></i><b>2.5.2</b> Selected fires by majority forest type</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="fire-selection.html"><a href="fire-selection.html#mapping-final-high-severity-fires"><i class="fa fa-check"></i><b>2.6</b> Mapping Final High-Severity Fires</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.6.1</b> Final Fires</a></li>
-<li class="chapter" data-level="2.6.2" data-path="fire-selection.html"><a href="fire-selection.html#final-map"><i class="fa fa-check"></i><b>2.6.2</b> Final Map</a></li>
+<li class="chapter" data-level="2.5.1" data-path="fire-selection.html"><a href="fire-selection.html#final-fires"><i class="fa fa-check"></i><b>2.5.1</b> Final Fires</a></li>
+<li class="chapter" data-level="2.5.2" data-path="fire-selection.html"><a href="fire-selection.html#final-map"><i class="fa fa-check"></i><b>2.5.2</b> Final Map</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html"><i class="fa fa-check"></i><b>3</b> Calculation of High-Severity</a>
@@ -181,16 +199,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-fire-boundaries"><i class="fa fa-check"></i><b>3.1.1</b> Import Fire Boundaries</a></li>
 <li class="chapter" data-level="3.1.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#clean-fire-boundaries"><i class="fa fa-check"></i><b>3.1.2</b> Clean Fire Boundaries</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#imagery"><i class="fa fa-check"></i><b>3.2</b> Imagery</a>
+<li class="chapter" data-level="3.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#assemble-imagery"><i class="fa fa-check"></i><b>3.2</b> Assemble Imagery</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#import-landsat-5"><i class="fa fa-check"></i><b>3.2.1</b> Import Landsat 5</a></li>
 <li class="chapter" data-level="3.2.2" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#prepare-landsat-data"><i class="fa fa-check"></i><b>3.2.2</b> Prepare Landsat Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#burn-indices"><i class="fa fa-check"></i><b>3.3</b> Burn Indices</a>
+<li class="chapter" data-level="3.3" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-burn-indices"><i class="fa fa-check"></i><b>3.3</b> Calculate Burn Indices</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#calculate-rdnbr"><i class="fa fa-check"></i><b>3.3.1</b> Calculate RdNBR</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-data-1"><i class="fa fa-check"></i><b>3.4</b> Export Data</a>
+<li class="chapter" data-level="3.4" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-data"><i class="fa fa-check"></i><b>3.4</b> Export Data</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="calculation-of-high-severity.html"><a href="calculation-of-high-severity.html#export-each-fire-rdnbr-to-drive"><i class="fa fa-check"></i><b>3.4.1</b> Export Each Fire RdNBR to Drive</a></li>
 </ul></li>
@@ -203,13 +221,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.2" data-path="patch-formation.html"><a href="patch-formation.html#import-rdnbr-rasters"><i class="fa fa-check"></i><b>4.1.2</b> Import RdNBR Rasters</a></li>
 <li class="chapter" data-level="4.1.3" data-path="patch-formation.html"><a href="patch-formation.html#import-fire-boundaries-1"><i class="fa fa-check"></i><b>4.1.3</b> Import Fire Boundaries</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="patch-formation.html"><a href="patch-formation.html#create-high-severity-patches"><i class="fa fa-check"></i><b>4.2</b> Create High-Severity Patches</a>
+<li class="chapter" data-level="4.2" data-path="patch-formation.html"><a href="patch-formation.html#delineate-high-severity-patches"><i class="fa fa-check"></i><b>4.2</b> Delineate High-Severity Patches</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="patch-formation.html"><a href="patch-formation.html#patchmorph"><i class="fa fa-check"></i><b>4.2.1</b> PatchMorph</a></li>
+<li class="chapter" data-level="4.2.2" data-path="patch-formation.html"><a href="patch-formation.html#filter-patch-dataset"><i class="fa fa-check"></i><b>4.2.2</b> Filter Patch Dataset</a></li>
+<li class="chapter" data-level="4.2.3" data-path="patch-formation.html"><a href="patch-formation.html#export-data-1"><i class="fa fa-check"></i><b>4.2.3</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#refine-patches"><i class="fa fa-check"></i><b>4.3</b> Refine Patches</a></li>
-<li class="chapter" data-level="4.4" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.4</b> Mapping</a></li>
-<li class="chapter" data-level="4.5" data-path="patch-formation.html"><a href="patch-formation.html#export-data-2"><i class="fa fa-check"></i><b>4.5</b> Export Data</a></li>
+<li class="chapter" data-level="4.3" data-path="patch-formation.html"><a href="patch-formation.html#mapping-1"><i class="fa fa-check"></i><b>4.3</b> Mapping</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html"><i class="fa fa-check"></i><b>5</b> Model Training Quadrants</a>
 <ul>
@@ -222,8 +240,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#split-patches-by-northsouth-aspects-and-interiorexterior"><i class="fa fa-check"></i><b>5.2.1</b> Split Patches by North/South Aspects and Interior/Exterior</a></li>
 <li class="chapter" data-level="5.2.2" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#clean-quadrants"><i class="fa fa-check"></i><b>5.2.2</b> Clean Quadrants</a></li>
+<li class="chapter" data-level="5.2.3" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#export-data-2"><i class="fa fa-check"></i><b>5.2.3</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="model-training-quadrants.html"><a href="model-training-quadrants.html#export-data-3"><i class="fa fa-check"></i><b>5.3</b> Export Data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="model-training-points.html"><a href="model-training-points.html"><i class="fa fa-check"></i><b>6</b> Model Training Points</a>
 <ul>
@@ -231,13 +249,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1.1" data-path="model-training-points.html"><a href="model-training-points.html#fire-list"><i class="fa fa-check"></i><b>6.1.1</b> Fire List</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="model-training-points.html"><a href="model-training-points.html#import-data"><i class="fa fa-check"></i><b>6.2</b> Import Data</a></li>
-<li class="chapter" data-level="6.3" data-path="model-training-points.html"><a href="model-training-points.html#sampling-points"><i class="fa fa-check"></i><b>6.3</b> Sampling Points</a>
+<li class="chapter" data-level="6.2" data-path="model-training-points.html"><a href="model-training-points.html#import-patches-and-sampling-quadrants"><i class="fa fa-check"></i><b>6.2</b> Import Patches and Sampling Quadrants</a></li>
+<li class="chapter" data-level="6.3" data-path="model-training-points.html"><a href="model-training-points.html#training-data-points"><i class="fa fa-check"></i><b>6.3</b> Training Data Points</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="model-training-points.html"><a href="model-training-points.html#import-and-combine-training-points"><i class="fa fa-check"></i><b>6.3.1</b> Import and Combine Training Points</a></li>
 <li class="chapter" data-level="6.3.2" data-path="model-training-points.html"><a href="model-training-points.html#assign-points-and-clean-data"><i class="fa fa-check"></i><b>6.3.2</b> Assign Points and Clean Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="model-training-points.html"><a href="model-training-points.html#export-data-3"><i class="fa fa-check"></i><b>6.3.3</b> Export Data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="model-training-points.html"><a href="model-training-points.html#export-data-4"><i class="fa fa-check"></i><b>6.4</b> Export Data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html"><i class="fa fa-check"></i><b>7</b> Snow-Cover Imagery</a>
 <ul>
@@ -246,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-fire-boundaries-2"><i class="fa fa-check"></i><b>7.1.1</b> Import Fire Boundaries</a></li>
 <li class="chapter" data-level="7.1.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#import-landsat-imagery"><i class="fa fa-check"></i><b>7.1.2</b> Import Landsat Imagery</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#create-snow-cover-landsat-collection"><i class="fa fa-check"></i><b>7.2</b> Create Snow-Cover Landsat Collection</a>
+<li class="chapter" data-level="7.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#assemble-snow-cover-landsat-imagery"><i class="fa fa-check"></i><b>7.2</b> Assemble Snow-Cover Landsat Imagery</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#functions-to-prepare-images"><i class="fa fa-check"></i><b>7.2.1</b> Functions to Prepare Images</a></li>
 <li class="chapter" data-level="7.2.2" data-path="snow-cover-imagery.html"><a href="snow-cover-imagery.html#map-functions-across-image-collection"><i class="fa fa-check"></i><b>7.2.2</b> Map Functions Across Image Collection</a></li>
@@ -283,25 +301,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.4.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#plot-ndvi-by-density-class"><i class="fa fa-check"></i><b>8.4.1</b> Plot NDVI by Density Class</a></li>
 </ul></li>
-<li class="chapter" data-level="8.5" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#model"><i class="fa fa-check"></i><b>8.5</b> Model</a>
+<li class="chapter" data-level="8.5" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#develop-model"><i class="fa fa-check"></i><b>8.5</b> Develop Model</a>
 <ul>
 <li class="chapter" data-level="8.5.1" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#create-random-forest-model"><i class="fa fa-check"></i><b>8.5.1</b> Create Random Forest Model</a></li>
 <li class="chapter" data-level="8.5.2" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#evaluate-parameters"><i class="fa fa-check"></i><b>8.5.2</b> Evaluate Parameters</a></li>
 <li class="chapter" data-level="8.5.3" data-path="random-forest-model-development.html"><a href="random-forest-model-development.html#export-model-object"><i class="fa fa-check"></i><b>8.5.3</b> Export Model Object</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html"><i class="fa fa-check"></i><b>9</b> Conifer Presence-Absence Prediction</a>
+<li class="chapter" data-level="9" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html"><i class="fa fa-check"></i><b>9</b> Conifer Presence Prediction</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
+<li class="chapter" data-level="9.1" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#set-up-7"><i class="fa fa-check"></i><b>9.1</b> Set Up</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
-<li class="chapter" data-level="9.1.2" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>9.1.2</b> Import Fire Boundaries</a></li>
-<li class="chapter" data-level="9.1.3" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#import-model"><i class="fa fa-check"></i><b>9.1.3</b> Import Model</a></li>
-<li class="chapter" data-level="9.1.4" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>9.1.4</b> Prepare Raster Naming</a></li>
+<li class="chapter" data-level="9.1.1" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#libraries-5"><i class="fa fa-check"></i><b>9.1.1</b> Libraries</a></li>
+<li class="chapter" data-level="9.1.2" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#import-fire-boundaries-4"><i class="fa fa-check"></i><b>9.1.2</b> Import Fire Boundaries</a></li>
+<li class="chapter" data-level="9.1.3" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#import-model"><i class="fa fa-check"></i><b>9.1.3</b> Import Model</a></li>
+<li class="chapter" data-level="9.1.4" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#prepare-raster-naming"><i class="fa fa-check"></i><b>9.1.4</b> Prepare Raster Naming</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#presence-absence-rasters"><i class="fa fa-check"></i><b>9.2</b> Presence-Absence Rasters</a>
+<li class="chapter" data-level="9.2" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#presence-absence-rasters"><i class="fa fa-check"></i><b>9.2</b> Presence-Absence Rasters</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="conifer-presence-absence-prediction.html"><a href="conifer-presence-absence-prediction.html#predict-presence-across-3-year-intervals"><i class="fa fa-check"></i><b>9.2.1</b> Predict Presence Across 3-Year Intervals</a></li>
+<li class="chapter" data-level="9.2.1" data-path="conifer-presence-prediction.html"><a href="conifer-presence-prediction.html#predict-presence-across-3-year-intervals"><i class="fa fa-check"></i><b>9.2.1</b> Predict Presence Across 3-Year Intervals</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="model-validation.html"><a href="model-validation.html"><i class="fa fa-check"></i><b>10</b> Model Validation</a>
@@ -333,7 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#import-fires"><i class="fa fa-check"></i><b>11.1.2</b> Import Fires</a></li>
 <li class="chapter" data-level="11.1.3" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#prepare-data-for-bands-and-fire-names-1"><i class="fa fa-check"></i><b>11.1.3</b> Prepare Data for Bands and Fire Names</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#connect-landsat-and-high-severity-patches"><i class="fa fa-check"></i><b>11.2</b> Connect Landsat and High-Severity Patches</a>
+<li class="chapter" data-level="11.2" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-ndvi-data"><i class="fa fa-check"></i><b>11.2</b> Extract NDVI Data</a>
 <ul>
 <li class="chapter" data-level="11.2.1" data-path="ndvi-trajectory.html"><a href="ndvi-trajectory.html#extract-landsat-data-for-each-patch"><i class="fa fa-check"></i><b>11.2.1</b> Extract Landsat Data for Each Patch</a></li>
 </ul></li>
@@ -353,18 +371,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#libraries-8"><i class="fa fa-check"></i><b>12.1.1</b> Libraries</a></li>
 <li class="chapter" data-level="12.1.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#import-high-severity-patches"><i class="fa fa-check"></i><b>12.1.2</b> Import High-Severity Patches</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#calculate-patch-decomposition"><i class="fa fa-check"></i><b>12.2</b> Calculate Patch Decomposition</a>
+<li class="chapter" data-level="12.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>12.2</b> Calculate Landscape Patterns</a>
 <ul>
 <li class="chapter" data-level="12.2.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#function-to-track-patch-changes"><i class="fa fa-check"></i><b>12.2.1</b> Function to Track Patch Changes</a></li>
 <li class="chapter" data-level="12.2.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#apply-function-to-all-fires"><i class="fa fa-check"></i><b>12.2.2</b> Apply Function to All Fires</a></li>
 <li class="chapter" data-level="12.2.3" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#create-dataset-for-each-forest-type"><i class="fa fa-check"></i><b>12.2.3</b> Create Dataset for Each Forest Type</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#assess-proportion-reforested"><i class="fa fa-check"></i><b>12.3</b> Assess Proportion Reforested</a>
+<li class="chapter" data-level="12.3" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#assess-landscape-level-recovery"><i class="fa fa-check"></i><b>12.3</b> Assess Landscape-Level Recovery</a>
 <ul>
 <li class="chapter" data-level="12.3.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#by-forest-type"><i class="fa fa-check"></i><b>12.3.1</b> By Forest Type</a></li>
 <li class="chapter" data-level="12.3.2" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#by-patch-size"><i class="fa fa-check"></i><b>12.3.2</b> By Patch Size</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#fragmentation"><i class="fa fa-check"></i><b>12.4</b> Fragmentation</a></li>
+<li class="chapter" data-level="12.4" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#calculate-fragmentation"><i class="fa fa-check"></i><b>12.4</b> Calculate Fragmentation</a></li>
 <li class="chapter" data-level="12.5" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#plot-1"><i class="fa fa-check"></i><b>12.5</b> Plot</a>
 <ul>
 <li class="chapter" data-level="12.5.1" data-path="landscape-level-conifer-recolonization.html"><a href="landscape-level-conifer-recolonization.html#alluvial-plot"><i class="fa fa-check"></i><b>12.5.1</b> Alluvial Plot</a></li>
@@ -378,12 +396,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#import-libraries"><i class="fa fa-check"></i><b>13.1.1</b> Import Libraries</a></li>
 <li class="chapter" data-level="13.1.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#import-patch-polygons"><i class="fa fa-check"></i><b>13.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#calculate-landscape-patterns"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a>
+<li class="chapter" data-level="13.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>13.2</b> Calculate Landscape Patterns</a>
 <ul>
 <li class="chapter" data-level="13.2.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#create-functions"><i class="fa fa-check"></i><b>13.2.1</b> Create Functions</a></li>
 <li class="chapter" data-level="13.2.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#map-across-all-fires"><i class="fa fa-check"></i><b>13.2.2</b> Map Across All Fires</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#assess-lsm-patterns"><i class="fa fa-check"></i><b>13.3</b> Assess LSM Patterns</a>
+<li class="chapter" data-level="13.3" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#assess-patch-level-recovery"><i class="fa fa-check"></i><b>13.3</b> Assess Patch-Level Recovery</a>
 <ul>
 <li class="chapter" data-level="13.3.1" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#prepare-data"><i class="fa fa-check"></i><b>13.3.1</b> Prepare Data</a></li>
 <li class="chapter" data-level="13.3.2" data-path="patch-level-conifer-recolonization.html"><a href="patch-level-conifer-recolonization.html#patch-level-area-reforested"><i class="fa fa-check"></i><b>13.3.2</b> Patch-Level Area Reforested</a></li>
@@ -396,13 +414,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.1.1" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#import-libraries-1"><i class="fa fa-check"></i><b>14.1.1</b> Import Libraries</a></li>
 <li class="chapter" data-level="14.1.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#import-patch-polygons-1"><i class="fa fa-check"></i><b>14.1.2</b> Import Patch Polygons</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#calculate-landscape-patterns-1"><i class="fa fa-check"></i><b>14.2</b> Calculate Landscape Patterns</a></li>
-<li class="chapter" data-level="14.3" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#assess-lei-patterns"><i class="fa fa-check"></i><b>14.3</b> Assess LEI Patterns</a>
+<li class="chapter" data-level="14.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#calculate-conifer-expansion"><i class="fa fa-check"></i><b>14.2</b> Calculate Conifer Expansion</a></li>
+<li class="chapter" data-level="14.3" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#assess-lei-and-amwei-patterns"><i class="fa fa-check"></i><b>14.3</b> Assess LEI and AMWEI Patterns</a>
 <ul>
 <li class="chapter" data-level="14.3.1" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#arrange-data"><i class="fa fa-check"></i><b>14.3.1</b> Arrange Data</a></li>
 <li class="chapter" data-level="14.3.2" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#lei-and-amwei-datasets"><i class="fa fa-check"></i><b>14.3.2</b> LEI and AMWEI Datasets</a></li>
+<li class="chapter" data-level="14.3.3" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#plot-lei-and-awmei"><i class="fa fa-check"></i><b>14.3.3</b> Plot LEI and AWMEI</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="conifer-expansion-patterns.html"><a href="conifer-expansion-patterns.html#plot-lei-and-awmei"><i class="fa fa-check"></i><b>14.4</b> Plot LEI and AWMEI</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html"><i class="fa fa-check"></i><b>15</b> Recovery Likelihood</a>
 <ul>
@@ -420,7 +438,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.2.5" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#calculate-topography"><i class="fa fa-check"></i><b>15.2.5</b> Calculate Topography</a></li>
 <li class="chapter" data-level="15.2.6" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#join-patch-metrics-and-recovery-data"><i class="fa fa-check"></i><b>15.2.6</b> Join Patch Metrics and Recovery Data</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#model-patch-recovery"><i class="fa fa-check"></i><b>15.3</b> Model Patch Recovery</a>
+<li class="chapter" data-level="15.3" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#model-recovery-likelihood"><i class="fa fa-check"></i><b>15.3</b> Model Recovery Likelihood</a>
 <ul>
 <li class="chapter" data-level="15.3.1" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#prepare-model-data"><i class="fa fa-check"></i><b>15.3.1</b> Prepare Model Data</a></li>
 <li class="chapter" data-level="15.3.2" data-path="recovery-likelihood.html"><a href="recovery-likelihood.html#create-logistic-model"><i class="fa fa-check"></i><b>15.3.2</b> Create Logistic Model</a></li>
@@ -453,166 +471,166 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.1</span> Set Up<a href="recovery-likelihood.html#set-up-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="libraries-9" class="section level3 hasAnchor" number="15.1.1">
 <h3><span class="header-section-number">15.1.1</span> Libraries<a href="recovery-likelihood.html#libraries-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="recovery-likelihood.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="recovery-likelihood.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-3"><a href="recovery-likelihood.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-4"><a href="recovery-likelihood.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb1-5"><a href="recovery-likelihood.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb1-6"><a href="recovery-likelihood.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exactextractr)</span>
-<span id="cb1-7"><a href="recovery-likelihood.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
-<span id="cb1-8"><a href="recovery-likelihood.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
-<span id="cb1-9"><a href="recovery-likelihood.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rempsyc)</span>
-<span id="cb1-10"><a href="recovery-likelihood.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-11"><a href="recovery-likelihood.html#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="recovery-likelihood.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="recovery-likelihood.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb164-2"><a href="recovery-likelihood.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb164-3"><a href="recovery-likelihood.html#cb164-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb164-4"><a href="recovery-likelihood.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb164-5"><a href="recovery-likelihood.html#cb164-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb164-6"><a href="recovery-likelihood.html#cb164-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exactextractr)</span>
+<span id="cb164-7"><a href="recovery-likelihood.html#cb164-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
+<span id="cb164-8"><a href="recovery-likelihood.html#cb164-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb164-9"><a href="recovery-likelihood.html#cb164-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rempsyc)</span>
+<span id="cb164-10"><a href="recovery-likelihood.html#cb164-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb164-11"><a href="recovery-likelihood.html#cb164-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-12"><a href="recovery-likelihood.html#cb164-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="import-high-severity-patches-1" class="section level3 hasAnchor" number="15.1.2">
 <h3><span class="header-section-number">15.1.2</span> Import High-Severity Patches<a href="recovery-likelihood.html#import-high-severity-patches-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="recovery-likelihood.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fire list</span></span>
-<span id="cb2-2"><a href="recovery-likelihood.html#cb2-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>,<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>)</span>
-<span id="cb2-3"><a href="recovery-likelihood.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="recovery-likelihood.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
-<span id="cb2-5"><a href="recovery-likelihood.html#cb2-5" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="recovery-likelihood.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span></span>
-<span id="cb2-7"><a href="recovery-likelihood.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span>
-<span id="cb2-8"><a href="recovery-likelihood.html#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="recovery-likelihood.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set crs</span></span>
-<span id="cb2-10"><a href="recovery-likelihood.html#cb2-10" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="recovery-likelihood.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fire list</span></span>
+<span id="cb165-2"><a href="recovery-likelihood.html#cb165-2" aria-hidden="true" tabindex="-1"></a>fire_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fire_7_1988&quot;</span>,<span class="st">&quot;Fire_9_1988&quot;</span>,<span class="st">&quot;Fire_10_1988&quot;</span>,<span class="st">&quot;Fire_11_1988&quot;</span>,<span class="st">&quot;Fire_12_1988&quot;</span>,<span class="st">&quot;Fire_13_1988&quot;</span>,<span class="st">&quot;Fire_14_1988&quot;</span>,<span class="st">&quot;Fire_15_1988&quot;</span>,<span class="st">&quot;Fire_16_1988&quot;</span>,<span class="st">&quot;Fire_18_1988&quot;</span>,<span class="st">&quot;Fire_19_1988&quot;</span>,<span class="st">&quot;Fire_20_1988&quot;</span>,<span class="st">&quot;Fire_22_1988&quot;</span>,<span class="st">&quot;Fire_23_1988&quot;</span>,<span class="st">&quot;Fire_25_1988&quot;</span>,<span class="st">&quot;Fire_26_1988&quot;</span>,<span class="st">&quot;Fire_28_1988&quot;</span>,<span class="st">&quot;Fire_29_1988&quot;</span>,<span class="st">&quot;Fire_31_1988&quot;</span>,<span class="st">&quot;Fire_32_1989&quot;</span>,<span class="st">&quot;Fire_33_1989&quot;</span>,<span class="st">&quot;Fire_35_1989&quot;</span>,<span class="st">&quot;Fire_38_1989&quot;</span>,<span class="st">&quot;Fire_41_1989&quot;</span>,<span class="st">&quot;Fire_42_1989&quot;</span>,<span class="st">&quot;Fire_48_1990&quot;</span>,<span class="st">&quot;Fire_49_1991&quot;</span>,<span class="st">&quot;Fire_50_1991&quot;</span>,<span class="st">&quot;Fire_51_1991&quot;</span>,<span class="st">&quot;Fire_54_1991&quot;</span>,<span class="st">&quot;Fire_1_1988&quot;</span>,<span class="st">&quot;Fire_2_1988&quot;</span>,<span class="st">&quot;Fire_3_1988&quot;</span>,<span class="st">&quot;Fire_4_1988&quot;</span>)</span>
+<span id="cb165-3"><a href="recovery-likelihood.html#cb165-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-4"><a href="recovery-likelihood.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import high-severity patches</span></span>
+<span id="cb165-5"><a href="recovery-likelihood.html#cb165-5" aria-hidden="true" tabindex="-1"></a>patches <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/patches/highsev_patches.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb165-6"><a href="recovery-likelihood.html#cb165-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Patch_ID =</span> <span class="fu">str_c</span>(Fire_ID,<span class="st">&quot;-&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span></span>
+<span id="cb165-7"><a href="recovery-likelihood.html#cb165-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span>
+<span id="cb165-8"><a href="recovery-likelihood.html#cb165-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-9"><a href="recovery-likelihood.html#cb165-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set crs</span></span>
+<span id="cb165-10"><a href="recovery-likelihood.html#cb165-10" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(patches)</span></code></pre></div>
 </div>
 </div>
 <div id="prepare-patch-data" class="section level2 hasAnchor" number="15.2">
 <h2><span class="header-section-number">15.2</span> Prepare Patch Data<a href="recovery-likelihood.html#prepare-patch-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="calculate-percent-reforested" class="section level3 hasAnchor" number="15.2.1">
 <h3><span class="header-section-number">15.2.1</span> Calculate Percent Reforested<a href="recovery-likelihood.html#calculate-percent-reforested" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="recovery-likelihood.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import and join patch fragmentation data</span></span>
-<span id="cb3-2"><a href="recovery-likelihood.html#cb3-2" aria-hidden="true" tabindex="-1"></a>patch_fragmentation <span class="ot">&lt;-</span> <span class="fu">do.call</span>(bind_rows,<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/patch_fate/t0t9&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;t0t9&quot;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>),read_csv))</span>
-<span id="cb3-3"><a href="recovery-likelihood.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="recovery-likelihood.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the proportion of area recolonized by conifers after 30 years</span></span>
-<span id="cb3-5"><a href="recovery-likelihood.html#cb3-5" aria-hidden="true" tabindex="-1"></a>patch_recovery <span class="ot">&lt;-</span> patch_fragmentation <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="recovery-likelihood.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Patch_ID,t9_status) <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="recovery-likelihood.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">t0_area =</span> <span class="fu">mean</span>(t0_area),</span>
-<span id="cb3-8"><a href="recovery-likelihood.html#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">t9_area =</span> <span class="fu">round</span>(<span class="fu">sum</span>(t9_area),<span class="dv">5</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb3-9"><a href="recovery-likelihood.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">values_from =</span> t9_area,<span class="at">names_from=</span>t9_status) <span class="sc">%&gt;%</span></span>
-<span id="cb3-10"><a href="recovery-likelihood.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">t9_area_unforested =</span> <span class="dv">4</span>,</span>
-<span id="cb3-11"><a href="recovery-likelihood.html#cb3-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">t9_area_forested =</span> <span class="dv">3</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb3-12"><a href="recovery-likelihood.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-13"><a href="recovery-likelihood.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_forested =</span> t9_area_forested<span class="sc">/</span>(t0_area))</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="recovery-likelihood.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import and join patch fragmentation data</span></span>
+<span id="cb166-2"><a href="recovery-likelihood.html#cb166-2" aria-hidden="true" tabindex="-1"></a>patch_fragmentation <span class="ot">&lt;-</span> <span class="fu">do.call</span>(bind_rows,<span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/patch_fate/t0t9&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;t0t9&quot;</span>, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>),read_csv))</span>
+<span id="cb166-3"><a href="recovery-likelihood.html#cb166-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-4"><a href="recovery-likelihood.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the proportion of area recolonized by conifers after 30 years</span></span>
+<span id="cb166-5"><a href="recovery-likelihood.html#cb166-5" aria-hidden="true" tabindex="-1"></a>patch_recovery <span class="ot">&lt;-</span> patch_fragmentation <span class="sc">%&gt;%</span></span>
+<span id="cb166-6"><a href="recovery-likelihood.html#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Patch_ID,t9_status) <span class="sc">%&gt;%</span></span>
+<span id="cb166-7"><a href="recovery-likelihood.html#cb166-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">t0_area =</span> <span class="fu">mean</span>(t0_area),</span>
+<span id="cb166-8"><a href="recovery-likelihood.html#cb166-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">t9_area =</span> <span class="fu">round</span>(<span class="fu">sum</span>(t9_area),<span class="dv">5</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb166-9"><a href="recovery-likelihood.html#cb166-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">values_from =</span> t9_area,<span class="at">names_from=</span>t9_status) <span class="sc">%&gt;%</span></span>
+<span id="cb166-10"><a href="recovery-likelihood.html#cb166-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">t9_area_unforested =</span> <span class="dv">4</span>,</span>
+<span id="cb166-11"><a href="recovery-likelihood.html#cb166-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">t9_area_forested =</span> <span class="dv">3</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb166-12"><a href="recovery-likelihood.html#cb166-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb166-13"><a href="recovery-likelihood.html#cb166-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_forested =</span> t9_area_forested<span class="sc">/</span>(t0_area))</span></code></pre></div>
 </div>
 <div id="calculate-patch-area-and-edge" class="section level3 hasAnchor" number="15.2.2">
 <h3><span class="header-section-number">15.2.2</span> Calculate Patch Area and Edge<a href="recovery-likelihood.html#calculate-patch-area-and-edge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="recovery-likelihood.html#cb4-1" aria-hidden="true" tabindex="-1"></a>patch_metrics <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="recovery-likelihood.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Fire_ID,Patch_ID,ptch_fr,ecoregn) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="recovery-likelihood.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">3488</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="recovery-likelihood.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">patch_area =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">10000</span>,<span class="dv">4</span>),</span>
-<span id="cb4-5"><a href="recovery-likelihood.html#cb4-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">perim_m =</span> <span class="fu">as.numeric</span>(<span class="fu">round</span>(<span class="fu">st_length</span>(<span class="fu">st_cast</span>(geometry,<span class="at">to =</span> <span class="st">&quot;MULTILINESTRING&quot;</span>)),<span class="dv">4</span>)),</span>
-<span id="cb4-6"><a href="recovery-likelihood.html#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_perim_rat =</span> patch_area<span class="sc">/</span>perim_m) <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="recovery-likelihood.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="sc">-</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-8"><a href="recovery-likelihood.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">core_area =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">10000</span>,<span class="dv">4</span>),</span>
-<span id="cb4-9"><a href="recovery-likelihood.html#cb4-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">perc_core =</span> <span class="fu">round</span>(core_area <span class="sc">/</span> patch_area,<span class="dv">5</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="recovery-likelihood.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="recovery-likelihood.html#cb167-1" aria-hidden="true" tabindex="-1"></a>patch_metrics <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span></span>
+<span id="cb167-2"><a href="recovery-likelihood.html#cb167-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Fire_ID,Patch_ID,ptch_fr,ecoregn) <span class="sc">%&gt;%</span></span>
+<span id="cb167-3"><a href="recovery-likelihood.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">3488</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb167-4"><a href="recovery-likelihood.html#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">patch_area =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">10000</span>,<span class="dv">4</span>),</span>
+<span id="cb167-5"><a href="recovery-likelihood.html#cb167-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">perim_m =</span> <span class="fu">as.numeric</span>(<span class="fu">round</span>(<span class="fu">st_length</span>(<span class="fu">st_cast</span>(geometry,<span class="at">to =</span> <span class="st">&quot;MULTILINESTRING&quot;</span>)),<span class="dv">4</span>)),</span>
+<span id="cb167-6"><a href="recovery-likelihood.html#cb167-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_perim_rat =</span> patch_area<span class="sc">/</span>perim_m) <span class="sc">%&gt;%</span></span>
+<span id="cb167-7"><a href="recovery-likelihood.html#cb167-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="sc">-</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb167-8"><a href="recovery-likelihood.html#cb167-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">core_area =</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">10000</span>,<span class="dv">4</span>),</span>
+<span id="cb167-9"><a href="recovery-likelihood.html#cb167-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">perc_core =</span> <span class="fu">round</span>(core_area <span class="sc">/</span> patch_area,<span class="dv">5</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb167-10"><a href="recovery-likelihood.html#cb167-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
 </div>
 <div id="calculate-patch-climate" class="section level3 hasAnchor" number="15.2.3">
 <h3><span class="header-section-number">15.2.3</span> Calculate Patch Climate<a href="recovery-likelihood.html#calculate-patch-climate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="recovery-likelihood.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import terraclim climate data, 3 year means before fire event</span></span>
-<span id="cb5-2"><a href="recovery-likelihood.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for each patch, extract the mean value for each climate variable</span></span>
-<span id="cb5-3"><a href="recovery-likelihood.html#cb5-3" aria-hidden="true" tabindex="-1"></a>get_climate <span class="ot">&lt;-</span> <span class="cf">function</span>(var){</span>
-<span id="cb5-4"><a href="recovery-likelihood.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  extracted_var <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/terraclim/&quot;</span>, <span class="at">pattern =</span> var, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-5"><a href="recovery-likelihood.html#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rast</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="recovery-likelihood.html#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-7"><a href="recovery-likelihood.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract</span>(.,patches <span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(<span class="at">crs=</span> <span class="fu">crs</span>(.)),<span class="at">fun =</span> mean,<span class="at">weights =</span> <span class="cn">TRUE</span>, <span class="at">exact =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-8"><a href="recovery-likelihood.html#cb5-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(mean)</span>
-<span id="cb5-9"><a href="recovery-likelihood.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-10"><a href="recovery-likelihood.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(extracted_var) <span class="ot">&lt;-</span> var</span>
-<span id="cb5-11"><a href="recovery-likelihood.html#cb5-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-12"><a href="recovery-likelihood.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_var)</span>
-<span id="cb5-13"><a href="recovery-likelihood.html#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-14"><a href="recovery-likelihood.html#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="recovery-likelihood.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># list of climate variables</span></span>
-<span id="cb5-16"><a href="recovery-likelihood.html#cb5-16" aria-hidden="true" tabindex="-1"></a>climate_variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;def&quot;</span>,<span class="st">&quot;pdsi&quot;</span>,<span class="st">&quot;swe&quot;</span>,<span class="st">&quot;ppt&quot;</span>,<span class="st">&quot;pet&quot;</span>,<span class="st">&quot;tmax&quot;</span>,<span class="st">&quot;soil&quot;</span>,<span class="st">&quot;vpd&quot;</span>)</span>
-<span id="cb5-17"><a href="recovery-likelihood.html#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="recovery-likelihood.html#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># extract mean climate values for each patch and assign to patch ID</span></span>
-<span id="cb5-19"><a href="recovery-likelihood.html#cb5-19" aria-hidden="true" tabindex="-1"></a>climate_df <span class="ot">&lt;-</span> <span class="fu">map</span>(climate_variables,get_climate)</span>
-<span id="cb5-20"><a href="recovery-likelihood.html#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="recovery-likelihood.html#cb5-21" aria-hidden="true" tabindex="-1"></a>patch_climate <span class="ot">&lt;-</span> <span class="fu">do.call</span>(cbind,climate_df) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-22"><a href="recovery-likelihood.html#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="at">Patch_ID =</span> patches<span class="sc">$</span>Patch_ID,.)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="recovery-likelihood.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import terraclim climate data, 3 year means before fire event</span></span>
+<span id="cb168-2"><a href="recovery-likelihood.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for each patch, extract the mean value for each climate variable</span></span>
+<span id="cb168-3"><a href="recovery-likelihood.html#cb168-3" aria-hidden="true" tabindex="-1"></a>get_climate <span class="ot">&lt;-</span> <span class="cf">function</span>(var){</span>
+<span id="cb168-4"><a href="recovery-likelihood.html#cb168-4" aria-hidden="true" tabindex="-1"></a>  extracted_var <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;data/terraclim/&quot;</span>, <span class="at">pattern =</span> var, <span class="at">all.files=</span><span class="cn">TRUE</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb168-5"><a href="recovery-likelihood.html#cb168-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rast</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb168-6"><a href="recovery-likelihood.html#cb168-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb168-7"><a href="recovery-likelihood.html#cb168-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract</span>(.,patches <span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(<span class="at">crs=</span> <span class="fu">crs</span>(.)),<span class="at">fun =</span> mean,<span class="at">weights =</span> <span class="cn">TRUE</span>, <span class="at">exact =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb168-8"><a href="recovery-likelihood.html#cb168-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(mean)</span>
+<span id="cb168-9"><a href="recovery-likelihood.html#cb168-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb168-10"><a href="recovery-likelihood.html#cb168-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(extracted_var) <span class="ot">&lt;-</span> var</span>
+<span id="cb168-11"><a href="recovery-likelihood.html#cb168-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb168-12"><a href="recovery-likelihood.html#cb168-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_var)</span>
+<span id="cb168-13"><a href="recovery-likelihood.html#cb168-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb168-14"><a href="recovery-likelihood.html#cb168-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-15"><a href="recovery-likelihood.html#cb168-15" aria-hidden="true" tabindex="-1"></a><span class="co"># list of climate variables</span></span>
+<span id="cb168-16"><a href="recovery-likelihood.html#cb168-16" aria-hidden="true" tabindex="-1"></a>climate_variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;def&quot;</span>,<span class="st">&quot;pdsi&quot;</span>,<span class="st">&quot;swe&quot;</span>,<span class="st">&quot;ppt&quot;</span>,<span class="st">&quot;pet&quot;</span>,<span class="st">&quot;tmax&quot;</span>,<span class="st">&quot;soil&quot;</span>,<span class="st">&quot;vpd&quot;</span>)</span>
+<span id="cb168-17"><a href="recovery-likelihood.html#cb168-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-18"><a href="recovery-likelihood.html#cb168-18" aria-hidden="true" tabindex="-1"></a><span class="co"># extract mean climate values for each patch and assign to patch ID</span></span>
+<span id="cb168-19"><a href="recovery-likelihood.html#cb168-19" aria-hidden="true" tabindex="-1"></a>climate_df <span class="ot">&lt;-</span> <span class="fu">map</span>(climate_variables,get_climate)</span>
+<span id="cb168-20"><a href="recovery-likelihood.html#cb168-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-21"><a href="recovery-likelihood.html#cb168-21" aria-hidden="true" tabindex="-1"></a>patch_climate <span class="ot">&lt;-</span> <span class="fu">do.call</span>(cbind,climate_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-22"><a href="recovery-likelihood.html#cb168-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="at">Patch_ID =</span> patches<span class="sc">$</span>Patch_ID,.)</span></code></pre></div>
 </div>
 <div id="calculate-latitude" class="section level3 hasAnchor" number="15.2.4">
 <h3><span class="header-section-number">15.2.4</span> Calculate Latitude<a href="recovery-likelihood.html#calculate-latitude" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="recovery-likelihood.html#cb6-1" aria-hidden="true" tabindex="-1"></a>patch_latitude <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="recovery-likelihood.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latitude =</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(geometry))[,<span class="dv">2</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="recovery-likelihood.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span> <span class="fu">select</span>(Patch_ID, latitude) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-4"><a href="recovery-likelihood.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="recovery-likelihood.html#cb169-1" aria-hidden="true" tabindex="-1"></a>patch_latitude <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb169-2"><a href="recovery-likelihood.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latitude =</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(geometry))[,<span class="dv">2</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-3"><a href="recovery-likelihood.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span> <span class="fu">select</span>(Patch_ID, latitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb169-4"><a href="recovery-likelihood.html#cb169-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
 </div>
 <div id="calculate-topography" class="section level3 hasAnchor" number="15.2.5">
 <h3><span class="header-section-number">15.2.5</span> Calculate Topography<a href="recovery-likelihood.html#calculate-topography" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="recovery-likelihood.html#cb7-1" aria-hidden="true" tabindex="-1"></a>extract_topo <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
-<span id="cb7-2"><a href="recovery-likelihood.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-3"><a href="recovery-likelihood.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Starting Fire &quot;</span>,fire_name))</span>
-<span id="cb7-4"><a href="recovery-likelihood.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-5"><a href="recovery-likelihood.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
-<span id="cb7-6"><a href="recovery-likelihood.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
-<span id="cb7-7"><a href="recovery-likelihood.html#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-8"><a href="recovery-likelihood.html#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="dv">4326</span>)</span>
-<span id="cb7-9"><a href="recovery-likelihood.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="recovery-likelihood.html#cb7-10" aria-hidden="true" tabindex="-1"></a>  dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(fire_patches,<span class="at">z=</span><span class="dv">11</span>)</span>
-<span id="cb7-11"><a href="recovery-likelihood.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem, <span class="at">opt =</span> <span class="st">&quot;aspect&quot;</span>,<span class="at">unit =</span> <span class="st">&quot;degrees&quot;</span>)</span>
-<span id="cb7-12"><a href="recovery-likelihood.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  slope <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem,<span class="at">opt=</span><span class="st">&#39;slope&#39;</span>, <span class="at">unit=</span><span class="st">&#39;degrees&#39;</span>)</span>
-<span id="cb7-13"><a href="recovery-likelihood.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  ccaspect <span class="ot">&lt;-</span> <span class="fu">cos</span>(aspect)</span>
-<span id="cb7-14"><a href="recovery-likelihood.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-15"><a href="recovery-likelihood.html#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the mean topographic values for each patch in this fire</span></span>
-<span id="cb7-16"><a href="recovery-likelihood.html#cb7-16" aria-hidden="true" tabindex="-1"></a>  extracted_elev <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(dem,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-17"><a href="recovery-likelihood.html#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-18"><a href="recovery-likelihood.html#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">elevation =</span> mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-19"><a href="recovery-likelihood.html#cb7-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Patch_ID, elevation)</span>
-<span id="cb7-20"><a href="recovery-likelihood.html#cb7-20" aria-hidden="true" tabindex="-1"></a>  extracted_aspect <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(ccaspect,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-21"><a href="recovery-likelihood.html#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-22"><a href="recovery-likelihood.html#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">aspect =</span> mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-23"><a href="recovery-likelihood.html#cb7-23" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(aspect)</span>
-<span id="cb7-24"><a href="recovery-likelihood.html#cb7-24" aria-hidden="true" tabindex="-1"></a>  extracted_slope <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(slope,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-25"><a href="recovery-likelihood.html#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb7-26"><a href="recovery-likelihood.html#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">slope =</span> mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-27"><a href="recovery-likelihood.html#cb7-27" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(slope)</span>
-<span id="cb7-28"><a href="recovery-likelihood.html#cb7-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-29"><a href="recovery-likelihood.html#cb7-29" aria-hidden="true" tabindex="-1"></a>  extracted_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(extracted_elev,extracted_aspect,extracted_slope)</span>
-<span id="cb7-30"><a href="recovery-likelihood.html#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="recovery-likelihood.html#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
-<span id="cb7-32"><a href="recovery-likelihood.html#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_data)</span>
-<span id="cb7-33"><a href="recovery-likelihood.html#cb7-33" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="recovery-likelihood.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map extraction function across all fires</span></span>
-<span id="cb8-2"><a href="recovery-likelihood.html#cb8-2" aria-hidden="true" tabindex="-1"></a>extracted_fires <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_list,extract_topo)</span>
-<span id="cb8-3"><a href="recovery-likelihood.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="recovery-likelihood.html#cb8-4" aria-hidden="true" tabindex="-1"></a>patch_topography <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,extracted_fires) </span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="recovery-likelihood.html#cb170-1" aria-hidden="true" tabindex="-1"></a>extract_topo <span class="ot">&lt;-</span> <span class="cf">function</span>(fire_name){</span>
+<span id="cb170-2"><a href="recovery-likelihood.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb170-3"><a href="recovery-likelihood.html#cb170-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Starting Fire &quot;</span>,fire_name))</span>
+<span id="cb170-4"><a href="recovery-likelihood.html#cb170-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb170-5"><a href="recovery-likelihood.html#cb170-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter the patches for this fire</span></span>
+<span id="cb170-6"><a href="recovery-likelihood.html#cb170-6" aria-hidden="true" tabindex="-1"></a>  fire_patches <span class="ot">&lt;-</span> patches <span class="sc">%&gt;%</span> </span>
+<span id="cb170-7"><a href="recovery-likelihood.html#cb170-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Fire_ID<span class="sc">==</span>fire_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-8"><a href="recovery-likelihood.html#cb170-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb170-9"><a href="recovery-likelihood.html#cb170-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-10"><a href="recovery-likelihood.html#cb170-10" aria-hidden="true" tabindex="-1"></a>  dem <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(fire_patches,<span class="at">z=</span><span class="dv">11</span>)</span>
+<span id="cb170-11"><a href="recovery-likelihood.html#cb170-11" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem, <span class="at">opt =</span> <span class="st">&quot;aspect&quot;</span>,<span class="at">unit =</span> <span class="st">&quot;degrees&quot;</span>)</span>
+<span id="cb170-12"><a href="recovery-likelihood.html#cb170-12" aria-hidden="true" tabindex="-1"></a>  slope <span class="ot">&lt;-</span> <span class="fu">terrain</span>(dem,<span class="at">opt=</span><span class="st">&#39;slope&#39;</span>, <span class="at">unit=</span><span class="st">&#39;degrees&#39;</span>)</span>
+<span id="cb170-13"><a href="recovery-likelihood.html#cb170-13" aria-hidden="true" tabindex="-1"></a>  ccaspect <span class="ot">&lt;-</span> <span class="fu">cos</span>(aspect)</span>
+<span id="cb170-14"><a href="recovery-likelihood.html#cb170-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb170-15"><a href="recovery-likelihood.html#cb170-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the mean topographic values for each patch in this fire</span></span>
+<span id="cb170-16"><a href="recovery-likelihood.html#cb170-16" aria-hidden="true" tabindex="-1"></a>  extracted_elev <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(dem,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-17"><a href="recovery-likelihood.html#cb170-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb170-18"><a href="recovery-likelihood.html#cb170-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">elevation =</span> mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-19"><a href="recovery-likelihood.html#cb170-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(Patch_ID, elevation)</span>
+<span id="cb170-20"><a href="recovery-likelihood.html#cb170-20" aria-hidden="true" tabindex="-1"></a>  extracted_aspect <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(ccaspect,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-21"><a href="recovery-likelihood.html#cb170-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb170-22"><a href="recovery-likelihood.html#cb170-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">aspect =</span> mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-23"><a href="recovery-likelihood.html#cb170-23" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(aspect)</span>
+<span id="cb170-24"><a href="recovery-likelihood.html#cb170-24" aria-hidden="true" tabindex="-1"></a>  extracted_slope <span class="ot">&lt;-</span> <span class="fu">left_join</span>(fire_patches, <span class="fu">exact_extract</span>(slope,fire_patches, <span class="at">append_cols =</span> <span class="cn">TRUE</span>, <span class="at">max_cells_in_memory =</span> <span class="fl">3e+08</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-25"><a href="recovery-likelihood.html#cb170-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb170-26"><a href="recovery-likelihood.html#cb170-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">slope =</span> mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-27"><a href="recovery-likelihood.html#cb170-27" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(slope)</span>
+<span id="cb170-28"><a href="recovery-likelihood.html#cb170-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb170-29"><a href="recovery-likelihood.html#cb170-29" aria-hidden="true" tabindex="-1"></a>  extracted_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(extracted_elev,extracted_aspect,extracted_slope)</span>
+<span id="cb170-30"><a href="recovery-likelihood.html#cb170-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-31"><a href="recovery-likelihood.html#cb170-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># export</span></span>
+<span id="cb170-32"><a href="recovery-likelihood.html#cb170-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(extracted_data)</span>
+<span id="cb170-33"><a href="recovery-likelihood.html#cb170-33" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="recovery-likelihood.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map extraction function across all fires</span></span>
+<span id="cb171-2"><a href="recovery-likelihood.html#cb171-2" aria-hidden="true" tabindex="-1"></a>extracted_fires <span class="ot">&lt;-</span> <span class="fu">map</span>(fire_list,extract_topo)</span>
+<span id="cb171-3"><a href="recovery-likelihood.html#cb171-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-4"><a href="recovery-likelihood.html#cb171-4" aria-hidden="true" tabindex="-1"></a>patch_topography <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind,extracted_fires) </span></code></pre></div>
 </div>
 <div id="join-patch-metrics-and-recovery-data" class="section level3 hasAnchor" number="15.2.6">
 <h3><span class="header-section-number">15.2.6</span> Join Patch Metrics and Recovery Data<a href="recovery-likelihood.html#join-patch-metrics-and-recovery-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="recovery-likelihood.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine all predictor datasets, set recovery threshold to 80% forested</span></span>
-<span id="cb9-2"><a href="recovery-likelihood.html#cb9-2" aria-hidden="true" tabindex="-1"></a>log_recovery <span class="ot">&lt;-</span> <span class="fu">list</span>(patch_metrics,patch_recovery,patch_latitude,patch_climate,patch_topography) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="recovery-likelihood.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(full_join, <span class="at">by=</span><span class="st">&#39;Patch_ID&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="recovery-likelihood.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb9-5"><a href="recovery-likelihood.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-6"><a href="recovery-likelihood.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_recovered =</span> <span class="fu">case_when</span>(perc_forested <span class="sc">&gt;=</span> <span class="fl">0.8</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb9-7"><a href="recovery-likelihood.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                                   perc_forested <span class="sc">&lt;</span> <span class="fl">0.8</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb9-8"><a href="recovery-likelihood.html#cb9-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_perim_rat =</span> area_perim_rat<span class="sc">*</span><span class="dv">10000</span>,</span>
-<span id="cb9-9"><a href="recovery-likelihood.html#cb9-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecoregn =</span> <span class="fu">as.factor</span>(ecoregn),</span>
-<span id="cb9-10"><a href="recovery-likelihood.html#cb9-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">ptch_fr=</span> <span class="fu">as.factor</span>(ptch_fr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-11"><a href="recovery-likelihood.html#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="recovery-likelihood.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine all predictor datasets, set recovery threshold to 80% forested</span></span>
+<span id="cb172-2"><a href="recovery-likelihood.html#cb172-2" aria-hidden="true" tabindex="-1"></a>log_recovery <span class="ot">&lt;-</span> <span class="fu">list</span>(patch_metrics,patch_recovery,patch_latitude,patch_climate,patch_topography) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-3"><a href="recovery-likelihood.html#cb172-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(full_join, <span class="at">by=</span><span class="st">&#39;Patch_ID&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-4"><a href="recovery-likelihood.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb172-5"><a href="recovery-likelihood.html#cb172-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ptch_fr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Douglas-Fir&quot;</span>,<span class="st">&quot;Lodegepole Pine&quot;</span>,<span class="st">&quot;Fir-Spruce&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-6"><a href="recovery-likelihood.html#cb172-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_recovered =</span> <span class="fu">case_when</span>(perc_forested <span class="sc">&gt;=</span> <span class="fl">0.8</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb172-7"><a href="recovery-likelihood.html#cb172-7" aria-hidden="true" tabindex="-1"></a>                                   perc_forested <span class="sc">&lt;</span> <span class="fl">0.8</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb172-8"><a href="recovery-likelihood.html#cb172-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">area_perim_rat =</span> area_perim_rat<span class="sc">*</span><span class="dv">10000</span>,</span>
+<span id="cb172-9"><a href="recovery-likelihood.html#cb172-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecoregn =</span> <span class="fu">as.factor</span>(ecoregn),</span>
+<span id="cb172-10"><a href="recovery-likelihood.html#cb172-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">ptch_fr=</span> <span class="fu">as.factor</span>(ptch_fr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-11"><a href="recovery-likelihood.html#cb172-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
 </div>
 </div>
-<div id="model-patch-recovery" class="section level2 hasAnchor" number="15.3">
-<h2><span class="header-section-number">15.3</span> Model Patch Recovery<a href="recovery-likelihood.html#model-patch-recovery" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="model-recovery-likelihood" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> Model Recovery Likelihood<a href="recovery-likelihood.html#model-recovery-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="prepare-model-data" class="section level3 hasAnchor" number="15.3.1">
 <h3><span class="header-section-number">15.3.1</span> Prepare Model Data<a href="recovery-likelihood.html#prepare-model-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="recovery-likelihood.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data prep required for lrm model</span></span>
-<span id="cb10-2"><a href="recovery-likelihood.html#cb10-2" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">datadist</span>(log_recovery)</span>
-<span id="cb10-3"><a href="recovery-likelihood.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">datadist=</span><span class="st">&quot;dd&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="recovery-likelihood.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data prep required for lrm model</span></span>
+<span id="cb173-2"><a href="recovery-likelihood.html#cb173-2" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">datadist</span>(log_recovery)</span>
+<span id="cb173-3"><a href="recovery-likelihood.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">datadist=</span><span class="st">&quot;dd&quot;</span>)</span></code></pre></div>
 </div>
 <div id="create-logistic-model" class="section level3 hasAnchor" number="15.3.2">
 <h3><span class="header-section-number">15.3.2</span> Create Logistic Model<a href="recovery-likelihood.html#create-logistic-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="recovery-likelihood.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression model with lrm</span></span>
-<span id="cb11-2"><a href="recovery-likelihood.html#cb11-2" aria-hidden="true" tabindex="-1"></a>log_model <span class="ot">&lt;-</span> <span class="fu">lrm</span>(log_recovered <span class="sc">~</span> ptch_fr <span class="sc">+</span> area_perim_rat <span class="sc">+</span> patch_area <span class="sc">+</span> elevation <span class="sc">+</span> slope <span class="sc">+</span> aspect <span class="sc">+</span> def <span class="sc">+</span> swe</span>
-<span id="cb11-3"><a href="recovery-likelihood.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                  ,<span class="at">data =</span> log_recovery)</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="recovery-likelihood.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lrm model object</span></span>
-<span id="cb12-2"><a href="recovery-likelihood.html#cb12-2" aria-hidden="true" tabindex="-1"></a>log_model</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="recovery-likelihood.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression model with lrm</span></span>
+<span id="cb174-2"><a href="recovery-likelihood.html#cb174-2" aria-hidden="true" tabindex="-1"></a>log_model <span class="ot">&lt;-</span> <span class="fu">lrm</span>(log_recovered <span class="sc">~</span> ptch_fr <span class="sc">+</span> area_perim_rat <span class="sc">+</span> patch_area <span class="sc">+</span> elevation <span class="sc">+</span> slope <span class="sc">+</span> aspect <span class="sc">+</span> def <span class="sc">+</span> swe</span>
+<span id="cb174-3"><a href="recovery-likelihood.html#cb174-3" aria-hidden="true" tabindex="-1"></a>                  ,<span class="at">data =</span> log_recovery)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="recovery-likelihood.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lrm model object</span></span>
+<span id="cb175-2"><a href="recovery-likelihood.html#cb175-2" aria-hidden="true" tabindex="-1"></a>log_model</span></code></pre></div>
 <pre><code>## Logistic Regression Model
 ## 
 ## lrm(formula = log_recovered ~ ptch_fr + area_perim_rat + patch_area + 
@@ -636,8 +654,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## aspect                  -0.1738 0.4785  -0.36 0.7164  
 ## def                     -0.0231 0.0113  -2.05 0.0404  
 ## swe                      0.0066 0.0034   1.97 0.0491</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="recovery-likelihood.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#model summary odds ratio</span></span>
-<span id="cb14-2"><a href="recovery-likelihood.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">summary</span>(log_model,<span class="at">def =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">swe =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">area_perim_rat =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">patch_area =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">elevation =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">slope =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">aspect =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="recovery-likelihood.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co">#model summary odds ratio</span></span>
+<span id="cb177-2"><a href="recovery-likelihood.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">summary</span>(log_model,<span class="at">def =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">swe =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">area_perim_rat =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">patch_area =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">elevation =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">slope =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">aspect =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1194,8 +1212,8 @@ NA
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="recovery-likelihood.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model summary IQR odds ratio</span></span>
-<span id="cb15-2"><a href="recovery-likelihood.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">summary</span>(log_model))</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="recovery-likelihood.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model summary IQR odds ratio</span></span>
+<span id="cb178-2"><a href="recovery-likelihood.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">summary</span>(log_model))</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1755,18 +1773,18 @@ NA
 </div>
 <div id="odds-ratio-table" class="section level3 hasAnchor" number="15.3.3">
 <h3><span class="header-section-number">15.3.3</span> Odds Ratio Table<a href="recovery-likelihood.html#odds-ratio-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="recovery-likelihood.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in odds ratio table</span></span>
-<span id="cb16-2"><a href="recovery-likelihood.html#cb16-2" aria-hidden="true" tabindex="-1"></a>odds_table <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/recovery/oddsratios_lrm.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a href="recovery-likelihood.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
-<span id="cb16-4"><a href="recovery-likelihood.html#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="recovery-likelihood.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function to show data to correct number of digits</span></span>
-<span id="cb16-6"><a href="recovery-likelihood.html#cb16-6" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">formatC</span>(x, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">3</span>)}</span>
-<span id="cb16-7"><a href="recovery-likelihood.html#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="recovery-likelihood.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create table </span></span>
-<span id="cb16-9"><a href="recovery-likelihood.html#cb16-9" aria-hidden="true" tabindex="-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">nice_table</span>(odds_table, <span class="at">separate.header =</span> <span class="cn">TRUE</span>,<span class="at">width =</span> <span class="dv">1</span>,<span class="at">col.format.custom =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>),<span class="at">format.custom =</span> <span class="st">&quot;fun&quot;</span>)</span>
-<span id="cb16-10"><a href="recovery-likelihood.html#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="recovery-likelihood.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># export to word </span></span>
-<span id="cb16-12"><a href="recovery-likelihood.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># flextable::save_as_docx(odds, path = &quot;data/recovery/odds_table.docx&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="recovery-likelihood.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bring in odds ratio table</span></span>
+<span id="cb179-2"><a href="recovery-likelihood.html#cb179-2" aria-hidden="true" tabindex="-1"></a>odds_table <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/recovery/oddsratios_lrm.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-3"><a href="recovery-likelihood.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb179-4"><a href="recovery-likelihood.html#cb179-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-5"><a href="recovery-likelihood.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function to show data to correct number of digits</span></span>
+<span id="cb179-6"><a href="recovery-likelihood.html#cb179-6" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">formatC</span>(x, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">3</span>)}</span>
+<span id="cb179-7"><a href="recovery-likelihood.html#cb179-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-8"><a href="recovery-likelihood.html#cb179-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create table </span></span>
+<span id="cb179-9"><a href="recovery-likelihood.html#cb179-9" aria-hidden="true" tabindex="-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">nice_table</span>(odds_table, <span class="at">separate.header =</span> <span class="cn">TRUE</span>,<span class="at">width =</span> <span class="dv">1</span>,<span class="at">col.format.custom =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>),<span class="at">format.custom =</span> <span class="st">&quot;fun&quot;</span>)</span>
+<span id="cb179-10"><a href="recovery-likelihood.html#cb179-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-11"><a href="recovery-likelihood.html#cb179-11" aria-hidden="true" tabindex="-1"></a><span class="co"># export to word </span></span>
+<span id="cb179-12"><a href="recovery-likelihood.html#cb179-12" aria-hidden="true" tabindex="-1"></a><span class="co"># flextable::save_as_docx(odds, path = &quot;data/recovery/odds_table.docx&quot;)</span></span></code></pre></div>
 
 </div>
 </div>

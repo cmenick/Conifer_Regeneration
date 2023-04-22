@@ -164,7 +164,7 @@ ggplot(training_dataset,aes(absence,ndvi)) +
   theme_classic()
 ```
 
-## Model
+## Develop Model
 
 ### Create Random Forest Model
 

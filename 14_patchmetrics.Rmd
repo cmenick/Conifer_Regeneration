@@ -166,7 +166,7 @@ log_recovery <- list(patch_metrics,patch_recovery,patch_latitude,patch_climate,p
   st_drop_geometry()
 ```
 
-## Model Patch Recovery
+## Model Recovery Likelihood
 
 ### Prepare Model Data
 

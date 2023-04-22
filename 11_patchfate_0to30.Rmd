@@ -31,7 +31,7 @@ patches <- st_read("data/patches/highsev_patches.shp") %>%
 crs <- crs(patches)
 ```
 
-## Calculate Patch Decomposition
+## Calculate Landscape Patterns
 
 ### Function to Track Patch Changes
 ```{r get_patches, message=FALSE, warning=FALSE}
@@ -103,7 +103,7 @@ patches_fs$next_node <- factor(patches_fs$next_node,levels = c("forested","0-50h
 patches_fs$value <- as.numeric(patches_fs$value)
 ```
 
-## Assess Proportion Reforested
+## Assess Landscape-Level Recovery
 
 ### By Forest Type
 
@@ -157,7 +157,7 @@ patch_data_size <- patch_data %>%
 nice_table(patch_data_size, separate.header = TRUE,width =1)
 ```
 
-## Fragmentation
+## Calculate Fragmentation
 
 ```{r fragmentation function, message=FALSE,warning=FALSE}
 ## function to identify the proportion of area that has moved to a smaller size class
@@ -173,7 +173,6 @@ get_fragmentation <- function(long_df,ftype){
            ptch_fr = ftype) 
 }
 ```
-
 
 ```{r fragmentation map, message=FALSE,warning=FALSE}
 # identify fragmentation separately across all three forest types
